@@ -53,7 +53,7 @@ function register_cpt_product() {
     'show_in_nav_menus' => true,
     'publicly_queryable' => true,
     'exclude_from_search' => false,
-    'has_archive' => true,
+    'has_archive' => 'shop',
     'query_var' => true,
     'can_export' => true,
     'rewrite' => true,
