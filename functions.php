@@ -9,10 +9,16 @@ function scripts_and_styles_method() {
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
 
+  $shopify_options = get_site_option('_igv_shopify_options');
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
+    'shopify' => array(
+      'domain' => $shopify_options['shopify_domain'],
+      'storefrontAccessToken' => $shopify_options['shopify_token'],
+    ),
   );
 
   wp_register_script('javascript-main', $javascriptMain);

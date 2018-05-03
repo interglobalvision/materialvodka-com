@@ -34,7 +34,8 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015',  'minify']
+        presets: ['es2015',  'minify'],
+        retainLines: true,
       },
     }, {
       test: /\.styl/,
@@ -56,9 +57,6 @@ module.exports = {
   },
 
   plugins: [
-    new MinifyPlugin({}, {
-      comments: false,
-    }),
     new ExtractTextPlugin('../css/site.css'),
     // Copy the images folder and optimize all the images
     new CopyWebpackPlugin([

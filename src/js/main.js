@@ -2,6 +2,8 @@
 /* global $, document */
 
 // Import dependencies
+import Shop from './shop';
+
 import lazySizes from 'lazysizes';
 
 // Import style
@@ -36,4 +38,5 @@ class Site {
   }
 }
 
-new Site();
+const Material = new Site();
+const MaterialShop = new Shop();
