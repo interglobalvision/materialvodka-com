@@ -2,10 +2,12 @@
 /* global $, document */
 
 // Import dependencies
+import Shop from './shop';
+
 import lazySizes from 'lazysizes';
 
 // Import style
-import '../styl/site.styl';
+import '../styl/site.styl'; 
 
 class Site {
   constructor() {
@@ -36,4 +38,5 @@ class Site {
   }
 }
 
-new Site();
+const Material = new Site();
+const MaterialShop = new Shop();
