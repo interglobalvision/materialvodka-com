@@ -36,25 +36,30 @@ function igv_cmb_metabox_home() {
 
   $home_page = get_page_by_path('home');
 
-  $metabox = new_cmb2_box( array(
-    'id'            => $prefix . 'metabox_home',
-    'title'         => esc_html__( 'Options', 'cmb2' ),
-    'object_types'  => array( 'page' ), // Post type
-    'show_on'      => array( 'key' => 'id', 'value' => array($home_page->ID) ),
-  ) );
+  // Check if home page exists
+  if(!empty($home_page)) {
 
-  $metabox->add_field( array(
-    'name'      	=> __( 'Featured Recipe', 'cmb2' ),
-    'id'        	=> $prefix . 'home_recipe',
-    'type'      	=> 'post_search_ajax',
-    'limit'      	=> 1,
-    'sortable' 	 	=> false,
-    'query_args'	=> array(
-      'post_type'			=> array( 'recipe' ),
-      'post_status'		=> array( 'publish' ),
-      'posts_per_page'	=> -1
-    )
-  ) );
+    $metabox = new_cmb2_box( array(
+      'id'            => $prefix . 'metabox_home',
+      'title'         => esc_html__( 'Options', 'cmb2' ),
+      'object_types'  => array( 'page' ), // Post type
+      'show_on'      => array( 'key' => 'id', 'value' => array($home_page->ID) ),
+    ) );
+
+    $metabox->add_field( array(
+      'name'      	=> __( 'Featured Recipe', 'cmb2' ),
+      'id'        	=> $prefix . 'home_recipe',
+      'type'      	=> 'post_search_ajax',
+      'limit'      	=> 1,
+      'sortable' 	 	=> false,
+      'query_args'	=> array(
+        'post_type'			=> array( 'recipe' ),
+        'post_status'		=> array( 'publish' ),
+        'posts_per_page'	=> -1
+      )
+    ) );
+
+  }
 
 }
 ?>
