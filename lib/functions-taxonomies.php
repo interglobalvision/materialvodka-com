@@ -9,7 +9,6 @@ function season_taxonomy() {
       'label' => 'Seasons',  
       'query_var' => true,
     )  
-	);  
+  );  
 }  
 add_action( 'init', 'season_taxonomy');
-
