@@ -441,10 +441,5 @@ function igv_product_metaboxes() {
     'query_args' => array( 'type' => 'image' ), // Only images attachment
   ) );
 
-  /**
-   * Metaboxes declarations here
-   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
-   */
-
 }
 ?>
