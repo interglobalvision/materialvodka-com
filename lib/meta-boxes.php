@@ -164,7 +164,7 @@ function igv_cmb_metaboxes_locate_page() {
 
     // Video group
     $locate_video_id = $locate_meta->add_field( array(
-      'id'      => $prefix . 'locate_video_group',
+      'id'      => 'locate_video_group',
       'name'    => 'Video',
       'type'        => 'group',
       'repeatable'  => false, // use false if you want non-repeatable group
@@ -173,7 +173,7 @@ function igv_cmb_metaboxes_locate_page() {
     // Video mp4
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video (mp4)',
-      'id'      => $prefix . 'locate_video_mp4',
+      'id'      => 'mp4',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -188,7 +188,7 @@ function igv_cmb_metaboxes_locate_page() {
     // Video webm
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video (webm)',
-      'id'      => $prefix . 'locate_video_webm',
+      'id'      => 'webm',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -200,10 +200,10 @@ function igv_cmb_metaboxes_locate_page() {
       ),
     ) );
 
-    // Video webm
+    // Video Poster
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video Poster',
-      'id'      => $prefix . 'locate_video_poster',
+      'id'      => 'poster',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -252,7 +252,7 @@ function igv_cmb_metaboxes_vodka_page() {
 
     //Vodka Video group
     $vodka_video_id = $vodka_meta->add_field( array(
-      'id'      => $prefix . 'vodka_video_group',
+      'id'      => 'vodka_video_group',
       'name'    => 'Video',
       'type'        => 'group',
       'repeatable'  => false, // use false if you want non-repeatable group
@@ -261,7 +261,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //Vodka Video mp4
     $vodka_meta->add_group_field( $vodka_video_id, array(
       'name'    => 'Video (mp4)',
-      'id'      => $prefix . 'vodka_video_mp4',
+      'id'      => 'mp4',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -276,7 +276,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //Vodka Video webm
     $vodka_meta->add_group_field( $vodka_video_id, array(
       'name'    => 'Video (webm)',
-      'id'      => $prefix . 'vodka_video_webm',
+      'id'      => 'webm',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -291,7 +291,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //Vodka Video Poster
     $vodka_meta->add_group_field( $vodka_video_id, array(
       'name'    => 'Video Poster',
-      'id'      => $prefix . 'vodka_video_poster',
+      'id'      => 'poster',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -347,7 +347,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //World Video mp4
     $world_meta->add_group_field( $world_video_id, array(
       'name'    => 'Video (mp4)',
-      'id'      => $prefix . 'world_video_mp4',
+      'id'      => 'mp4',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -362,7 +362,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //World Video webm
     $world_meta->add_group_field( $world_video_id, array(
       'name'    => 'Video (webm)',
-      'id'      => $prefix . 'world_video_webm',
+      'id'      => 'webm',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -377,7 +377,7 @@ function igv_cmb_metaboxes_vodka_page() {
     //World Video Poster
     $world_meta->add_group_field( $world_video_id, array(
       'name'    => 'Video Poster',
-      'id'      => $prefix . 'world_video_poster',
+      'id'      => 'poster',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
