@@ -40,4 +40,58 @@ function igv_cmb_metaboxes() {
    */
 
 }
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_recipe' );
+function igv_cmb_metabox_recipe() {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  /**
+   * Metaboxes declarations here
+   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
+   */
+
+  /**
+   * Initiate the metabox
+   */
+  $recipe_metaboxes = new_cmb2_box( array(
+    'id'            => $prefix . 'recipe_metaboxes',
+    'title'         => __( 'Ingredients', 'cmb2' ),
+    'object_types'  => array( 'recipe', ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  $ingredients_group_id = $recipe_metaboxes->add_field( array(
+  'id'          => $prefix . 'ingredients_group',
+  'type'        => 'group',
+  'description' => __( 'Generates reusable form entries', 'cmb2' ),
+  // 'repeatable'  => false, // use false if you want non-repeatable group
+  'options'     => array(
+    'group_title'   => __( 'Entry {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+    'add_button'    => __( 'Add Another Entry', 'cmb2' ),
+    'remove_button' => __( 'Remove Entry', 'cmb2' ),
+    'sortable'      => true, // beta
+    // 'closed'     => true, // true to have the groups closed by default
+  ),
+) );
+
+  $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+  'name' => 'Ingredient',
+  'id'   => $prefix . 'ingredient_text',
+  'type' => 'text',
+  // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
+) );
+
+ $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+  'name' => 'Quantity',
+  'id'   => $prefix . 'quantity_text',
+  'type' => 'text',
+  // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
+) );
+
+
+}
 ?>
