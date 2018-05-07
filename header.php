@@ -29,5 +29,61 @@ get_template_part('partials/seo');
 <section id="main-container">
 
   <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+    <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
+    <div class="container">
+      <div class="grid-row text-uppercase flex-nowrap">
+        <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
+          <a href="<?php echo home_url(); ?>">Material Vodka</a>
+        </div>
+        <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
+          <button id="mobile-menu-trigger">Menu</button>
+        </div>
+        <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
+          <ul class="grid-row justify-between">
+            <li class="grid-item">
+              <a href="<?php echo home_url('prize'); ?>">Prize</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('video'); ?>">Videos</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('locate'); ?>">Locate</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('merch'); ?>">Merch</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <nav id="mobile-nav">
+      <div class="container">
+        <ul class="grid-column">
+          <li class="grid-item">
+            <a href="<?php echo home_url('prize'); ?>">Prize</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('video'); ?>">Videos</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('locate'); ?>">Locate</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('merch'); ?>">Merch</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </header>

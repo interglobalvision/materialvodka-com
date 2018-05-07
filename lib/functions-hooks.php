@@ -10,6 +10,10 @@ function create_custom_pages() {
     'merch' => 'Merch',
     'vodka' => 'Vodka',
     'prize' => 'Prize',
+    'press' => 'Press',
+    'contact' => 'Contact',
+    'terms-and-conditions' => 'Terms & Conditions',
+    'privacy-policy' => 'Privacy Policy',
   );
   foreach($custom_pages as $page_name => $page_title) {
     $page = get_page_by_path($page_name);
