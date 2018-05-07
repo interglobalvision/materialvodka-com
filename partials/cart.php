@@ -1,5 +1,5 @@
-<div id="cart-container"class="container margin-bottom-basic">
-  <div class="grid-row ">
+<div id="cart-container" class="container margin-bottom-basic">
+  <div class="grid-row">
     <div class="grid-item item-m-9 grid-row text-align-center">
       <div class="grid-item item-s-12 item-m-4">
         <span>Product</span>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="grid-row ">
-    <div id="items-container" class="grid-item item-s-12 item-m-9 ">
+    <div id="items-container" class="grid-item item-s-12 item-m-9">
     </div>
     <div class="grid-item item-s-12 item-m-3">
       <div id="subtotal-container" class="grid-item item-s-12 grid-row"></div>
