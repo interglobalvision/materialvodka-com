@@ -32,8 +32,10 @@ class Shop {
 
       if ($('.single-product').length) { // Single product page
         this.initSingleProduct();
-      } else if ($('.page-cart').length) { // Cart page
-        this.initCartPage();
+      }
+
+      if ($('#cart-container').length) { // Cart is present
+        this.initCartSection();
       }
 
     } else {
@@ -98,7 +100,7 @@ class Shop {
     }
   }
 
-  initCartPage() {
+  initCartSection() {
     // Get DOM elements
     this.$itemsContainer = $('#items-container');
     this.$checkoutContainer = $('#checkout-container');
@@ -152,7 +154,7 @@ class Shop {
     this.$cartCounter.html(lineItems.length);
 
     // Update page Cart content
-    if ($('.page-cart').length) {
+    if ($('#cart-container').length) {
       this.clearCartMarkup();
       this.generateCartItemsRow(lineItems);
       this.bindCartInputs(lineItems);

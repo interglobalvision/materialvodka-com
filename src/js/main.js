@@ -7,7 +7,7 @@ import Shop from './shop';
 import lazySizes from 'lazysizes';
 
 // Import style
-import '../styl/site.styl'; 
+import '../styl/site.styl';  
 
 class Site {
   constructor() {
