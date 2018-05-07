@@ -9,7 +9,7 @@ function scripts_and_styles_method() {
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
 
-  $shopify_options = get_site_option('_igv_shopify_options');
+  $shopify_options = get_site_option('_igv_shop_options');
 
   $javascriptVars = array(
     'siteUrl' => home_url(),
