@@ -72,8 +72,8 @@ function register_cpt_video_award() {
     'new_item' => _x( 'New Video Award', 'video_award' ),
     'view_item' => _x( 'View Video Award', 'video_award' ),
     'search_items' => _x( 'Search Video Awards', 'video_award' ),
-    'not_found' => _x( 'No video awards found', 'video_award' ),
-    'not_found_in_trash' => _x( 'No video awards found in Trash', 'video_award' ),
+    'not_found' => _x( 'No Video Awards found', 'video_award' ),
+    'not_found_in_trash' => _x( 'No Video Awards found in Trash', 'video_award' ),
     'parent_item_colon' => _x( 'Parent Video Award:', 'video_award' ),
     'menu_name' => _x( 'Video Awards', 'video_award' ),
   );
