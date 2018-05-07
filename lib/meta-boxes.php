@@ -116,6 +116,17 @@ function igv_cmb_metabox_video_awards() {
     ),
   ) );
 
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Minutes', 'cmb2' ),
+    'id'   => $prefix . 'video_award_minutes',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Seconds', 'cmb2' ),
+    'id'   => $prefix . 'video_award_seconds',
+    'type' => 'text',
+  ) );
 
 }
 /**
