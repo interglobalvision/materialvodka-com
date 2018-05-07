@@ -6,7 +6,10 @@ function add_menu_icons_styles(){
 
 <style>
 #menu-posts-stockist .dashicons-admin-post:before {
-    content: '\f513';
+  content: '\f513';
+}
+#menu-posts-video_award .dashicons-admin-post:before {
+  content: "\f235";
 }
 </style>
 
