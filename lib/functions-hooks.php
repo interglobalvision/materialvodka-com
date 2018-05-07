@@ -7,7 +7,6 @@ function create_custom_pages() {
   $custom_pages = array(
     'home' => 'Home',
     'locate' => 'Locate',
-    'merch' => 'Merch',
     'vodka' => 'Vodka',
     'prize' => 'Prize',
     'press' => 'Press',
