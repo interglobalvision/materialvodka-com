@@ -397,12 +397,7 @@ function igv_cmb_metabox_recipe() {
 
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
-
-  /**
-   * Metaboxes declarations here
-   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
-   */
-
+  
   /**
    * Initiate the metabox
    */
@@ -424,56 +419,18 @@ function igv_cmb_metabox_recipe() {
     'remove_button' => __( 'Remove Ingredient', 'cmb2' ),
     'sortable'      => true, // beta
   ),
-) );
-
-  $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
-  'name' => 'Ingredient',
-  'id'   => 'ingredient_text',
-  'type' => 'text',
-) );
-
- $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
-  'name' => 'Quantity',
-  'id'   => 'quantity_text',
-  'type' => 'text',
-) );
-
-
-}
-
-// Product Metaboxes
-add_action( 'cmb2_init', 'igv_product_metaboxes' );
-function igv_product_metaboxes() {
-
-  // Start with an underscore to hide fields from custom fields list
-  $prefix = '_igv_';
-
-  $product = new_cmb2_box( array(
-    'id'            => 'product_meta',
-    'title'         => __( 'Product Information', 'cmb2' ),
-    'object_types'  => array( 'product', ), // Post type
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
-    // 'cmb_styles' => false, // false to disable the CMB stylesheet
-    // 'closed'     => true, // Keep the metabox closed by default
   ) );
 
-  $product->add_field( array(
-    'name'       => __( 'Shopify Product Handle', 'cmb2' ),
-    'id'         => $prefix . 'shopify_product_handle',
-    'desc'    => __( 'The handle can be found on product URLs. Ex. in https://myshop.myshopify.com/products/my-product "my-product" is the handle', 'igb' ),
-    'type'       => 'text',
+    $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+    'name' => 'Ingredient',
+    'id'   => 'ingredient_text',
+    'type' => 'text',
   ) );
 
-  $product->add_field( array(
-    'name' => 'Product Gallery',
-    'desc' => '',
-    'id'         => $prefix . 'shopify_product_gallery',
-    'type' => 'file_list',
-    'preview_size' => array( 100, 100 ),
-    'query_args' => array( 'type' => 'image' ), // Only images attachment
+   $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+    'name' => 'Quantity',
+    'id'   => 'quantity_text',
+    'type' => 'text',
   ) );
-
 }
 ?>
