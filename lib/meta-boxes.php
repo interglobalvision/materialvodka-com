@@ -218,8 +218,6 @@ function igv_cmb_metaboxes_locate_page() {
     ));
   }
 
-  //
-
 }
 
 // Product Metaboxes
@@ -229,7 +227,7 @@ function igv_product_metaboxes() {
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
 
- $product = new_cmb2_box( array(
+  $product = new_cmb2_box( array(
     'id'            => 'product_meta',
     'title'         => __( 'Product Information', 'cmb2' ),
     'object_types'  => array( 'product', ), // Post type
