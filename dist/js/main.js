@@ -148,10 +148,12 @@ storefrontAccessToken:c}),
 
 this.initCheckout(),
 
-$('.single-product').length?
-this.initSingleProduct():
-$('.page-cart').length&&
-this.initCartPage();
+$('.single-product').length&&
+this.initSingleProduct(),
+
+
+$('#cart-container').length&&
+this.initCartSection();
 
 
 }else
@@ -214,7 +216,7 @@ this.productHandle=$('#shopify-handle').attr('data-shopify-handle'),
 this.productHandle&&
 this.fetchProductMeta(this.productHandle);
 
-}},{key:'initCartPage',value:function initCartPage()
+}},{key:'initCartSection',value:function initCartSection()
 
 {
 
@@ -270,7 +272,7 @@ lineItems,c=a.webUrl,d=a.subtotalPrice;
 this.$cartCounter.html(b.length),
 
 
-$('.page-cart').length&&(
+$('#cart-container').length&&(
 this.clearCartMarkup(),
 this.generateCartItemsRow(b),
 this.bindCartInputs(b),
