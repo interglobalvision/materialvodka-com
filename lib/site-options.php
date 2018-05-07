@@ -4,17 +4,17 @@ add_action( 'cmb2_admin_init', 'igv_register_shopify_options_metabox' );
 function igv_register_shopify_options_metabox() {
   $prefix = '_igv_';
 
-  $shopify_options = new_cmb2_box( array(
-    'id'           => $prefix . 'shopify_options_page',
-    'title'        => esc_html__( 'Shopify Options', 'cmb2' ),
+  $shop_options = new_cmb2_box( array(
+    'id'           => $prefix . 'shop_options_page',
+    'title'        => esc_html__( 'Shop Options', 'cmb2' ),
     'object_types' => array( 'options-page' ),
     /*
      * The following parameters are specific to the options-page box
      * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
      */
-    'option_key'      => $prefix . 'shopify_options', // The option key and admin menu page slug.
+    'option_key'      => $prefix . 'shop_options', // The option key and admin menu page slug.
     'icon_url'        => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
-    'menu_title'      => esc_html__( 'Shopify', 'cmb2' ), // Falls back to 'title' (above).
+    'menu_title'      => esc_html__( 'Shop', 'cmb2' ), // Falls back to 'title' (above).
     // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
     'capability'      => 'manage_options', // Cap required to view options-page.
     // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
@@ -24,21 +24,21 @@ function igv_register_shopify_options_metabox() {
   ) );
 
   // Shopify options
-  $shopify_options->add_field( array(
+  $shop_options->add_field( array(
     'name'    => esc_html__( 'API Options', 'cmb2' ),
     'desc'    => esc_html__( '', 'cmb2' ),
     'id'      => $prefix . 'shopify_api_title',
     'type'    => 'title',
   ) );
 
-  $shopify_options->add_field( array(
+  $shop_options->add_field( array(
     'name'    => esc_html__( 'Shopify Domain', 'cmb2' ),
     'desc'    => esc_html__( 'ex. shop.materialvodka.com', 'cmb2' ),
     'id'      => 'shopify_domain',
     'type'    => 'text',
   ) );
 
-  $shopify_options->add_field( array(
+  $shop_options->add_field( array(
     'name'    => esc_html__( 'Shopify StoreFront Access Token', 'cmb2' ),
     'id'      => 'shopify_token',
     'type'    => 'text',
