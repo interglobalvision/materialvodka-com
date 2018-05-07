@@ -67,12 +67,10 @@ function igv_cmb_metabox_recipe() {
   $ingredients_group_id = $recipe_metaboxes->add_field( array(
   'id'          => $prefix . 'ingredients_group',
   'type'        => 'group',
-  'description' => __( 'Generates reusable form entries', 'cmb2' ),
-  // 'repeatable'  => false, // use false if you want non-repeatable group
   'options'     => array(
-    'group_title'   => __( 'Entry {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
-    'add_button'    => __( 'Add Another Entry', 'cmb2' ),
-    'remove_button' => __( 'Remove Entry', 'cmb2' ),
+    'group_title'   => __( 'Ingredient {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+    'add_button'    => __( 'Add Another Ingredient', 'cmb2' ),
+    'remove_button' => __( 'Remove Ingredient', 'cmb2' ),
     'sortable'      => true, // beta
     // 'closed'     => true, // true to have the groups closed by default
   ),
