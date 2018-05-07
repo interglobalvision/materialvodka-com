@@ -65,7 +65,7 @@ function igv_cmb_metabox_recipe() {
   ) );
 
   $ingredients_group_id = $recipe_metaboxes->add_field( array(
-  'id'          => $prefix . 'ingredients_group',
+  'id'          => 'ingredients_group',
   'type'        => 'group',
   'options'     => array(
     'group_title'   => __( 'Ingredient {#}', 'cmb2' ), 
@@ -77,13 +77,13 @@ function igv_cmb_metabox_recipe() {
 
   $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
   'name' => 'Ingredient',
-  'id'   => $prefix . 'ingredient_text',
+  'id'   => 'ingredient_text',
   'type' => 'text',
 ) );
 
  $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
   'name' => 'Quantity',
-  'id'   => $prefix . 'quantity_text',
+  'id'   => 'quantity_text',
   'type' => 'text',
 ) );
 
