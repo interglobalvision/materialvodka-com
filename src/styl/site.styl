@@ -3,9 +3,9 @@
 
 // ******************************************************
 
-// RESETS
+// RESETS 
 
-meyer-reset()
+meyer-reset() 
 box-sizing-reset()
 normalize()
 
@@ -21,7 +21,9 @@ normalize()
 // FONTS
 @import 'fonts/fonts'
 
-$font-sans = font-stack('Helvetica')
+$font-sans = 'TradeGothic LT Light', font-stack('Helvetica')
+$font-bold = 'TradeGothic LT Bold', font-stack('Helvetica')
+$font-regular = 'TradeGothic LT', font-stack('Helvetica')
 $font-serif = font-stack('Georgia')
 
 // ******************************************************
@@ -43,6 +45,7 @@ $font-tracking-wider = .05em
 html
   font-family: $font-sans
   letter-spacing: $font-tracking-basic
+  font-weight: 300
 
 body
   line-height: $font-leading-basic
@@ -61,6 +64,13 @@ body
 
 .line-larger
   line-height: $font-leading-larger
+
+em, .font-italic
+  font-style: italic
+
+strong, .font-bold
+  font-family: $font-bold
+  font-weight: bold
 
 // ******************************************************
 

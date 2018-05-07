@@ -4,7 +4,7 @@
 // Import dependencies
 import Shop from './shop';
 
-import lazySizes from 'lazysizes';
+import lazySizes from 'lazysizes'; 
 
 // Import style
 import '../styl/site.styl';

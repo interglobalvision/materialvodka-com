@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const MinifyPlugin = require('babel-minify-webpack-plugin');
+// const MinifyPlugin = require('babel-minify-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -45,14 +45,19 @@ module.exports = {
           loader: 'css-loader',
           options: {
             minimize: true,
+            url: false,
           },
         }, {
           loader: 'stylus-loader',
           options: {
             preferPathResolver: 'webpack', // Faster
+            'resolve url': true,
           },
         }],
       })
+    }, {
+      test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+      loader: 'file-loader',
     }],
   },
 
