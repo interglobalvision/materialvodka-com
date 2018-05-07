@@ -28,16 +28,33 @@ function get_post_objects( $query_args ) {
 /**
  * Hook in and add metaboxes. Can only happen on the 'cmb2_init' hook.
  */
-add_action( 'cmb2_init', 'igv_cmb_metaboxes' );
-function igv_cmb_metaboxes() {
+add_action( 'cmb2_init', 'igv_cmb_metabox_home' );
+function igv_cmb_metabox_home() {
 
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
 
-  /**
-   * Metaboxes declarations here
-   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
-   */
+  $home_page = get_page_by_path('home');
+
+  $metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'metabox_home',
+    'title'         => esc_html__( 'Options', 'cmb2' ),
+    'object_types'  => array( 'page' ), // Post type
+    'show_on'      => array( 'key' => 'id', 'value' => array($home_page->ID) ),
+  ) );
+
+  $metabox->add_field( array(
+    'name'      	=> __( 'Featured Recipe', 'cmb2' ),
+    'id'        	=> $prefix . 'home_recipe',
+    'type'      	=> 'post_search_ajax',
+    'limit'      	=> 1,
+    'sortable' 	 	=> false,
+    'query_args'	=> array(
+      'post_type'			=> array( 'recipe' ),
+      'post_status'		=> array( 'publish' ),
+      'posts_per_page'	=> -1
+    )
+  ) );
 
 }
 ?>
