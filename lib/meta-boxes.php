@@ -43,7 +43,10 @@ function igv_cmb_metabox_home() {
       'id'            => $prefix . 'metabox_home',
       'title'         => esc_html__( 'Options', 'cmb2' ),
       'object_types'  => array( 'page' ), // Post type
-      'show_on'      => array( 'key' => 'id', 'value' => array($home_page->ID) ),
+      'show_on'      => array(
+        'key' => 'id',
+        'value' => array($home_page->ID)
+      ),
     ) );
 
     $metabox->add_field( array(
