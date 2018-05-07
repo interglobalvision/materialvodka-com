@@ -62,6 +62,61 @@ function igv_cmb_metabox_home() {
       )
     ) );
 
+    // Video group
+    $video_group_id = $metabox->add_field( array(
+      'id'      => $prefix . 'home_video_group',
+      'name'    => 'Video',
+      'type'        => 'group',
+      'repeatable'  => false, // use false if you want non-repeatable group
+    ) );
+
+    // Video mp4
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video (mp4)',
+      'id'      => 'mp4',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/mp4',
+        ),
+      ),
+    ) );
+
+    // Video webm
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video (webm)',
+      'id'      => 'webm',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/webm',
+        ),
+      ),
+    ) );
+
+    // Video webm
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video preview image',
+      'id'      => 'poster',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ));
+
   }
 
 }
