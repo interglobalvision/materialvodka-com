@@ -80,6 +80,55 @@ function igv_cmb_metabox_stockist() {
   ) );
 
 }
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_video_awards' );
+function igv_cmb_metabox_video_awards() {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'metabox-video-award',
+    'title'         => esc_html__( 'Video Awards Metabox', 'cmb2' ),
+    'object_types'  => array( 'video_award' ), // Post type
+  ) );
+
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Video Year', 'cmb2' ),
+    'id'   => $prefix . 'video_award_video_year',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Artist(s)', 'cmb2' ),
+    'id'   => $prefix . 'video_award_artists',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name'    => esc_html__( 'Bio', 'cmb2' ),
+    'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
+    'id'      => $prefix . 'video_award_bio',
+    'type'    => 'wysiwyg',
+    'options' => array(
+      'textarea_rows' => 5,
+    ),
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Minutes', 'cmb2' ),
+    'id'   => $prefix . 'video_award_minutes',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Seconds', 'cmb2' ),
+    'id'   => $prefix . 'video_award_seconds',
+    'type' => 'text',
+  ) );
+
+}
 /**
  * Add Locate page metaboxes
  */
