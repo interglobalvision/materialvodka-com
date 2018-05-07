@@ -28,16 +28,56 @@ function get_post_objects( $query_args ) {
 /**
  * Hook in and add metaboxes. Can only happen on the 'cmb2_init' hook.
  */
-add_action( 'cmb2_init', 'igv_cmb_metaboxes' );
-function igv_cmb_metaboxes() {
 
-  // Start with an underscore to hide fields from custom fields list
-  $prefix = '_igv_';
+// Start with an underscore to hide fields from custom fields list
+$prefix = '_igv_';
 
-  /**
-   * Metaboxes declarations here
-   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
-   */
+add_action( 'cmb2_init', 'igv_cmb_metabox_stockist' );
+function igv_cmb_metabox_stockist() {
+
+  $metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'metabox-stockist',
+    'title'         => esc_html__( 'Stockist Metabox', 'cmb2' ),
+    'object_types'  => array( 'stockist' ), // Post type
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Zip code', 'cmb2' ),
+    'desc' => esc_html__( 'Required', 'cmb2' ),
+    'id'   => $prefix . 'stockist_zipcode',
+    'type' => 'text_small',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Address', 'cmb2' ),
+    'desc' => esc_html__( 'Full address', 'cmb2' ),
+    'id'   => $prefix . 'stockist_address',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Phone number', 'cmb2' ),
+    'id'   => $prefix . 'stockist_phone',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Website', 'cmb2' ),
+    'id'   => $prefix . 'stockist_website',
+    'type' => 'text_url',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Facebook', 'cmb2' ),
+    'id'   => $prefix . 'stockist_facebook',
+    'type' => 'text_url',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Instagram', 'cmb2' ),
+    'id'   => $prefix . 'stockist_instagram',
+    'type' => 'text_url',
+  ) );
 
 }
 ?>
