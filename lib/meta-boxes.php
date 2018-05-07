@@ -66,8 +66,6 @@ function igv_cmb_metaboxes_locate_page() {
       'context'       => 'normal',
       'priority'      => 'high',
       'show_names'    => true, // Show field names on the left
-      // 'cmb_styles' => false, // false to disable the CMB stylesheet
-      // 'closed'     => true, // Keep the metabox closed by default
     ) );
 
 
@@ -76,11 +74,9 @@ function igv_cmb_metaboxes_locate_page() {
       'name'    => 'Home Image',
       'id'      => $prefix . 'locate_home_image',
       'type'    => 'file',
-      // Optional:
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'image/jpeg',
@@ -95,11 +91,9 @@ function igv_cmb_metaboxes_locate_page() {
       'name'    => 'Top Image',
       'id'      => $prefix . 'locate_top_image',
       'type'    => 'file',
-      // Optional:
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'image/jpeg',
@@ -118,7 +112,6 @@ function igv_cmb_metaboxes_locate_page() {
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'image/jpeg',
@@ -142,11 +135,9 @@ function igv_cmb_metaboxes_locate_page() {
       'name'    => 'Video (mp4)',
       'id'      => $prefix . 'locate_video_mp4',
       'type'    => 'file',
-      // Optional:
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'video/mp4',
@@ -159,11 +150,9 @@ function igv_cmb_metaboxes_locate_page() {
       'name'    => 'Video (webm)',
       'id'      => $prefix . 'locate_video_webm',
       'type'    => 'file',
-      // Optional:
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'video/webm',
@@ -176,11 +165,9 @@ function igv_cmb_metaboxes_locate_page() {
       'name'    => 'Video Poster',
       'id'      => $prefix . 'locate_video_poster',
       'type'    => 'file',
-      // Optional:
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
       'query_args' => array(
         'type' => array(
           'image/jpeg',
