@@ -68,11 +68,10 @@ function igv_cmb_metabox_recipe() {
   'id'          => $prefix . 'ingredients_group',
   'type'        => 'group',
   'options'     => array(
-    'group_title'   => __( 'Ingredient {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+    'group_title'   => __( 'Ingredient {#}', 'cmb2' ), 
     'add_button'    => __( 'Add Another Ingredient', 'cmb2' ),
     'remove_button' => __( 'Remove Ingredient', 'cmb2' ),
     'sortable'      => true, // beta
-    // 'closed'     => true, // true to have the groups closed by default
   ),
 ) );
 
@@ -80,14 +79,12 @@ function igv_cmb_metabox_recipe() {
   'name' => 'Ingredient',
   'id'   => $prefix . 'ingredient_text',
   'type' => 'text',
-  // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
 ) );
 
  $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
   'name' => 'Quantity',
   'id'   => $prefix . 'quantity_text',
   'type' => 'text',
-  // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
 ) );
 
 
