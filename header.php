@@ -62,4 +62,28 @@ get_template_part('partials/seo');
         </nav>
       </div>
     </div>
+    <nav id="mobile-nav">
+      <div class="container">
+        <ul class="grid-column">
+          <li class="grid-item">
+            <a href="<?php echo home_url('prize'); ?>">Prize</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('video'); ?>">Videos</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('locate'); ?>">Locate</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('merch'); ?>">Merch</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </header>
