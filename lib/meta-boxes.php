@@ -29,11 +29,11 @@ function get_post_objects( $query_args ) {
  * Hook in and add metaboxes. Can only happen on the 'cmb2_init' hook.
  */
 
-// Start with an underscore to hide fields from custom fields list
-$prefix = '_igv_';
-
 add_action( 'cmb2_init', 'igv_cmb_metabox_stockist' );
 function igv_cmb_metabox_stockist() {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
 
   $metabox = new_cmb2_box( array(
     'id'            => $prefix . 'metabox-stockist',
@@ -58,7 +58,7 @@ function igv_cmb_metabox_stockist() {
   $metabox->add_field( array(
     'name' => esc_html__( 'Phone number', 'cmb2' ),
     'id'   => $prefix . 'stockist_phone',
-    'type' => 'text',
+    'type' => 'text_medium',
   ) );
 
   $metabox->add_field( array(
