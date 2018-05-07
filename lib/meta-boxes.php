@@ -385,7 +385,7 @@ function igv_cmb_metabox_recipe() {
   'id'          => 'ingredients_group',
   'type'        => 'group',
   'options'     => array(
-    'group_title'   => __( 'Ingredient {#}', 'cmb2' ), 
+    'group_title'   => __( 'Ingredient {#}', 'cmb2' ),
     'add_button'    => __( 'Add Another Ingredient', 'cmb2' ),
     'remove_button' => __( 'Remove Ingredient', 'cmb2' ),
     'sortable'      => true, // beta
@@ -414,7 +414,7 @@ function igv_product_metaboxes() {
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
 
- $product = new_cmb2_box( array(
+  $product = new_cmb2_box( array(
     'id'            => 'product_meta',
     'title'         => __( 'Product Information', 'cmb2' ),
     'object_types'  => array( 'product', ), // Post type
