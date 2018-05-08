@@ -107,7 +107,14 @@ if (have_posts()) {
   }
 }
 ?>
-
+      <div class="grid-row align-items-center justify-center">
+        <div class="grid-item item-s-12 item-m-6 text-align-right">
+          Special Events, Art Prize, Cocktail Recipes, etc.
+        </div>
+        <div class="grid-item item-s-12 item-m-6">
+          <?php get_template_part('partials/mailinglist-form'); ?>
+        </div>
+      </div>
     </div>
   </section>
 </main>
