@@ -1,4 +1,131 @@
 <?php
+add_action( 'cmb2_admin_init', 'igv_register_shopify_options_metabox' );
+
+function igv_register_shopify_options_metabox() {
+  $prefix = '_igv_';
+
+  $shop_options = new_cmb2_box( array(
+    'id'           => $prefix . 'shop_options_page',
+    'title'        => esc_html__( 'Shop Options', 'cmb2' ),
+    'object_types' => array( 'options-page' ),
+    /*
+     * The following parameters are specific to the options-page box
+     * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
+     */
+    'option_key'      => $prefix . 'shop_options', // The option key and admin menu page slug.
+    'icon_url'        => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
+    'menu_title'      => esc_html__( 'Shop Options', 'cmb2' ), // Falls back to 'title' (above).
+    // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
+    'capability'      => 'manage_options', // Cap required to view options-page.
+    // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
+    // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
+    // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+    'save_button'     => esc_html__( 'Save', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+  ) );
+
+  // Shop options
+  $shop_options->add_field( array(
+    'name'    => esc_html__( 'Merch Page Options', 'cmb2' ),
+    'desc'    => esc_html__( '', 'cmb2' ),
+    'id'      => $prefix . 'merch_options_title',
+    'type'    => 'title',
+  ) );
+
+  // Lookbook image
+  $shop_options->add_field(array(
+    'name'    => 'Lookbook Image',
+    'id'      => $prefix . 'shop_lookbook_image',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ));
+
+  // Video group
+  $shop_video_id = $shop_options->add_field( array(
+    'id'      => $prefix . 'shop_video_group',
+    'name'    => 'Video',
+    'type'        => 'group',
+    'repeatable'  => false, // use false if you want non-repeatable group
+  ) );
+
+  // Video mp4
+  $shop_options->add_group_field( $shop_video_id, array(
+    'name'    => 'Video (mp4)',
+    'id'      => 'shop_video_mp4',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'video/mp4',
+      ),
+    ),
+  ) );
+
+  // Video webm
+  $shop_options->add_group_field( $shop_video_id, array(
+    'name'    => 'Video (webm)',
+    'id'      => 'shop_video_webm',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'video/webm',
+      ),
+    ),
+  ) );
+
+  // Video poster
+  $shop_options->add_group_field( $shop_video_id, array(
+    'name'    => 'Video Poster',
+    'id'      => 'shop_video_poster',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ));
+
+  // Shopify options
+  $shop_options->add_field( array(
+    'name'    => esc_html__( 'API Options', 'cmb2' ),
+    'desc'    => esc_html__( '', 'cmb2' ),
+    'id'      => $prefix . 'shopify_api_title',
+    'type'    => 'title',
+  ) );
+
+  $shop_options->add_field( array(
+    'name'    => esc_html__( 'Shopify Domain', 'cmb2' ),
+    'desc'    => esc_html__( 'ex. shop.materialvodka.com', 'cmb2' ),
+    'id'      => 'shopify_domain',
+    'type'    => 'text',
+  ) );
+
+  $shop_options->add_field( array(
+    'name'    => esc_html__( 'Shopify StoreFront Access Token', 'cmb2' ),
+    'id'      => 'shopify_token',
+    'type'    => 'text',
+  ) );
+
+}
+
 add_action( 'cmb2_admin_init', 'igv_register_theme_options_metabox' );
 
 function igv_register_theme_options_metabox() {

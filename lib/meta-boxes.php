@@ -28,10 +28,98 @@ function get_post_objects( $query_args ) {
 /**
  * Hook in and add metaboxes. Can only happen on the 'cmb2_init' hook.
  */
+add_action( 'cmb2_init', 'igv_cmb_metabox_home' );
+function igv_cmb_metabox_home() {
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $home_page = get_page_by_path('home');
+
+  // Check if home page exists
+  if(!empty($home_page)) {
+
+    $metabox = new_cmb2_box( array(
+      'id'            => $prefix . 'metabox_home',
+      'title'         => esc_html__( 'Options', 'cmb2' ),
+      'object_types'  => array( 'page' ), // Post type
+      'show_on'      => array(
+        'key' => 'id',
+        'value' => array($home_page->ID)
+      ),
+    ) );
+
+    $metabox->add_field( array(
+      'name'      	=> __( 'Featured Recipe', 'cmb2' ),
+      'id'        	=> $prefix . 'home_recipe',
+      'type'      	=> 'post_search_ajax',
+      'limit'      	=> 1,
+      'sortable' 	 	=> false,
+      'query_args'	=> array(
+        'post_type'			=> array( 'recipe' ),
+        'post_status'		=> array( 'publish' ),
+        'posts_per_page'	=> -1
+      )
+    ) );
+
+    // Video group
+    $video_group_id = $metabox->add_field( array(
+      'id'      => $prefix . 'home_video_group',
+      'name'    => 'Video',
+      'type'        => 'group',
+      'repeatable'  => false, // use false if you want non-repeatable group
+    ) );
+
+    // Video mp4
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video (mp4)',
+      'id'      => 'mp4',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/mp4',
+        ),
+      ),
+    ) );
+
+    // Video webm
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video (webm)',
+      'id'      => 'webm',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/webm',
+        ),
+      ),
+    ) );
+
+    // Video webm
+    $metabox->add_group_field( $video_group_id, array(
+      'name'    => 'Video preview image',
+      'id'      => 'poster',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ));
+  }
+}
 
 add_action( 'cmb2_init', 'igv_cmb_metabox_stockist' );
 function igv_cmb_metabox_stockist() {
-
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
 
@@ -77,6 +165,55 @@ function igv_cmb_metabox_stockist() {
     'name' => esc_html__( 'Instagram', 'cmb2' ),
     'id'   => $prefix . 'stockist_instagram',
     'type' => 'text_url',
+  ) );
+
+}
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_video_awards' );
+function igv_cmb_metabox_video_awards() {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'metabox-video-award',
+    'title'         => esc_html__( 'Video Awards Metabox', 'cmb2' ),
+    'object_types'  => array( 'video_award' ), // Post type
+  ) );
+
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Video Year', 'cmb2' ),
+    'id'   => $prefix . 'video_award_video_year',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Artist(s)', 'cmb2' ),
+    'id'   => $prefix . 'video_award_artists',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name'    => esc_html__( 'Bio', 'cmb2' ),
+    'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
+    'id'      => $prefix . 'video_award_bio',
+    'type'    => 'wysiwyg',
+    'options' => array(
+      'textarea_rows' => 5,
+    ),
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Minutes', 'cmb2' ),
+    'id'   => $prefix . 'video_award_minutes',
+    'type' => 'text',
+  ) );
+
+  $metabox->add_field( array(
+    'name' => esc_html__( 'Seconds', 'cmb2' ),
+    'id'   => $prefix . 'video_award_seconds',
+    'type' => 'text',
   ) );
 
 }
@@ -217,9 +354,84 @@ function igv_cmb_metaboxes_locate_page() {
       'preview_size' => 'large', // Image size to use when previewing in the admin.
     ));
   }
+}
 
-  //
+// Product Metaboxes
+add_action( 'cmb2_init', 'igv_product_metaboxes' );
+function igv_product_metaboxes() {
 
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $product = new_cmb2_box( array(
+    'id'            => 'product_meta',
+    'title'         => __( 'Product Information', 'cmb2' ),
+    'object_types'  => array( 'product', ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+    // 'cmb_styles' => false, // false to disable the CMB stylesheet
+    // 'closed'     => true, // Keep the metabox closed by default
+  ) );
+
+  $product->add_field( array(
+    'name'       => __( 'Shopify Product Handle', 'cmb2' ),
+    'id'         => $prefix . 'shopify_product_handle',
+    'desc'    => __( 'The handle can be found on product URLs. Ex. in https://myshop.myshopify.com/products/my-product "my-product" is the handle', 'igb' ),
+    'type'       => 'text',
+  ) );
+
+  $product->add_field( array(
+    'name' => 'Product Gallery',
+    'desc' => '',
+    'id'         => $prefix . 'shopify_product_gallery',
+    'type' => 'file_list',
+    'preview_size' => array( 100, 100 ),
+    'query_args' => array( 'type' => 'image' ), // Only images attachment
+  ) );
+
+}
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_recipe' );
+function igv_cmb_metabox_recipe() {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+  
+  /**
+   * Initiate the metabox
+   */
+  $recipe_metaboxes = new_cmb2_box( array(
+    'id'            => $prefix . 'recipe_metaboxes',
+    'title'         => __( 'Ingredients', 'cmb2' ),
+    'object_types'  => array( 'recipe', ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  $ingredients_group_id = $recipe_metaboxes->add_field( array(
+  'id'          => 'ingredients_group',
+  'type'        => 'group',
+  'options'     => array(
+    'group_title'   => __( 'Ingredient {#}', 'cmb2' ),
+    'add_button'    => __( 'Add Another Ingredient', 'cmb2' ),
+    'remove_button' => __( 'Remove Ingredient', 'cmb2' ),
+    'sortable'      => true, // beta
+  ),
+  ) );
+
+    $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+    'name' => 'Ingredient',
+    'id'   => 'ingredient_text',
+    'type' => 'text',
+  ) );
+
+   $recipe_metaboxes->add_group_field( $ingredients_group_id , array(
+    'name' => 'Quantity',
+    'id'   => 'quantity_text',
+    'type' => 'text',
+  ) );
 }
 
 /**

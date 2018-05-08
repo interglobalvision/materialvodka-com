@@ -9,10 +9,16 @@ function scripts_and_styles_method() {
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
 
+  $shopify_options = get_site_option('_igv_shop_options');
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
+    'shopify' => array(
+      'domain' => $shopify_options['shopify_domain'],
+      'storefrontAccessToken' => $shopify_options['shopify_token'],
+    ),
   );
 
   wp_register_script('javascript-main', $javascriptMain);
@@ -45,7 +51,8 @@ register_nav_menus( array(
 function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/webdevstudios/cmb2/init.php';
-    require_once 'vendor/webdevstudios/cmb2-post-search-field/lib/init.php';
+    // require_once 'vendor/webdevstudios/cmb2-post-search-field/lib/init.php';
+    require_once 'vendor/alexis-magina/cmb2-field-post-search-ajax/cmb-field-post-search-ajax.php';
   }
 }
 add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 11 );
@@ -69,5 +76,6 @@ get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
+get_template_part( 'lib/functions-taxonomies' );
 
 ?>
