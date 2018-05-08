@@ -397,7 +397,7 @@ function igv_cmb_metabox_recipe() {
 
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
-  
+
   /**
    * Initiate the metabox
    */
@@ -411,7 +411,7 @@ function igv_cmb_metabox_recipe() {
   ) );
 
   $ingredients_group_id = $recipe_metaboxes->add_field( array(
-  'id'          => 'ingredients_group',
+  'id'          => $prefix . 'ingredients_group',
   'type'        => 'group',
   'options'     => array(
     'group_title'   => __( 'Ingredient {#}', 'cmb2' ),
