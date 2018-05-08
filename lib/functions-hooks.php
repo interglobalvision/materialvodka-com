@@ -27,3 +27,19 @@ function create_custom_pages() {
   }
 }
 add_filter( 'after_setup_theme', 'create_custom_pages' );
+
+
+function create_season_categories() {
+  $seasons = ['Winter', 'Spring', 'Summer', 'Fall'];
+
+  foreach ($seasons as $key => $value) {
+    wp_insert_term(
+  		$value,
+  		'season',
+  		array(
+  		  'slug' => strtolower($value)
+  		)
+  	);
+  }
+}
+add_action( 'init', 'create_season_categories' );
