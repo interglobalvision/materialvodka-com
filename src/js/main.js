@@ -2,6 +2,7 @@
 /* global $, document */
 
 // Import dependencies
+import './covervid.js';
 import Shop from './shop';
 
 import lazySizes from 'lazysizes';
@@ -26,6 +27,9 @@ class Site {
   onReady() {
     lazySizes.init();
 
+    this.$covervidVideo = $('.covervid-video');
+
+    this.initCoverVid();
   }
 
   fixWidows() {
@@ -35,6 +39,14 @@ class Site {
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
     });
+  }
+
+  initCoverVid() {
+    const _this = this;
+
+    if (_this.$covervidVideo.length) {
+      _this.$covervidVideo.coverVid(1920, 1080);
+    }
   }
 }
 
