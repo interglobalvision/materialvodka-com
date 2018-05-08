@@ -28,7 +28,6 @@ function create_custom_pages() {
 }
 add_filter( 'after_setup_theme', 'create_custom_pages' );
 
-
 function create_season_categories() {
   $seasons = ['Winter', 'Spring', 'Summer', 'Fall'];
 
