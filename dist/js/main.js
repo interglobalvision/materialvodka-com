@@ -91,15 +91,21 @@ $(document).ready(this.onReady.bind(this));
 }return _createClass(a,[{key:'onResize',value:function onResize()
 
 {
-
+this.sizeHeaderSpacer();
 }},{key:'onReady',value:function onReady()
 
 {
 _lazysizes2.default.init(),
 
+this.$window=$(window),
+this.$document=$(document),
+this.$header=$('#header'),
+this.$mainContent=$('#main-content'),
+this.$headerSpacer=$('#header-spacer'),
 this.$covervidVideo=$('.covervid-video'),
 
-this.initCoverVid();
+this.initCoverVid(),
+this.bindStickyHeader();
 }},{key:'fixWidows',value:function fixWidows()
 
 {
@@ -112,11 +118,37 @@ $(this).html(a);
 }},{key:'initCoverVid',value:function initCoverVid()
 
 {
+this.$covervidVideo.length&&
+this.$covervidVideo.coverVid(1920,1080);
+
+}},{key:'bindStickyHeader',value:function bindStickyHeader()
+
+{
 var a=this;
 
-a.$covervidVideo.length&&
-a.$covervidVideo.coverVid(1920,1080);
+this.sizeHeaderSpacer(),
 
+this.$window.on('scroll',function(){
+a.headerSpacerOffset-a.windowHeight<=a.$window.scrollTop()&&!a.$header.hasClass('bottom')?
+a.$header.addClass('bottom').css({
+top:a.headerTop+'px',
+bottom:'auto'}):
+
+a.headerSpacerOffset-a.windowHeight>a.$window.scrollTop()&&a.$header.hasClass('bottom')&&
+a.$header.removeClass('bottom').css({
+top:'auto',
+bottom:0});
+
+
+});
+}},{key:'sizeHeaderSpacer',value:function sizeHeaderSpacer()
+
+{
+var a=this.$header.outerHeight();
+this.$headerSpacer.css('height',a+'px'),
+this.headerTop=this.$headerSpacer.offset().top,
+this.headerSpacerOffset=this.headerTop+a,
+this.windowHeight=this.$window.outerHeight();
 }}]),a}(),
 
 
