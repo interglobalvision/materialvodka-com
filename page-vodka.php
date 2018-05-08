@@ -11,13 +11,13 @@ get_header();
 if (have_posts()) {
   while (have_posts()) {
     the_post();
-    $vodka_video = get_post_meta(get_the_ID(), '_igv_vodka_video_group', true);
+    $vodka_video = get_post_meta($post->ID, '_igv_vodka_video_group', true);
     $vodka_video = $vodka_video[0];
-    $vodka_image = get_post_meta(get_the_ID(), '_igv_vodka_image', true);
-    $world_video = get_post_meta(get_the_ID(), '_igv_world_video_group', true);
+    $vodka_image = get_post_meta($post->ID, '_igv_vodka_image', true);
+    $world_video = get_post_meta($post->ID, '_igv_world_video_group', true);
     $world_video = $world_video[0];
-    $world_image = get_post_meta(get_the_ID(), '_igv_world_image', true);
-    $institution_list = get_post_meta(get_the_ID(), '_igv_institution_list_textarea', true);
+    $world_image = get_post_meta($post->ID, '_igv_world_image', true);
+    $institution_list = get_post_meta($post->ID, '_igv_institution_list_textarea', true);
    
 ?>
     <div class="grid-row">
@@ -31,7 +31,7 @@ if (have_posts()) {
     
     <div class="grid-row">
       <div class="grid-item item-s-12">
-        <h1 class='font-uppercase'>Material Vodka</h1>
+        <h2 class='font-uppercase'>Material Vodka</h2>
       </div>
     </div>
     
@@ -69,24 +69,17 @@ if (have_posts()) {
         </div>
       </div>
 
-      <div class="grid-item item-s-12 item-m-6" style="background-image: url(<?php echo $world_image; ?>)">
+      <div class="grid-item item-s-12 item-m-6 background-cover" style="background-image: url(<?php echo $world_image; ?>)">
       </div>  
     </div>
     
 <?php
   }
-} else {
-?>
-        <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
 } ?>
 
       </div>
     </div>
   </section>
-
-  <?php get_template_part('partials/pagination'); ?>
-
 </main>
 
 <?php
