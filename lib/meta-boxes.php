@@ -301,7 +301,7 @@ function igv_cmb_metaboxes_locate_page() {
 
     // Video group
     $locate_video_id = $locate_meta->add_field( array(
-      'id'      => $prefix . 'locate_video_group',
+      'id'      => 'locate_video_group',
       'name'    => 'Video',
       'type'        => 'group',
       'repeatable'  => false, // use false if you want non-repeatable group
@@ -310,7 +310,7 @@ function igv_cmb_metaboxes_locate_page() {
     // Video mp4
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video (mp4)',
-      'id'      => $prefix . 'locate_video_mp4',
+      'id'      => 'mp4',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -325,7 +325,7 @@ function igv_cmb_metaboxes_locate_page() {
     // Video webm
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video (webm)',
-      'id'      => $prefix . 'locate_video_webm',
+      'id'      => 'webm',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -337,10 +337,10 @@ function igv_cmb_metaboxes_locate_page() {
       ),
     ) );
 
-    // Video webm
+    // Video Poster
     $locate_meta->add_group_field( $locate_video_id, array(
       'name'    => 'Video Poster',
-      'id'      => $prefix . 'locate_video_poster',
+      'id'      => 'poster',
       'type'    => 'file',
       'options' => array(
         'url' => false, // Hide the text input for the url
@@ -432,5 +432,218 @@ function igv_cmb_metabox_recipe() {
     'id'   => 'quantity_text',
     'type' => 'text',
   ) );
+}
+
+/**
+ * Add Vodka page metaboxes
+ */
+add_action( 'cmb2_init', 'igv_cmb_metaboxes_vodka_page' );
+function igv_cmb_metaboxes_vodka_page() {
+
+  $prefix = '_igv_';
+
+  // Get Locate page
+  $vodka_page = get_page_by_path('/vodka');
+
+  // Check if vodka page exists
+  if(!empty($vodka_page)) {
+
+    // Vodka Init metabox
+    $vodka_meta = new_cmb2_box( array(
+      'id'            => $prefix . 'vodka_options',
+      'title'         => __( 'Vodka Options', 'cmb2' ),
+      'object_types'  => array( 'page', ), // Post type
+      'show_on'       => array(
+        'key' => 'id',
+        'value' => array($vodka_page->ID)
+      ),
+      'context'       => 'normal',
+      'priority'      => 'high',
+      'show_names'    => true, // Show field names on the left
+    ) );
+
+    //Vodka Video group
+    $vodka_video_id = $vodka_meta->add_field( array(
+      'id'      => 'vodka_video_group',
+      'name'    => 'Video',
+      'type'        => 'group',
+      'repeatable'  => false, // use false if you want non-repeatable group
+    ) );
+
+    //Vodka Video mp4
+    $vodka_meta->add_group_field( $vodka_video_id, array(
+      'name'    => 'Video (mp4)',
+      'id'      => 'mp4',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/mp4',
+        ),
+      ),
+    ) );
+
+    //Vodka Video webm
+    $vodka_meta->add_group_field( $vodka_video_id, array(
+      'name'    => 'Video (webm)',
+      'id'      => 'webm',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/webm',
+        ),
+      ),
+    ) );
+
+    //Vodka Video Poster
+    $vodka_meta->add_group_field( $vodka_video_id, array(
+      'name'    => 'Video Poster',
+      'id'      => 'poster',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ) );
+
+    //Vodka Image
+    $vodka_meta->add_field( array(
+      'name'    => 'Vodka Image',
+      'id'      => $prefix . 'vodka_image',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ) );
+
+    // World Init metabox
+    $world_meta = new_cmb2_box( array(
+      'id'            => $prefix . 'world_options',
+      'title'         => __( 'World Options', 'cmb2' ),
+      'object_types'  => array( 'page', ), // Post type
+      'show_on'       => array(
+        'key' => 'id',
+        'value' => array($vodka_page->ID)
+      ),
+      'context'       => 'normal',
+      'priority'      => 'high',
+      'show_names'    => true, // Show field names on the left
+    ) );
+
+    //World Video group
+    $world_video_id = $world_meta->add_field( array(
+      'id'      => $prefix . 'world_video_group',
+      'name'    => 'Video',
+      'type'        => 'group',
+      'repeatable'  => false, // use false if you want non-repeatable group
+    ) );
+
+    //World Video mp4
+    $world_meta->add_group_field( $world_video_id, array(
+      'name'    => 'Video (mp4)',
+      'id'      => 'mp4',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/mp4',
+        ),
+      ),
+    ) );
+
+    //World Video webm
+    $world_meta->add_group_field( $world_video_id, array(
+      'name'    => 'Video (webm)',
+      'id'      => 'webm',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/webm',
+        ),
+      ),
+    ) );
+
+    //World Video Poster
+    $world_meta->add_group_field( $world_video_id, array(
+      'name'    => 'Video Poster',
+      'id'      => 'poster',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ) );
+
+    //World Image
+
+    $world_meta->add_field( array(
+      'name'    => 'World Image',
+      'id'      => $prefix . 'world_image',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ) );
+
+    //List of Institutions
+
+    // Init metabox
+    $institution_list = new_cmb2_box( array(
+      'id'            => $prefix . 'institution_list_options',
+      'title'         => __( 'Insititution List', 'cmb2' ),
+      'object_types'  => array( 'page', ), // Post type
+      'show_on'       => array(
+        'key' => 'id',
+        'value' => array($vodka_page->ID)
+      ),
+      'context'       => 'normal',
+      'priority'      => 'high',
+      'show_names'    => true, // Show field names on the left
+    ) );
+
+    $institution_list->add_field( array(
+    'name' => esc_html__( 'List', 'cmb2' ),
+    'desc' => esc_html__( 'field description (optional)', 'cmb2' ),
+    'id'   => $prefix . 'institution_list_textarea',
+    'type' => 'textarea',
+  ) );
+
+  }
 }
 ?>
