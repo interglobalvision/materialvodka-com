@@ -33,12 +33,12 @@ function create_season_categories() {
 
   foreach ($seasons as $key => $value) {
     wp_insert_term(
-  		$value,
-  		'season',
-  		array(
-  		  'slug' => strtolower($value)
-  		)
-  	);
+      $value,
+      'season',
+      array(
+        'slug' => strtolower($value)
+      )
+    );
   }
 }
 add_action( 'init', 'create_season_categories' );
