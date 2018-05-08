@@ -1,9 +1,13 @@
 <?php
 get_header();
 
-$video = get_post_meta($post->ID, '_igv_home_video_group', true);
-$recipe = get_post_meta($post->ID, '_igv_home_recipe', true);
-$options = get_site_option('_igv_site_options');
+if (have_posts()) {
+  while (have_posts()) {
+    the_post();
+
+    $video = get_post_meta($post->ID, '_igv_home_video_group', true);
+    $recipe = get_post_meta($post->ID, '_igv_home_recipe', true);
+    $options = get_site_option('_igv_site_options');
 ?>
 
 <main id="main-content">
@@ -16,7 +20,7 @@ $options = get_site_option('_igv_site_options');
       ?>
         <div class="grid-item no-gutter covervid-wrapper
         covervid-s-12 covervid-m-6">
-          <video class="covervid-video" autoplay loop poster="<?php echo $video[0]['poster']; ?>">
+          <video class="covervid-video" muted autoplay loop poster="<?php echo $video[0]['poster']; ?>">
             <source src="<?php echo $video[0]['webm']; ?>" type="video/webm">
             <source src="<?php echo $video[0]['mp4']; ?>" type="video/mp4">
           </video>
@@ -82,8 +86,8 @@ $options = get_site_option('_igv_site_options');
         $query = new WP_Query( $args );
 
         // The Loop
-        if ($query->have_posts()) {
-        	while ($query->have_posts()) {
+        if ( $query->have_posts() ) {
+        	while ( $query->have_posts() ) {
         		$query->the_post();
       ?>
         <div class="grid-item grid-item-square background-cover font-uppercase" href="<?php echo home_url('videos'); ?>" style="background-image: url(<?php echo the_post_thumbnail_url($recipe, 'full'); ?>)">
@@ -121,5 +125,8 @@ $options = get_site_option('_igv_site_options');
 </main>
 
 <?php
+  }
+}
+
 get_footer();
 ?>
