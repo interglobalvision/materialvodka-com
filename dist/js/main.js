@@ -111,6 +111,7 @@ $(this).html(a);
 });
 }},{key:'initCoverVid',value:function initCoverVid()
 
+
 {
 var a=this;
 

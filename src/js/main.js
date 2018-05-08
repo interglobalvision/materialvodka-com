@@ -41,6 +41,7 @@ class Site {
     });
   }
 
+
   initCoverVid() {
     const _this = this;
 
