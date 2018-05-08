@@ -14,7 +14,7 @@ $font-size-mid = 24px
 $font-size-small = 18px
 $font-size-tiny = 8px
 
-grid-maker(96%, $gutter, s)
+grid-maker(100%, $gutter, s)
 
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
@@ -36,3 +36,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   transform: translateX(100vw)
   &.active
     transform: translateX(0)
+
+// ******************************************************
+
+// VIDEOS
+
+.covervid-wrapper
+  position: relative
+
+.covervid-s-12
+  height: calc('100vw / 3')
