@@ -13,21 +13,12 @@ if (have_posts()) {
     the_post();
     $vodka_video = get_post_meta(get_the_ID(), '_igv_vodka_video_group', true);
     $vodka_video = $vodka_video[0];
-    pr($vodka_video);
-
     $vodka_image = get_post_meta(get_the_ID(), '_igv_vodka_image', true);
-    pr($vodka_image);
-
     $world_video = get_post_meta(get_the_ID(), '_igv_world_video_group', true);
     $world_video = $world_video[0];
-    pr($world_video);
-
     $world_image = get_post_meta(get_the_ID(), '_igv_world_image', true);
-    pr($world_image);
-
     $institution_list = get_post_meta(get_the_ID(), '_igv_institution_list_textarea', true);
-    pr($institution_list);
-
+   
 ?>
     <div class="grid-row">
       <div class="grid-item item-s-12">
@@ -61,20 +52,26 @@ if (have_posts()) {
     </div>
   
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-l-6">
-        <h1 class='font-uppercase'>10% OF THE PROFITS GO TO SUPPORTING THE ARTS.</h1>
+      <div class="grid-item grid-row item-s-12 item-m-6">
+        <div class="grid-item item-s-12">
+          <h1 class='font-uppercase'>10% OF THE PROFITS GO TO SUPPORTING THE ARTS.</h1>
+        </div>
 
-        <p>Material is woven into the framework of the creative community. We are members of our world and we actively support radical change.</p>
+        <div class="grid-item item-s-6">
+          <p>Material is woven into the framework of the creative community. We are members of our world and we actively support radical change.</p>
+        </div>
 
-        <p>Some of the artists and cultural institutions we have worked with include:</p>
-
-        <?php echo ( $institution_list ); ?>
-
-        <div class="grid-item item-s-12 item-l-4" style="background-image: url(<?php echo $world_image; ?>)"></div>
+        <div class="grid-item item-s-6">
+          <p>Some of the artists and cultural institutions we have worked with include:</p>
+          <?php echo ( $institution_list ); ?>
+          <p>Learn more about the Material Vodka Prizes</p>
+        </div>
       </div>
+
+      <div class="grid-item item-s-12 item-m-6" style="background-image: url(<?php echo $world_image; ?>)"></div>  
+
     </div>
-
-
+    
 <?php
   }
 } else {
