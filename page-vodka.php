@@ -31,7 +31,7 @@ if (have_posts()) {
     
     <div class="grid-row">
       <div class="grid-item item-s-12">
-        <h2 class='font-uppercase'>Material Vodka</h2>
+        <h1 class='font-uppercase'>Material Vodka</h1>
       </div>
     </div>
     
@@ -55,7 +55,7 @@ if (have_posts()) {
     <div class="grid-row">
       <div class="grid-item grid-row item-s-12 item-m-6">
         <div class="grid-item item-s-12">
-          <h1 class='font-uppercase'>10% OF THE PROFITS GO TO SUPPORTING THE ARTS.</h1>
+          <h2 class='font-uppercase'>10% OF THE PROFITS GO TO SUPPORTING THE ARTS.</h2>
         </div>
 
         <div class="grid-item item-s-6">
