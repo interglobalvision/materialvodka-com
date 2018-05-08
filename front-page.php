@@ -24,8 +24,8 @@ $options = get_site_option('_igv_site_options');
       <?php
         }
       ?>
-        <div class="grid-item grid-item-square">
-          <div class="font-size-large">a vodka company founded with the sole intention of supporting alternative arts.</div>
+        <div class="grid-item grid-item-square grid-row align-items-end">
+          <div class="font-size-large grid-item item-s-12 item-m-10 offset-m-1 no-gutter margin-bottom-large">a vodka company founded with the sole intention of supporting alternative arts.</div>
           <div id="bottle-sprite"></div>
         </div>
       <?php
