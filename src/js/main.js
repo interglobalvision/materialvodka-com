@@ -43,7 +43,7 @@ class Site {
 
   initCoverVid() {
     const _this = this;
-    
+
     if (_this.$covervidVideo.length) {
       _this.$covervidVideo.coverVid(1920, 1080);
     }
