@@ -28,10 +28,10 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header" class="font-uppercase">
+  <header id="header" class="padding-top-tiny padding-bottom-tiny font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
-      <div class="grid-row flex-nowrap">
+      <div class="grid-row flex-nowrap align-items-center">
         <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
