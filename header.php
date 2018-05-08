@@ -9,6 +9,7 @@
 <?php
 get_template_part('partials/globie');
 get_template_part('partials/seo');
+get_template_part('partials/agechecker-form.php');
 ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
