@@ -78,6 +78,7 @@ if (have_posts()) {
         <div class="grid-item item-s-12 item-l-6" style="background-image: url(<?php echo $bottom_image; ?>)">
         </div>
         <div class="grid-item item-s-12 item-l-6">
+          <p>Newsletter goes here</p>
         </div>
       </div>
 <?php
