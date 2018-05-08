@@ -97,6 +97,8 @@ $(document).ready(this.onReady.bind(this));
 {
 _lazysizes2.default.init(),
 
+this.$covervidVideo=$('.covervid-video'),
+
 this.initCoverVid();
 }},{key:'fixWidows',value:function fixWidows()
 
@@ -110,7 +112,11 @@ $(this).html(a);
 }},{key:'initCoverVid',value:function initCoverVid()
 
 {
-$('.covervid-video').coverVid(1920,1080);
+var a=this;
+
+a.$covervidVideo.length&&
+a.$covervidVideo.coverVid(1920,1080);
+
 }}]),a}(),
 
 

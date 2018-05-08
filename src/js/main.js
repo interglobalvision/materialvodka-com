@@ -27,6 +27,8 @@ class Site {
   onReady() {
     lazySizes.init();
 
+    this.$covervidVideo = $('.covervid-video');
+
     this.initCoverVid();
   }
 
@@ -40,7 +42,11 @@ class Site {
   }
 
   initCoverVid() {
-    $('.covervid-video').coverVid(1920, 1080);
+    const _this = this;
+    
+    if (_this.$covervidVideo.length) {
+      _this.$covervidVideo.coverVid(1920, 1080);
+    }
   }
 }
 
