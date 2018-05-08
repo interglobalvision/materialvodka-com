@@ -2,6 +2,7 @@
 
 // Custom functions (like special queries, etc)
 
+// return array of season term slugs ordered ASC from current season
 function get_ordered_season_array() {
   $today = new DateTime();
 

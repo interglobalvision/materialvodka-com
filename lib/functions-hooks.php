@@ -2,7 +2,7 @@
 
 // Custom hooks (like excerpt length etc)
 
-// Programatically create Home, What We Do and Filming pages
+// Programatically create pages
 function create_custom_pages() {
   $custom_pages = array(
     'home' => 'Home',
@@ -28,6 +28,7 @@ function create_custom_pages() {
 }
 add_filter( 'after_setup_theme', 'create_custom_pages' );
 
+// Programatically create Seasons for Recipes
 function create_season_categories() {
   $seasons = ['Winter', 'Spring', 'Summer', 'Fall'];
 
