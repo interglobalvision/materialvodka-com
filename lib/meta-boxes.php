@@ -464,7 +464,7 @@ function igv_cmb_metaboxes_vodka_page() {
 
     //Vodka Video group
     $vodka_video_id = $vodka_meta->add_field( array(
-      'id'      => 'vodka_video_group',
+      'id'      => $prefix . 'vodka_video_group',
       'name'    => 'Video',
       'type'        => 'group',
       'repeatable'  => false, // use false if you want non-repeatable group
