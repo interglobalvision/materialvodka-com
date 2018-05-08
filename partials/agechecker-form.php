@@ -1,4 +1,4 @@
-<div id="form-wrapper--dob">
+<form id="form-wrapper--dob">
 
   <p>Please enter your date of birth:<p>
   
@@ -15,7 +15,8 @@
   </div>
 
   <p>You must be of legal age to enter<p>
-  <input type="submit" value="Enter">
 
-</div>
+  <button id="submit-age">Enter</button>
+
+</form>
 

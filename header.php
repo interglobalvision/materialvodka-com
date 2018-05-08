@@ -9,7 +9,7 @@
 <?php
 get_template_part('partials/globie');
 get_template_part('partials/seo');
-get_template_part('partials/agechecker-form.php');
+
 ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
@@ -28,7 +28,7 @@ get_template_part('partials/agechecker-form.php');
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
 <section id="main-container">
-
+  <?php get_template_part('partials/agechecker-form'); ?>
   <header id="header">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
