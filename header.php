@@ -28,7 +28,7 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header" class="padding-top-tiny padding-bottom-tiny font-uppercase">
+  <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
       <div class="grid-row flex-nowrap align-items-center">
