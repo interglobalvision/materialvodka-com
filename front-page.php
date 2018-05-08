@@ -82,15 +82,15 @@ $options = get_site_option('_igv_site_options');
         $query = new WP_Query( $args );
 
         // The Loop
-        if ( $query->have_posts() ) {
-        	while ( $query->have_posts() ) {
+        if ($query->have_posts()) {
+        	while ($query->have_posts()) {
         		$query->the_post();
       ?>
         <div class="grid-item grid-item-square background-cover font-uppercase" href="<?php echo home_url('videos'); ?>" style="background-image: url(<?php echo the_post_thumbnail_url($recipe, 'full'); ?>)">
           <h2 class="font-size-large"><?php the_title(); ?></h2>
           <span>Video Award Recipient <?php the_date('F Y'); ?></span>
         </div>
-      <?
+      <?php
         	}
         }
 
