@@ -39,7 +39,8 @@ if (have_posts()) {
       <div class="grid-item item-s-12 item-l-3">
         <?php the_content(); ?>
       </div>
-      <div class="grid-item item-s-12 item-l-9" style="background-image: url(<?php echo $vodka_image; ?>)"></div>
+      <div class="grid-item item-s-12 item-l-9" style="background-image: url(<?php echo $vodka_image; ?>)">
+      </div>
     </div>
     
     <div class="grid-row">
@@ -68,8 +69,8 @@ if (have_posts()) {
         </div>
       </div>
 
-      <div class="grid-item item-s-12 item-m-6" style="background-image: url(<?php echo $world_image; ?>)"></div>  
-
+      <div class="grid-item item-s-12 item-m-6" style="background-image: url(<?php echo $world_image; ?>)">
+      </div>  
     </div>
     
 <?php
