@@ -55,19 +55,21 @@ class Site {
   }
 
   animateBottleSprite() {
-    const controller = new ScrollMagic.Controller();
+    if ($('#bottle-sprite').length) {
+      const controller = new ScrollMagic.Controller();
 
-    // create Tween
-    const tween = TweenMax.to("#bottle-sprite", 1.0, {
-      backgroundPosition: "100% 0",
-      ease: SteppedEase.config(59)
-    });
+      // create Tween
+      const tween = TweenMax.to("#bottle-sprite", 1.0, {
+        backgroundPosition: "100% 0",
+        ease: SteppedEase.config(59)
+      });
 
-    // build scene
-    const scene = new ScrollMagic.Scene({duration: 500})
-    .triggerHook("onCenter")
-    .setTween(tween)
-    .addTo(controller);
+      // build scene
+      const scene = new ScrollMagic.Scene({duration: 500})
+      .triggerHook("onCenter")
+      .setTween(tween)
+      .addTo(controller);
+    }
   }
 }
 

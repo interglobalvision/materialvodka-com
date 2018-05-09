@@ -4901,6 +4901,7 @@ a.$covervidVideo.coverVid(1920,1080);
 }},{key:'animateBottleSprite',value:function animateBottleSprite()
 
 {
+if($('#bottle-sprite').length)
 var a=new _scrollmagic2.default.Controller,
 
 
@@ -4914,6 +4915,7 @@ c=new _scrollmagic2.default.Scene({duration:500}).
 triggerHook('onCenter').
 setTween(b).
 addTo(a);
+
 }}]),a}(),
 
 
