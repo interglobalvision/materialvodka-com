@@ -1,5 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, window */
+/* global $, document, window, WP */
 
 class Ajaxy {
   constructor() {
@@ -18,7 +18,7 @@ class Ajaxy {
     this.bindLinks();
 
     // Ajax event
-    this.ajaxSuccessEvent = new Event('ajaxSuccess')
+    this.ajaxSuccessEvent = new Event('ajaxSuccess');
 
     $(window).bind('popstate', this.handlePopState);
 
@@ -33,7 +33,7 @@ class Ajaxy {
   bindLinks() {
     const siteURL = "http://" + top.location.host.toString();
 
-    this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a');
+    this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a, .not-ajax');
 
     // Find all ajaxy links and bind ajax event
     this.$ajaxyLinks.click(this.handleLinkClick.bind(this));
