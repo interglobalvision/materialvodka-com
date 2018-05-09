@@ -53,6 +53,4 @@ class Site {
 
 const Material = new Site();
 const MaterialShop = new Shop();
-const MaterialAjaxy = new Ajaxy({
-  complete: MaterialShop.onReady,
-});
+const MaterialAjaxy = new Ajaxy();

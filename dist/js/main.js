@@ -123,8 +123,7 @@ Site = function () {
 
 var Material = new Site();
 var MaterialShop = new _shop2.default();
-var MaterialAjaxy = new _ajaxy2.default({
-  complete: MaterialShop.onReady });
+var MaterialAjaxy = new _ajaxy2.default();
 
 /***/ }),
 /* 1 */
@@ -6059,139 +6058,139 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 /* global $, document, window */var
 
 Ajaxy = function () {
-	function Ajaxy() {_classCallCheck(this, Ajaxy);
-		// firstLoad is checked below. It helps prevent Safari's popstate on load to
-		// reload (ajax) the site.
-		this.firstLoad = true;
+  function Ajaxy() {_classCallCheck(this, Ajaxy);
+    // firstLoad is checked below. It helps prevent Safari's popstate on load to
+    // reload (ajax) the site.
+    this.firstLoad = true;
 
-		// Bind function
-		this.ajaxBefore = this.ajaxBefore.bind(this);
-		this.ajaxSuccess = this.ajaxSuccess.bind(this);
-		this.ajaxAfter = this.ajaxAfter.bind(this);
-		this.ajaxErrorHandler = this.ajaxErrorHandler.bind(this);
-		this.handlePopState = this.handlePopState.bind(this);
+    // Bind function
+    this.ajaxBefore = this.ajaxBefore.bind(this);
+    this.ajaxSuccess = this.ajaxSuccess.bind(this);
+    this.ajaxAfter = this.ajaxAfter.bind(this);
+    this.ajaxErrorHandler = this.ajaxErrorHandler.bind(this);
+    this.handlePopState = this.handlePopState.bind(this);
 
-		// Bind links
-		this.bindLinks();
+    // Bind links
+    this.bindLinks();
 
-		// Ajax event
-		this.ajaxSuccessEvent = new Event('ajaxSuccess');
+    // Ajax event
+    this.ajaxSuccessEvent = new Event('ajaxSuccess');
 
-		$(window).bind('popstate', this.handlePopState);
+    $(window).bind('popstate', this.handlePopState);
 
-	}_createClass(Ajaxy, [{ key: 'handlePopState', value: function handlePopState()
+  }_createClass(Ajaxy, [{ key: 'handlePopState', value: function handlePopState()
 
-		{
-			if (!this.firstLoad) {
-				this.load(document.location.origin + document.location.pathname, false);
-			}
-		} }, { key: 'bindLinks', value: function bindLinks()
+    {
+      if (!this.firstLoad) {
+        this.load(document.location.origin + document.location.pathname, false);
+      }
+    } }, { key: 'bindLinks', value: function bindLinks()
 
-		{
-			var siteURL = "http://" + top.location.host.toString();
+    {
+      var siteURL = "http://" + top.location.host.toString();
 
-			this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a');
+      this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a');
 
-			// Find all ajaxy links and bind ajax event
-			this.$ajaxyLinks.click(this.handleLinkClick.bind(this));
-		} }, { key: 'handleLinkClick', value: function handleLinkClick(
+      // Find all ajaxy links and bind ajax event
+      this.$ajaxyLinks.click(this.handleLinkClick.bind(this));
+    } }, { key: 'handleLinkClick', value: function handleLinkClick(
 
-		event) {
+    event) {
 
-			// Detect if is cmd+click or ctrl+click or has been defaultPrevented somewhere else
-			if (!event.isDefaultPrevented() && !event.metaKey && !event.ctrlKey) {
-				event.preventDefault();
+      // Detect if is cmd+click or ctrl+click or has been defaultPrevented somewhere else
+      if (!event.isDefaultPrevented() && !event.metaKey && !event.ctrlKey) {
+        event.preventDefault();
 
-				var url = event.currentTarget.href;
+        var url = event.currentTarget.href;
 
-				this.load(url);
-			}
+        this.load(url);
+      }
 
-			return;
+      return;
 
-		} }, { key: 'reset', value: function reset()
+    } }, { key: 'reset', value: function reset()
 
-		{
+    {
 
-			// Unbind click from all ajax links
-			this.$ajaxyLinks.unbind('click');
+      // Unbind click from all ajax links
+      this.$ajaxyLinks.unbind('click');
 
-			// Re initiate
-			this.bindLinks();
-		}
+      // Re initiate
+      this.bindLinks();
+    }
 
-		/*
-     * Load a new URL thru ajax
-     * @url {String}: URL to load
-     * @pushState {Bool}: Make false if a new state doens't need to be pushed (Default: true). Ex, going back
-     */ }, { key: 'load', value: function load(
-		url) {var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    /*
+       * Load a new URL thru ajax
+       * @url {String}: URL to load
+       * @pushState {Bool}: Make false if a new state doens't need to be pushed (Default: true). Ex, going back
+       */ }, { key: 'load', value: function load(
+    url) {var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-			this.firstLoad = false;
+      this.firstLoad = false;
 
-			if (pushState) {
-				// Push new history state
-				history.pushState(null, null, url);
-			}
+      if (pushState) {
+        // Push new history state
+        history.pushState(null, null, url);
+      }
 
-			$.ajax(url, {
-				dataType: 'html',
-				beforeSend: this.ajaxBefore,
-				error: this.ajaxErrorHandler,
-				success: this.ajaxSuccess,
-				complete: this.ajaxAfter });
+      $.ajax(url, {
+        dataType: 'html',
+        beforeSend: this.ajaxBefore,
+        error: this.ajaxErrorHandler,
+        success: this.ajaxSuccess,
+        complete: this.ajaxAfter });
 
-		} }, { key: 'ajaxBefore', value: function ajaxBefore(
+    } }, { key: 'ajaxBefore', value: function ajaxBefore(
 
-		xhr, settings) {
+    xhr, settings) {
 
-			$('body').addClass('loading');
-			$('body, html').animate({
-				scrollTop: 0 },
-			300);
-		} }, { key: 'ajaxAfter', value: function ajaxAfter()
+      $('body').addClass('loading');
+      $('body, html').animate({
+        scrollTop: 0 },
+      300);
+    } }, { key: 'ajaxAfter', value: function ajaxAfter()
 
-		{
+    {
 
-			$('body').removeClass('loading');
+      $('body').removeClass('loading');
 
-			this.reset();
+      this.reset();
 
-			// Resets from other parts of the website
-			//Site.reinit();
+      // Resets from other parts of the website
+      //Site.reinit();
 
-		} }, { key: 'ajaxErrorHandler', value: function ajaxErrorHandler(
+    } }, { key: 'ajaxErrorHandler', value: function ajaxErrorHandler(
 
-		jqXHR, textStatus) {
-			console.log(textStatus);
-			console.log(jqXHR);
-		} }, { key: 'ajaxSuccess', value: function ajaxSuccess(
+    jqXHR, textStatus) {
+      console.log(textStatus);
+      console.log(jqXHR);
+    } }, { key: 'ajaxSuccess', value: function ajaxSuccess(
 
-		data, textStatus, jqXHR) {
-			// Convert data into proper html to be able to fully parse thru jQuery
-			var respHtml = document.createElement('html');
+    data, textStatus, jqXHR) {
+      // Convert data into proper html to be able to fully parse thru jQuery
+      var respHtml = document.createElement('html');
 
-			respHtml.innerHTML = data;
+      respHtml.innerHTML = data;
 
-			// Get changes: body classes, page title, main content, header
-			var $bodyClasses = $('body', respHtml).attr('class');
-			var $content = $('#main-content', respHtml);
-			var $title = $('title', respHtml).text();
+      // Get changes: body classes, page title, main content, header
+      var $bodyClasses = $('body', respHtml).attr('class');
+      var $content = $('#main-content', respHtml);
+      var $title = $('title', respHtml).text();
 
-			// Update with new title, content and classes
-			document.title = $title;
-			$('#main-content').html($content.html());
-			$('body').removeAttr('class').addClass($bodyClasses + ' loading');
+      // Update with new title, content and classes
+      document.title = $title;
+      $('#main-content').html($content.html());
+      $('body').removeAttr('class').addClass($bodyClasses + ' loading');
 
-			// Update Admin Bar
-			if (WP.isAdmin) {
-				$('#wpadminbar').html($('#wpadminbar', respHtml));
-			}
+      // Update Admin Bar
+      if (WP.isAdmin) {
+        $('#wpadminbar').html($('#wpadminbar', respHtml));
+      }
 
-			// Trigger event on window
-			window.dispatchEvent(this.ajaxSuccessEvent);
+      // Trigger event on window
+      window.dispatchEvent(this.ajaxSuccessEvent);
 
-		} }]);return Ajaxy;}();exports.default =
+    } }]);return Ajaxy;}();exports.default =
 
 
 Ajaxy;

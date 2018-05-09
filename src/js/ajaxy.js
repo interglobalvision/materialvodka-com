@@ -3,9 +3,9 @@
 
 class Ajaxy {
   constructor() {
-		// firstLoad is checked below. It helps prevent Safari's popstate on load to
-		// reload (ajax) the site.
-		this.firstLoad = true;
+    // firstLoad is checked below. It helps prevent Safari's popstate on load to
+    // reload (ajax) the site.
+    this.firstLoad = true;
 
     // Bind function
     this.ajaxBefore = this.ajaxBefore.bind(this);
@@ -14,15 +14,15 @@ class Ajaxy {
     this.ajaxErrorHandler = this.ajaxErrorHandler.bind(this);
     this.handlePopState = this.handlePopState.bind(this);
 
-		// Bind links
-		this.bindLinks();
+    // Bind links
+    this.bindLinks();
 
     // Ajax event
     this.ajaxSuccessEvent = new Event('ajaxSuccess')
 
-		$(window).bind('popstate', this.handlePopState);
+    $(window).bind('popstate', this.handlePopState);
 
-	}
+  }
 
   handlePopState() {
     if( !this.firstLoad ) {
@@ -30,14 +30,14 @@ class Ajaxy {
     }
   }
 
-	bindLinks() {
-		const siteURL = "http://" + top.location.host.toString();
+  bindLinks() {
+    const siteURL = "http://" + top.location.host.toString();
 
-		this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a');
+    this.$ajaxyLinks = $("a[href^='" + siteURL + "'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").not('#wpadminbar a');
 
-		// Find all ajaxy links and bind ajax event
-		this.$ajaxyLinks.click(this.handleLinkClick.bind(this));
-	}
+    // Find all ajaxy links and bind ajax event
+    this.$ajaxyLinks.click(this.handleLinkClick.bind(this));
+  }
 
   handleLinkClick(event) {
 
@@ -54,87 +54,87 @@ class Ajaxy {
 
   }
 
-	reset() {
+  reset() {
 
-		// Unbind click from all ajax links
-		this.$ajaxyLinks.unbind('click');
+    // Unbind click from all ajax links
+    this.$ajaxyLinks.unbind('click');
 
-		// Re initiate
-		this.bindLinks();
-	}
+    // Re initiate
+    this.bindLinks();
+  }
 
-	/*
-	 * Load a new URL thru ajax
-	 * @url {String}: URL to load
-	 * @pushState {Bool}: Make false if a new state doens't need to be pushed (Default: true). Ex, going back
-	 */
-	load(url, pushState = true) {
+  /*
+   * Load a new URL thru ajax
+   * @url {String}: URL to load
+   * @pushState {Bool}: Make false if a new state doens't need to be pushed (Default: true). Ex, going back
+   */
+  load(url, pushState = true) {
 
-		this.firstLoad = false;
+    this.firstLoad = false;
 
-		if( pushState ) {
-			// Push new history state
-			history.pushState(null, null, url);
-		}
+    if( pushState ) {
+      // Push new history state
+      history.pushState(null, null, url);
+    }
 
-		$.ajax(url, {
-			dataType: 'html',
+    $.ajax(url, {
+      dataType: 'html',
       beforeSend: this.ajaxBefore,
-			error: this.ajaxErrorHandler,
-			success: this.ajaxSuccess,
-			complete: this.ajaxAfter,
-		});
-	}
+      error: this.ajaxErrorHandler,
+      success: this.ajaxSuccess,
+      complete: this.ajaxAfter,
+    });
+  }
 
-	ajaxBefore(xhr, settings) {
+  ajaxBefore(xhr, settings) {
 
-		$('body').addClass('loading');
-		$('body, html').animate({
-			scrollTop: 0,
-		}, 300);
-	}
+    $('body').addClass('loading');
+    $('body, html').animate({
+      scrollTop: 0,
+    }, 300);
+  }
 
-	ajaxAfter() {
+  ajaxAfter() {
 
-		$('body').removeClass('loading');
+    $('body').removeClass('loading');
 
-		this.reset();
+    this.reset();
 
-		// Resets from other parts of the website
-		//Site.reinit();
+    // Resets from other parts of the website
+    //Site.reinit();
 
-	}
+  }
 
-	ajaxErrorHandler(jqXHR, textStatus) {
-		console.log(textStatus);
-		console.log(jqXHR);
-	}
+  ajaxErrorHandler(jqXHR, textStatus) {
+    console.log(textStatus);
+    console.log(jqXHR);
+  }
 
-	ajaxSuccess(data, textStatus, jqXHR) {
-		// Convert data into proper html to be able to fully parse thru jQuery
-		let respHtml = document.createElement('html');
+  ajaxSuccess(data, textStatus, jqXHR) {
+    // Convert data into proper html to be able to fully parse thru jQuery
+    let respHtml = document.createElement('html');
 
-		respHtml.innerHTML = data;
+    respHtml.innerHTML = data;
 
-		// Get changes: body classes, page title, main content, header
-		let $bodyClasses = $('body', respHtml).attr('class');
-		let $content = $('#main-content', respHtml);
-		let $title = $('title', respHtml).text();
+    // Get changes: body classes, page title, main content, header
+    let $bodyClasses = $('body', respHtml).attr('class');
+    let $content = $('#main-content', respHtml);
+    let $title = $('title', respHtml).text();
 
-		// Update with new title, content and classes
-		document.title = $title;
-		$('#main-content').html($content.html());
-		$('body').removeAttr('class').addClass($bodyClasses + ' loading');
+    // Update with new title, content and classes
+    document.title = $title;
+    $('#main-content').html($content.html());
+    $('body').removeAttr('class').addClass($bodyClasses + ' loading');
 
-		// Update Admin Bar
-		if( WP.isAdmin ) {
-			$('#wpadminbar').html( $('#wpadminbar', respHtml) );
-		}
+    // Update Admin Bar
+    if( WP.isAdmin ) {
+      $('#wpadminbar').html( $('#wpadminbar', respHtml) );
+    }
 
     // Trigger event on window
     window.dispatchEvent(this.ajaxSuccessEvent);
 
-	}
+  }
 }
 
 export default Ajaxy;
