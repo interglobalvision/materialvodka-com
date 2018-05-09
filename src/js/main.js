@@ -7,6 +7,7 @@ import Shop from './shop';
 
 import lazySizes from 'lazysizes';
 import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 
 // Import style
 import '../styl/site.styl';
@@ -29,6 +30,8 @@ class Site {
     lazySizes.init();
 
     this.$covervidVideo = $('.covervid-video');
+
+    this.checkForCookie();
 
     this.initCoverVid();
 
@@ -59,20 +62,21 @@ class Site {
       const month = $('.month').val();
       const day = $('.day').val();
       const year = $('.year').val();
-      console.log('clicked');
-      console.log(month + day + year);
-      console.log(dayjs);
       const birthday = dayjs(new Date(year, month, day));
       const age = dayjs().diff(birthday, 'years');
-      console.log(birthday);
-      console.log(age);
-      //date.now in milliseconds
-      //convert date of bday to milliseconds
-      //subtract ms now - ms bday
-      //if ms is > a certain amount (how many milliseconds is a 21 year old?)
-      //if under 21, don't save cookie
-      //if 21 +, save cookie
+      if (age >= 21) {
+        Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').addClass('legal-age');
+      } else {
+        console.log("not of age");
+      }
     });
+  }
+
+  checkForCookie() {
+    //on page load check to see if the cookie with id exists
+    //if so add the class to the body
+    //if not don't do anything
   }
 
 

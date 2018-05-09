@@ -78,8 +78,9 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
+
 // Import style
-__webpack_require__(1);var _shop = __webpack_require__(2);var _shop2 = _interopRequireDefault(_shop);var _lazysizes = __webpack_require__(5);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(12);var _dayjs2 = _interopRequireDefault(_dayjs);__webpack_require__(7);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(1);var _shop = __webpack_require__(2);var _shop2 = _interopRequireDefault(_shop);var _lazysizes = __webpack_require__(5);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(12);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(4);var _jsCookie2 = _interopRequireDefault(_jsCookie);__webpack_require__(7);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -99,6 +100,8 @@ Site = function () {
       _lazysizes2.default.init();
 
       this.$covervidVideo = $('.covervid-video');
+
+      this.checkForCookie();
 
       this.initCoverVid();
 
@@ -129,20 +132,21 @@ Site = function () {
         var month = $('.month').val();
         var day = $('.day').val();
         var year = $('.year').val();
-        console.log('clicked');
-        console.log(month + day + year);
-        console.log(_dayjs2.default);
         var birthday = (0, _dayjs2.default)(new Date(year, month, day));
         var age = (0, _dayjs2.default)().diff(birthday, 'years');
-        console.log(birthday);
-        console.log(age);
-        //date.now in milliseconds
-        //convert date of bday to milliseconds
-        //subtract ms now - ms bday
-        //if ms is > a certain amount (how many milliseconds is a 21 year old?)
-        //if under 21, don't save cookie
-        //if 21 +, save cookie
+        if (age >= 21) {
+          _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+          $('body').addClass('legal-age');
+        } else {
+          console.log("not of age");
+        }
       });
+    } }, { key: 'checkForCookie', value: function checkForCookie()
+
+    {
+      //on page load check to see if the cookie with id exists
+      //if so add the class to the body
+      //if not don't do anything
     } }]);return Site;}();
 
 
