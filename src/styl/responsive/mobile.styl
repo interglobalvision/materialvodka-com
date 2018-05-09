@@ -32,6 +32,32 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 // ******************************************************
 
+// CUBE
+
+.cube-front, .cube-left, .cube-right
+  position:absolute
+  top:0
+  bottom:0
+  left:0
+  right:0
+  backface-visibility: hidden
+  background-color: $color-black
+
+.cube-left, .cube-right
+  visibility: hidden
+
+.cube-front
+  visibility: visible
+
+.cube-holder
+  position:relative
+  perspective: 0
+  &.ready
+    .cube-left, .cube-right
+      visibility: visible
+
+// ******************************************************
+
 // HEADER
 
 #desktop-nav
@@ -73,3 +99,11 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   background-position: 0%
   background-repeat: no-repeat
   background-size: 6000% 100%
+
+// ******************************************************
+
+// RECIPES
+
+.recipe-item
+  min-height: 600px
+  height: 33vw
