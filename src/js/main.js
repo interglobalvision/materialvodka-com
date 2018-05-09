@@ -22,18 +22,28 @@ class Site {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind
+    this.repositionHeader = this.repositionHeader.bind(this);
+
   }
 
   onResize() {
-
+    this.sizeHeaderSpacer();
+    this.repositionHeader();
   }
 
   onReady() {
     lazySizes.init();
 
+    this.$window = $(window);
+    this.$document = $(document);
+    this.$header = $('#header');
+    this.$mainContent = $('#main-content');
+    this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
     this.initCoverVid();
+    this.bindStickyHeader();
     this.animateBottleSprite();
   }
 
@@ -47,11 +57,39 @@ class Site {
   }
 
   initCoverVid() {
-    const _this = this;
-
-    if (_this.$covervidVideo.length) {
-      _this.$covervidVideo.coverVid(1920, 1080);
+    if (this.$covervidVideo.length) {
+      this.$covervidVideo.coverVid(1920, 1080);
     }
+  }
+
+  bindStickyHeader() {
+    const that = this;
+
+    this.sizeHeaderSpacer();
+
+    this.$window.on('scroll', this.repositionHeader);
+  }
+
+  repositionHeader() {
+    if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop()) {
+      this.$header.addClass('bottom').css({
+        top: this.headerTop + 'px',
+        bottom: 'auto'
+      });
+    } else if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop()) {
+      this.$header.removeClass('bottom').css({
+        top: 'auto',
+        bottom: 0
+      });
+    }
+  }
+
+  sizeHeaderSpacer() {
+    const headerHeight = this.$header.outerHeight();
+    this.$headerSpacer.css('height', headerHeight + 'px');
+    this.headerTop = this.$headerSpacer.offset().top;
+    this.headerSpacerOffset = this.headerTop + headerHeight;
+    this.windowHeight = this.$window.outerHeight();
   }
 
   animateBottleSprite() {
