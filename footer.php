@@ -2,9 +2,11 @@
 $options = get_site_option('_igv_site_options');
 ?>
 
-  <footer id="footer">
+  <div id="header-spacer"></div>
+
+  <footer id="footer" class="padding-top-tiny padding-bottom-tiny font-size-small">
     <div class="container">
-      <div class="grid-row">
+      <div class="grid-row align-items-center">
         <div class="grid-item flex-grow item-s-12 item-m-auto">
           &copy; <?php echo date('Y'); ?> MATERIAL VODKA
         </div>
@@ -29,7 +31,9 @@ $options = get_site_option('_igv_site_options');
             if (!empty($options['socialmedia_instagram'])) {
           ?>
             <li>
-              <a href="https://instagram.com/<?php echo $options['socialmedia_instagram']; ?>">IG</a>
+              <a href="https://instagram.com/<?php echo $options['socialmedia_instagram']; ?>">
+                <img src="<?php echo get_stylesheet_directory_uri() . '/dist/img/social-instagram.png'; ?>" class="social-icon" />
+              </a>
             </li>
           <?php
             }
@@ -37,7 +41,9 @@ $options = get_site_option('_igv_site_options');
             if (!empty($options['socialmedia_facebook_url'])) {
           ?>
             <li>
-              <a href="<?php echo $options['socialmedia_facebook_url']; ?>">FB</a>
+              <a href="<?php echo $options['socialmedia_facebook_url']; ?>">
+                <img src="<?php echo get_stylesheet_directory_uri() . '/dist/img/social-facebook.png'; ?>" class="social-icon" />
+              </a>
             </li>
           <?php
             }
@@ -45,7 +51,9 @@ $options = get_site_option('_igv_site_options');
             if (!empty($options['socialmedia_twitter'])) {
           ?>
             <li>
-              <a href="https://twitter.com/<?php echo $options['socialmedia_twitter']; ?>">TW</a>
+              <a href="https://twitter.com/<?php echo $options['socialmedia_twitter']; ?>">
+                <img src="<?php echo get_stylesheet_directory_uri() . '/dist/img/social-twitter.png'; ?>" class="social-icon" />
+              </a>
             </li>
           <?php
             }

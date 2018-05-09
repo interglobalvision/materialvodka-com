@@ -125,7 +125,7 @@ class Ajaxy {
 
     // Update Admin Bar
     if( WP.isAdmin ) {
-      $('#wpadminbar').html( $('#wpadminbar', respHtml) );
+      $('#wpadminbar').html( $('#wpadminbar', respHtml) ); 
     }
 
     // Trigger event on window

@@ -7,6 +7,10 @@ import Shop from './shop';
 import Ajaxy from './ajaxy';
 
 import lazySizes from 'lazysizes';
+import ScrollMagic from 'scrollmagic';
+import 'animation.gsap';
+import TweenMax from 'gsap';
+
 
 // Import style
 import '../styl/site.styl';
@@ -19,18 +23,29 @@ class Site {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind
+    this.repositionHeader = this.repositionHeader.bind(this);
+
   }
 
   onResize() {
-
+    this.sizeHeaderSpacer();
+    this.repositionHeader();
   }
 
   onReady() {
     lazySizes.init();
 
+    this.$window = $(window);
+    this.$document = $(document);
+    this.$header = $('#header');
+    this.$mainContent = $('#main-content');
+    this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
     this.initCoverVid();
+    this.bindStickyHeader();
+    this.animateBottleSprite();
   }
 
   fixWidows() {
@@ -43,10 +58,56 @@ class Site {
   }
 
   initCoverVid() {
-    const _this = this;
+    if (this.$covervidVideo.length) {
+      this.$covervidVideo.coverVid(1920, 1080);
+    }
+  }
 
-    if (_this.$covervidVideo.length) {
-      _this.$covervidVideo.coverVid(1920, 1080);
+  bindStickyHeader() {
+    const that = this;
+
+    this.sizeHeaderSpacer();
+
+    this.$window.on('scroll', this.repositionHeader);
+  }
+
+  repositionHeader() {
+    if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop()) {
+      this.$header.addClass('bottom').css({
+        top: this.headerTop + 'px',
+        bottom: 'auto'
+      });
+    } else if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop()) {
+      this.$header.removeClass('bottom').css({
+        top: 'auto',
+        bottom: 0
+      });
+    }
+  }
+
+  sizeHeaderSpacer() {
+    const headerHeight = this.$header.outerHeight();
+    this.$headerSpacer.css('height', headerHeight + 'px');
+    this.headerTop = this.$headerSpacer.offset().top;
+    this.headerSpacerOffset = this.headerTop + headerHeight;
+    this.windowHeight = this.$window.outerHeight();
+  }
+
+  animateBottleSprite() {
+    if ($('#bottle-sprite').length) {
+      const controller = new ScrollMagic.Controller();
+
+      // create Tween
+      const tween = TweenMax.to("#bottle-sprite", 1.0, {
+        backgroundPosition: "100% 0",
+        ease: SteppedEase.config(59)
+      });
+
+      // build scene
+      const scene = new ScrollMagic.Scene({duration: 500})
+      .triggerHook("onCenter")
+      .setTween(tween)
+      .addTo(controller);
     }
   }
 }

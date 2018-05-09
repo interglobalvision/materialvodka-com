@@ -42,7 +42,7 @@ if (have_posts()) {
         <?php the_content(); ?>
       </div>
     <?php
-      !empty($vodka_image) {
+      if (!empty($vodka_image)) {
     ?>
       <div class="grid-item item-s-12 item-l-9" style="background-image: url(<?php echo $vodka_image; ?>)">
       </div>
@@ -84,7 +84,7 @@ if (have_posts()) {
       </div>
 
     <?php
-      if !empty($world_image) {
+      if (!empty($world_image)) {
     ?>
       <div class="grid-item item-s-12 item-m-6 background-cover" style="background-image: url(<?php echo $world_image; ?>)">
       </div>
