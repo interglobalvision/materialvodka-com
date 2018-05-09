@@ -4,6 +4,7 @@
 // Import dependencies
 import './covervid.js';
 import Shop from './shop';
+import Ajaxy from './ajaxy';
 
 import lazySizes from 'lazysizes';
 
@@ -52,3 +53,6 @@ class Site {
 
 const Material = new Site();
 const MaterialShop = new Shop();
+const MaterialAjaxy = new Ajaxy({
+  complete: MaterialShop.onReady,
+});
