@@ -100,9 +100,6 @@ class Ajaxy {
 
     this.reset();
 
-    // Resets from other parts of the website
-    //Site.reinit();
-
   }
 
   ajaxErrorHandler(jqXHR, textStatus) {

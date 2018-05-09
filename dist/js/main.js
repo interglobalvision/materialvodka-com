@@ -6156,9 +6156,6 @@ Ajaxy = function () {
 
       this.reset();
 
-      // Resets from other parts of the website
-      //Site.reinit();
-
     } }, { key: 'ajaxErrorHandler', value: function ajaxErrorHandler(
 
     jqXHR, textStatus) {
