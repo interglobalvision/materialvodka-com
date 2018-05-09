@@ -52,9 +52,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 .cube-holder
   position:relative
   perspective: 0
+  z-index: 0
   &.ready
     .cube-left, .cube-right
       visibility: visible
+
+.cube-active
+  z-index: 100
 
 // ******************************************************
 
@@ -107,3 +111,5 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 .recipe-item
   min-height: 600px
   height: 33vw
+  .cube-left
+    cursor: pointer

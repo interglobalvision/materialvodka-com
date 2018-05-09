@@ -53,8 +53,17 @@ class Site {
 
   bindRecipeCube() {
     if ($('.recipe-item').length) {
-      $('.recipe-item').on('click', function() {
-        $(this).find('.cube-left, .cube-right').toggleClass('cube-front');
+      $('.recipe-item').on({
+        'click': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+          $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+        },
+        'mouseleave': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).find('.cube-right').removeClass('cube-front');
+          $(this).find('.cube-left').addClass('cube-front');
+        }
       });
 
       this.updateCubeStyle('recipe', '.recipe-item');

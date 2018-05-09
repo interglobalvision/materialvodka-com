@@ -53,7 +53,7 @@ if (have_posts()) {
 
         $cube_num = 0;
 ?>
-        <div class="recipe-item cube-holder u-pointer grid-item no-gutter item-s-12 item-m-4 item-l-3" data-cube="recipe-item-cube-<?php echo $cube_num; ?>">
+        <div class="recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3">
 
           <div class="cube-left cube-front background-cover grid-column" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
             <div class="grid-item">
