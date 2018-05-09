@@ -40,6 +40,7 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "datejs": "^1.0.0-rc3",
     "js-cookie": "^2.2.0",
     "shopify-buy": "^1.4.0"
   }
