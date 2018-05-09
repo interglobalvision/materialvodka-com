@@ -1,4 +1,4 @@
-<form id="form-wrapper--dob">
+<div id="form-wrapper--dob">
 
   <p>Please enter your date of birth:<p>
   
@@ -18,5 +18,5 @@
 
   <button id="submit-age">Enter</button>
 
-</form>
+</div>
 

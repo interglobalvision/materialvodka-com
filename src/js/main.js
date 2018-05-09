@@ -30,6 +30,9 @@ class Site {
     this.$covervidVideo = $('.covervid-video');
 
     this.initCoverVid();
+
+    this.submitAgeForm();
+
   }
 
   fixWidows() {
@@ -41,7 +44,6 @@ class Site {
     });
   }
 
-
   initCoverVid() {
     const _this = this;
 
@@ -49,6 +51,20 @@ class Site {
       _this.$covervidVideo.coverVid(1920, 1080);
     }
   }
+
+  submitAgeForm() {
+    $('#submit-age').on('click', function(e){
+      e.preventDefault();
+      var month = $('.month').val();
+      var date = $('.date').val();
+      var year = $('.year').val();
+      console.log('clicked');
+      console.log(month);
+      console.log(date);
+      console.log(year);
+    })
+  }
+
 }
 
 const Material = new Site();
