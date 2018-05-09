@@ -8,7 +8,7 @@ import Ajaxy from './ajaxy';
 
 import lazySizes from 'lazysizes';
 import ScrollMagic from 'scrollmagic';
-import 'animation.gsap';
+import animationGsap from 'animationGsap';
 import TweenMax from 'gsap';
 
 
