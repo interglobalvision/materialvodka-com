@@ -5,6 +5,7 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
+import Mailchimp from './mailchimp';
 
 import lazySizes from 'lazysizes';
 import ScrollMagic from 'scrollmagic';
@@ -115,3 +116,4 @@ class Site {
 const Material = new Site();
 const MaterialShop = new Shop();
 const MaterialAjaxy = new Ajaxy();
+const MaterialMailchimp = new Mailchimp();

@@ -12834,8 +12834,9 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
+
 // Import style
-__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _mailchimp = __webpack_require__(19);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -12937,6 +12938,7 @@ Site = function () {
 var Material = new Site();
 var MaterialShop = new _shop2.default();
 var MaterialAjaxy = new _ajaxy2.default();
+var MaterialMailchimp = new _mailchimp2.default();
 
 /***/ }),
 /* 5 */
@@ -21386,6 +21388,42 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
+Mailchimp = function () {
+  function Mailchimp() {_classCallCheck(this, Mailchimp);
+    this.mobileThreshold = 601;
+
+    $(window).
+    resize(this.onResize.bind(this)) // Bind resize
+    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+  }_createClass(Mailchimp, [{ key: 'onResize', value: function onResize()
+
+    {
+
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+
+    } }]);return Mailchimp;}();exports.default =
+
+
+
+Mailchimp;
 
 /***/ })
 /******/ ]);
