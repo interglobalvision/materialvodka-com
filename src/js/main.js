@@ -21,7 +21,7 @@ class Site {
   }
 
   onResize() {
-
+    this.updateCubeStyle('recipe', '.recipe-item');
   }
 
   onReady() {
@@ -30,6 +30,8 @@ class Site {
     this.$covervidVideo = $('.covervid-video');
 
     this.initCoverVid();
+
+    this.bindRecipeCube();
   }
 
   fixWidows() {
@@ -46,6 +48,57 @@ class Site {
 
     if (_this.$covervidVideo.length) {
       _this.$covervidVideo.coverVid(1920, 1080);
+    }
+  }
+
+  bindRecipeCube() {
+    if ($('.recipe-item').length) {
+      $('.recipe-item').on('click', function() {
+        $(this).find('.cube-left, .cube-right').toggleClass('cube-front');
+      });
+
+      this.updateCubeStyle('recipe', '.recipe-item');
+    }
+  }
+
+  updateCubeStyle(styleId, selector) {
+    const cubeTransition = 0.6;
+
+    if ($(selector).length) {
+      const width = $(selector).width() / 2;
+
+      const styleContent = `
+      ${selector} .cube-left {
+        transform: rotateY(-90deg) translateZ(${width}px)
+      }
+      ${selector} .cube-left.cube-front {
+        transform: rotateY(0deg) translateZ(${width}px)
+      }
+      ${selector} .cube-right {
+        transform: rotateY(90deg) translateZ(${width}px)
+      }
+      ${selector} .cube-right.cube-front {
+        transform: rotateY(0deg) translateZ(${width}px)
+      }`;
+
+      if ($('style#cube-style-' + styleId).length) {
+        $('style#cube-style-' + styleId).html(styleContent);
+      } else {
+        const styleElement = `
+        <style type="text/css" id="cube-style-${styleId}">
+          ${styleContent}
+        </style>`;
+
+        $('head').append(styleElement);
+
+        $(selector).addClass('ready');
+
+        window.setTimeout(function() {
+          $(selector).find('.cube-left, .cube-right').css({
+            transition: 'transform ' + cubeTransition + 's ease-in-out',
+          });
+        }, 100);
+      }
     }
   }
 }

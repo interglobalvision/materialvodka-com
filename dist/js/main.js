@@ -91,7 +91,7 @@ $(document).ready(this.onReady.bind(this));
 }return _createClass(a,[{key:'onResize',value:function onResize()
 
 {
-
+this.updateCubeStyle('recipe','.recipe-item');
 }},{key:'onReady',value:function onReady()
 
 {
@@ -99,7 +99,9 @@ _lazysizes2.default.init(),
 
 this.$covervidVideo=$('.covervid-video'),
 
-this.initCoverVid();
+this.initCoverVid(),
+
+this.bindRecipeCube();
 }},{key:'fixWidows',value:function fixWidows()
 
 {
@@ -117,6 +119,57 @@ var a=this;
 a.$covervidVideo.length&&
 a.$covervidVideo.coverVid(1920,1080);
 
+}},{key:'bindRecipeCube',value:function bindRecipeCube()
+
+{
+$('.recipe-item').length&&(
+$('.recipe-item').on('click',function(){
+$(this).find('.cube-left, .cube-right').toggleClass('cube-front');
+}),
+
+this.updateCubeStyle('recipe','.recipe-item'));
+
+}},{key:'updateCubeStyle',value:function updateCubeStyle(a,b)
+
+{
+
+
+if($(b).length){
+var c=$(b).width()/2,
+
+d='\n      '+b+' .cube-left {\n        transform: rotateY(-90deg) translateZ('+c+'px)\n      }\n      '+b+' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ('+c+'px)\n      }\n      '+b+' .cube-right {\n        transform: rotateY(90deg) translateZ('+c+'px)\n      }\n      '+b+' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ('+c+'px)\n      }';
+
+
+
+
+
+
+
+
+
+
+
+
+
+if($('style#cube-style-'+a).length)
+$('style#cube-style-'+a).html(d);else
+{
+
+
+
+
+
+$('head').append('\n        <style type="text/css" id="cube-style-'+a+'">\n          '+d+'\n        </style>'),
+
+$(b).addClass('ready'),
+
+window.setTimeout(function(){
+$(b).find('.cube-left, .cube-right').css({
+transition:'transform '+0.6+'s ease-in-out'});
+
+},100);
+}
+}
 }}]),a}(),
 
 
