@@ -144,7 +144,6 @@ Site = function () {
     } }, { key: 'checkForCookie', value: function checkForCookie()
 
     {
-      //on page load check to see if the cookie with id exists
       var cookie = _jsCookie2.default.get('legalAge');
       console.log(cookie);
       if (cookie) {
@@ -152,8 +151,6 @@ Site = function () {
       } else {
         console.log('doing nothing');
       }
-      //if so add the class to the body
-      //if not don't do anything
     } }]);return Site;}();
 
 
