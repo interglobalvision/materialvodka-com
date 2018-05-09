@@ -18,10 +18,14 @@ class Site {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind
+    this.repositionHeader = this.repositionHeader.bind(this);
+
   }
 
   onResize() {
     this.sizeHeaderSpacer();
+    this.repositionHeader();
   }
 
   onReady() {
@@ -58,19 +62,21 @@ class Site {
 
     this.sizeHeaderSpacer();
 
-    this.$window.on('scroll', function() {
-      if ((that.headerSpacerOffset - that.windowHeight) <= that.$window.scrollTop() && !that.$header.hasClass('bottom')) {
-        that.$header.addClass('bottom').css({
-          top: that.headerTop + 'px',
-          bottom: 'auto'
-        });
-      } else if ((that.headerSpacerOffset - that.windowHeight) > that.$window.scrollTop() && that.$header.hasClass('bottom')) {
-        that.$header.removeClass('bottom').css({
-          top: 'auto',
-          bottom: 0
-        });
-      }
-    });
+    this.$window.on('scroll', this.repositionHeader);
+  }
+
+  repositionHeader() {
+    if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop()) {
+      this.$header.addClass('bottom').css({
+        top: this.headerTop + 'px',
+        bottom: 'auto'
+      });
+    } else if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop()) {
+      this.$header.removeClass('bottom').css({
+        top: 'auto',
+        bottom: 0
+      });
+    }
   }
 
   sizeHeaderSpacer() {

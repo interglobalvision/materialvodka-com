@@ -86,12 +86,16 @@ this.mobileThreshold=601,
 
 $(window).resize(this.onResize.bind(this)),
 
-$(document).ready(this.onReady.bind(this));
+$(document).ready(this.onReady.bind(this)),
+
+
+this.repositionHeader=this.repositionHeader.bind(this);
 
 }return _createClass(a,[{key:'onResize',value:function onResize()
 
 {
-this.sizeHeaderSpacer();
+this.sizeHeaderSpacer(),
+this.repositionHeader();
 }},{key:'onReady',value:function onReady()
 
 {
@@ -124,23 +128,25 @@ this.$covervidVideo.coverVid(1920,1080);
 }},{key:'bindStickyHeader',value:function bindStickyHeader()
 
 {
-var a=this;
+this;
 
 this.sizeHeaderSpacer(),
 
-this.$window.on('scroll',function(){
-a.headerSpacerOffset-a.windowHeight<=a.$window.scrollTop()&&!a.$header.hasClass('bottom')?
-a.$header.addClass('bottom').css({
-top:a.headerTop+'px',
+this.$window.on('scroll',this.repositionHeader);
+}},{key:'repositionHeader',value:function repositionHeader()
+
+{
+this.headerSpacerOffset-this.windowHeight<=this.$window.scrollTop()?
+this.$header.addClass('bottom').css({
+top:this.headerTop+'px',
 bottom:'auto'}):
 
-a.headerSpacerOffset-a.windowHeight>a.$window.scrollTop()&&a.$header.hasClass('bottom')&&
-a.$header.removeClass('bottom').css({
+this.headerSpacerOffset-this.windowHeight>this.$window.scrollTop()&&
+this.$header.removeClass('bottom').css({
 top:'auto',
 bottom:0});
 
 
-});
 }},{key:'sizeHeaderSpacer',value:function sizeHeaderSpacer()
 
 {
