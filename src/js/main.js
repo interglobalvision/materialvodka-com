@@ -6,6 +6,7 @@ import './covervid.js';
 import Shop from './shop';
 
 import lazySizes from 'lazysizes';
+import dayjs from 'dayjs';
 
 // Import style
 import '../styl/site.styl';
@@ -55,17 +56,27 @@ class Site {
   submitAgeForm() {
     $('#submit-age').on('click', function(e){
       e.preventDefault();
-      var month = $('.month').val();
-      var date = $('.date').val();
-      var year = $('.year').val();
+      const month = $('.month').val();
+      const day = $('.day').val();
+      const year = $('.year').val();
       console.log('clicked');
-      console.log(month);
-      console.log(date);
-      console.log(year);
-    })
+      console.log(month + day + year);
+      console.log(dayjs);
+      const birthday = dayjs(new Date(year, month, day));
+      const age = dayjs().diff(birthday, 'years');
+      console.log(birthday);
+      console.log(age);
+      //date.now in milliseconds
+      //convert date of bday to milliseconds
+      //subtract ms now - ms bday
+      //if ms is > a certain amount (how many milliseconds is a 21 year old?)
+      //if under 21, don't save cookie
+      //if 21 +, save cookie
+    });
   }
+
 
 }
 
 const Material = new Site();
-const MaterialShop = new Shop();
+//const MaterialShop = new Shop();

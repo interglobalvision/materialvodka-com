@@ -7,7 +7,7 @@
   </div>
 
   <div class="form-wrapper--dob__item">
-     <input class="date" name="date" value="" type="number" pattern="[0-9]*" placeholder="DD" id="dob_dd" maxlength="2">
+     <input class="day" name="day" value="" type="number" pattern="[0-9]*" placeholder="DD" id="dob_dd" maxlength="2">
   </div>
 
   <div class="form-wrapper--dob__item">
