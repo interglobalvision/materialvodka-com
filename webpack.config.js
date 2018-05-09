@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// const MinifyPlugin = require('babel-minify-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -34,7 +33,7 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015',  'minify'],
+        presets: ['es2015'],
         retainLines: true,
       },
     }, {
