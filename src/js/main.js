@@ -75,6 +75,13 @@ class Site {
 
   checkForCookie() {
     //on page load check to see if the cookie with id exists
+    const cookie = Cookies.get('legalAge');
+    console.log(cookie);
+    if (cookie) {
+      $('body').addClass('legal-age');
+    } else {
+      console.log('doing nothing')
+    }
     //if so add the class to the body
     //if not don't do anything
   }
