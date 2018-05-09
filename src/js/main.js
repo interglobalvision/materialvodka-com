@@ -6,6 +6,10 @@ import './covervid.js';
 import Shop from './shop';
 
 import lazySizes from 'lazysizes';
+import ScrollMagic from 'scrollmagic';
+import 'animation.gsap';
+import TweenMax from 'gsap';
+
 
 // Import style
 import '../styl/site.styl';
@@ -30,6 +34,7 @@ class Site {
     this.$covervidVideo = $('.covervid-video');
 
     this.initCoverVid();
+    this.animateBottleSprite();
   }
 
   fixWidows() {
@@ -46,6 +51,24 @@ class Site {
 
     if (_this.$covervidVideo.length) {
       _this.$covervidVideo.coverVid(1920, 1080);
+    }
+  }
+
+  animateBottleSprite() {
+    if ($('#bottle-sprite').length) {
+      const controller = new ScrollMagic.Controller();
+
+      // create Tween
+      const tween = TweenMax.to("#bottle-sprite", 1.0, {
+        backgroundPosition: "100% 0",
+        ease: SteppedEase.config(59)
+      });
+
+      // build scene
+      const scene = new ScrollMagic.Scene({duration: 500})
+      .triggerHook("onCenter")
+      .setTween(tween)
+      .addTo(controller);
     }
   }
 }
