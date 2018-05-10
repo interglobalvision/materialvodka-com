@@ -5,6 +5,7 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
+import Mailchimp from './mailchimp';
 
 import lazySizes from 'lazysizes';
 import dayjs from 'dayjs';
@@ -57,7 +58,7 @@ class Site {
   fixWidows() {
     // utility class mainly for use on headines to avoid widows [single words on a new line]
     $('.js-fix-widows').each(function(){
-      var string = $(this).html();
+      let string = $(this).html();
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
     });
@@ -70,8 +71,6 @@ class Site {
   }
 
   bindStickyHeader() {
-    const that = this;
-
     this.sizeHeaderSpacer();
 
     this.$window.on('scroll', this.repositionHeader);
@@ -210,3 +209,4 @@ class Site {
 const Material = new Site();
 const MaterialShop = new Shop();
 const MaterialAjaxy = new Ajaxy();
+const MaterialMailchimp = new Mailchimp();
