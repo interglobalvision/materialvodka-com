@@ -1,6 +1,8 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, window, WP */
 
+import { geo2zip } from 'geo2zip';
+
 class Stockists {
 
   constructor() {
@@ -34,6 +36,7 @@ class Stockists {
   }
 
   handleSubmit() {
+    // Get input value
     const zipcode = this.$zipCodeInput.val();
 
     if(zipcode !== '') {
@@ -42,18 +45,16 @@ class Stockists {
   }
 
   requestGeolocation() {
+    // Request browser geolocation
     navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError);
   }
 
   geoSuccess(position) {
     const { latitude, longitude } = position.coords;
 
-    this.findStockists({
-      coords: {
-        longitude,
-        latitude,
-      }
-    });
+    geo2zip({ longitude, latitude }).then(zip => {
+      this.findStockists(zip);
+    })
 
   }
 
@@ -61,8 +62,8 @@ class Stockists {
     console.log(error);
   }
 
-  findStockists(location) {
-    console.log(location);
+  findStockists(zip) {
+    console.log(zip);
   }
 }
 
