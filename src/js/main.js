@@ -65,8 +65,6 @@ class Site {
   }
 
   bindStickyHeader() {
-    const that = this;
-
     this.sizeHeaderSpacer();
 
     this.$window.on('scroll', this.repositionHeader);

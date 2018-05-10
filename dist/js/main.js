@@ -12887,8 +12887,6 @@ Site = function () {
     } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
 
     {
-      var that = this;
-
       this.sizeHeaderSpacer();
 
       this.$window.on('scroll', this.repositionHeader);
@@ -21405,22 +21403,96 @@ Mailchimp = function () {
   function Mailchimp() {_classCallCheck(this, Mailchimp);
     this.mobileThreshold = 601;
 
-    $(window).
-    resize(this.onResize.bind(this)) // Bind resize
-    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
 
-  }_createClass(Mailchimp, [{ key: 'onResize', value: function onResize()
+    this.submitForm = this.submitForm.bind(this);
+    this.successMessage = this.successMessage.bind(this);
+  }_createClass(Mailchimp, [{ key: 'onReady', value: function onReady()
 
     {
+      this.$form = $('#mailchimp-form');
 
-    } }, { key: 'onReady', value: function onReady()
+      if (this.$form.length) {
+        this.$email = $('#mailchimp-email');
+        this.$reply = $('#mailchimp-response');
+
+        this.initFormHandling();
+      }
+    } }, { key: 'initFormHandling', value: function initFormHandling()
 
     {
+      this.$form.submit(this.submitForm);
+    } }, { key: 'submitForm', value: function submitForm()
 
+    {
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
+      var data = {};
+      var dataArray = this.$form.serializeArray();
+
+      $.each(dataArray, function (index, item) {
+        data[item.name] = item.value;
+      });
+
+      $.ajax({
+        url: url,
+        data: data,
+        success: this.successMessage,
+        dataType: 'jsonp',
+        error: function error(resp, text) {
+          console.log('mailchimp ajax submit error: ' + text);
+        } });
+
+
+      return false;
+    } }, { key: 'successMessage', value: function successMessage(
+
+    response) {
+      var msg = '';
+
+      console.log(response);
+
+      if (response.result === 'success') {
+
+        msg = 'You\'ve been successfully subscribed';
+
+        this.$reply.removeClass('error').addClass('valid');
+        this.$email.removeClass('error').addClass('valid');
+
+      } else {
+
+        this.$email.removeClass('valid').addClass('error');
+        this.$reply.removeClass('valid').addClass('error');
+
+        var index = -1;
+
+        try {
+          var parts = response.msg.split(' - ', 2);
+
+          if (parts[1] === undefined) {
+            msg = response.msg;
+          } else {
+            var i = parseInt(parts[0], 10);
+
+            if (i.toString() === parts[0]) {
+              index = parts[0];
+              msg = parts[1];
+            } else {
+              index = -1;
+              msg = response.msg;
+            }
+          }
+        }
+        catch (e) {
+          index = -1;
+          msg = response.msg;
+        }
+      }
+
+      this.$reply.html(msg);
     } }]);return Mailchimp;}();exports.default =
-
 
 
 Mailchimp;
