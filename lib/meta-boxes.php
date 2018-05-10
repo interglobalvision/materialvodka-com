@@ -130,6 +130,19 @@ function igv_cmb_metabox_stockist() {
   ) );
 
   $metabox->add_field( array(
+    'name' => esc_html__( 'City', 'cmb2' ),
+    'desc' => esc_html__( 'Required', 'cmb2' ),
+    'id'   => $prefix . 'stockist_city',
+    'type' => 'select',
+    'show_option_none' => true,
+    'options'          => array(
+      'ny' => __( 'NY', 'cmb2' ),
+      'la'   => __( 'LA', 'cmb2' ),
+      'miami'     => __( 'Miami', 'cmb2' ),
+    ),
+  ) );
+
+  $metabox->add_field( array(
     'name' => esc_html__( 'Zip code', 'cmb2' ),
     'desc' => esc_html__( 'Required', 'cmb2' ),
     'id'   => $prefix . 'stockist_zipcode',
@@ -301,7 +314,7 @@ function igv_cmb_metaboxes_locate_page() {
 
     // Video group
     $locate_video_id = $locate_meta->add_field( array(
-      'id'      => 'locate_video_group',
+      'id'      => $prefix . 'locate_video_group',
       'name'    => 'Video',
       'type'        => 'group',
       'repeatable'  => false, // use false if you want non-repeatable group
@@ -397,7 +410,7 @@ function igv_cmb_metabox_recipe() {
 
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
-  
+
   /**
    * Initiate the metabox
    */
@@ -411,7 +424,7 @@ function igv_cmb_metabox_recipe() {
   ) );
 
   $ingredients_group_id = $recipe_metaboxes->add_field( array(
-  'id'          => 'ingredients_group',
+  'id'          => $prefix . 'ingredients_group',
   'type'        => 'group',
   'options'     => array(
     'group_title'   => __( 'Ingredient {#}', 'cmb2' ),

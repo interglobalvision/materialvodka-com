@@ -11,7 +11,7 @@ $font-size-basic = 12px
 $font-size-extra = 48px
 $font-size-large = 36px
 $font-size-mid = 24px
-$font-size-small = 18px
+$font-size-small = 11px
 $font-size-tiny = 8px
 
 grid-maker(100%, $gutter, s)
@@ -32,7 +32,51 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 // ******************************************************
 
+// CUBE
+
+.cube-front, .cube-left, .cube-right
+  position:absolute
+  top:0
+  bottom:0
+  left:0
+  right:0
+  backface-visibility: hidden
+  background-color: $color-black
+
+.cube-left, .cube-right
+  visibility: hidden
+
+.cube-front
+  visibility: visible
+
+.cube-holder
+  position:relative
+  perspective: 0
+  z-index: 0
+  &.ready
+    .cube-left, .cube-right
+      visibility: visible
+
+.cube-active
+  z-index: 100
+
+// ******************************************************
+
 // HEADER
+
+#header
+  position: fixed
+  bottom: 0
+  left: 0
+  z-index: 900
+  background-color: $color-black
+  width: 100%
+  &.bottom
+    position: absolute
+
+#logo
+  fill: $color-white
+  height: 1.4em
 
 #desktop-nav
   display: none
@@ -41,11 +85,23 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   position: fixed
   top: 0
   left: 0
-  width: 100vw
+  width: 100%
   height: 100vh
   transform: translateX(100vw)
   &.active
     transform: translateX(0)
+
+// ******************************************************
+
+// FOOTER
+
+#footer
+  background-color: $color-white
+  color: $color-black
+
+.social-icon
+  height: 1.5em
+  margin-left: .5em
 
 // ******************************************************
 
@@ -70,6 +126,17 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   top: 0
   left: 0
   background-image: url('../img/bottle-sprite.png')
-  background-position: 0%
+  background-position: 0% 0
   background-repeat: no-repeat
   background-size: 6000% 100%
+  mix-blend-mode: difference
+
+// ******************************************************
+
+// RECIPES
+
+.recipe-item
+  min-height: 600px
+  height: 33vw
+  .cube-left
+    cursor: pointer

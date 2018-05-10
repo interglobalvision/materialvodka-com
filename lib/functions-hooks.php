@@ -2,7 +2,7 @@
 
 // Custom hooks (like excerpt length etc)
 
-// Programatically create Home, What We Do and Filming pages
+// Programatically create pages
 function create_custom_pages() {
   $custom_pages = array(
     'home' => 'Home',

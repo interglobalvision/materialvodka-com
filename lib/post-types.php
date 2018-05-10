@@ -89,7 +89,7 @@ function register_cpt_recipe() {
     'parent_item_colon' => _x( 'Parent Recipe:', 'recipe' ),
     'menu_name' => _x( 'Recipes', 'recipe' ),
   );
-  
+
   $args = array(
     'labels' => $labels,
     'hierarchical' => false,
@@ -104,13 +104,13 @@ function register_cpt_recipe() {
     'show_in_nav_menus' => true,
     'publicly_queryable' => true,
     'exclude_from_search' => false,
-    'has_archive' => true,
+    'has_archive' => 'recipes',
     'query_var' => true,
     'can_export' => true,
     'rewrite' => true,
     'capability_type' => 'post'
   );
-  
+
   register_post_type( 'recipe', $args );
 }
 
@@ -196,6 +196,6 @@ function register_cpt_video_award() {
     'rewrite' => true,
     'capability_type' => 'post'
   );
-  
+
   register_post_type( 'video_award', $args );
 }

@@ -1,3 +1,76 @@
 <?php
 
 // Custom functions (like special queries, etc)
+
+// return array of season term slugs ordered ASC from current season
+function get_ordered_season_array() {
+  $today = new DateTime();
+
+  // get the season dates
+  $spring = new DateTime('March 20');
+  $summer = new DateTime('June 20');
+  $fall = new DateTime('September 22');
+  $winter = new DateTime('December 21');
+
+  switch(true) {
+    case $today >= $spring && $today < $summer:
+      return ['spring', 'summer', 'fall', 'winter'];
+
+    case $today >= $summer && $today < $fall:
+      return ['summer', 'fall', 'winter', 'spring'];
+
+    case $today >= $fall && $today < $winter:
+      return ['fall', 'winter', 'spring', 'summer'];
+
+    default:
+      return ['winter', 'spring', 'summer', 'fall'];
+  }
+}
+
+/**
+* Query and return all Stockists that match the $city_slug
+*
+* @param string $city_slug Slug for the city
+* @return object Returns a WP_Query object
+*/
+function get_stockists_by_city($city_slug) {
+  $args = array(
+    'post_type' => 'stockist',
+    'meta_query' => array(
+      array(
+        'key'     => '_igv_stockist_city',
+        'value'   => array($city_slug),
+      ),
+    ),
+    'order_by' => 'meta_value',
+    'order'      => 'ASC',
+    'meta_key'     => '_igv_stockist_city',
+    'posts_per_page' => -1,
+  );
+
+  return new WP_Query($args);
+}
+
+/**
+ * Generate a unordered listof stockist by query
+ *
+ * @param object $query Query of stockists
+ * @return void It outputs markup for the list
+ */
+function generate_stockists_list($query) {
+
+  if (!empty($query)) {
+    echo '<ul>';
+    while($query->have_posts()) {
+      $query->the_post();
+
+      $website = get_post_meta(get_the_ID(), '_igv_stockist_website', true);
+      echo '<li class="font-uppercase">';
+      echo '<a href="' . $website . '" rel="noopener noreferrer" target="_blank">' . the_title() . '</a>';
+      echo '</li>';
+    }
+    echo '</ul>';
+  }
+
+  wp_reset_postdata();
+}
