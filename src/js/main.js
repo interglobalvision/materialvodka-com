@@ -5,6 +5,7 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
+import Cube from './cube';
 
 import lazySizes from 'lazysizes';
 import ScrollMagic from 'scrollmagic';
@@ -19,7 +20,9 @@ class Site {
   constructor() {
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window)
+      .resize(this.onResize.bind(this))
+      .on('ajaxSuccess', this.onReady.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -29,7 +32,6 @@ class Site {
   }
 
   onResize() {
-    this.updateCubeStyle('recipe', '.recipe-item');
     this.sizeHeaderSpacer();
     this.repositionHeader();
   }
@@ -47,7 +49,6 @@ class Site {
     this.bindStickyHeader();
     this.initCoverVid();
     this.animateBottleSprite();
-    this.bindRecipeCube();
   }
 
   fixWidows() {
@@ -112,68 +113,9 @@ class Site {
       .addTo(controller);
     }
   }
-
-  bindRecipeCube() {
-    if ($('.recipe-item').length) {
-      $('.recipe-item').on({
-        'click': function() {
-          $('.cube-holder').removeClass('cube-active');
-          $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
-          $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
-        },
-        'mouseleave': function() {
-          $('.cube-holder').removeClass('cube-active');
-          $(this).find('.cube-right').removeClass('cube-front');
-          $(this).find('.cube-left').addClass('cube-front');
-        }
-      });
-
-      this.updateCubeStyle('recipe', '.recipe-item');
-    }
-  }
-
-  updateCubeStyle(styleId, selector) {
-    const cubeTransition = 0.6;
-
-    if ($(selector).length) {
-      const width = $(selector).width() / 2;
-
-      const styleContent = `
-      ${selector} .cube-left {
-        transform: rotateY(-90deg) translateZ(${width}px)
-      }
-      ${selector} .cube-left.cube-front {
-        transform: rotateY(0deg) translateZ(${width}px)
-      }
-      ${selector} .cube-right {
-        transform: rotateY(90deg) translateZ(${width}px)
-      }
-      ${selector} .cube-right.cube-front {
-        transform: rotateY(0deg) translateZ(${width}px)
-      }`;
-
-      if ($('style#cube-style-' + styleId).length) {
-        $('style#cube-style-' + styleId).html(styleContent);
-      } else {
-        const styleElement = `
-        <style type="text/css" id="cube-style-${styleId}">
-          ${styleContent}
-        </style>`;
-
-        $('head').append(styleElement);
-
-        $(selector).addClass('ready');
-
-        window.setTimeout(function() {
-          $(selector).find('.cube-left, .cube-right').css({
-            transition: 'transform ' + cubeTransition + 's ease-in-out',
-          });
-        }, 100);
-      }
-    }
-  }
 }
 
 const Material = new Site();
 const MaterialShop = new Shop();
 const MaterialAjaxy = new Ajaxy();
+const MaterialCube = new Cube();

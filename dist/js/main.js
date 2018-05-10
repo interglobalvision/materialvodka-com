@@ -12834,14 +12834,17 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
+
 // Import style
-__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _cube = __webpack_require__(21);var _cube2 = _interopRequireDefault(_cube);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window).
+    resize(this.onResize.bind(this)).
+    on('ajaxSuccess', this.onReady.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -12851,7 +12854,6 @@ Site = function () {
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
-      this.updateCubeStyle('recipe', '.recipe-item');
       this.sizeHeaderSpacer();
       this.repositionHeader();
     } }, { key: 'onReady', value: function onReady()
@@ -12869,7 +12871,6 @@ Site = function () {
       this.bindStickyHeader();
       this.initCoverVid();
       this.animateBottleSprite();
-      this.bindRecipeCube();
     } }, { key: 'fixWidows', value: function fixWidows()
 
     {
@@ -12933,72 +12934,13 @@ Site = function () {
         setTween(tween).
         addTo(controller);
       }
-    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
-
-    {
-      if ($('.recipe-item').length) {
-        $('.recipe-item').on({
-          'click': function click() {
-            $('.cube-holder').removeClass('cube-active');
-            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
-            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
-          },
-          'mouseleave': function mouseleave() {
-            $('.cube-holder').removeClass('cube-active');
-            $(this).find('.cube-right').removeClass('cube-front');
-            $(this).find('.cube-left').addClass('cube-front');
-          } });
-
-
-        this.updateCubeStyle('recipe', '.recipe-item');
-      }
-    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
-
-    styleId, selector) {
-      var cubeTransition = 0.6;
-
-      if ($(selector).length) {
-        var width = $(selector).width() / 2;
-
-        var styleContent = '\n      ' +
-        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
-        width + 'px)\n      }';
-
-
-        if ($('style#cube-style-' + styleId).length) {
-          $('style#cube-style-' + styleId).html(styleContent);
-        } else {
-          var styleElement = '\n        <style type="text/css" id="cube-style-' +
-          styleId + '">\n          ' +
-          styleContent + '\n        </style>';
-
-
-          $('head').append(styleElement);
-
-          $(selector).addClass('ready');
-
-          window.setTimeout(function () {
-            $(selector).find('.cube-left, .cube-right').css({
-              transition: 'transform ' + cubeTransition + 's ease-in-out' });
-
-          }, 100);
-        }
-      }
     } }]);return Site;}();
 
 
 var Material = new Site();
 var MaterialShop = new _shop2.default();
 var MaterialAjaxy = new _ajaxy2.default();
+var MaterialCube = new _cube2.default();
 
 /***/ }),
 /* 5 */
@@ -21448,6 +21390,112 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
+Cube = function () {
+  function Cube() {_classCallCheck(this, Cube);
+    this.mobileThreshold = 601;
+
+    $(window).
+    resize(this.onResize.bind(this)) // Bind resize
+    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+  }_createClass(Cube, [{ key: 'onResize', value: function onResize()
+
+    {
+      this.updateCubeStyle('recipe', '.recipe-item');
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+      this.bindRecipeCube();
+    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
+
+    {
+      if ($('.recipe-item').length) {
+        $('.recipe-item').on({
+          'click': function click() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+          },
+          'mouseleave': function mouseleave() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).find('.cube-right').removeClass('cube-front');
+            $(this).find('.cube-left').addClass('cube-front');
+          } });
+
+
+        this.updateCubeStyle('recipe', '.recipe-item');
+      }
+    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
+
+    styleId, selector) {
+      if ($(selector).length) {
+        var width = $(selector).width() / 2;
+
+        var styleContent = '\n      ' +
+        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }';
+
+
+        if ($('style#cube-style-' + styleId).length) {
+
+          $('style#cube-style-' + styleId).html(styleContent);
+
+          this.setTransition(selector);
+
+        } else {
+
+          var styleElement = '\n        <style type="text/css" id="cube-style-' +
+          styleId + '">\n          ' +
+          styleContent + '\n        </style>';
+
+
+          $('head').append(styleElement);
+
+          $(selector).addClass('ready');
+
+          this.setTransition(selector);
+        }
+      }
+    } }, { key: 'setTransition', value: function setTransition(
+
+    selector) {
+      var cubeTransition = 0.6;
+
+      window.setTimeout(function () {
+        $(selector).find('.cube-left, .cube-right').css({
+          transition: 'transform ' + cubeTransition + 's ease-in-out' });
+
+      }, 100);
+    } }]);return Cube;}();exports.default =
+
+
+Cube;
 
 /***/ })
 /******/ ]);
