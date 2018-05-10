@@ -9,6 +9,7 @@ class Mailchimp {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind functions
     this.submitForm = this.submitForm.bind(this);
     this.successMessage = this.successMessage.bind(this);
   }
@@ -20,24 +21,26 @@ class Mailchimp {
       this.$email = $('#mailchimp-email');
       this.$reply = $('#mailchimp-response');
 
-      this.initFormHandling();
+      // Bind form submit event
+      this.$form.submit(this.submitForm);
     }
   }
 
-  initFormHandling() {
-    this.$form.submit(this.submitForm);
-  }
-
   submitForm() {
+    // Rewrite action URL for JSONP
     var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
 
     var data = {};
+
+    // Get form data
     var dataArray = this.$form.serializeArray();
 
+    // Create data object from form data
     $.each(dataArray, function (index, item) {
       data[item.name] = item.value;
     });
 
+    // Ajax post to Mailchimp API
     $.ajax({
       url: url,
       data: data,
@@ -48,26 +51,31 @@ class Mailchimp {
       }
     });
 
+    // Prevent default submit functionality
     return false;
   }
 
+  /**
+  * Handle response message
+  */
   successMessage(response) {
     let msg = '';
 
-    console.log(response);
-
     if (response.result === 'success') {
 
+      // Success message
       msg = 'You\'ve been successfully subscribed';
 
+      // Set class .valid on form elements
       this.$reply.removeClass('error').addClass('valid');
       this.$email.removeClass('error').addClass('valid');
 
     } else {
-
+      // Set class .error on form elements
       this.$email.removeClass('valid').addClass('error');
       this.$reply.removeClass('valid').addClass('error');
 
+      // Make error message from API response
       let index = -1;
 
       try {
@@ -93,6 +101,7 @@ class Mailchimp {
       }
     }
 
+    // Show message
     this.$reply.html(msg);
   }
 }

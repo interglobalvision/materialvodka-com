@@ -21407,6 +21407,7 @@ Mailchimp = function () {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind functions
     this.submitForm = this.submitForm.bind(this);
     this.successMessage = this.successMessage.bind(this);
   }_createClass(Mailchimp, [{ key: 'onReady', value: function onReady()
@@ -21418,24 +21419,26 @@ Mailchimp = function () {
         this.$email = $('#mailchimp-email');
         this.$reply = $('#mailchimp-response');
 
-        this.initFormHandling();
+        // Bind form submit event
+        this.$form.submit(this.submitForm);
       }
-    } }, { key: 'initFormHandling', value: function initFormHandling()
-
-    {
-      this.$form.submit(this.submitForm);
     } }, { key: 'submitForm', value: function submitForm()
 
     {
+      // Rewrite action URL for JSONP
       var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
 
       var data = {};
+
+      // Get form data
       var dataArray = this.$form.serializeArray();
 
+      // Create data object from form data
       $.each(dataArray, function (index, item) {
         data[item.name] = item.value;
       });
 
+      // Ajax post to Mailchimp API
       $.ajax({
         url: url,
         data: data,
@@ -21446,26 +21449,31 @@ Mailchimp = function () {
         } });
 
 
+      // Prevent default submit functionality
       return false;
-    } }, { key: 'successMessage', value: function successMessage(
+    }
 
+    /**
+      * Handle response message
+      */ }, { key: 'successMessage', value: function successMessage(
     response) {
       var msg = '';
 
-      console.log(response);
-
       if (response.result === 'success') {
 
+        // Success message
         msg = 'You\'ve been successfully subscribed';
 
+        // Set class .valid on form elements
         this.$reply.removeClass('error').addClass('valid');
         this.$email.removeClass('error').addClass('valid');
 
       } else {
-
+        // Set class .error on form elements
         this.$email.removeClass('valid').addClass('error');
         this.$reply.removeClass('valid').addClass('error');
 
+        // Make error message from API response
         var index = -1;
 
         try {
@@ -21491,6 +21499,7 @@ Mailchimp = function () {
         }
       }
 
+      // Show message
       this.$reply.html(msg);
     } }]);return Mailchimp;}();exports.default =
 
