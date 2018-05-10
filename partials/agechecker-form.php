@@ -1,7 +1,5 @@
 <div class="overlay-position" id="age-overlay">
 
-  <div class="container-blur"></div>
-
   <div class="container-overlay grid-row justify-center">
 
     <form id="age-checker-form" class="grid-column align-items-center justify-center grid-item item-s-4">
