@@ -60,11 +60,196 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document */
+
+// Import dependencies
+
+
+
+
+
+
+
+
+
+
+// Import style
+__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(3);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(4);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+
+Site = function () {
+  function Site() {_classCallCheck(this, Site);
+    this.mobileThreshold = 601;
+
+    $(window).resize(this.onResize.bind(this));
+
+    $(document).ready(this.onReady.bind(this));
+
+    // Bind
+    this.repositionHeader = this.repositionHeader.bind(this);
+
+  }_createClass(Site, [{ key: 'onResize', value: function onResize()
+
+    {
+      this.updateCubeStyle('recipe', '.recipe-item');
+      this.sizeHeaderSpacer();
+      this.repositionHeader();
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+      _lazysizes2.default.init();
+
+      this.$window = $(window);
+      this.$document = $(document);
+      this.$header = $('#header');
+      this.$mainContent = $('#main-content');
+      this.$headerSpacer = $('#header-spacer');
+      this.$covervidVideo = $('.covervid-video');
+
+      this.bindStickyHeader();
+      this.initCoverVid();
+      this.animateBottleSprite();
+      this.bindRecipeCube();
+    } }, { key: 'fixWidows', value: function fixWidows()
+
+    {
+      // utility class mainly for use on headines to avoid widows [single words on a new line]
+      $('.js-fix-widows').each(function () {
+        var string = $(this).html();
+        string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
+        $(this).html(string);
+      });
+    } }, { key: 'initCoverVid', value: function initCoverVid()
+
+    {
+      if (this.$covervidVideo.length) {
+        this.$covervidVideo.coverVid(1920, 1080);
+      }
+    } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
+
+    {
+      var that = this;
+
+      this.sizeHeaderSpacer();
+
+      this.$window.on('scroll', this.repositionHeader);
+    } }, { key: 'repositionHeader', value: function repositionHeader()
+
+    {
+      if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop()) {
+        this.$header.addClass('bottom').css({
+          top: this.headerTop + 'px',
+          bottom: 'auto' });
+
+      } else if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop()) {
+        this.$header.removeClass('bottom').css({
+          top: 'auto',
+          bottom: 0 });
+
+      }
+    } }, { key: 'sizeHeaderSpacer', value: function sizeHeaderSpacer()
+
+    {
+      var headerHeight = this.$header.outerHeight();
+      this.$headerSpacer.css('height', headerHeight + 'px');
+      this.headerTop = this.$headerSpacer.offset().top;
+      this.headerSpacerOffset = this.headerTop + headerHeight;
+      this.windowHeight = this.$window.outerHeight();
+    } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
+
+    {
+      if ($('#bottle-sprite').length) {
+        var controller = new _scrollmagic2.default.Controller();
+
+        // create Tween
+        var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
+          backgroundPosition: "100% 0",
+          ease: SteppedEase.config(59) });
+
+
+        // build scene
+        var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
+        triggerHook("onCenter").
+        setTween(tween).
+        addTo(controller);
+      }
+    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
+
+    {
+      if ($('.recipe-item').length) {
+        $('.recipe-item').on({
+          'click': function click() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+          },
+          'mouseleave': function mouseleave() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).find('.cube-right').removeClass('cube-front');
+            $(this).find('.cube-left').addClass('cube-front');
+          } });
+
+
+        this.updateCubeStyle('recipe', '.recipe-item');
+      }
+    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
+
+    styleId, selector) {
+      var cubeTransition = 0.6;
+
+      if ($(selector).length) {
+        var width = $(selector).width() / 2;
+
+        var styleContent = '\n      ' +
+        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }';
+
+
+        if ($('style#cube-style-' + styleId).length) {
+          $('style#cube-style-' + styleId).html(styleContent);
+        } else {
+          var styleElement = '\n        <style type="text/css" id="cube-style-' +
+          styleId + '">\n          ' +
+          styleContent + '\n        </style>';
+
+
+          $('head').append(styleElement);
+
+          $(selector).addClass('ready');
+
+          window.setTimeout(function () {
+            $(selector).find('.cube-left, .cube-right').css({
+              transition: 'transform ' + cubeTransition + 's ease-in-out' });
+
+          }, 100);
+        }
+      }
+    } }]);return Site;}();
+
+
+var Material = new Site();
+var MaterialShop = new _shop2.default();
+var MaterialAjaxy = new _ajaxy2.default();
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -91,7 +276,182 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 1 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /*!
+                                                                                                                                                                                                                                                                                        * JavaScript Cookie v2.2.0
+                                                                                                                                                                                                                                                                                        * https://github.com/js-cookie/js-cookie
+                                                                                                                                                                                                                                                                                        *
+                                                                                                                                                                                                                                                                                        * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+                                                                                                                                                                                                                                                                                        * Released under the MIT license
+                                                                                                                                                                                                                                                                                        */
+;(function (factory) {
+	var registeredInModuleLoader = false;
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		registeredInModuleLoader = true;
+	}
+	if (( false ? 'undefined' : _typeof(exports)) === 'object') {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+})(function () {
+	function extend() {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[i];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function init(converter) {
+		function api(key, value, attributes) {
+			var result;
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			// Write
+
+			if (arguments.length > 1) {
+				attributes = extend({
+					path: '/' },
+				api.defaults, attributes);
+
+				if (typeof attributes.expires === 'number') {
+					var expires = new Date();
+					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+					attributes.expires = expires;
+				}
+
+				// We're using "expires" because "max-age" is not supported by IE
+				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+				try {
+					result = JSON.stringify(value);
+					if (/^[\{\[]/.test(result)) {
+						value = result;
+					}
+				} catch (e) {}
+
+				if (!converter.write) {
+					value = encodeURIComponent(String(value)).
+					replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				} else {
+					value = converter.write(value, key);
+				}
+
+				key = encodeURIComponent(String(key));
+				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+				key = key.replace(/[\(\)]/g, escape);
+
+				var stringifiedAttributes = '';
+
+				for (var attributeName in attributes) {
+					if (!attributes[attributeName]) {
+						continue;
+					}
+					stringifiedAttributes += '; ' + attributeName;
+					if (attributes[attributeName] === true) {
+						continue;
+					}
+					stringifiedAttributes += '=' + attributes[attributeName];
+				}
+				return document.cookie = key + '=' + value + stringifiedAttributes;
+			}
+
+			// Read
+
+			if (!key) {
+				result = {};
+			}
+
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling "get()"
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var rdecode = /(%[0-9A-Z]{2})+/g;
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (!this.json && cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
+					cookie = converter.read ?
+					converter.read(cookie, name) : converter(cookie, name) ||
+					cookie.replace(rdecode, decodeURIComponent);
+
+					if (this.json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					if (key === name) {
+						result = cookie;
+						break;
+					}
+
+					if (!key) {
+						result[name] = cookie;
+					}
+				} catch (e) {}
+			}
+
+			return result;
+		}
+
+		api.set = api;
+		api.get = function (key) {
+			return api.call(api, key);
+		};
+		api.getJSON = function () {
+			return api.apply({
+				json: true },
+			[].slice.call(arguments));
+		};
+		api.defaults = {};
+
+		api.remove = function (key, attributes) {
+			api(key, '', extend(attributes, {
+				expires: -1 }));
+
+		};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+});
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2881,7 +3241,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = 
 });
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10863,10 +11223,10 @@ if (_gsScope._gsDefine) {_gsScope._gsQueue.pop()();} //necessary in case TweenLi
 	_tickerActive = false; //ensures that the first official animation forces a ticker.tick() to update the time when it is instantiated
 
 })(typeof module !== "undefined" && module.exports && typeof global !== "undefined" ? global : undefined || window, "TweenMax");
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12813,195 +13173,10 @@ if (_gsScope._gsDefine) {_gsScope._gsQueue.pop()();} //necessary in case TweenLi
 	_tickerActive = false; //ensures that the first official animation forces a ticker.tick() to update the time when it is instantiated
 
 })(typeof module !== "undefined" && module.exports && typeof global !== "undefined" ? global : undefined || window, "TweenLite");
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document */
-
-// Import dependencies
-
-
-
-
-
-
-
-
-
-
-// Import style
-__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
-
-Site = function () {
-  function Site() {_classCallCheck(this, Site);
-    this.mobileThreshold = 601;
-
-    $(window).resize(this.onResize.bind(this));
-
-    $(document).ready(this.onReady.bind(this));
-
-    // Bind
-    this.repositionHeader = this.repositionHeader.bind(this);
-
-  }_createClass(Site, [{ key: 'onResize', value: function onResize()
-
-    {
-      this.updateCubeStyle('recipe', '.recipe-item');
-      this.sizeHeaderSpacer();
-      this.repositionHeader();
-    } }, { key: 'onReady', value: function onReady()
-
-    {
-      _lazysizes2.default.init();
-
-      this.$window = $(window);
-      this.$document = $(document);
-      this.$header = $('#header');
-      this.$mainContent = $('#main-content');
-      this.$headerSpacer = $('#header-spacer');
-      this.$covervidVideo = $('.covervid-video');
-
-      this.bindStickyHeader();
-      this.initCoverVid();
-      this.animateBottleSprite();
-      this.bindRecipeCube();
-    } }, { key: 'fixWidows', value: function fixWidows()
-
-    {
-      // utility class mainly for use on headines to avoid widows [single words on a new line]
-      $('.js-fix-widows').each(function () {
-        var string = $(this).html();
-        string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
-        $(this).html(string);
-      });
-    } }, { key: 'initCoverVid', value: function initCoverVid()
-
-    {
-      if (this.$covervidVideo.length) {
-        this.$covervidVideo.coverVid(1920, 1080);
-      }
-    } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
-
-    {
-      var that = this;
-
-      this.sizeHeaderSpacer();
-
-      this.$window.on('scroll', this.repositionHeader);
-    } }, { key: 'repositionHeader', value: function repositionHeader()
-
-    {
-      if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop()) {
-        this.$header.addClass('bottom').css({
-          top: this.headerTop + 'px',
-          bottom: 'auto' });
-
-      } else if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop()) {
-        this.$header.removeClass('bottom').css({
-          top: 'auto',
-          bottom: 0 });
-
-      }
-    } }, { key: 'sizeHeaderSpacer', value: function sizeHeaderSpacer()
-
-    {
-      var headerHeight = this.$header.outerHeight();
-      this.$headerSpacer.css('height', headerHeight + 'px');
-      this.headerTop = this.$headerSpacer.offset().top;
-      this.headerSpacerOffset = this.headerTop + headerHeight;
-      this.windowHeight = this.$window.outerHeight();
-    } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
-
-    {
-      if ($('#bottle-sprite').length) {
-        var controller = new _scrollmagic2.default.Controller();
-
-        // create Tween
-        var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
-          backgroundPosition: "100% 0",
-          ease: SteppedEase.config(59) });
-
-
-        // build scene
-        var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
-        triggerHook("onCenter").
-        setTween(tween).
-        addTo(controller);
-      }
-    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
-
-    {
-      if ($('.recipe-item').length) {
-        $('.recipe-item').on({
-          'click': function click() {
-            $('.cube-holder').removeClass('cube-active');
-            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
-            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
-          },
-          'mouseleave': function mouseleave() {
-            $('.cube-holder').removeClass('cube-active');
-            $(this).find('.cube-right').removeClass('cube-front');
-            $(this).find('.cube-left').addClass('cube-front');
-          } });
-
-
-        this.updateCubeStyle('recipe', '.recipe-item');
-      }
-    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
-
-    styleId, selector) {
-      var cubeTransition = 0.6;
-
-      if ($(selector).length) {
-        var width = $(selector).width() / 2;
-
-        var styleContent = '\n      ' +
-        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
-        width + 'px)\n      }\n      ' +
-
-        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
-        width + 'px)\n      }';
-
-
-        if ($('style#cube-style-' + styleId).length) {
-          $('style#cube-style-' + styleId).html(styleContent);
-        } else {
-          var styleElement = '\n        <style type="text/css" id="cube-style-' +
-          styleId + '">\n          ' +
-          styleContent + '\n        </style>';
-
-
-          $('head').append(styleElement);
-
-          $(selector).addClass('ready');
-
-          window.setTimeout(function () {
-            $(selector).find('.cube-left, .cube-right').css({
-              transition: 'transform ' + cubeTransition + 's ease-in-out' });
-
-          }, 100);
-        }
-      }
-    } }]);return Site;}();
-
-
-var Material = new Site();
-var MaterialShop = new _shop2.default();
-var MaterialAjaxy = new _ajaxy2.default();
-
-/***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13100,14 +13275,14 @@ if (window.jQuery) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, WP */
-var _shopifyBuy = __webpack_require__(7);var _shopifyBuy2 = _interopRequireDefault(_shopifyBuy);
-var _jsCookie = __webpack_require__(8);var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+var _shopifyBuy = __webpack_require__(8);var _shopifyBuy2 = _interopRequireDefault(_shopifyBuy);
+var _jsCookie = __webpack_require__(2);var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Shop = function () {
   function Shop() {_classCallCheck(this, Shop);
@@ -13430,7 +13605,7 @@ Shop = function () {
 Shop;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18750,181 +18925,6 @@ module.exports = Client;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /*!
-                                                                                                                                                                                                                                                                                        * JavaScript Cookie v2.2.0
-                                                                                                                                                                                                                                                                                        * https://github.com/js-cookie/js-cookie
-                                                                                                                                                                                                                                                                                        *
-                                                                                                                                                                                                                                                                                        * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
-                                                                                                                                                                                                                                                                                        * Released under the MIT license
-                                                                                                                                                                                                                                                                                        */
-;(function (factory) {
-	var registeredInModuleLoader = false;
-	if (true) {
-		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		registeredInModuleLoader = true;
-	}
-	if (( false ? 'undefined' : _typeof(exports)) === 'object') {
-		module.exports = factory();
-		registeredInModuleLoader = true;
-	}
-	if (!registeredInModuleLoader) {
-		var OldCookies = window.Cookies;
-		var api = window.Cookies = factory();
-		api.noConflict = function () {
-			window.Cookies = OldCookies;
-			return api;
-		};
-	}
-})(function () {
-	function extend() {
-		var i = 0;
-		var result = {};
-		for (; i < arguments.length; i++) {
-			var attributes = arguments[i];
-			for (var key in attributes) {
-				result[key] = attributes[key];
-			}
-		}
-		return result;
-	}
-
-	function init(converter) {
-		function api(key, value, attributes) {
-			var result;
-			if (typeof document === 'undefined') {
-				return;
-			}
-
-			// Write
-
-			if (arguments.length > 1) {
-				attributes = extend({
-					path: '/' },
-				api.defaults, attributes);
-
-				if (typeof attributes.expires === 'number') {
-					var expires = new Date();
-					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
-					attributes.expires = expires;
-				}
-
-				// We're using "expires" because "max-age" is not supported by IE
-				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
-
-				try {
-					result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
-						value = result;
-					}
-				} catch (e) {}
-
-				if (!converter.write) {
-					value = encodeURIComponent(String(value)).
-					replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-				} else {
-					value = converter.write(value, key);
-				}
-
-				key = encodeURIComponent(String(key));
-				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-				key = key.replace(/[\(\)]/g, escape);
-
-				var stringifiedAttributes = '';
-
-				for (var attributeName in attributes) {
-					if (!attributes[attributeName]) {
-						continue;
-					}
-					stringifiedAttributes += '; ' + attributeName;
-					if (attributes[attributeName] === true) {
-						continue;
-					}
-					stringifiedAttributes += '=' + attributes[attributeName];
-				}
-				return document.cookie = key + '=' + value + stringifiedAttributes;
-			}
-
-			// Read
-
-			if (!key) {
-				result = {};
-			}
-
-			// To prevent the for loop in the first place assign an empty array
-			// in case there are no cookies at all. Also prevents odd result when
-			// calling "get()"
-			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
-			var i = 0;
-
-			for (; i < cookies.length; i++) {
-				var parts = cookies[i].split('=');
-				var cookie = parts.slice(1).join('=');
-
-				if (!this.json && cookie.charAt(0) === '"') {
-					cookie = cookie.slice(1, -1);
-				}
-
-				try {
-					var name = parts[0].replace(rdecode, decodeURIComponent);
-					cookie = converter.read ?
-					converter.read(cookie, name) : converter(cookie, name) ||
-					cookie.replace(rdecode, decodeURIComponent);
-
-					if (this.json) {
-						try {
-							cookie = JSON.parse(cookie);
-						} catch (e) {}
-					}
-
-					if (key === name) {
-						result = cookie;
-						break;
-					}
-
-					if (!key) {
-						result[name] = cookie;
-					}
-				} catch (e) {}
-			}
-
-			return result;
-		}
-
-		api.set = api;
-		api.get = function (key) {
-			return api.call(api, key);
-		};
-		api.getJSON = function () {
-			return api.apply({
-				json: true },
-			[].slice.call(arguments));
-		};
-		api.defaults = {};
-
-		api.remove = function (key, attributes) {
-			api(key, '', extend(attributes, {
-				expires: -1 }));
-
-		};
-
-		api.withConverter = init;
-
-		return api;
-	}
-
-	return init(function () {});
-});
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19833,7 +19833,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (root, factory) {
 	if (true) {
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(2), __webpack_require__(13)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(4), __webpack_require__(13)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -21432,16 +21432,16 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
 	};
 	if (typeof module !== "undefined" && module.exports) {//node
-		__webpack_require__(3); //dependency
+		__webpack_require__(5); //dependency
 		module.exports = getGlobal();
 	} else if (true) {//AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(5)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	}
 })("TimelineMax");
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 14 */
