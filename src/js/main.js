@@ -7,10 +7,11 @@ import Shop from './shop';
 import Ajaxy from './ajaxy';
 
 import lazySizes from 'lazysizes';
+import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
 import TweenMax from 'gsap';
-
 
 // Import style
 import '../styl/site.styl';
@@ -44,6 +45,9 @@ class Site {
     this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
+    this.checkForCookie();
+    this.initCoverVid();
+    this.submitAgeForm();
     this.bindStickyHeader();
     this.initCoverVid();
     this.animateBottleSprite();
@@ -172,6 +176,35 @@ class Site {
       }
     }
   }
+
+  submitAgeForm() {
+    $('#submit-age').on('click', function(e){
+      e.preventDefault();
+      const month = $('#birthday-month').val();
+      const day = $('#birthday-day').val();
+      const year = $('#birthday-year').val();
+      const birthday = dayjs(new Date(year, month, day));
+      const age = dayjs().diff(birthday, 'years');
+      if (age >= 21) {
+        Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').addClass('legal-age');
+      } else {
+        console.log("not of age");
+      }
+    });
+  }
+
+  checkForCookie() {
+    const cookie = Cookies.get('legalAge');
+    console.log(cookie);
+    if (cookie) {
+      $('body').addClass('legal-age');
+    } else {
+      console.log('doing nothing')
+    }
+  }
+
+
 }
 
 const Material = new Site();
