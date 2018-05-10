@@ -32,6 +32,36 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 // ******************************************************
 
+// CUBE
+
+.cube-front, .cube-left, .cube-right
+  position:absolute
+  top:0
+  bottom:0
+  left:0
+  right:0
+  backface-visibility: hidden
+  background-color: $color-black
+
+.cube-left, .cube-right
+  visibility: hidden
+
+.cube-front
+  visibility: visible
+
+.cube-holder
+  position:relative
+  perspective: 0
+  z-index: 0
+  &.ready
+    .cube-left, .cube-right
+      visibility: visible
+
+.cube-active
+  z-index: 100
+
+// ******************************************************
+
 // HEADER
 
 #header
@@ -100,3 +130,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   background-repeat: no-repeat
   background-size: 6000% 100%
   mix-blend-mode: difference
+
+// ******************************************************
+
+// RECIPES
+
+.recipe-item
+  min-height: 600px
+  height: 33vw
+  .cube-left
+    cursor: pointer

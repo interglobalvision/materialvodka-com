@@ -8,10 +8,11 @@ import Ajaxy from './ajaxy';
 import Mailchimp from './mailchimp';
 
 import lazySizes from 'lazysizes';
+import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
 import TweenMax from 'gsap';
-
 
 // Import style
 import '../styl/site.styl';
@@ -30,6 +31,7 @@ class Site {
   }
 
   onResize() {
+    this.updateCubeStyle('recipe', '.recipe-item');
     this.sizeHeaderSpacer();
     this.repositionHeader();
   }
@@ -44,9 +46,13 @@ class Site {
     this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
+    this.checkForCookie();
     this.initCoverVid();
+    this.submitAgeForm();
     this.bindStickyHeader();
+    this.initCoverVid();
     this.animateBottleSprite();
+    this.bindRecipeCube();
   }
 
   fixWidows() {
@@ -109,6 +115,95 @@ class Site {
       .addTo(controller);
     }
   }
+
+  bindRecipeCube() {
+    if ($('.recipe-item').length) {
+      $('.recipe-item').on({
+        'click': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+          $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+        },
+        'mouseleave': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).find('.cube-right').removeClass('cube-front');
+          $(this).find('.cube-left').addClass('cube-front');
+        }
+      });
+
+      this.updateCubeStyle('recipe', '.recipe-item');
+    }
+  }
+
+  updateCubeStyle(styleId, selector) {
+    const cubeTransition = 0.6;
+
+    if ($(selector).length) {
+      const width = $(selector).width() / 2;
+
+      const styleContent = `
+      ${selector} .cube-left {
+        transform: rotateY(-90deg) translateZ(${width}px)
+      }
+      ${selector} .cube-left.cube-front {
+        transform: rotateY(0deg) translateZ(${width}px)
+      }
+      ${selector} .cube-right {
+        transform: rotateY(90deg) translateZ(${width}px)
+      }
+      ${selector} .cube-right.cube-front {
+        transform: rotateY(0deg) translateZ(${width}px)
+      }`;
+
+      if ($('style#cube-style-' + styleId).length) {
+        $('style#cube-style-' + styleId).html(styleContent);
+      } else {
+        const styleElement = `
+        <style type="text/css" id="cube-style-${styleId}">
+          ${styleContent}
+        </style>`;
+
+        $('head').append(styleElement);
+
+        $(selector).addClass('ready');
+
+        window.setTimeout(function() {
+          $(selector).find('.cube-left, .cube-right').css({
+            transition: 'transform ' + cubeTransition + 's ease-in-out',
+          });
+        }, 100);
+      }
+    }
+  }
+
+  submitAgeForm() {
+    $('#submit-age').on('click', function(e){
+      e.preventDefault();
+      const month = $('#birthday-month').val();
+      const day = $('#birthday-day').val();
+      const year = $('#birthday-year').val();
+      const birthday = dayjs(new Date(year, month, day));
+      const age = dayjs().diff(birthday, 'years');
+      if (age >= 21) {
+        Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').addClass('legal-age');
+      } else {
+        console.log("not of age");
+      }
+    });
+  }
+
+  checkForCookie() {
+    const cookie = Cookies.get('legalAge');
+    console.log(cookie);
+    if (cookie) {
+      $('body').addClass('legal-age');
+    } else {
+      console.log('doing nothing')
+    }
+  }
+
+
 }
 
 const Material = new Site();
