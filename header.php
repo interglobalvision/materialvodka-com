@@ -9,6 +9,7 @@
 <?php
 get_template_part('partials/globie');
 get_template_part('partials/seo');
+
 ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
@@ -28,6 +29,8 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
+  <?php get_template_part('partials/agechecker-form'); ?>
+  
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
