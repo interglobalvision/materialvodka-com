@@ -2,16 +2,16 @@
 
   <p>Please enter your date of birth:<p>
   
-  <div class="age-checker-item">
-    <input class="birthday-month" name="month" value="" type="number" min="1" max="12" placeholder="MM" id="dob_mm">
+  <div>
+    <input id="birthday-month" name="month" value="" type="number" min="1" max="12" placeholder="MM">
   </div>
 
-  <div class="age-checker-item">
-     <input class="birthday-day" name="day" value="" type="number" min="1" max="31" placeholder="DD" id="dob_dd">
+  <div>
+     <input id="birthday-day" name="day" value="" type="number" min="1" max="31" placeholder="DD">
   </div>
 
-  <div class="age-checker-item">
-     <input class="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY" id="dob_yyyy">
+  <div>
+     <input id="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY">
   </div>
 
   <p>You must be of legal age to enter<p>

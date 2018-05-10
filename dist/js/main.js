@@ -304,9 +304,9 @@ Site = function () {
     {
       $('#submit-age').on('click', function (e) {
         e.preventDefault();
-        var month = $('.birthday-month').val();
-        var day = $('.birthday-day').val();
-        var year = $('.birthday-year').val();
+        var month = $('#birthday-month').val();
+        var day = $('#birthday-day').val();
+        var year = $('#birthday-year').val();
         var birthday = (0, _dayjs2.default)(new Date(year, month, day));
         var age = (0, _dayjs2.default)().diff(birthday, 'years');
         if (age >= 21) {
