@@ -59,9 +59,9 @@ class Site {
   submitAgeForm() {
     $('#submit-age').on('click', function(e){
       e.preventDefault();
-      const month = $('.month').val();
-      const day = $('.day').val();
-      const year = $('.year').val();
+      const month = $('.birthday-month').val();
+      const day = $('.birthday-day').val();
+      const year = $('.birthday-year').val();
       const birthday = dayjs(new Date(year, month, day));
       const age = dayjs().diff(birthday, 'years');
       if (age >= 21) {
@@ -87,4 +87,4 @@ class Site {
 }
 
 const Material = new Site();
-//const MaterialShop = new Shop();
+const MaterialShop = new Shop();
