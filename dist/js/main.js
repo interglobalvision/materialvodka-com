@@ -12836,7 +12836,7 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 // Import style
-__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _mailchimp = __webpack_require__(19);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _mailchimp = __webpack_require__(10);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(11);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(13);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -19010,6 +19010,121 @@ Ajaxy;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
+Mailchimp = function () {
+  function Mailchimp() {_classCallCheck(this, Mailchimp);
+    this.mobileThreshold = 601;
+
+    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+    // Bind functions
+    this.submitForm = this.submitForm.bind(this);
+    this.successMessage = this.successMessage.bind(this);
+  }_createClass(Mailchimp, [{ key: 'onReady', value: function onReady()
+
+    {
+      this.$form = $('#mailchimp-form');
+
+      if (this.$form.length) {
+        this.$email = $('#mailchimp-email');
+        this.$reply = $('#mailchimp-response');
+
+        // Bind form submit event
+        this.$form.submit(this.submitForm);
+      }
+    } }, { key: 'submitForm', value: function submitForm()
+
+    {
+      // Rewrite action URL for JSONP
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
+      var data = {};
+
+      // Get form data
+      var dataArray = this.$form.serializeArray();
+
+      // Create data object from form data
+      $.each(dataArray, function (index, item) {
+        data[item.name] = item.value;
+      });
+
+      // Ajax post to Mailchimp API
+      $.ajax({
+        url: url,
+        data: data,
+        success: this.successMessage,
+        dataType: 'jsonp',
+        error: function error(resp, text) {
+          console.log('mailchimp ajax submit error: ' + text);
+        } });
+
+
+      // Prevent default submit functionality
+      return false;
+    }
+
+    /**
+      * Handle response message
+      */ }, { key: 'successMessage', value: function successMessage(
+    response) {
+      var msg = '';
+
+      if (response.result === 'success') {
+
+        // Success message
+        msg = 'You\'ve been successfully subscribed';
+
+        // Set class .valid on form elements
+        this.$reply.removeClass('error').addClass('valid');
+        this.$email.removeClass('error').addClass('valid');
+
+      } else {
+        // Set class .error on form elements
+        this.$email.removeClass('valid').addClass('error');
+        this.$reply.removeClass('valid').addClass('error');
+
+        // Make error message from API response
+        var index = -1;
+
+        try {
+          var parts = response.msg.split(' - ', 2);
+
+          if (parts[1] === undefined) {
+            msg = response.msg;
+          } else {
+            var i = parseInt(parts[0], 10);
+
+            if (i.toString() === parts[0]) {
+              index = parts[0];
+              msg = parts[1];
+            } else {
+              index = -1;
+              msg = response.msg;
+            }
+          }
+        }
+        catch (e) {
+          index = -1;
+          msg = response.msg;
+        }
+      }
+
+      // Show message
+      this.$reply.html(msg);
+    } }]);return Mailchimp;}();exports.default =
+
+
+Mailchimp;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(module) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};(function (window, factory) {
 	var lazySizes = factory(window, window.document);
 	window.lazySizes = lazySizes;
@@ -19706,10 +19821,10 @@ Ajaxy;
 
 	return lazysizes;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19737,7 +19852,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19771,7 +19886,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (root, factory) {
 	if (true) {
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(2), __webpack_require__(13)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(2), __webpack_require__(14)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -20056,7 +20171,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21382,129 +21497,10 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, WP */var
-
-Mailchimp = function () {
-  function Mailchimp() {_classCallCheck(this, Mailchimp);
-    this.mobileThreshold = 601;
-
-    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
-
-    $(document).ready(this.onReady.bind(this));
-
-    // Bind functions
-    this.submitForm = this.submitForm.bind(this);
-    this.successMessage = this.successMessage.bind(this);
-  }_createClass(Mailchimp, [{ key: 'onReady', value: function onReady()
-
-    {
-      this.$form = $('#mailchimp-form');
-
-      if (this.$form.length) {
-        this.$email = $('#mailchimp-email');
-        this.$reply = $('#mailchimp-response');
-
-        // Bind form submit event
-        this.$form.submit(this.submitForm);
-      }
-    } }, { key: 'submitForm', value: function submitForm()
-
-    {
-      // Rewrite action URL for JSONP
-      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
-
-      var data = {};
-
-      // Get form data
-      var dataArray = this.$form.serializeArray();
-
-      // Create data object from form data
-      $.each(dataArray, function (index, item) {
-        data[item.name] = item.value;
-      });
-
-      // Ajax post to Mailchimp API
-      $.ajax({
-        url: url,
-        data: data,
-        success: this.successMessage,
-        dataType: 'jsonp',
-        error: function error(resp, text) {
-          console.log('mailchimp ajax submit error: ' + text);
-        } });
-
-
-      // Prevent default submit functionality
-      return false;
-    }
-
-    /**
-      * Handle response message
-      */ }, { key: 'successMessage', value: function successMessage(
-    response) {
-      var msg = '';
-
-      if (response.result === 'success') {
-
-        // Success message
-        msg = 'You\'ve been successfully subscribed';
-
-        // Set class .valid on form elements
-        this.$reply.removeClass('error').addClass('valid');
-        this.$email.removeClass('error').addClass('valid');
-
-      } else {
-        // Set class .error on form elements
-        this.$email.removeClass('valid').addClass('error');
-        this.$reply.removeClass('valid').addClass('error');
-
-        // Make error message from API response
-        var index = -1;
-
-        try {
-          var parts = response.msg.split(' - ', 2);
-
-          if (parts[1] === undefined) {
-            msg = response.msg;
-          } else {
-            var i = parseInt(parts[0], 10);
-
-            if (i.toString() === parts[0]) {
-              index = parts[0];
-              msg = parts[1];
-            } else {
-              index = -1;
-              msg = response.msg;
-            }
-          }
-        }
-        catch (e) {
-          index = -1;
-          msg = response.msg;
-        }
-      }
-
-      // Show message
-      this.$reply.html(msg);
-    } }]);return Mailchimp;}();exports.default =
-
-
-Mailchimp;
 
 /***/ })
 /******/ ]);

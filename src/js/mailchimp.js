@@ -28,12 +28,12 @@ class Mailchimp {
 
   submitForm() {
     // Rewrite action URL for JSONP
-    var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+    const url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
 
-    var data = {};
+    let data = {};
 
     // Get form data
-    var dataArray = this.$form.serializeArray();
+    const dataArray = this.$form.serializeArray();
 
     // Create data object from form data
     $.each(dataArray, function (index, item) {
