@@ -235,4 +235,18 @@ function igv_register_theme_options_metabox() {
     'id'      => 'google_analytics_id',
     'type'    => 'text',
   ) );
+
+  // Zip Code API options
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Zip Code API Options', 'cmb2' ),
+    'desc'    => esc_html__( '', 'cmb2' ),
+    'id'      => $prefix . 'zipcode_api_title',
+    'type'    => 'title',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Zip Code API Key', 'cmb2' ),
+    'id'      => 'zipcode_api_key',
+    'type'    => 'text',
+  ) );
 }
