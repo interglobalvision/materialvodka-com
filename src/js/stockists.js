@@ -16,9 +16,8 @@ class Stockists {
     this.requestGeolocation = this.requestGeolocation.bind(this);
     this.geoSuccess = this.geoSuccess.bind(this);
     this.geoError = this.geoError.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
 
-    // Settings
-    this.radius = 10; // in miles
   }
 
   onReady() {
@@ -40,7 +39,7 @@ class Stockists {
     const zipcode = this.$zipCodeInput.val();
 
     if(zipcode !== '') {
-      this.findStockists({zipcode});
+      this.findStockists(zipcode);
     }
   }
 
@@ -63,7 +62,14 @@ class Stockists {
   }
 
   findStockists(zip) {
-    console.log(zip);
+    // Make the ajax request
+    $.getJSON(WP.siteUrl + `/wp-json/igv/find-stockists/${zip}`, this.handleResponse);
+  }
+
+  handleResponse(data) {
+    if (data) {
+      console.log(data);
+    }
   }
 }
 
