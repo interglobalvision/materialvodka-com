@@ -432,7 +432,7 @@ Site = function () {
         var age = (0, _dayjs2.default)().diff(birthday, 'years');
         if (age >= 21) {
           _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-          $('body').addClass('legal-age');
+          $('body').removeClass('age-check');
         } else {
           console.log("not of age");
         }
@@ -443,9 +443,9 @@ Site = function () {
       var cookie = _jsCookie2.default.get('legalAge');
       console.log(cookie);
       if (cookie) {
-        $('body').addClass('legal-age');
+        console.log("your in");
       } else {
-        console.log('doing nothing');
+        $('body').addClass('age-check');
       }
     } }]);return Site;}();
 
