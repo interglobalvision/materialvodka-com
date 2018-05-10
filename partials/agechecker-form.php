@@ -1,22 +1,34 @@
-<form id="age-checker-form">
 
-  <p>Please enter your date of birth:<p>
-  
-  <div>
-    <input id="birthday-month" name="month" value="" type="number" min="1" max="12" placeholder="MM">
-  </div>
 
-  <div>
-     <input id="birthday-day" name="day" value="" type="number" min="1" max="31" placeholder="DD">
-  </div>
+<div class="container-overlay">
 
-  <div>
-     <input id="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY">
-  </div>
+  <form id="age-checker-form" class="grid-column align-items-center margin-top-large">
+    
+    <div class="padding-bottom-basic">
+      <?php get_template_part('partials/logo') ?></a>
+    </div>
 
-  <p>You must be of legal age to enter<p>
+    <p>Please enter your date of birth:<p>
+    
+    <div class="grid-row justify-center padding-bottom-small">
+      <div>
+        <input id="birthday-month" name="month" value="" type="number" min="1" max="12" placeholder="MM">
+      </div>
 
-  <button id="submit-age">Enter</button>
+      <div>
+         <input id="birthday-day" name="day" value="" type="number" min="1" max="31" placeholder="DD">
+      </div>
 
-</form>
+      <div>
+         <input id="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY">
+      </div>
+    </div>
+
+    <p>You must be of legal age to enter<p>
+
+    <button id="submit-age">Enter</button>
+
+  </form>
+
+</div>
 
