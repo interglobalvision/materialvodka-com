@@ -7,7 +7,9 @@ class Shop {
   constructor() {
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window)
+      .resize(this.onResize.bind(this)) // Bind resize
+      .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
 

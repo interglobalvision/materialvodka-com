@@ -11,7 +11,7 @@ $font-size-basic = 12px
 $font-size-extra = 48px
 $font-size-large = 36px
 $font-size-mid = 24px
-$font-size-small = 18px
+$font-size-small = 11px
 $font-size-tiny = 8px
 
 grid-maker(100%, $gutter, s)
@@ -64,6 +64,20 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 // HEADER
 
+#header
+  position: fixed
+  bottom: 0
+  left: 0
+  z-index: 900
+  background-color: $color-black
+  width: 100%
+  &.bottom
+    position: absolute
+
+#logo
+  fill: $color-white
+  height: 1.4em
+
 #desktop-nav
   display: none
 
@@ -71,11 +85,23 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   position: fixed
   top: 0
   left: 0
-  width: 100vw
+  width: 100%
   height: 100vh
   transform: translateX(100vw)
   &.active
     transform: translateX(0)
+
+// ******************************************************
+
+// FOOTER
+
+#footer
+  background-color: $color-white
+  color: $color-black
+
+.social-icon
+  height: 1.5em
+  margin-left: .5em
 
 // ******************************************************
 
@@ -100,9 +126,10 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   top: 0
   left: 0
   background-image: url('../img/bottle-sprite.png')
-  background-position: 0%
+  background-position: 0% 0
   background-repeat: no-repeat
   background-size: 6000% 100%
+  mix-blend-mode: difference
 
 // ******************************************************
 

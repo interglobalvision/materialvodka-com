@@ -28,12 +28,12 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
-      <div class="grid-row text-uppercase flex-nowrap">
+      <div class="grid-row flex-nowrap align-items-center">
         <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
-          <a href="<?php echo home_url(); ?>">Material Vodka</a>
+          <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
         <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
           <button id="mobile-menu-trigger">Menu</button>

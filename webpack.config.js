@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// const MinifyPlugin = require('babel-minify-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -17,7 +16,13 @@ module.exports = {
     "jquery": "jQuery" // We declare jQuery as an externa dependency because we add it thru worpdress enqueue
   },
   resolve: {
-    extensions: ['.js', '.css', '.styl', '.svg']
+    extensions: ['.js', '.css', '.styl', '.svg'],
+    alias: {
+      'TweenMax': path.resolve('node_modules', 'gsap/src/uncompressed/TweenMax.js'),
+      'TimelineMax': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineMax.js'),
+      'ScrollMagic': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'),
+      'animationGsap$': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'),
+    }
   },
 
   module: {
@@ -34,7 +39,7 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015',  'minify'],
+        presets: ['es2015'],
         retainLines: true,
       },
     }, {
