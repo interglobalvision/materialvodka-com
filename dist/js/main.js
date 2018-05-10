@@ -12834,8 +12834,9 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
+
 // Import style
-__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(19);var _stockists2 = _interopRequireDefault(_stockists);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(12);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -12937,6 +12938,7 @@ Site = function () {
 var Material = new Site();
 var MaterialShop = new _shop2.default();
 var MaterialAjaxy = new _ajaxy2.default();
+var MaterialStockists = new _stockists2.default();
 
 /***/ }),
 /* 5 */
@@ -21386,6 +21388,85 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, window, WP */var
+
+Stockists = function () {
+
+  function Stockists() {_classCallCheck(this, Stockists);
+
+    // Bind global Events
+    $(document).ready(this.onReady.bind(this));
+    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    // Bind functions
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.requestGeolocation = this.requestGeolocation.bind(this);
+    this.geoSuccess = this.geoSuccess.bind(this);
+    this.geoError = this.geoError.bind(this);
+
+    // Settings
+    this.radius = 10; // in miles
+  }_createClass(Stockists, [{ key: 'onReady', value: function onReady()
+
+    {
+
+      // Get DOM elements
+      this.$stockistsContainer = $('#find-stockists-container');
+      this.$zipCodeInput = $('#find-zip-code');
+      this.$submitButton = $('#find-submit');
+      this.$useGeolocationButton = $('#find-use-location');
+
+      // Bind to events
+      this.$submitButton.click(this.handleSubmit);
+      this.$useGeolocationButton.click(this.requestGeolocation);
+
+    } }, { key: 'handleSubmit', value: function handleSubmit()
+
+    {
+      var zipcode = this.$zipCodeInput.val();
+
+      if (zipcode !== '') {
+        this.findStockists({ zipcode: zipcode });
+      }
+    } }, { key: 'requestGeolocation', value: function requestGeolocation()
+
+    {
+      navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError);
+    } }, { key: 'geoSuccess', value: function geoSuccess(
+
+    position) {var _position$coords =
+      position.coords,latitude = _position$coords.latitude,longitude = _position$coords.longitude;
+
+      this.findStockists({
+        coords: {
+          longitude: longitude,
+          latitude: latitude } });
+
+
+
+    } }, { key: 'geoError', value: function geoError(
+
+    error) {
+      console.log(error);
+    } }, { key: 'findStockists', value: function findStockists(
+
+    location) {
+      console.log(location);
+    } }]);return Stockists;}();exports.default =
+
+
+Stockists;
 
 /***/ })
 /******/ ]);

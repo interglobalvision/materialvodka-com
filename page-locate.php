@@ -25,6 +25,8 @@ if (have_posts()) {
             <?php get_template_part('partials/zip-code-form'); ?>
           </div>
           <div class="grid-item item-s-12 item-l-6">
+            <ul id="find-stockists-container">
+            </ul>
           </div>
         </div>
         <div class="grid-item item-s-12 item-l-4 background-cover" style="background-image: url(<?php echo $top_image; ?>)">
