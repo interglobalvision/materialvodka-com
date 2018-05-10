@@ -12851,6 +12851,7 @@ Site = function () {
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
+      this.updateCubeStyle('recipe', '.recipe-item');
       this.sizeHeaderSpacer();
       this.repositionHeader();
     } }, { key: 'onReady', value: function onReady()
@@ -12865,9 +12866,10 @@ Site = function () {
       this.$headerSpacer = $('#header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
-      this.initCoverVid();
       this.bindStickyHeader();
+      this.initCoverVid();
       this.animateBottleSprite();
+      this.bindRecipeCube();
     } }, { key: 'fixWidows', value: function fixWidows()
 
     {
@@ -12930,6 +12932,66 @@ Site = function () {
         triggerHook("onCenter").
         setTween(tween).
         addTo(controller);
+      }
+    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
+
+    {
+      if ($('.recipe-item').length) {
+        $('.recipe-item').on({
+          'click': function click() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+          },
+          'mouseleave': function mouseleave() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).find('.cube-right').removeClass('cube-front');
+            $(this).find('.cube-left').addClass('cube-front');
+          } });
+
+
+        this.updateCubeStyle('recipe', '.recipe-item');
+      }
+    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
+
+    styleId, selector) {
+      var cubeTransition = 0.6;
+
+      if ($(selector).length) {
+        var width = $(selector).width() / 2;
+
+        var styleContent = '\n      ' +
+        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }';
+
+
+        if ($('style#cube-style-' + styleId).length) {
+          $('style#cube-style-' + styleId).html(styleContent);
+        } else {
+          var styleElement = '\n        <style type="text/css" id="cube-style-' +
+          styleId + '">\n          ' +
+          styleContent + '\n        </style>';
+
+
+          $('head').append(styleElement);
+
+          $(selector).addClass('ready');
+
+          window.setTimeout(function () {
+            $(selector).find('.cube-left, .cube-right').css({
+              transition: 'transform ' + cubeTransition + 's ease-in-out' });
+
+          }, 100);
+        }
       }
     } }]);return Site;}();
 
