@@ -158,9 +158,9 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
-    'name'    => esc_html__( 'Mailchimp embed code', 'cmb2' ),
-    'id'      => $prefix . 'mailinglist_embed',
-    'type'    => 'textarea_code',
+    'name'    => esc_html__( 'Mailchimp Form Action URL', 'cmb2' ),
+    'id'      => 'mailchimp_url',
+    'type'    => 'text',
   ) );
 
   // Social Media variables
