@@ -19,12 +19,13 @@ if (have_posts()) {
       <div class="grid-row">
         <div class="grid-item item-s-12 item-l-8 no-gutter grid-row">
           <div class="grid-item item-s-12">
-            <h1 class="font-uppercase">Find it near you</h1>
+            <h2 class="margin-bottom-basic font-size-mid font-uppercase">Find it near you</h2>
           </div>
           <div class="grid-item item-s-12 item-l-6">
             <?php get_template_part('partials/zip-code-form'); ?>
           </div>
           <div class="grid-item item-s-12 item-l-6">
+            <?php get_template_part('partials/stockists-container'); ?>
           </div>
         </div>
         <div class="grid-item item-s-12 item-l-4 background-cover locate-top-image">

@@ -140,3 +140,52 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   height: 33vw
   .cube-left
     cursor: pointer
+
+// ******************************************************
+
+// AGE CHECKER FORM
+
+#age-overlay
+  visibility: hidden
+  pointer-events: none
+  position: fixed
+  width: 100vw
+  height: 100vh
+  top:0
+  left:0
+  z-index: 1000
+ 
+  
+#age-checker-form
+  background-color: $color-black
+
+button#submit-age
+  background-color: $color-black
+  color: $color-white
+  border: none
+  padding-top: 1rem
+
+input
+  background-color: $color-black
+  color: $color-white
+  padding: 1rem
+  min-width: 4em
+  text-align: center
+
+input#birthday-year
+  min-width: 5em
+
+input::-webkit-inner-spin-button 
+    -webkit-appearance: none
+    margin: 0
+
+body
+  &.age-check
+    #main-container
+      filter: blur(50px)
+    #age-overlay
+      visibility: visible
+      pointer-events: auto
+      
+
+

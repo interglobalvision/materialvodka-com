@@ -79,5 +79,6 @@ get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
 get_template_part( 'lib/functions-taxonomies' );
+get_template_part( 'lib/functions-api' );
 
 ?>
