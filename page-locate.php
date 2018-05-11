@@ -35,7 +35,7 @@ if (have_posts()) {
       if (!empty($video)) {
     ?>
       <div class="grid-row">
-        <div class="grid-item item-s-12 covervid-wrapper covervid-s-12 covervid-m-6">
+        <div class="grid-item item-s-12 covervid-wrapper height-s-33vw height-m-16vw">
           <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($video[0]['_igv_locate_video_poster']) ?  $video[0]['_igv_locate_video_poster'] : ''; ?>">
             <source src="<?php echo !empty($video[0]['_igv_locate_video_webm']) ? $video[0]['_igv_locate_video_webm'] : ''; ?>" type="video/webm">
             <source src="<?php echo !empty($video[0]['_igv_locate_video_mp4']) ? $video[0]['_igv_locate_video_mp4'] : ''; ?>" type="video/mp4">
