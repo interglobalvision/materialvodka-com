@@ -21,8 +21,9 @@ if (have_posts()) {
     if (!empty($vodka_video)) {
   ?>
     <div class="grid-row">
-      <div class="grid-item item-s-12">
-        <video autoplay loop muted poster="<?php echo !empty($vodka_video[0]['poster']) ? $vodka_video[0]['poster'] : ''; ?>">
+      <div class="grid-item item-s-12 covervid-wrapper
+        height-s-33vw height-m-16vw">
+        <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($vodka_video[0]['poster']) ? $vodka_video[0]['poster'] : ''; ?>">
           <source src="<?php echo !empty($vodka_video[0]['webm']) ? $vodka_video[0]['webm'] : ''; ?>" type="video/webm">
           <source src="<?php echo !empty($vodka_video[0]['mp4']) ? $vodka_video[0]['mp4'] : ''; ?>" type="video/mp4">
         </video>
@@ -55,8 +56,9 @@ if (have_posts()) {
       if (!empty($world_video)) {
     ?>
       <div class="grid-row">
-        <div class="grid-item item-s-12">
-          <video autoplay loop muted poster="<?php echo !empty($world_video[0]['poster']) ? $world_video[0]['poster'] : ''; ?>">
+        <div class="grid-item item-s-12 covervid-wrapper
+        height-s-33vw height-m-16vw">
+          <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($world_video[0]['poster']) ? $world_video[0]['poster'] : ''; ?>">
             <source src="<?php echo !empty($world_video[0]['webm']) ? $world_video[0]['webm'] : ''; ?>" type="video/webm">
             <source src="<?php echo !empty($world_video[0]['mp4']) ? $world_video[0]['mp4'] : ''; ?>" type="video/mp4">
           </video>
