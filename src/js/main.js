@@ -5,8 +5,12 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
+<<<<<<< HEAD
+import Stockists from './stockists';
+=======
 import Cube from './cube';
 import Mailchimp from './mailchimp';
+>>>>>>> master
 
 import lazySizes from 'lazysizes';
 import dayjs from 'dayjs';
@@ -144,5 +148,6 @@ class Site {
 const Material = new Site();
 const MaterialShop = new Shop();
 const MaterialAjaxy = new Ajaxy();
+const MaterialStockists = new Stockists();
 const MaterialCube = new Cube();
 const MaterialMailchimp = new Mailchimp();

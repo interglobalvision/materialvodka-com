@@ -52,13 +52,9 @@ if (have_posts()) {
         <?php
           }
         ?>
-            <div class="margin-bottom-basic font-size-mid">Find it near you</div>
-            <form class="margin-bottom-basic">
-              <input type="number" placeholder="ZIP CODE" />
-              <input type="submit" value="FIND VODKA" />
-            </form>
-            <div class="margin-bottom-basic">OR</div>
-            <button class="margin-bottom-basic">Use your location</button>
+            <h2 class="margin-bottom-basic font-size-mid">Find it near you</h2>
+            <?php get_template_part('partials/zip-code-form'); ?>
+            <?php get_template_part('partials/stockists-container'); ?>
           </div>
         </div>
       <?php
