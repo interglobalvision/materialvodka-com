@@ -23,7 +23,6 @@ class Stockists {
   }
 
   onReady() {
-
     // Get the stockists container (our main element and check)
     this.$stockistsContainer = $('#find-stockists-container');
 

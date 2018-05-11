@@ -21426,7 +21426,6 @@ Stockists = function () {
   }_createClass(Stockists, [{ key: 'onReady', value: function onReady()
 
     {
-
       // Get the stockists container (our main element and check)
       this.$stockistsContainer = $('#find-stockists-container');
 
