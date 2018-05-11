@@ -197,5 +197,5 @@ function register_cpt_video_award() {
     'capability_type' => 'post'
   );
 
-  register_post_type( 'video_award', $args );
+  register_post_type( 'video-award', $args );
 }
