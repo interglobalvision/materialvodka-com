@@ -145,10 +145,9 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 // AGE CHECKER FORM
 
-.container-overlay
-  position: absolute
-  width: 100vw
-  height: 100vw
+#age-overlay
+  visibility: hidden
+  pointer-events: none
   
 #age-checker-form
   position: fixed
@@ -190,7 +189,5 @@ body
       left:0
       z-index: 9999
  
-#age-overlay
-  visibility: hidden
-  pointer-events: none
+
 
