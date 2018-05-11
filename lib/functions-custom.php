@@ -74,3 +74,52 @@ function generate_stockists_list($query) {
 
   wp_reset_postdata();
 }
+
+/**
+ * Generate responsive background css in a single string
+ * useful for inline-styles
+ *
+  * @param {string} element_class - the attatchment id
+ * @param {string} attatchment_id - the attatchment id
+ * @param {array} sizes - a relational array of width/image_size values, should come in ASC order
+ */
+function responsive_background_styles($element_class, $attatchment_id, $sizes) {
+  // Open style tag
+  $style = '<style type="text/css">';
+
+  foreach ($sizes as $size) {
+    // Get the the attatchment src of specific size
+    $src = wp_get_attachment_image_src($attatchment_id, $size);
+
+    if(!empty($src)) {
+      // Append media query and background image url
+      $style .= '@media (min-width: ' . $src[1] . 'px) {
+        .' . $element_class . ' {
+        background-image: url(' . $src[0] . ');
+        }
+      } ';
+    }
+  }
+
+  // Close style tag
+  $style .= '</style>';
+
+  // Output all the style
+  echo $style;
+}
+
+/**
+ * Return a string prefixed with `bg-`
+ *
+ * @param {string} $id - the unique identifier
+ * @param {bool} $echo - to echo the string instead of return it
+ */
+function get_background_class($id, $echo = false) {
+  $class = 'bg-' . $id;
+
+  if(!$echo) {
+    return $class;
+  }
+  echo $class;
+
+}
