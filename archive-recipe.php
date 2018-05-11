@@ -8,7 +8,7 @@ get_header();
 
       <div class="grid-row padding-top-mid padding-bottom-basic">
         <div class="grid-item item-s-12 item-m-6">
-          <h1 class="font-uppercase font-size-large font-regular font-outline">Cocktail Recipes</h1>
+          <h1 class="font-uppercase font-size-large font-bold font-outline">Cocktail Recipes</h1>
         </div>
         <div class="grid-item item-s-12 item-m-3 item-l-2">
           <span>Material works with Arley Marks of Honey’s to invent the most tasty recipes.</span>

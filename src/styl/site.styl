@@ -21,9 +21,13 @@ normalize()
 // FONTS
 @import 'fonts/fonts'
 
-$font-sans = 'TradeGothic LT Light', font-stack('Helvetica')
-$font-bold = 'TradeGothic LT Bold', font-stack('Helvetica')
-$font-regular = 'TradeGothic LT', font-stack('Helvetica')
+//$font-sans = 'TradeGothic LT Light', font-stack('Helvetica')
+//$font-bold = 'TradeGothic LT Bold', font-stack('Helvetica')
+//$font-regular = 'TradeGothic LT', font-stack('Helvetica')
+$font-sans = 'Folio BQ Light', font-stack('Helvetica')
+$font-sans-italic = 'Folio BQ Light Italic', font-stack('Helvetica')
+$font-bold = 'Folio BQ Bold', font-stack('Helvetica')
+$font-medium = 'Folio BQ Medium', font-stack('Helvetica')
 $font-serif = font-stack('Georgia')
 
 // ******************************************************
@@ -53,8 +57,9 @@ body
 .font-sans
   font-family: $font-sans
 
-.font-regular
-  font-family: $font-regular
+.font-medium
+  font-family: $font-medium
+  font-weight: 400
 
 .font-serif
   font-family: $font-serif
@@ -70,10 +75,15 @@ body
 
 em, .font-italic
   font-style: italic
+  font-family: $font-sans-italic
 
-strong, .font-bold
+strong
+  font-family: $font-medium
+  font-weight: 400
+
+.font-bold
   font-family: $font-bold
-  font-weight: bold
+  font-weight: 500
 
 // ******************************************************
 
