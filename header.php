@@ -47,7 +47,7 @@ get_template_part('partials/seo');
               <a href="<?php echo home_url('prize'); ?>">Prize</a>
             </li>
             <li class="grid-item">
-              <a href="<?php echo home_url('video'); ?>">Videos</a>
+              <a href="<?php echo home_url('videos'); ?>">Videos</a>
             </li>
             <li class="grid-item">
               <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
@@ -72,7 +72,7 @@ get_template_part('partials/seo');
             <a href="<?php echo home_url('prize'); ?>">Prize</a>
           </li>
           <li class="grid-item">
-            <a href="<?php echo home_url('video'); ?>">Videos</a>
+            <a href="<?php echo home_url('videos'); ?>">Videos</a>
           </li>
           <li class="grid-item">
             <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
