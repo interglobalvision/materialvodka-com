@@ -1,6 +1,6 @@
 <div id="age-overlay" class="grid-row justify-center">
 
-  <form id="age-checker-form" class="grid-column align-items-center justify-center grid-item item-s-4">
+  <form id="age-checker-form" class="grid-column align-items-center justify-center grid-item item-s-10 item-m-6 item-l-4">
     
     <div class="padding-bottom-basic">
       <?php get_template_part('partials/logo') ?></a>
