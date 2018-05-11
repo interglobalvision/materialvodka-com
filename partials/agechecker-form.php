@@ -1,4 +1,4 @@
-<div class="overlay-position" id="age-overlay">
+<div id="age-overlay">
 
   <div class="container-overlay grid-row justify-center">
 
