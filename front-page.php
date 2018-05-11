@@ -41,9 +41,12 @@ if (have_posts()) {
         <div class="grid-item no-gutter grid-row">
         <?php
           if (!empty($locate_image)) {
-            $image_src = wp_get_attachment_image_src($locate_image, 'full');
         ?>
-          <div class="grid-item item-s-6 background-cover" style="background-image: url(<?php echo $image_src[0];  ?>)"></div>
+          <div class="grid-item item-s-6 background-cover bg-front-locate">
+            <?php
+            responsive_background_styles('bg-front-locate', $locate_image, array('320x320','640x640','960x960'));
+            ?>
+          </div>
           <div class="grid-item item-s-6 margin-top-basic">
         <?php
           } else {
@@ -62,7 +65,11 @@ if (have_posts()) {
 
         if (!empty($recipe)) {
       ?>
-        <a class="grid-item background-cover font-uppercase flex-grow" href="<?php echo home_url('recipes'); ?>" style="background-image: url(<?php echo get_the_post_thumbnail_url($recipe, 'full'); ?>)">
+        <a class="grid-item background-cover font-uppercase flex-grow bg-front-recipe" href="<?php echo home_url('recipes'); ?>">
+          <?php
+          $recipe_image = get_post_thumbnail_id($recipe);
+          responsive_background_styles('bg-front-recipe', $recipe_image , array('320x320','640x640','960x960'));
+          ?>
           <h2 class="font-size-mid">Cocktail Recipes</h2>
           <span><?php echo get_the_title($recipe); ?></span>
         </a>
@@ -85,8 +92,13 @@ if (have_posts()) {
         if ( $query->have_posts() ) {
           while ( $query->have_posts() ) {
             $query->the_post();
+
       ?>
-        <div class="grid-item grid-item-square background-cover font-uppercase" href="<?php echo home_url('videos'); ?>" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+        <div class="grid-item grid-item-square background-cover font-uppercase bg-front-video-award" href="<?php echo home_url('videos'); ?>">
+          <?php
+          $video_award_image =  get_post_thumbnail_id(get_the_ID());
+          responsive_background_styles('bg-front-video-award', $video_award_image, array('320x320','640x640','960x960'));
+          ?>
           <h2 class="font-size-large"><?php the_title(); ?></h2>
           <span>Video Award Recipient <?php the_date('F Y'); ?></span>
         </div>

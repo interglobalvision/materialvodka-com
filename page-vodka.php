@@ -11,9 +11,9 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
     $vodka_video = get_post_meta($post->ID, '_igv_vodka_video_group', true);
-    $vodka_image = get_post_meta($post->ID, '_igv_vodka_image', true);
+    $vodka_image = get_post_meta($post->ID, '_igv_vodka_image_id', true);
     $world_video = get_post_meta($post->ID, '_igv_world_video_group', true);
-    $world_image = get_post_meta($post->ID, '_igv_world_image', true);
+    $world_image = get_post_meta($post->ID, '_igv_world_image_id', true);
     $institution_list = get_post_meta($post->ID, '_igv_institution_list_textarea', true);
 
 ?>
@@ -44,7 +44,10 @@ if (have_posts()) {
     <?php
       if (!empty($vodka_image)) {
     ?>
-      <div class="grid-item item-s-12 item-l-9" style="background-image: url(<?php echo $vodka_image; ?>)">
+      <div class="grid-item item-s-12 item-l-9 vodka-image">
+      <?php
+        responsive_background_styles('vodka-image', $vodka_image, array('320', '640', '960'));
+      ?>
       </div>
     <?php
       }
@@ -86,7 +89,10 @@ if (have_posts()) {
     <?php
       if (!empty($world_image)) {
     ?>
-      <div class="grid-item item-s-12 item-m-6 background-cover" style="background-image: url(<?php echo $world_image; ?>)">
+      <div class="grid-item item-s-12 item-m-6 background-cover world-image">
+      <?php
+        responsive_background_styles('world-image', $world_image, array('320x320', '640x640', '960x960'));
+      ?>
       </div>
     <?php
       }
