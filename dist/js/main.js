@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,6 +92,181 @@ module.exports = g;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /*!
+                                                                                                                                                                                                                                                                                        * JavaScript Cookie v2.2.0
+                                                                                                                                                                                                                                                                                        * https://github.com/js-cookie/js-cookie
+                                                                                                                                                                                                                                                                                        *
+                                                                                                                                                                                                                                                                                        * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+                                                                                                                                                                                                                                                                                        * Released under the MIT license
+                                                                                                                                                                                                                                                                                        */
+;(function (factory) {
+	var registeredInModuleLoader = false;
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		registeredInModuleLoader = true;
+	}
+	if (( false ? 'undefined' : _typeof(exports)) === 'object') {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+})(function () {
+	function extend() {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[i];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function init(converter) {
+		function api(key, value, attributes) {
+			var result;
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			// Write
+
+			if (arguments.length > 1) {
+				attributes = extend({
+					path: '/' },
+				api.defaults, attributes);
+
+				if (typeof attributes.expires === 'number') {
+					var expires = new Date();
+					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+					attributes.expires = expires;
+				}
+
+				// We're using "expires" because "max-age" is not supported by IE
+				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+				try {
+					result = JSON.stringify(value);
+					if (/^[\{\[]/.test(result)) {
+						value = result;
+					}
+				} catch (e) {}
+
+				if (!converter.write) {
+					value = encodeURIComponent(String(value)).
+					replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				} else {
+					value = converter.write(value, key);
+				}
+
+				key = encodeURIComponent(String(key));
+				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+				key = key.replace(/[\(\)]/g, escape);
+
+				var stringifiedAttributes = '';
+
+				for (var attributeName in attributes) {
+					if (!attributes[attributeName]) {
+						continue;
+					}
+					stringifiedAttributes += '; ' + attributeName;
+					if (attributes[attributeName] === true) {
+						continue;
+					}
+					stringifiedAttributes += '=' + attributes[attributeName];
+				}
+				return document.cookie = key + '=' + value + stringifiedAttributes;
+			}
+
+			// Read
+
+			if (!key) {
+				result = {};
+			}
+
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling "get()"
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var rdecode = /(%[0-9A-Z]{2})+/g;
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (!this.json && cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
+					cookie = converter.read ?
+					converter.read(cookie, name) : converter(cookie, name) ||
+					cookie.replace(rdecode, decodeURIComponent);
+
+					if (this.json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					if (key === name) {
+						result = cookie;
+						break;
+					}
+
+					if (!key) {
+						result[name] = cookie;
+					}
+				} catch (e) {}
+			}
+
+			return result;
+		}
+
+		api.set = api;
+		api.get = function (key) {
+			return api.call(api, key);
+		};
+		api.getJSON = function () {
+			return api.apply({
+				json: true },
+			[].slice.call(arguments));
+		};
+		api.defaults = {};
+
+		api.remove = function (key, attributes) {
+			api(key, '', extend(attributes, {
+				expires: -1 }));
+
+		};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2881,7 +3056,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = 
 });
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10866,7 +11041,7 @@ if (_gsScope._gsDefine) {_gsScope._gsQueue.pop()();} //necessary in case TweenLi
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12816,7 +12991,7 @@ if (_gsScope._gsDefine) {_gsScope._gsQueue.pop()();} //necessary in case TweenLi
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12835,14 +13010,23 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
+<<<<<<< HEAD
 // Import style
 __webpack_require__(5);var _shop = __webpack_require__(6);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(22);var _stockists2 = _interopRequireDefault(_stockists);var _lazysizes = __webpack_require__(11);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(1);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(13);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(2);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+=======
+
+
+// Import style
+__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _cube = __webpack_require__(10);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(11);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(12);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(14);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(15);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+>>>>>>> master
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window).
+    resize(this.onResize.bind(this)).
+    on('ajaxSuccess', this.onReady.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -12866,8 +13050,11 @@ Site = function () {
       this.$headerSpacer = $('#header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
+      this.checkForCookie();
       this.initCoverVid();
+      this.submitAgeForm();
       this.bindStickyHeader();
+      this.initCoverVid();
       this.animateBottleSprite();
     } }, { key: 'fixWidows', value: function fixWidows()
 
@@ -12887,8 +13074,6 @@ Site = function () {
     } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
 
     {
-      var that = this;
-
       this.sizeHeaderSpacer();
 
       this.$window.on('scroll', this.repositionHeader);
@@ -12932,16 +13117,44 @@ Site = function () {
         setTween(tween).
         addTo(controller);
       }
+    } }, { key: 'submitAgeForm', value: function submitAgeForm()
+
+    {
+      $('#submit-age').on('click', function (e) {
+        e.preventDefault();
+        var month = $('#birthday-month').val();
+        var day = $('#birthday-day').val();
+        var year = $('#birthday-year').val();
+        var birthday = (0, _dayjs2.default)(new Date(year, month, day));
+        var age = (0, _dayjs2.default)().diff(birthday, 'years');
+        if (age >= 21) {
+          _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+          $('body').removeClass('age-check');
+        }
+      });
+    } }, { key: 'checkForCookie', value: function checkForCookie()
+
+    {
+      var cookie = _jsCookie2.default.get('legalAge');
+      if (!cookie) {
+        $('body').addClass('age-check');
+      }
     } }]);return Site;}();
+
 
 
 var Material = new Site();
 var MaterialShop = new _shop2.default();
 var MaterialAjaxy = new _ajaxy2.default();
+<<<<<<< HEAD
 var MaterialStockists = new _stockists2.default();
+=======
+var MaterialCube = new _cube2.default();
+var MaterialMailchimp = new _mailchimp2.default();
+>>>>>>> master
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13040,14 +13253,14 @@ if (window.jQuery) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, WP */
-var _shopifyBuy = __webpack_require__(7);var _shopifyBuy2 = _interopRequireDefault(_shopifyBuy);
-var _jsCookie = __webpack_require__(8);var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+var _shopifyBuy = __webpack_require__(8);var _shopifyBuy2 = _interopRequireDefault(_shopifyBuy);
+var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Shop = function () {
   function Shop() {_classCallCheck(this, Shop);
@@ -13370,7 +13583,7 @@ Shop = function () {
 Shop;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18690,181 +18903,6 @@ module.exports = Client;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /*!
-                                                                                                                                                                                                                                                                                        * JavaScript Cookie v2.2.0
-                                                                                                                                                                                                                                                                                        * https://github.com/js-cookie/js-cookie
-                                                                                                                                                                                                                                                                                        *
-                                                                                                                                                                                                                                                                                        * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
-                                                                                                                                                                                                                                                                                        * Released under the MIT license
-                                                                                                                                                                                                                                                                                        */
-;(function (factory) {
-	var registeredInModuleLoader = false;
-	if (true) {
-		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		registeredInModuleLoader = true;
-	}
-	if (( false ? 'undefined' : _typeof(exports)) === 'object') {
-		module.exports = factory();
-		registeredInModuleLoader = true;
-	}
-	if (!registeredInModuleLoader) {
-		var OldCookies = window.Cookies;
-		var api = window.Cookies = factory();
-		api.noConflict = function () {
-			window.Cookies = OldCookies;
-			return api;
-		};
-	}
-})(function () {
-	function extend() {
-		var i = 0;
-		var result = {};
-		for (; i < arguments.length; i++) {
-			var attributes = arguments[i];
-			for (var key in attributes) {
-				result[key] = attributes[key];
-			}
-		}
-		return result;
-	}
-
-	function init(converter) {
-		function api(key, value, attributes) {
-			var result;
-			if (typeof document === 'undefined') {
-				return;
-			}
-
-			// Write
-
-			if (arguments.length > 1) {
-				attributes = extend({
-					path: '/' },
-				api.defaults, attributes);
-
-				if (typeof attributes.expires === 'number') {
-					var expires = new Date();
-					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
-					attributes.expires = expires;
-				}
-
-				// We're using "expires" because "max-age" is not supported by IE
-				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
-
-				try {
-					result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
-						value = result;
-					}
-				} catch (e) {}
-
-				if (!converter.write) {
-					value = encodeURIComponent(String(value)).
-					replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-				} else {
-					value = converter.write(value, key);
-				}
-
-				key = encodeURIComponent(String(key));
-				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-				key = key.replace(/[\(\)]/g, escape);
-
-				var stringifiedAttributes = '';
-
-				for (var attributeName in attributes) {
-					if (!attributes[attributeName]) {
-						continue;
-					}
-					stringifiedAttributes += '; ' + attributeName;
-					if (attributes[attributeName] === true) {
-						continue;
-					}
-					stringifiedAttributes += '=' + attributes[attributeName];
-				}
-				return document.cookie = key + '=' + value + stringifiedAttributes;
-			}
-
-			// Read
-
-			if (!key) {
-				result = {};
-			}
-
-			// To prevent the for loop in the first place assign an empty array
-			// in case there are no cookies at all. Also prevents odd result when
-			// calling "get()"
-			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
-			var i = 0;
-
-			for (; i < cookies.length; i++) {
-				var parts = cookies[i].split('=');
-				var cookie = parts.slice(1).join('=');
-
-				if (!this.json && cookie.charAt(0) === '"') {
-					cookie = cookie.slice(1, -1);
-				}
-
-				try {
-					var name = parts[0].replace(rdecode, decodeURIComponent);
-					cookie = converter.read ?
-					converter.read(cookie, name) : converter(cookie, name) ||
-					cookie.replace(rdecode, decodeURIComponent);
-
-					if (this.json) {
-						try {
-							cookie = JSON.parse(cookie);
-						} catch (e) {}
-					}
-
-					if (key === name) {
-						result = cookie;
-						break;
-					}
-
-					if (!key) {
-						result[name] = cookie;
-					}
-				} catch (e) {}
-			}
-
-			return result;
-		}
-
-		api.set = api;
-		api.get = function (key) {
-			return api.call(api, key);
-		};
-		api.getJSON = function () {
-			return api.apply({
-				json: true },
-			[].slice.call(arguments));
-		};
-		api.defaults = {};
-
-		api.remove = function (key, attributes) {
-			api(key, '', extend(attributes, {
-				expires: -1 }));
-
-		};
-
-		api.withConverter = init;
-
-		return api;
-	}
-
-	return init(function () {});
-});
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19010,6 +19048,221 @@ Ajaxy;
 /***/ }),
 /* 10 */,
 /* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
+Cube = function () {
+  function Cube() {_classCallCheck(this, Cube);
+    this.mobileThreshold = 601;
+
+    $(window).
+    resize(this.onResize.bind(this)) // Bind resize
+    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+  }_createClass(Cube, [{ key: 'onResize', value: function onResize()
+
+    {
+      this.updateCubeStyle('recipe', '.recipe-item');
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+      this.bindRecipeCube();
+    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
+
+    {
+      if ($('.recipe-item').length) {
+        $('.recipe-item').on({
+          'click': function click() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+          },
+          'mouseleave': function mouseleave() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).find('.cube-right').removeClass('cube-front');
+            $(this).find('.cube-left').addClass('cube-front');
+          } });
+
+
+        this.updateCubeStyle('recipe', '.recipe-item');
+      }
+    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
+
+    styleId, selector) {
+      if ($(selector).length) {
+        var width = $(selector).width() / 2;
+
+        var styleContent = '\n      ' +
+        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }';
+
+
+        if ($('style#cube-style-' + styleId).length) {
+
+          $('style#cube-style-' + styleId).html(styleContent);
+
+          this.setTransition(selector);
+
+        } else {
+
+          var styleElement = '\n        <style type="text/css" id="cube-style-' +
+          styleId + '">\n          ' +
+          styleContent + '\n        </style>';
+
+
+          $('head').append(styleElement);
+
+          $(selector).addClass('ready');
+
+          this.setTransition(selector);
+        }
+      }
+    } }, { key: 'setTransition', value: function setTransition(
+
+    selector) {
+      var cubeTransition = 0.6;
+
+      window.setTimeout(function () {
+        $(selector).find('.cube-left, .cube-right').css({
+          transition: 'transform ' + cubeTransition + 's ease-in-out' });
+
+      }, 100);
+    } }]);return Cube;}();exports.default =
+
+
+Cube;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
+Mailchimp = function () {
+  function Mailchimp() {_classCallCheck(this, Mailchimp);
+    this.mobileThreshold = 601;
+
+    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+    // Bind functions
+    this.submitForm = this.submitForm.bind(this);
+    this.successMessage = this.successMessage.bind(this);
+  }_createClass(Mailchimp, [{ key: 'onReady', value: function onReady()
+
+    {
+      this.$form = $('#mailchimp-form');
+
+      if (this.$form.length) {
+        this.$email = $('#mailchimp-email');
+        this.$reply = $('#mailchimp-response');
+
+        // Bind form submit event
+        this.$form.submit(this.submitForm);
+      }
+    } }, { key: 'submitForm', value: function submitForm()
+
+    {
+      // Rewrite action URL for JSONP
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
+      var data = {};
+
+      // Get form data
+      var dataArray = this.$form.serializeArray();
+
+      // Create data object from form data
+      $.each(dataArray, function (index, item) {
+        data[item.name] = item.value;
+      });
+
+      // Ajax post to Mailchimp API
+      $.ajax({
+        url: url,
+        data: data,
+        success: this.successMessage,
+        dataType: 'jsonp',
+        error: function error(resp, text) {
+          console.log('mailchimp ajax submit error: ' + text);
+        } });
+
+
+      // Prevent default submit functionality
+      return false;
+    }
+
+    /**
+      * Handle response message
+      */ }, { key: 'successMessage', value: function successMessage(
+    response) {
+      var msg = '';
+
+      if (response.result === 'success') {
+
+        // Success message
+        msg = 'You\'ve been successfully subscribed';
+
+        // Set class .valid on form elements
+        this.$reply.removeClass('error').addClass('valid');
+        this.$email.removeClass('error').addClass('valid');
+
+      } else {
+        // Set class .error on form elements
+        this.$email.removeClass('valid').addClass('error');
+        this.$reply.removeClass('valid').addClass('error');
+
+        // Make error message from API response
+        var index = -1;
+
+        try {
+          var parts = response.msg.split(' - ', 2);
+
+          if (parts[1] === undefined) {
+            msg = response.msg;
+          } else {
+            var i = parseInt(parts[0], 10);
+
+            if (i.toString() === parts[0]) {
+              index = parts[0];
+              msg = parts[1];
+            } else {
+              index = -1;
+              msg = response.msg;
+            }
+          }
+        }
+        catch (e) {
+          index = -1;
+          msg = response.msg;
+        }
+      }
+
+      // Show message
+      this.$reply.html(msg);
+    } }]);return Mailchimp;}();exports.default =
+
+
+Mailchimp;
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19709,10 +19962,17 @@ Ajaxy;
 
 	return lazysizes;
 });
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
 /* 12 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
+
+/***/ }),
+/* 13 */
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19740,7 +20000,22 @@ module.exports = function (module) {
 };
 
 /***/ }),
+<<<<<<< HEAD
 /* 13 */
+=======
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};!function (t, e) {"object" == ( false ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? module.exports = e() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : t.dayjs = e();}(undefined, function () {"use strict";var t = "second",e = "minute",n = "hour",s = "day",r = "week",i = "month",a = "year",u = "Sunday.Monday.Tuesday.Wednesday.Thursday.Friday.Saturday".split("."),c = "January.February.March.April.May.June.July.August.September.October.November.December".split("."),h = /^(\d{4})-?(\d{1,2})-?(\d{1,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?$/,o = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,d = function d(t, e, n) {var s = String(t);return !s || s.length >= e ? t : "" + Array(e + 1 - s.length).join(n) + t;},$ = function $(t) {return t && String(t).toLowerCase().replace(/s$/, "");},f = function f(t) {return void 0 === t;},l = function l(t) {var e;return null === t ? new Date(NaN) : f(t) ? new Date() : t instanceof Date ? t : "string" == typeof t && (e = t.match(h)) ? new Date(e[1], e[2] - 1, e[3], e[5] || 0, e[6] || 0, e[7] || 0, e[8] || 0) : new Date(t);},m = function () {function h(t) {this.$d = l(t), this.init();}var m = h.prototype;return m.init = function () {this.$y = this.$d.getFullYear(), this.$M = this.$d.getMonth(), this.$D = this.$d.getDate(), this.$W = this.$d.getDay(), this.$H = this.$d.getHours(), this.$m = this.$d.getMinutes(), this.$s = this.$d.getSeconds(), this.$ms = this.$d.getMilliseconds();}, m.isValid = function () {return !("Invalid Date" === this.$d.toString());}, m.isLeapYear = function () {return this.$y % 4 == 0 && this.$y % 100 != 0 || this.$y % 400 == 0;}, m.isSame = function (t) {return this.valueOf() === t.valueOf();}, m.isBefore = function (t) {return this.valueOf() < t.valueOf();}, m.isAfter = function (t) {return this.valueOf() > t.valueOf();}, m.year = function () {return this.$y;}, m.month = function () {return this.$M;}, m.day = function () {return this.$W;}, m.date = function () {return this.$D;}, m.hour = function () {return this.$H;}, m.minute = function () {return this.$m;}, m.second = function () {return this.$s;}, m.millisecond = function () {return this.$ms;}, m.unix = function () {return Math.floor(this.valueOf() / 1e3);}, m.valueOf = function () {return this.$d.getTime();}, m.startOf = function (u, c) {var o = this,d = !!f(c) || c,l = function l(t, e, n) {void 0 === n && (n = o.$y);var r = new h(new Date(n, e, t));return d ? r : r.endOf(s);},m = function m(t, e) {return new h(o.toDate()[t].apply(o.toDate(), d ? [0, 0, 0, 0].slice(e) : [23, 59, 59, 999].slice(e)));};switch ($(u)) {case a:return d ? l(1, 0) : l(31, 11, this.$y);case i:return d ? l(1, this.$M) : l(0, this.$M + 1, this.$y);case r:return d ? l(this.$D - this.$W, this.$M) : l(this.$D + (6 - this.$W), this.$M, this.$y);case s:case "date":return m("setHours", 0);case n:return m("setMinutes", 1);case e:return m("setSeconds", 2);case t:return m("setMilliseconds", 3);default:return this.clone();}}, m.endOf = function (t) {return this.startOf(t, !1);}, m.$set = function (s, r) {switch ($(s)) {case "date":this.$d.setDate(r);break;case i:this.$d.setMonth(r);break;case a:this.$d.setFullYear(r);break;case n:this.$d.setHours(r);break;case e:this.$d.setMinutes(r);break;case t:this.$d.setSeconds(r);break;case "millisecond":this.$d.setMilliseconds(r);}return this.init(), this;}, m.set = function (t, e) {return this.clone().$set(t, e);}, m.add = function (t, u) {t = Number(t);var c,o = u && 1 === u.length ? u : $(u);if (["M", i].indexOf(o) > -1) {var d = this.set("date", 1).set(i, this.$M + t);return d = d.set("date", Math.min(this.$D, d.daysInMonth()));}if (["y", a].indexOf(o) > -1) return this.set(a, this.$y + t);switch (o) {case "m":case e:c = 6e4;break;case "h":case n:c = 36e5;break;case "d":case s:c = 864e5;break;case "w":case r:c = 6048e5;break;default:c = 1e3;}return new h(this.valueOf() + t * c);}, m.subtract = function (t, e) {return this.add(-1 * t, e);}, m.format = function (t) {var e,n,s,r,i = this,a = t || "YYYY-MM-DDTHH:mm:ssZ",h = (e = this.$d.getTimezoneOffset(), n = Math.abs(e), s = Math.floor(n / 60), r = n % 60, (e <= 0 ? "+" : "-") + d(s, 2, "0") + ":" + d(r, 2, "0"));return a.replace(o, function (t) {if (t.indexOf("[") > -1) return t.replace(/\[|\]/g, "");switch (t) {case "YY":return String(i.$y).slice(-2);case "YYYY":return String(i.$y);case "M":return String(i.$M + 1);case "MM":return d(i.$M + 1, 2, "0");case "MMM":return c[i.$M].slice(0, 3);case "MMMM":return c[i.$M];case "D":return String(i.$D);case "DD":return d(i.$D, 2, "0");case "d":return String(i.$W);case "dddd":return u[i.$W];case "H":return String(i.$H);case "HH":return d(i.$H, 2, "0");case "h":case "hh":return 0 === i.$H ? 12 : d(i.$H < 13 ? i.$H : i.$H - 12, "hh" === t ? 2 : 1, "0");case "a":return i.$H < 12 ? "am" : "pm";case "A":return i.$H < 12 ? "AM" : "PM";case "m":return String(i.$m);case "mm":return d(i.$m, 2, "0");case "s":return String(i.$s);case "ss":return d(i.$s, 2, "0");case "SSS":return d(i.$ms, 3, "0");case "Z":return h;default:return h.replace(":", "");}});}, m.diff = function (u, c, o) {var d,f,l,m,M,y,g = $(c),S = u instanceof h ? u : new h(u),D = this - S,b = (d = this, m = 12 * ((f = S).year() - d.year()) + (f.month() - d.month()), M = d.clone().add(m, "months"), l = f - M < 0 ? (f - M) / (M - d.clone().add(m - 1, "months")) : (f - M) / (d.clone().add(m + 1, "months") - M), Number(-(m + l)));switch (g) {case a:b /= 12;break;case i:break;case "quarter":b /= 3;break;case r:b = D / 6048e5;break;case s:b = D / 864e5;break;case n:b = D / 36e5;break;case e:b = D / 6e4;break;case t:b = D / 1e3;break;default:b = D;}return o ? b : (y = b) < 0 ? Math.ceil(y) || 0 : Math.floor(y);}, m.daysInMonth = function () {return this.endOf(i).$D;}, m.clone = function () {return new h(this);}, m.toDate = function () {return new Date(this.$d);}, m.toArray = function () {return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];}, m.toJSON = function () {return this.toISOString();}, m.toISOString = function () {return this.toDate().toISOString();}, m.toObject = function () {return { years: this.$y, months: this.$M, date: this.$D, hours: this.$H, minutes: this.$m, seconds: this.$s, milliseconds: this.$ms };}, m.toString = function () {return this.$d.toUTCString();}, h;}();return function (t) {return new m(t);};});
+
+/***/ }),
+/* 15 */
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19774,7 +20049,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (root, factory) {
 	if (true) {
 		// AMD. Register as an anonymous module.
+<<<<<<< HEAD
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(2), __webpack_require__(14)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+=======
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(16)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+>>>>>>> master
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -20059,7 +20338,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 14 */
+=======
+/* 16 */
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21373,10 +21656,10 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
 	};
 	if (typeof module !== "undefined" && module.exports) {//node
-		__webpack_require__(3); //dependency
+		__webpack_require__(4); //dependency
 		module.exports = getGlobal();
 	} else if (true) {//AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(4)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -21385,7 +21668,11 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
+<<<<<<< HEAD
 /* 15 */
+=======
+/* 17 */
+>>>>>>> master
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

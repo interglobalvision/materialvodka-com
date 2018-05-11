@@ -6,9 +6,9 @@ get_header();
   <section id="posts">
     <div class="container">
 
-      <div class="grid-row">
+      <div class="grid-row padding-top-mid padding-bottom-basic">
         <div class="grid-item item-s-12 item-m-6">
-          <h1 class="font-uppercase font-size-mid">Cocktail Recipes</h1>
+          <h1 class="font-uppercase font-size-large font-bold font-outline">Cocktail Recipes</h1>
         </div>
         <div class="grid-item item-s-12 item-m-3 item-l-2">
           <span>Material works with Arley Marks of Honey’s to invent the most tasty recipes.</span>
@@ -39,64 +39,71 @@ if (have_posts()) {
     // The Loop
     if ( $query->have_posts() ) {
 ?>
-      <div class="grid-row">
+      <div class="grid-row padding-top-basic padding-bottom-basic">
         <div class="grid-item item-s-12">
           <h2 class="font-uppercase"><?php echo $slug; ?></h2>
         </div>
       </div>
-      <div class="grid-row">
+      <div class="grid-row padding-bottom-basic">
 <?php
       while ( $query->have_posts() ) {
         $query->the_post();
 
         $ingredients = get_post_meta($post->ID, '_igv_ingredients_group', true);
+
+        $cube_num = 0;
 ?>
-        <div class="recipe-item grid-item item-s-12 item-m-4 item-l-3">
+        <div class="recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3">
 
-          <div class="recipe-front background-cover" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
-            <h3><?php echo the_title(); ?></h3>
-          <?php
-            if (!empty($ingredients)) {
-              $ingredients_string = '';
-              $i = 1;
-
-              // iterate through ingredients forming
-              // comma separated string. leaving out
-              // comma after last item
-              foreach ($ingredients as $ingredient) {
-                $ingredients_string .= $ingredient['ingredient_text'];
-                $ingredients_string .= $i !== count($ingredients) ? ', ' : '';
-                $i++;
-              }
-          ?>
-            <span><?php echo $ingredients_string; ?></span>
-          <?php
-            }
-          ?>
-          </div>
-
-          <div class="recipe-details">
-            <h3><?php echo the_title(); ?></h3>
+          <div class="cube-left cube-front background-cover grid-column" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+            <div class="grid-item">
+              <h3 class="font-size-mid padding-bottom-micro"><?php echo the_title(); ?></h3>
             <?php
               if (!empty($ingredients)) {
-            ?>
-            <ul>
-            <?php
+                $ingredients_string = '';
+                $i = 1;
+
+                // iterate through ingredients forming
+                // comma separated string. leaving out
+                // comma after last item
                 foreach ($ingredients as $ingredient) {
-            ?>
-              <li class="ingredient-item"><?php echo $ingredient['quantity_text']; ?> <?php echo $ingredient['ingredient_text']; ?></li>
-            <?php
+                  $ingredients_string .= $ingredient['ingredient_text'];
+                  $ingredients_string .= $i !== count($ingredients) ? ', ' : '';
+                  $i++;
                 }
             ?>
-            </ul>
+              <span><?php echo $ingredients_string; ?></span>
             <?php
               }
             ?>
-            <?php the_content(); ?>
+            </div>
+          </div>
+
+          <div class="recipe-details cube-right grid-column">
+            <div class="grid-item">
+              <h3 class="font-size-mid padding-bottom-basic"><?php echo the_title(); ?></h3>
+              <?php
+                if (!empty($ingredients)) {
+              ?>
+              <ul class="padding-bottom-small">
+              <?php
+                  foreach ($ingredients as $ingredient) {
+              ?>
+                <li class="ingredient-item"><?php echo $ingredient['quantity_text']; ?> <?php echo $ingredient['ingredient_text']; ?></li>
+              <?php
+                  }
+              ?>
+              </ul>
+              <?php
+                }
+              ?>
+              <?php the_content(); ?>
+            </div>
           </div>
 
         </div>
 <?php
+        $cube_num++;
       }
 ?>
       </div>

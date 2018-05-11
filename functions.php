@@ -10,6 +10,7 @@ function scripts_and_styles_method() {
   $is_admin = current_user_can('administrator') ? 1 : 0;
 
   $shopify_options = get_site_option('_igv_shop_options');
+  $site_options = get_site_option('_igv_site_options');
 
   $javascriptVars = array(
     'siteUrl' => home_url(),
@@ -19,6 +20,7 @@ function scripts_and_styles_method() {
       'domain' => $shopify_options['shopify_domain'],
       'storefrontAccessToken' => $shopify_options['shopify_token'],
     ),
+    'mailchimp' => $site_options['mailchimp_url'],
   );
 
   wp_register_script('javascript-main', $javascriptMain);
