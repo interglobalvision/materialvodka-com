@@ -13185,8 +13185,6 @@ Site = function () {
         if (age >= 21) {
           _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
           $('body').removeClass('age-check');
-        } else {
-          console.log("not of age");
         }
       });
     } }, { key: 'checkForCookie', value: function checkForCookie()

@@ -188,8 +188,6 @@ class Site {
       if (age >= 21) {
         Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
         $('body').removeClass('age-check');
-      } else {
-        console.log("not of age");
       }
     });
   }
