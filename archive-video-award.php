@@ -21,29 +21,38 @@ if (have_posts()) {
     $seconds = get_post_meta($post->ID, '_igv_video_award_seconds', true);
     
 ?>
+    <div class="information-overlay item item-m-4">
+      <h2 class="font-uppercase"><?php the_title(); ?></h2>
+      <div><?php echo ($video_year); ?></div>
+      <div><?php echo ($minutes); ?> minutes <?php echo ($seconds); ?> seconds</div>
+      <p><?php the_content(); ?>
+      <h2 class="font-uppercase"><?php echo ($artists); ?></h2>
+      <p><?php echo ($bio); ?></p>
+    </div>
+
     <div class="grid-item item-s-12 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
-      <h2 class="font-size-large"><?php the_title(); ?></h2>
-      <p><?php echo ( $artists ); ?></p> 
-      <p><?php the_date('F Y'); ?><p>
-      <p>INFORMATION</p>
+      <h2><?php the_title(); ?></h2>
+      <div><?php echo ( $artists ); ?></div> 
+      <div><?php the_date('F Y'); ?></div>
+      <div class="font-uppercase">information</div>
     </div>
   
-    <?php
-    } else { //grid post
-    ?> 
+<?php
+} else { //grid post
+?> 
   
-    <div class="grid-item item-s-3 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
-      <h2 class="font-size-large"><?php the_title(); ?></h2>
-      <p><?php echo ( $artists ); ?></p> 
-      <p><?php the_date('F Y'); ?><p>
-      <p>INFORMATION</p>
+    <div class="grid-item item-s-4 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+      <h2><?php the_title(); ?></h2>
+      <div><?php echo ( $artists ); ?></div> 
+      <div><?php the_date('F Y'); ?></div>
+      <div class="font-uppercase">information</div>
     </div>
   
-    <?php 
-        } //end post condition
-      } //endwhile
-    } // endif
-    ?>
+<?php 
+    } //end post condition
+  } //endwhile
+} // endif
+?>
 
       </div>
     </div>
@@ -53,8 +62,3 @@ if (have_posts()) {
 <?php
 get_footer();
 ?>
-
-<!-- 
-if current_post == 0 print big image
-else print grid posts
--->
