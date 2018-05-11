@@ -191,7 +191,7 @@ function igv_cmb_metabox_video_awards() {
   $metabox = new_cmb2_box( array(
     'id'            => $prefix . 'metabox-video-award',
     'title'         => esc_html__( 'Video Awards Metabox', 'cmb2' ),
-    'object_types'  => array( 'video_award' ), // Post type
+    'object_types'  => array( 'video-award' ), // Post type
   ) );
 
 

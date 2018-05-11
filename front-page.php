@@ -81,7 +81,7 @@ if (have_posts()) {
       <div class="grid-item item-s-12 item-m-6 no-gutter grid-column">
       <?php
         $args = array(
-          'post_type' => 'video_award',
+          'post_type' => 'video-award',
           'posts_per_page' => '1',
         );
 
