@@ -46,7 +46,6 @@ if (have_posts()) {
         <h2><?php the_title(); ?></h2>
         <div><?php echo $artists; ?></div>
         <div><?php echo get_the_date('F Y'); ?></div>
-        <div class="font-uppercase">information</div>
       </div>
 
 <?php 
