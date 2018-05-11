@@ -23,6 +23,7 @@ if (have_posts()) {
 ?>
     <div class="grid-item item-s-12 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
       <h2 class="font-size-large"><?php the_title(); ?></h2>
+      <p><?php echo ( $artists ); ?></p> 
       <p><?php the_date('F Y'); ?><p>
       <p>INFORMATION</p>
     </div>
@@ -33,6 +34,7 @@ if (have_posts()) {
   
     <div class="grid-item item-s-3 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
       <h2 class="font-size-large"><?php the_title(); ?></h2>
+      <p><?php echo ( $artists ); ?></p> 
       <p><?php the_date('F Y'); ?><p>
       <p>INFORMATION</p>
     </div>
