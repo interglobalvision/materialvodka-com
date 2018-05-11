@@ -195,12 +195,8 @@ class Site {
   }
 
   checkForCookie() {
-    console.log("checking for cookie");
     const cookie = Cookies.get('legalAge');
-    console.log(cookie);
-    if (cookie) {
-      console.log("your old enough");
-    } else {
+    if (!cookie) {
       $('body').addClass('age-check');
     }
   }

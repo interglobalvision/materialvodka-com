@@ -13192,12 +13192,8 @@ Site = function () {
     } }, { key: 'checkForCookie', value: function checkForCookie()
 
     {
-      console.log("checking for cookie");
       var cookie = _jsCookie2.default.get('legalAge');
-      console.log(cookie);
-      if (cookie) {
-        console.log("your old enough");
-      } else {
+      if (!cookie) {
         $('body').addClass('age-check');
       }
     } }]);return Site;}();
