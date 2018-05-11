@@ -12,13 +12,14 @@ if (have_posts()) {
 
   while (have_posts()) {
     the_post();
-    $video_year = get_post_meta($post->ID, '_igv_video_award_video_year', true);
+    
     $artists = get_post_meta($post->ID, '_igv_video_award_artists', true);
+    
+    if ($wp_query->current_post == 0) {
+    $video_year = get_post_meta($post->ID, '_igv_video_award_video_year', true);
     $bio = get_post_meta($post->ID, '_igv_video_award_bio', true);
     $minutes = get_post_meta($post->ID, '_igv_video_award_minutes', true);
     $seconds = get_post_meta($post->ID, '_igv_video_award_seconds', true);
-
-    if ($wp_query->current_post == 0) {
         
 ?>
       <div class="information-overlay item item-m-4">
