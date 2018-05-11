@@ -1,4 +1,4 @@
-<div id="age-overlay grid-row justify-center">
+<div id="age-overlay" class="grid-row justify-center">
 
   <form id="age-checker-form" class="grid-column align-items-center justify-center grid-item item-s-4">
     

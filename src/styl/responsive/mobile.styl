@@ -148,11 +148,15 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 #age-overlay
   visibility: hidden
   pointer-events: none
-  
-#age-checker-form
   position: fixed
   width: 100vw
-  height: 100vw
+  height: 100vh
+  top:0
+  left:0
+  z-index: 1000
+ 
+  
+#age-checker-form
   background-color: $color-black
 
 button#submit-age
@@ -182,12 +186,6 @@ body
     #age-overlay
       visibility: visible
       pointer-events: auto
-      position: fixed
-      width: 100vw
-      height: 100vw
-      top:0
-      left:0
-      z-index: 9999
- 
+      
 
 
