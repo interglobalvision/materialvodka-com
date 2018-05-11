@@ -22,7 +22,7 @@ if (have_posts()) {
     $seconds = get_post_meta($post->ID, '_igv_video_award_seconds', true);
         
 ?>
-      <div class="information-overlay item item-m-4">
+      <div class="information-overlay grid-item item-m-4">
         <h2 class="font-uppercase font-size-large"><?php the_title(); ?></h2>
         <div><?php echo $video_year; ?></div>
         <div><?php echo $minutes; ?> minutes <?php echo $seconds; ?> seconds</div>
