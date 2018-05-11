@@ -9,7 +9,7 @@ class Shop {
 
     $(window)
       .resize(this.onResize.bind(this)) // Bind resize
-      .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+      .on('ajaxySuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
 

@@ -1,6 +1,6 @@
-<form id="zip-code-form">
+<form id="zip-code-form" class="margin-bottom-basic">
   <input id="find-zip-code" type="text" placeholder="ZIP CODE" />
-  <button id="find-submit" type="button" class="font-uppercase">Find vodka</button>
+  <button id="find-submit" class="font-uppercase">Find vodka</button>
 </form>
-<p class="font-uppercase">Or</p>
-<button id="find-use-location" class="font-uppercase">Use your location</button>
+<div class="margin-bottom-basic font-uppercase">or</div>
+<button id="find-use-location" class="margin-bottom-basic font-uppercase">Use your location</button>

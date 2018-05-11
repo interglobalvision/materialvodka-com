@@ -9,67 +9,181 @@ class Stockists {
 
     // Bind global Events
     $(document).ready(this.onReady.bind(this));
-    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+    $(window).on('ajaxySuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
 
     // Bind functions
     this.handleSubmit = this.handleSubmit.bind(this);
     this.requestGeolocation = this.requestGeolocation.bind(this);
     this.geoSuccess = this.geoSuccess.bind(this);
     this.geoError = this.geoError.bind(this);
-    this.handleResponse = this.handleResponse.bind(this);
+    this.handleSuccess = this.handleSuccess.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.outputMessage = this.outputMessage.bind(this);
 
   }
 
   onReady() {
 
-    // Get DOM elements
+    // Get the stockists container (our main element and check)
     this.$stockistsContainer = $('#find-stockists-container');
-    this.$zipCodeInput = $('#find-zip-code');
-    this.$submitButton = $('#find-submit');
-    this.$useGeolocationButton = $('#find-use-location');
 
-    // Bind to events
-    this.$submitButton.click(this.handleSubmit);
-    this.$useGeolocationButton.click(this.requestGeolocation);
+    if(this.$stockistsContainer.length) {
+
+      // Get the rest of DOM elements
+      this.$zipCodeInput = $('#find-zip-code');
+      this.$submitButton = $('#find-submit');
+      this.$useGeolocationButton = $('#find-use-location');
+
+      // Bind to events
+      this.$submitButton.click(this.handleSubmit);
+      this.$useGeolocationButton.click(this.requestGeolocation);
+    }
 
   }
 
-  handleSubmit() {
-    // Get input value
-    const zipcode = this.$zipCodeInput.val();
+  handleSubmit(event) {
+    event.preventDefault();
 
-    if(zipcode !== '') {
+    // Get input value (parsed as int)
+    const zipcode = parseInt(this.$zipCodeInput.val());
+
+    // Check our zipcode is exactly 5 digits
+    if(zipcode.toString().length !== 5) {
+      this.outputError('Please provide a valid zipcode');
+    } else {
       this.findStockists(zipcode);
     }
   }
 
   requestGeolocation() {
+    // Set loading message
+    this.outputMessage('Requesting your geolocation...');
+
     // Request browser geolocation
     navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError);
   }
 
   geoSuccess(position) {
+    // Get lat/lng
     const { latitude, longitude } = position.coords;
 
-    geo2zip({ longitude, latitude }).then(zip => {
-      this.findStockists(zip);
-    })
+    // Convert lat/lng to zipcode
+    geo2zip({ longitude, latitude })
+      .then(zip => {
+        this.findStockists(zip);
+      })
+      .catch(e => {
+        this.outputError();
+      });
 
   }
 
   geoError(error) {
-    console.log(error);
+    this.outputMessage('We cound\'t retrive your geolocation :(');
   }
 
   findStockists(zip) {
-    // Make the ajax request
-    $.getJSON(WP.siteUrl + `/wp-json/igv/find-stockists/${zip}`, this.handleResponse);
+    // Set loading message
+    this.outputMessage('Finding Stockists...');
+
+    // Make a request to find the nearest stockists
+    $.ajax(WP.siteUrl + `/wp-json/igv/find-stockists/${zip}`, {
+      dataType: 'json',
+      error: this.handleError,
+      success: this.handleSuccess,
+    });
   }
 
-  handleResponse(data) {
-    if (data) {
-      console.log(data);
+  // Handle successful requests
+  handleSuccess(data) {
+    // If success is false, it means no other zipcodes where found
+    // or an error happened in the server
+    if (!data.success) {
+      this.outputError();
+    } else {
+      if(data.stockists.length) {
+        this.outputStockists(data.stockists);
+      } else {
+        this.outputError('We couldn\'t find stockists near you :(');
+      }
     }
+  }
+
+  handleError() {
+    this.outputError();
+  }
+
+  /**
+   * Output a message in the stockists container
+   * @param {string} msg - The message to output
+   */
+  outputMessage(msg) {
+    this.$stockistsContainer.html(`<p class="font-size-mid">${msg}</p>`);
+  }
+
+  /**
+   * Output an error message in the stockists container
+   * @param {string} error - The error message to output
+   */
+  outputError(error = 'An error ocurred') {
+    this.$stockistsContainer.html(`<p class="font-size-mid error-message">${error}</p>`);
+  }
+
+  /**
+   * Output a list of stockists
+   * @param {array} stockists - The list of stockists to output
+   */
+  outputStockists(stockists) {
+    // Clear list
+    this.$stockistsContainer.html('');
+
+    // Append each element
+    stockists.forEach( element => {
+
+      // Start our info string with the basics: title and address
+      let info = `
+        <h3>${element.post_title}</h3>
+        <p><a href="https://www.google.com/maps/search/${element._igv_stockist_address}" target="_blank" rel="noopener noreferrer">${element._igv_stockist_address}</a></p>
+        `;
+
+      // Phone
+      if (element._igv_stockist_phone !== undefined && element._igv_stockist_phone !== '') {
+        info += `
+        <p><a href="tel:${element._igv_stockist_phone}" target="_blank" rel="noopener noreferrer">${element._igv_stockist_phone}</a></p>
+        `;
+      }
+
+      // Links: website, facebok, instagram
+      if (element._igv_stockist_website !== undefined || element._igv_stockist_facebook !== undefined || element._igv_stockist_twitter !== undefined) {
+        // Open links paragraph
+        let links = `<p>`;
+
+        // Website
+        if (element._igv_stockist_website !== undefined) {
+          links  += `<a class="font-uppercase" href="${element._igv_stockist_website}" target="_blank" rel="noopener noreferrer">Website</a>`;
+        }
+
+        // Facebook
+        if (element._igv_stockist_facebook !== undefined) {
+          links  += ` <a class="font-uppercase" href="${element._igv_stockist_facebook}" target="_blank" rel="noopener noreferrer">Facebook</a>`;
+        }
+
+        // Instagram
+        if (element._igv_stockist_instagram !== undefined) {
+          links  += ` <a class="font-uppercase" href="${element._igv_stockist_instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`;
+        }
+
+        // Close links paragraph
+        links += `</p>`;
+
+        // Append to info
+        info += links;
+
+      }
+
+      // Append a list element with our info in it to the stockists list
+      this.$stockistsContainer.append(`<li>${info}</li>`);
+    });
   }
 }
 
