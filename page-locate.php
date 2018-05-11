@@ -11,9 +11,9 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
 
-    $top_image = get_post_meta(get_the_ID(), '_igv_locate_top_image', true);
+    $top_image = get_post_meta(get_the_ID(), '_igv_locate_top_image_id', true);
+    $bottom_image = get_post_meta(get_the_ID(), '_igv_locate_bottom_image_id', true);
     $video = get_post_meta(get_the_ID(), '_igv_locate_video_group', true);
-    $bottom_image = get_post_meta(get_the_ID(), '_igv_locate_bottom_image', true);
 
 ?>
       <div class="grid-row">
@@ -27,7 +27,10 @@ if (have_posts()) {
           <div class="grid-item item-s-12 item-l-6">
           </div>
         </div>
-        <div class="grid-item item-s-12 item-l-4 background-cover" style="background-image: url(<?php echo $top_image; ?>)">
+        <div class="grid-item item-s-12 item-l-4 background-cover locate-top-image">
+          <?php
+            responsive_background_styles('locate-top-image', $top_image, array('320x320', '640x640', '960x960'));
+          ?>
         </div>
       </div>
 
@@ -82,7 +85,10 @@ if (have_posts()) {
       </div>
 
       <div class="grid-row">
-        <div class="grid-item item-s-12 item-l-6 background-cover" style="background-image: url(<?php echo $bottom_image; ?>)">
+        <div class="grid-item item-s-12 item-l-6 background-cover locate-bottom-image">
+          <?php
+            responsive_background_styles('locate-bottom-image', $bottom_image, array('320', '640', '960'));
+          ?>
         </div>
         <div class="grid-item item-s-12 item-l-6">
           <p>Newsletter goes here</p>
