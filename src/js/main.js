@@ -5,13 +5,9 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
-<<<<<<< HEAD
 import Stockists from './stockists';
-=======
 import Cube from './cube';
 import Mailchimp from './mailchimp';
->>>>>>> master
-
 import lazySizes from 'lazysizes';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
