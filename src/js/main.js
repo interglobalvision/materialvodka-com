@@ -123,6 +123,14 @@ class Site {
       const month = $('#birthday-month').val();
       const day = $('#birthday-day').val();
       const year = $('#birthday-year').val();
+      if ( month == null || month == "" || day == null || day == "" || year == null || year == ""){
+        alert("Please fill out all fields.");
+        return false;
+      }
+      if (isNaN(month) || isNaN(day) || isNaN(year)){
+        alert("dont be a dick")
+        return false;
+      }
       const birthday = dayjs(new Date(year, month, day));
       const age = dayjs().diff(birthday, 'years');
       if (age >= 21) {
