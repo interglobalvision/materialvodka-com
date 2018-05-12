@@ -13014,9 +13014,13 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 // Import style
 <<<<<<< HEAD
+__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _cube = __webpack_require__(10);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(11);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(12);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(14);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(15);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+=======
+<<<<<<< HEAD
 __webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _cube = __webpack_require__(20);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(21);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(10);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(12);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(13);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 =======
 __webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(10);var _stockists2 = _interopRequireDefault(_stockists);var _cube = __webpack_require__(19);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(20);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(21);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(23);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(24);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+>>>>>>> master
 >>>>>>> master
 
 Site = function () {
@@ -13068,7 +13072,9 @@ Site = function () {
 
     {
       if (this.$covervidVideo.length) {
-        this.$covervidVideo.coverVid(1920, 1080);
+        this.$covervidVideo.each(function (index, element) {
+          $(element).coverVid(1920, 1080);
+        });
       }
     } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
 
@@ -18905,6 +18911,21 @@ module.exports = Client;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, window, WP */var
+<<<<<<< HEAD
+
+Ajaxy = function () {
+  function Ajaxy() {_classCallCheck(this, Ajaxy);
+    // firstLoad is checked below. It helps prevent Safari's popstate on load to
+    // reload (ajax) the site.
+    this.firstLoad = true;
+
+    // Bind function
+    this.ajaxBefore = this.ajaxBefore.bind(this);
+    this.ajaxSuccess = this.ajaxSuccess.bind(this);
+    this.ajaxAfter = this.ajaxAfter.bind(this);
+    this.ajaxErrorHandler = this.ajaxErrorHandler.bind(this);
+    this.handlePopState = this.handlePopState.bind(this);
+=======
 
 Ajaxy = function () {
   function Ajaxy() {_classCallCheck(this, Ajaxy);
@@ -19054,6 +19075,7 @@ Object.defineProperty(exports, "__esModule", { value: true });var _createClass =
 var _geo2zip = __webpack_require__(11);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Stockists = function () {
+>>>>>>> master
 
   function Stockists() {_classCallCheck(this, Stockists);
 >>>>>>> master
@@ -52864,6 +52886,106 @@ Cube;
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, WP */var
 
+Cube = function () {
+  function Cube() {_classCallCheck(this, Cube);
+    this.mobileThreshold = 601;
+
+    $(window).
+    resize(this.onResize.bind(this)) // Bind resize
+    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+  }_createClass(Cube, [{ key: 'onResize', value: function onResize()
+
+    {
+      this.updateCubeStyle('recipe', '.recipe-item');
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+      this.bindRecipeCube();
+    } }, { key: 'bindRecipeCube', value: function bindRecipeCube()
+
+    {
+      if ($('.recipe-item').length) {
+        $('.recipe-item').on({
+          'click': function click() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+            $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+          },
+          'mouseleave': function mouseleave() {
+            $('.cube-holder').removeClass('cube-active');
+            $(this).find('.cube-right').removeClass('cube-front');
+            $(this).find('.cube-left').addClass('cube-front');
+          } });
+
+
+        this.updateCubeStyle('recipe', '.recipe-item');
+      }
+    } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
+
+    styleId, selector) {
+      if ($(selector).length) {
+        var width = $(selector).width() / 2;
+
+        var styleContent = '\n      ' +
+        selector + ' .cube-left {\n        transform: rotateY(-90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-left.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right {\n        transform: rotateY(90deg) translateZ(' +
+        width + 'px)\n      }\n      ' +
+
+        selector + ' .cube-right.cube-front {\n        transform: rotateY(0deg) translateZ(' +
+        width + 'px)\n      }';
+
+
+        if ($('style#cube-style-' + styleId).length) {
+
+          $('style#cube-style-' + styleId).html(styleContent);
+
+          this.setTransition(selector);
+
+        } else {
+
+          var styleElement = '\n        <style type="text/css" id="cube-style-' +
+          styleId + '">\n          ' +
+          styleContent + '\n        </style>';
+
+
+          $('head').append(styleElement);
+
+          $(selector).addClass('ready');
+
+          this.setTransition(selector);
+        }
+      }
+    } }, { key: 'setTransition', value: function setTransition(
+
+    selector) {
+      var cubeTransition = 0.6;
+
+      window.setTimeout(function () {
+        $(selector).find('.cube-left, .cube-right').css({
+          transition: 'transform ' + cubeTransition + 's ease-in-out' });
+
+      }, 100);
+    } }]);return Cube;}();exports.default =
+
+
+Cube;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */var
+
 Mailchimp = function () {
   function Mailchimp() {_classCallCheck(this, Mailchimp);
     this.mobileThreshold = 601;
@@ -52972,7 +53094,11 @@ Mailchimp = function () {
 Mailchimp;
 
 /***/ }),
+<<<<<<< HEAD
+/* 12 */
+=======
 /* 21 */
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53674,6 +53800,12 @@ Mailchimp;
 	return lazysizes;
 });
 <<<<<<< HEAD
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
+
+/***/ }),
+/* 13 */
+=======
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)(module)))
 
 /***/ }),
@@ -53683,6 +53815,7 @@ Mailchimp;
 
 /***/ }),
 /* 22 */
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53712,9 +53845,13 @@ module.exports = function (module) {
 
 /***/ }),
 <<<<<<< HEAD
+/* 14 */
+=======
+<<<<<<< HEAD
 /* 12 */
 =======
 /* 23 */
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53727,9 +53864,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = 
 
 /***/ }),
 <<<<<<< HEAD
+/* 15 */
+=======
+<<<<<<< HEAD
 /* 13 */
 =======
 /* 24 */
+>>>>>>> master
 >>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53765,9 +53906,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if (true) {
 		// AMD. Register as an anonymous module.
 <<<<<<< HEAD
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(16)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+=======
+<<<<<<< HEAD
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(14)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 =======
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(25)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+>>>>>>> master
 >>>>>>> master
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -54053,7 +54198,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
+<<<<<<< HEAD
+/* 16 */
+=======
 /* 25 */
+>>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55379,11 +55528,17 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
+<<<<<<< HEAD
+/* 17 */
+=======
 /* 26 */
+>>>>>>> master
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 /***/ }),
 /* 16 */,
@@ -55605,6 +55760,7 @@ Mailchimp = function () {
 Mailchimp;
 
 =======
+>>>>>>> master
 >>>>>>> master
 /***/ })
 /******/ ]);
