@@ -13121,18 +13121,18 @@ Site = function () {
         var day = $('#birthday-day').val();
         var year = $('#birthday-year').val();
         if (month == null || month == "" || day == null || day == "" || year == null || year == "") {
-          alert("Please fill out all fields.");
-          return false;
-        }
-        if (isNaN(month) || isNaN(day) || isNaN(year)) {
-          alert("dont be a dick");
-          return false;
-        }
-        var birthday = (0, _dayjs2.default)(new Date(year, month, day));
-        var age = (0, _dayjs2.default)().diff(birthday, 'years');
-        if (age >= 21) {
-          _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-          $('body').removeClass('age-check');
+          alert('Please fill out all fields.');
+        } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
+          alert('enter a number!');
+        } else {
+          var birthday = (0, _dayjs2.default)(new Date(year, month, day));
+          var age = (0, _dayjs2.default)().diff(birthday, 'years');
+          if (age >= 21) {
+            _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+            $('body').removeClass('age-check');
+          } else {
+            alert('you must be 21 to enter.');
+          }
         }
       });
     } }, { key: 'checkForCookie', value: function checkForCookie()
