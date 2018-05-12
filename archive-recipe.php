@@ -51,11 +51,13 @@ if (have_posts()) {
 
         $ingredients = get_post_meta($post->ID, '_igv_ingredients_group', true);
 
-        $cube_num = 0;
+        $bg_class = get_background_class($post->ID);
+        $bg_image = get_post_thumbnail_id($post->ID);
+
 ?>
         <div class="recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3">
 
-          <div class="cube-left cube-front background-cover grid-column" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+          <div class="cube-left cube-front background-cover grid-column <?php echo $bg_class; ?>">
             <div class="grid-item">
               <h3 class="font-size-mid padding-bottom-micro"><?php echo the_title(); ?></h3>
             <?php
@@ -77,6 +79,9 @@ if (have_posts()) {
               }
             ?>
             </div>
+            <?php
+              responsive_background_styles($bg_class, $bg_image, array('320', '640', '960', '1440'));
+            ?>
           </div>
 
           <div class="recipe-details cube-right grid-column">
@@ -103,7 +108,6 @@ if (have_posts()) {
 
         </div>
 <?php
-        $cube_num++;
       }
 ?>
       </div>

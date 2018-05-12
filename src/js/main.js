@@ -5,9 +5,9 @@
 import './covervid.js';
 import Shop from './shop';
 import Ajaxy from './ajaxy';
+import Stockists from './stockists';
 import Cube from './cube';
 import Mailchimp from './mailchimp';
-
 import lazySizes from 'lazysizes';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
@@ -129,20 +129,15 @@ class Site {
       const age = dayjs().diff(birthday, 'years');
       if (age >= 21) {
         Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-        $('body').addClass('legal-age');
-      } else {
-        console.log("not of age");
+        $('body').removeClass('age-check');
       }
     });
   }
 
   checkForCookie() {
     const cookie = Cookies.get('legalAge');
-    console.log(cookie);
-    if (cookie) {
-      $('body').addClass('legal-age');
-    } else {
-      console.log('doing nothing')
+    if (!cookie) {
+      $('body').addClass('age-check');
     }
   }
 
@@ -151,5 +146,6 @@ class Site {
 const Material = new Site();
 const MaterialShop = new Shop();
 const MaterialAjaxy = new Ajaxy();
+const MaterialStockists = new Stockists();
 const MaterialCube = new Cube();
 const MaterialMailchimp = new Mailchimp();

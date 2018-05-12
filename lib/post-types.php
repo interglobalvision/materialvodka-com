@@ -190,12 +190,12 @@ function register_cpt_video_award() {
     'show_in_nav_menus' => true,
     'publicly_queryable' => true,
     'exclude_from_search' => false,
-    'has_archive' => true,
+    'has_archive' => 'videos',
     'query_var' => true,
     'can_export' => true,
     'rewrite' => true,
     'capability_type' => 'post'
   );
 
-  register_post_type( 'video_award', $args );
+  register_post_type( 'video-award', $args );
 }

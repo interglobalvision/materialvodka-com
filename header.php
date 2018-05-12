@@ -22,15 +22,17 @@ get_template_part('partials/seo');
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 <?php } ?>
 
+<?php debug_page_request(); ?>
+
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
+<?php get_template_part('partials/agechecker-form'); ?>
+
 <section id="main-container">
 
-  <?php get_template_part('partials/agechecker-form'); ?>
-  
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
@@ -47,7 +49,7 @@ get_template_part('partials/seo');
               <a href="<?php echo home_url('prize'); ?>">Prize</a>
             </li>
             <li class="grid-item">
-              <a href="<?php echo home_url('video'); ?>">Videos</a>
+              <a href="<?php echo home_url('videos'); ?>">Videos</a>
             </li>
             <li class="grid-item">
               <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
@@ -72,7 +74,7 @@ get_template_part('partials/seo');
             <a href="<?php echo home_url('prize'); ?>">Prize</a>
           </li>
           <li class="grid-item">
-            <a href="<?php echo home_url('video'); ?>">Videos</a>
+            <a href="<?php echo home_url('videos'); ?>">Videos</a>
           </li>
           <li class="grid-item">
             <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
