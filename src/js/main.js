@@ -67,7 +67,9 @@ class Site {
 
   initCoverVid() {
     if (this.$covervidVideo.length) {
-      this.$covervidVideo.coverVid(1920, 1080);
+      this.$covervidVideo.each((index, element) =>  {
+        $(element).coverVid(1920, 1080);
+      });
     }
   }
 
