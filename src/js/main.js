@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
-import TweenMax from 'gsap';
+import TweenMax from 'gsap'; 
 
 // Import style
 import '../styl/site.styl';
@@ -68,7 +68,9 @@ class Site {
 
   initCoverVid() {
     if (this.$covervidVideo.length) {
-      this.$covervidVideo.coverVid(1920, 1080);
+      this.$covervidVideo.each((index, element) =>  {
+        $(element).coverVid(1920, 1080);
+      });
     }
   }
 
@@ -134,13 +136,13 @@ class Site {
     } else {
       Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
       $('body').removeClass('age-check');
-    }   
+    }
   }
 
   validateAgeForm(month, day, year) {
     //returns true or false based on validation state
       let isValid = true;
-      let errorMessage = ''; 
+      let errorMessage = '';
       if ( month === null || month === '' || day === null || day === '' || year === null || year === '') {
         isValid = false;
         errorMessage = 'Please fill out all fields';

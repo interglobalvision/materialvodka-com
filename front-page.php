@@ -18,8 +18,7 @@ if (have_posts()) {
       <?php
         if (!empty($video)) {
       ?>
-        <div class="grid-item no-gutter covervid-wrapper
-        covervid-s-12 covervid-m-6">
+        <div class="grid-item no-gutter covervid-wrapper height-s-33vw height-m-16vw">
           <video class="covervid-video" muted autoplay loop poster="<?php echo $video[0]['poster']; ?>">
             <source src="<?php echo $video[0]['webm']; ?>" type="video/webm">
             <source src="<?php echo $video[0]['mp4']; ?>" type="video/mp4">
