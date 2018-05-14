@@ -214,6 +214,7 @@ function igv_cmb_metabox_video_awards() {
     'type'    => 'wysiwyg',
     'options' => array(
       'textarea_rows' => 5,
+      'media_buttons' => false,
     ),
   ) );
 
@@ -657,6 +658,77 @@ function igv_cmb_metaboxes_vodka_page() {
     'type' => 'textarea',
   ) );
 
+  }
+}
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_prize' );
+function igv_cmb_metabox_prize() {
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $prize_page = get_page_by_path('prize');
+
+  // Check if Prize page exists
+  if(!empty($prize_page)) {
+
+    $metabox = new_cmb2_box( array(
+      'id'            => $prefix . 'metabox_prize',
+      'title'         => esc_html__( 'Options', 'cmb2' ),
+      'object_types'  => array( 'page' ), // Post type
+      'show_on'      => array(
+        'key' => 'id',
+        'value' => array($prize_page->ID)
+      ),
+    ) );
+
+    // Winners group
+    $winners_group_id = $metabox->add_field( array(
+      'id'      => $prefix . 'prize_winners_group',
+      'name'    => 'Winners',
+      'type'        => 'group',
+      'repeatable'  => true,
+    ) );
+
+    // Year
+    $metabox->add_group_field( $winners_group_id, array(
+      'name'    => 'Year',
+      'id'      => 'year',
+      'type'    => 'text',
+    ) );
+
+    // Name
+    $metabox->add_group_field( $winners_group_id, array(
+      'name'    => 'Name (jpeg/png)',
+      'id'      => 'name',
+      'type'    => 'text',
+    ) );
+
+    // Bio
+    $metabox->add_group_field( $winners_group_id, array(
+      'name'    => 'Bio',
+      'id'      => 'bio',
+      'type'    => 'wysiwyg',
+      'options' => array(
+        'textarea_rows' => 5,
+        'media_buttons' => false,
+      ),
+    ) );
+
+    // Photo
+    $metabox->add_group_field( $winners_group_id, array(
+      'name'    => 'Image (jpeg/png)',
+      'id'      => 'image',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+    ) );
   }
 }
 ?>
