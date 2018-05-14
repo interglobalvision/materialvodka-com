@@ -124,9 +124,9 @@ class Site {
       const day = $('#birthday-day').val();
       const year = $('#birthday-year').val();
       if ( month === null || month === "" || day === null || day === "" || year === null || year === "") {
-        $('#age-form-repsonse').html("Please fill out all fields").addClass("age-form-error");
+        $('#age-form-response').html("Please fill out all fields").addClass("age-form-error");
       } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        $('#age-form-repsonse').html("Enter a number").addClass("age-form-error");
+        $('#age-form-response').html("Enter a number").addClass("age-form-error");
       } else {
         const birthday = dayjs(new Date(year, month, day));
         const age = dayjs().diff(birthday, 'years');
@@ -134,7 +134,7 @@ class Site {
           Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
           $('body').removeClass('age-check');
         } else {
-        $('#age-form-response').html("You must be of legal age to enter").addClass("age-form-error");
+          $('#age-form-response').html("You must be of legal age to enter").addClass("age-form-error");
         }
       }
     });

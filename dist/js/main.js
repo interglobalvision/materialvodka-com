@@ -13121,9 +13121,9 @@ Site = function () {
         var day = $('#birthday-day').val();
         var year = $('#birthday-year').val();
         if (month === null || month === "" || day === null || day === "" || year === null || year === "") {
-          $('#age-form-repsonse').html("Please fill out all fields").addClass("age-form-error");
+          $('#age-form-response').html("Please fill out all fields").addClass("age-form-error");
         } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-          $('#age-form-repsonse').html("Enter a number").addClass("age-form-error");
+          $('#age-form-response').html("Enter a number").addClass("age-form-error");
         } else {
           var birthday = (0, _dayjs2.default)(new Date(year, month, day));
           var age = (0, _dayjs2.default)().diff(birthday, 'years');
