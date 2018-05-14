@@ -49,6 +49,19 @@ function igv_cmb_metabox_home() {
     ) );
 
     $metabox->add_field( array(
+      'name'      	=> __( 'Bottle background', 'cmb2' ),
+      'id'        	=> $prefix . 'home_recipe',
+      'type'      	=> 'post_search_ajax',
+      'limit'      	=> 1,
+      'sortable' 	 	=> false,
+      'query_args'	=> array(
+        'post_type'			=> array( 'recipe' ),
+        'post_status'		=> array( 'publish' ),
+        'posts_per_page'	=> -1
+      )
+    ) );
+
+    $metabox->add_field( array(
       'name'      	=> __( 'Featured Recipe', 'cmb2' ),
       'id'        	=> $prefix . 'home_recipe',
       'type'      	=> 'post_search_ajax',
