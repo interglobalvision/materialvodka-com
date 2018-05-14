@@ -49,16 +49,18 @@ function igv_cmb_metabox_home() {
     ) );
 
     $metabox->add_field( array(
-      'name'      	=> __( 'Bottle background', 'cmb2' ),
-      'id'        	=> $prefix . 'home_recipe',
-      'type'      	=> 'post_search_ajax',
-      'limit'      	=> 1,
-      'sortable' 	 	=> false,
-      'query_args'	=> array(
-        'post_type'			=> array( 'recipe' ),
-        'post_status'		=> array( 'publish' ),
-        'posts_per_page'	=> -1
-      )
+      'name'      	=> __( 'Bottle background image', 'cmb2' ),
+      'id'        	=> $prefix . 'home_bottle_image',
+      'type'      	=> 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
     ) );
 
     $metabox->add_field( array(
