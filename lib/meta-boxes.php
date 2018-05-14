@@ -677,6 +677,6 @@ function igv_cmb_metabox_winner() {
     'name'    => 'Year',
     'id'      => $prefix . 'prize_winner_year',
     'type'    => 'text',
-  );
+  ) );
 }
 ?>
