@@ -43,7 +43,7 @@ class AgeCheck {
       Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
       $('body').removeClass('age-check');
 
-      if (email !== null && email !== '') {
+      if (email !== null && email !== '' && this.handleMailchimpAjax !== undefined) {
         const data = {'EMAIL': email};
 
         this.handleMailchimpAjax(data);
