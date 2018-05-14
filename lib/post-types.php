@@ -11,7 +11,7 @@ function add_menu_icons_styles(){
 #menu-posts-stockist .dashicons-admin-post:before {
   content: '\f513';
 }
-#menu-posts-video_award .dashicons-admin-post:before {
+#menu-posts-video-award .dashicons-admin-post:before {
   content: "\f235";
 }
 
@@ -162,18 +162,18 @@ add_action( 'init', 'register_cpt_video_award' );
 function register_cpt_video_award() {
 
   $labels = array(
-    'name' => _x( 'Video Awards', 'video_award' ),
-    'singular_name' => _x( 'Video Award', 'video_award' ),
-    'add_new' => _x( 'Add New', 'video_award' ),
-    'add_new_item' => _x( 'Add New Video Award', 'video_award' ),
-    'edit_item' => _x( 'Edit Video Award', 'video_award' ),
-    'new_item' => _x( 'New Video Award', 'video_award' ),
-    'view_item' => _x( 'View Video Award', 'video_award' ),
-    'search_items' => _x( 'Search Video Awards', 'video_award' ),
-    'not_found' => _x( 'No Video Awards found', 'video_award' ),
-    'not_found_in_trash' => _x( 'No Video Awards found in Trash', 'video_award' ),
-    'parent_item_colon' => _x( 'Parent Video Award:', 'video_award' ),
-    'menu_name' => _x( 'Video Awards', 'video_award' ),
+    'name' => _x( 'Video Awards', 'video-award' ),
+    'singular_name' => _x( 'Video Award', 'video-award' ),
+    'add_new' => _x( 'Add New', 'video-award' ),
+    'add_new_item' => _x( 'Add New Video Award', 'video-award' ),
+    'edit_item' => _x( 'Edit Video Award', 'video-award' ),
+    'new_item' => _x( 'New Video Award', 'video-award' ),
+    'view_item' => _x( 'View Video Award', 'video-award' ),
+    'search_items' => _x( 'Search Video Awards', 'video-award' ),
+    'not_found' => _x( 'No Video Awards found', 'video-award' ),
+    'not_found_in_trash' => _x( 'No Video Awards found in Trash', 'video-award' ),
+    'parent_item_colon' => _x( 'Parent Video Award:', 'video-award' ),
+    'menu_name' => _x( 'Video Awards', 'video-award' ),
   );
 
   $args = array(
@@ -198,4 +198,47 @@ function register_cpt_video_award() {
   );
 
   register_post_type( 'video-award', $args );
+}
+
+add_action( 'init', 'register_cpt_prize_winner' );
+
+function register_cpt_prize_winner() {
+
+  $labels = array(
+    'name' => _x( 'Prize Winners', 'prize-winner' ),
+    'singular_name' => _x( 'Prize Winner', 'prize-winner' ),
+    'add_new' => _x( 'Add New', 'prize-winner' ),
+    'add_new_item' => _x( 'Add New Prize Winner', 'prize-winner' ),
+    'edit_item' => _x( 'Edit Prize Winner', 'prize-winner' ),
+    'new_item' => _x( 'New Prize Winner', 'prize-winner' ),
+    'view_item' => _x( 'View Prize Winner', 'prize-winner' ),
+    'search_items' => _x( 'Search Prize Winners', 'prize-winner' ),
+    'not_found' => _x( 'No Prize Winners found', 'prize-winner' ),
+    'not_found_in_trash' => _x( 'No Prize Winners found in Trash', 'prize-winner' ),
+    'parent_item_colon' => _x( 'Parent Prize Winner:', 'prize-winner' ),
+    'menu_name' => _x( 'Prize Winners', 'prize-winner' ),
+  );
+
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => false,
+
+    'supports' => array( 'title', 'editor', 'thumbnail' ),
+
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+
+    'show_in_nav_menus' => true,
+    'publicly_queryable' => true,
+    'exclude_from_search' => false,
+    'has_archive' => 'prize',
+    'query_var' => true,
+    'can_export' => true,
+    'rewrite' => true,
+    'capability_type' => 'post'
+  );
+
+  register_post_type( 'prize-winner', $args );
 }
