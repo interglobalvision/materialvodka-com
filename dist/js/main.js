@@ -13027,6 +13027,7 @@ Site = function () {
 
     // Bind
     this.repositionHeader = this.repositionHeader.bind(this);
+    this.handleAgeFormSubmit = this.handleAgeFormSubmit.bind(this);
 
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
@@ -13117,18 +13118,52 @@ Site = function () {
     } }, { key: 'submitAgeForm', value: function submitAgeForm()
 
     {
-      $('#submit-age').on('click', function (e) {
-        e.preventDefault();
-        var month = $('#birthday-month').val();
-        var day = $('#birthday-day').val();
-        var year = $('#birthday-year').val();
+      $('#submit-age').on('click', this.handleAgeFormSubmit);
+    } }, { key: 'handleAgeFormSubmit', value: function handleAgeFormSubmit(
+
+    event) {
+      event.preventDefault();
+      var month = $('#birthday-month').val();
+      var day = $('#birthday-day').val();
+      var year = $('#birthday-year').val();
+      var validation = this.validateAgeForm(month, day, year);
+
+      if (validation['isValid'] === false) {
+        $('#age-form-response').html(validation['errorMessage']).addClass('age-form-error');
+      } else {
+        _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').removeClass('age-check');
+      }
+    } }, { key: 'validateAgeForm', value: function validateAgeForm(
+
+    month, day, year) {
+      //returns true or false based on validation state
+      var isValid = true;
+      var errorMessage = '';
+      if (month === null || month === '' || day === null || day === '' || year === null || year === '') {
+        isValid = false;
+        errorMessage = 'Please fill out all fields';
+      } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
+        isValid = false;
+        errorMessage = 'Enter a valid number';
+      } else if (month > 12 || month < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid month';
+      } else if (day > 31 || day < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid day';
+      } else if (year > 2050 || year < 1900) {
+        isValid = false;
+        errorMessage = 'Enter a valid year';
+      } else {
         var birthday = (0, _dayjs2.default)(new Date(year, month, day));
         var age = (0, _dayjs2.default)().diff(birthday, 'years');
-        if (age >= 21) {
-          _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-          $('body').removeClass('age-check');
+        if (age < 21) {
+          isValid = false;
+          errorMessage = 'You must be of legal age to enter';
         }
-      });
+      }
+      return { isValid: isValid, errorMessage: errorMessage };
     } }, { key: 'checkForCookie', value: function checkForCookie()
 
     {
@@ -13137,6 +13172,7 @@ Site = function () {
         $('body').addClass('age-check');
       }
     } }]);return Site;}();
+
 
 
 

@@ -18,11 +18,11 @@
       </div>
 
       <div>
-         <input id="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY">
+         <input id="birthday-year" name="year" value="" type="number" min="1900" max="<?php echo date("Y"); ?>"placeholder="YYYY">
       </div>
     </div>
 
-    <p>You must be of legal age to enter<p>
+    <p id="age-form-response">You must be of legal age to enter<p>
 
     <button id="submit-age">Enter</button>
 
