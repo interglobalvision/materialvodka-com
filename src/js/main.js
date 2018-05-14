@@ -30,6 +30,7 @@ class Site {
 
     // Bind
     this.repositionHeader = this.repositionHeader.bind(this);
+    this.handleAgeFormSubmit = this.handleAgeFormSubmit.bind(this);
 
   }
 
@@ -118,32 +119,52 @@ class Site {
   }
 
   submitAgeForm() {
-    $('#submit-age').on('click', function(e){
-      e.preventDefault();
-      const month = $('#birthday-month').val();
-      const day = $('#birthday-day').val();
-      const year = $('#birthday-year').val();
-      if ( month === null || month === "" || day === null || day === "" || year === null || year === "") {
-        $('#age-form-response').html("Please fill out all fields").addClass("age-form-error");
+    $('#submit-age').on('click', this.handleAgeFormSubmit);
+  }
+
+  handleAgeFormSubmit(event) {
+    event.preventDefault();
+    const month = $('#birthday-month').val();
+    const day = $('#birthday-day').val();
+    const year = $('#birthday-year').val();
+    const validation = this.validateAgeForm(month, day, year);
+
+    if (validation['isValid'] === false){
+      $('#age-form-response').html(validation['errorMessage']).addClass('age-form-error');
+    } else {
+      Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+      $('body').removeClass('age-check');
+    }   
+  }
+
+  validateAgeForm(month, day, year) {
+    //returns true or false based on validation state
+      let isValid = true;
+      let errorMessage = ''; 
+      if ( month === null || month === '' || day === null || day === '' || year === null || year === '') {
+        isValid = false;
+        errorMessage = 'Please fill out all fields';
       } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        $('#age-form-repsonse').html("Enter a number").addClass("age-form-error");
-      } else if (month >= 1 && month <= 12) {
-        $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
-      } else if (day >= 1 && day <= 31) {
-        $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
-      } else if (year >= 1900 && year <= 3000) {
-         $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
+        isValid = false;
+        errorMessage = 'Enter a valid number';
+      } else if (month > 12 || month < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid month';
+      } else if (day > 31 || day < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid day';
+      } else if (year > 2050 || year < 1900) {
+         isValid = false;
+         errorMessage = 'Enter a valid year';
       } else {
         const birthday = dayjs(new Date(year, month, day));
         const age = dayjs().diff(birthday, 'years');
-        if (age >= 21) {
-          Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-          $('body').removeClass('age-check');
-        } else {
-          $('#age-form-response').html("You must be of legal age to enter").addClass("age-form-error");
+        if (age < 21) {
+          isValid = false;
+          errorMessage = 'You must be of legal age to enter';
         }
       }
-    });
+      return {isValid, errorMessage}
   }
 
   checkForCookie() {
