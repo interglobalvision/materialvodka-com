@@ -14,9 +14,11 @@ function add_menu_icons_styles(){
 #menu-posts-video-award .dashicons-admin-post:before {
   content: "\f235";
 }
-
 #menu-posts-product .dashicons-admin-post:before {
   content: "\f174";
+}
+#menu-posts-prize-winner .dashicons-admin-post:before {
+  content: "\f313";
 }
 </style>
 
