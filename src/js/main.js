@@ -67,7 +67,9 @@ class Site {
 
   initCoverVid() {
     if (this.$covervidVideo.length) {
-      this.$covervidVideo.coverVid(1920, 1080);
+      this.$covervidVideo.each((index, element) =>  {
+        $(element).coverVid(1920, 1080);
+      });
     }
   }
 
@@ -120,35 +122,14 @@ class Site {
   submitAgeForm() {
     $('#submit-age').on('click', function(e){
       e.preventDefault();
-
       const month = $('#birthday-month').val();
       const day = $('#birthday-day').val();
       const year = $('#birthday-year').val();
-
-      if ( month === null || month === "" || day === null || day === "" || year === null || year === "") {
-
-        $('#age-form-response').html("Please fill out all fields").addClass("age-form-error");
-
-      } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-
-        $('#age-form-response').html("Enter a number").addClass("age-form-error");
-
-      } else {
-
-        const birthday = dayjs(new Date(year, month, day));
-        const age = dayjs().diff(birthday, 'years');
-
-        if (age >= 21) { 
-
-          Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-
-          $('body').removeClass('age-check');
-
-        } else {
-
-          $('#age-form-response').html("You must be of legal age to enter").addClass("age-form-error");
-
-        }
+      const birthday = dayjs(new Date(year, month, day));
+      const age = dayjs().diff(birthday, 'years');
+      if (age >= 21) {
+        Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').removeClass('age-check');
       }
     });
   }
