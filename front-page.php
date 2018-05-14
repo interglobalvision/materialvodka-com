@@ -7,6 +7,7 @@ if (have_posts()) {
 
     $video = get_post_meta($post->ID, '_igv_home_video_group', true);
     $recipe = get_post_meta($post->ID, '_igv_home_recipe', true);
+    $bottle_image = get_post_meta($post->ID, '_igv_home_bottle_image_id', true);
     $options = get_site_option('_igv_site_options');
 ?>
 
@@ -27,7 +28,12 @@ if (have_posts()) {
       <?php
         }
       ?>
-        <div class="grid-item grid-item-square grid-row align-items-end">
+        <div class="grid-item grid-item-square grid-row align-items-end background-cover bg-front-bottle">
+          <?php
+          if (!empty($bottle_image)) {
+            responsive_background_styles('bg-front-bottle', $bottle_image , array('320x320','640x640','960x960'));
+          }
+          ?>
           <div class="font-size-large grid-item item-s-12 item-m-10 offset-m-1 no-gutter margin-bottom-large">a vodka company founded with the sole intention of supporting alternative arts.</div>
           <div id="bottle-sprite"></div>
         </div>
