@@ -13126,13 +13126,20 @@ Site = function () {
       var month = $('#birthday-month').val();
       var day = $('#birthday-day').val();
       var year = $('#birthday-year').val();
+      var email = $('#mailchimp-email').val();
       var validation = this.validateAgeForm(month, day, year);
 
-      if (validation['isValid'] === false) {
-        $('#age-form-response').html(validation['errorMessage']).addClass('age-form-error');
+      if (validation.isValid === false) {
+        $('#age-form-response').html(validation.errorMessage).addClass('age-form-error');
       } else {
         _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
         $('body').removeClass('age-check');
+
+        if (email !== null && email !== '') {
+          var data = { 'EMAIL': email };
+
+          MaterialMailchimp.handleMailchimpAjax(data);
+        }
       }
     } }, { key: 'validateAgeForm', value: function validateAgeForm(
 
@@ -52919,9 +52926,6 @@ Mailchimp = function () {
     } }, { key: 'submitForm', value: function submitForm()
 
     {
-      // Rewrite action URL for JSONP
-      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
-
       var data = {};
 
       // Get form data
@@ -52932,19 +52936,26 @@ Mailchimp = function () {
         data[item.name] = item.value;
       });
 
+      this.handleAjax(data, this.successMessage);
+
+      // Prevent default submit functionality
+      return false;
+    } }, { key: 'handleMailchimpAjax', value: function handleMailchimpAjax(
+
+    data, successCallback) {
+      // Rewrite action URL for JSONP
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
       // Ajax post to Mailchimp API
       $.ajax({
         url: url,
         data: data,
-        success: this.successMessage,
+        success: successCallback,
         dataType: 'jsonp',
         error: function error(resp, text) {
           console.log('mailchimp ajax submit error: ' + text);
         } });
 
-
-      // Prevent default submit functionality
-      return false;
     }
 
     /**

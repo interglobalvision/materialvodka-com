@@ -27,9 +27,6 @@ class Mailchimp {
   }
 
   submitForm() {
-    // Rewrite action URL for JSONP
-    const url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
-
     let data = {};
 
     // Get form data
@@ -40,19 +37,26 @@ class Mailchimp {
       data[item.name] = item.value;
     });
 
+    this.handleAjax(data, this.successMessage);
+
+    // Prevent default submit functionality
+    return false;
+  }
+
+  handleMailchimpAjax(data, successCallback) {
+    // Rewrite action URL for JSONP
+    const url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
     // Ajax post to Mailchimp API
     $.ajax({
       url: url,
       data: data,
-      success: this.successMessage,
+      success: successCallback,
       dataType: 'jsonp',
       error: function (resp, text) {
         console.log('mailchimp ajax submit error: ' + text);
       }
     });
-
-    // Prevent default submit functionality
-    return false;
   }
 
   /**

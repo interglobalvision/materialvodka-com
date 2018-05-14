@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
-import TweenMax from 'gsap'; 
+import TweenMax from 'gsap';
 
 // Import style
 import '../styl/site.styl';
@@ -129,13 +129,20 @@ class Site {
     const month = $('#birthday-month').val();
     const day = $('#birthday-day').val();
     const year = $('#birthday-year').val();
+    const email = $('#mailchimp-email').val();
     const validation = this.validateAgeForm(month, day, year);
 
-    if (validation['isValid'] === false){
-      $('#age-form-response').html(validation['errorMessage']).addClass('age-form-error');
+    if (validation.isValid === false){
+      $('#age-form-response').html(validation.errorMessage).addClass('age-form-error');
     } else {
       Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
       $('body').removeClass('age-check');
+
+      if (email !== null && email !== '') {
+        const data = {'EMAIL': email};
+
+        MaterialMailchimp.handleMailchimpAjax(data);
+      }
     }
   }
 
