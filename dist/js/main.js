@@ -13121,9 +13121,9 @@ Site = function () {
         var day = $('#birthday-day').val();
         var year = $('#birthday-year').val();
         if (month == null || month == "" || day == null || day == "" || year == null || year == "") {
-          alert('Please fill out all fields.');
+          $('.error-rules').replaceWith("<p>Please fill out all fields</p>");
         } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-          alert('enter a number!');
+          $('.error-rules').replaceWith("<p>Enter a number!</p>");
         } else {
           var birthday = (0, _dayjs2.default)(new Date(year, month, day));
           var age = (0, _dayjs2.default)().diff(birthday, 'years');
@@ -13131,7 +13131,7 @@ Site = function () {
             _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
             $('body').removeClass('age-check');
           } else {
-            alert('you must be 21 to enter.');
+            $('.error-rules').css("color", "red");
           }
         }
       });

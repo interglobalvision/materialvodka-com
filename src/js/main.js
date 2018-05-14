@@ -124,9 +124,9 @@ class Site {
       const day = $('#birthday-day').val();
       const year = $('#birthday-year').val();
       if ( month == null || month == "" || day == null || day == "" || year == null || year == "") {
-        alert('Please fill out all fields.');
+        $('.error-rules').replaceWith("<p>Please fill out all fields</p>");
       } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        alert('enter a number!');
+        $('.error-rules').replaceWith("<p>Enter a number!</p>");
       } else {
         const birthday = dayjs(new Date(year, month, day));
         const age = dayjs().diff(birthday, 'years');
@@ -134,7 +134,7 @@ class Site {
           Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
           $('body').removeClass('age-check');
         } else {
-        alert('you must be 21 to enter.')
+        $('.error-rules').css("color", "red");
         }
       }
     });

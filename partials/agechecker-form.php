@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <p>You must be of legal age to enter<p>
+    <p class="error-rules">You must be of legal age to enter<p>
 
     <button id="submit-age">Enter</button>
 
