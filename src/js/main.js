@@ -126,7 +126,13 @@ class Site {
       if ( month === null || month === "" || day === null || day === "" || year === null || year === "") {
         $('#age-form-response').html("Please fill out all fields").addClass("age-form-error");
       } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        $('#age-form-response').html("Enter a number").addClass("age-form-error");
+        $('#age-form-repsonse').html("Enter a number").addClass("age-form-error");
+      } else if (month >= 1 && month <= 12) {
+        $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
+      } else if (day >= 1 && day <= 31) {
+        $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
+      } else if (year >= 1900 && year <= 3000) {
+         $('#age-form-repsonse').html("Enter a valid number").addClass("age-form-error");
       } else {
         const birthday = dayjs(new Date(year, month, day));
         const age = dayjs().diff(birthday, 'years');
@@ -148,6 +154,7 @@ class Site {
   }
 
 }
+
 
 const Material = new Site();
 const MaterialShop = new Shop();
