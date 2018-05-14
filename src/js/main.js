@@ -8,9 +8,8 @@ import Ajaxy from './ajaxy';
 import Stockists from './stockists';
 import Cube from './cube';
 import Mailchimp from './mailchimp';
+import AgeCheck from './ageCheck';
 import lazySizes from 'lazysizes';
-import dayjs from 'dayjs';
-import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
 import TweenMax from 'gsap';
@@ -30,8 +29,6 @@ class Site {
 
     // Bind
     this.repositionHeader = this.repositionHeader.bind(this);
-    this.handleAgeFormSubmit = this.handleAgeFormSubmit.bind(this);
-
   }
 
   onResize() {
@@ -49,9 +46,7 @@ class Site {
     this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
-    this.checkForCookie();
     this.initCoverVid();
-    this.submitAgeForm();
     this.bindStickyHeader();
     this.initCoverVid();
     this.animateBottleSprite();
@@ -120,71 +115,7 @@ class Site {
     }
   }
 
-  submitAgeForm() {
-    $('#submit-age').on('click', this.handleAgeFormSubmit);
-  }
-
-  handleAgeFormSubmit(event) {
-    event.preventDefault();
-    const month = $('#birthday-month').val();
-    const day = $('#birthday-day').val();
-    const year = $('#birthday-year').val();
-    const email = $('#mailchimp-email').val();
-    const validation = this.validateAgeForm(month, day, year);
-
-    if (validation.isValid === false){
-      $('#age-form-response').html(validation.errorMessage).addClass('age-form-error');
-    } else {
-      Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-      $('body').removeClass('age-check');
-
-      if (email !== null && email !== '') {
-        const data = {'EMAIL': email};
-
-        MaterialMailchimp.handleMailchimpAjax(data);
-      }
-    }
-  }
-
-  validateAgeForm(month, day, year) {
-    //returns true or false based on validation state
-      let isValid = true;
-      let errorMessage = '';
-      if ( month === null || month === '' || day === null || day === '' || year === null || year === '') {
-        isValid = false;
-        errorMessage = 'Please fill out all fields';
-      } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        isValid = false;
-        errorMessage = 'Enter a valid number';
-      } else if (month > 12 || month < 1) {
-        isValid = false;
-        errorMessage = 'Enter a valid month';
-      } else if (day > 31 || day < 1) {
-        isValid = false;
-        errorMessage = 'Enter a valid day';
-      } else if (year > 2050 || year < 1900) {
-         isValid = false;
-         errorMessage = 'Enter a valid year';
-      } else {
-        const birthday = dayjs(new Date(year, month, day));
-        const age = dayjs().diff(birthday, 'years');
-        if (age < 21) {
-          isValid = false;
-          errorMessage = 'You must be of legal age to enter';
-        }
-      }
-      return {isValid, errorMessage}
-  }
-
-  checkForCookie() {
-    const cookie = Cookies.get('legalAge');
-    if (!cookie) {
-      $('body').addClass('age-check');
-    }
-  }
-
 }
-
 
 const Material = new Site();
 const MaterialShop = new Shop();
@@ -192,3 +123,4 @@ const MaterialAjaxy = new Ajaxy();
 const MaterialStockists = new Stockists();
 const MaterialCube = new Cube();
 const MaterialMailchimp = new Mailchimp();
+const MaterialAgeCheck = new AgeCheck(MaterialMailchimp.handleMailchimpAjax);
