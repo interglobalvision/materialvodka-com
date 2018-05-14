@@ -44,7 +44,7 @@ get_template_part('partials/seo');
           <button id="mobile-menu-trigger">Menu</button>
         </div>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
-          <ul class="grid-row justify-between">
+          <ul class="grid-row justify-between flex-nowrap">
             <li class="grid-item">
               <a href="<?php echo home_url('prize'); ?>">Prize</a>
             </li>
@@ -52,7 +52,7 @@ get_template_part('partials/seo');
               <a href="<?php echo home_url('videos'); ?>">Videos</a>
             </li>
             <li class="grid-item">
-              <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
+              <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
             </li>
             <li class="grid-item">
               <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
@@ -77,7 +77,7 @@ get_template_part('partials/seo');
             <a href="<?php echo home_url('videos'); ?>">Videos</a>
           </li>
           <li class="grid-item">
-            <a href="<?php echo home_url('vodka'); ?>">The Vodka</a>
+            <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
           </li>
           <li class="grid-item">
             <a href="<?php echo home_url('recipes'); ?>">Recipes</a>

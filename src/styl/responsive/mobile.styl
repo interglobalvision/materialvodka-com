@@ -21,7 +21,7 @@ space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-m
 font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
 
 .grid-item-square
-  min-height: 50vw
+  min-height: 100vw
 
 #main-content
   min-height: 100vh
@@ -29,6 +29,45 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 .background-cover
   background-size: cover
   background-position: center
+
+.mobile-min-height
+  min-height: 100vw
+
+// ******************************************************
+
+// FORMS
+
+button
+  background-color: transparent
+  color: $color-white
+  border: none
+  padding: 0
+  appearance: none
+  font-family: $font-medium
+  font-weight: 400
+  padding: 0 $margin-tiny
+  cursor: pointer
+  &.button-no-padding
+    padding: 0
+
+input
+  background-color: $color-black
+  color: $color-white
+  padding: 1rem
+  text-align: center
+  border: 1px solid $color-white
+  font-weight: 300
+  font-family: $font-sans
+  &::placeholder
+    color: $color-white
+  &:focus
+    outline: $color-white
+    &::placeholder
+      color: transparent
+
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
 
 // ******************************************************
 
@@ -47,7 +86,7 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   visibility: hidden
 
 .cube-front
-  visibility: visible 
+  visibility: visible
 
 .cube-holder
   position:relative
@@ -155,29 +194,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   left:0
   z-index: 1000
 
-
 #age-checker-form
   background-color: $color-black
-
-button#submit-age
-  background-color: $color-black
-  color: $color-white
-  border: none
-  padding-top: 1rem
-
-input
-  background-color: $color-black
-  color: $color-white
-  padding: 1rem
-  min-width: 4em
-  text-align: center
+  input
+    min-width: 4em
 
 input#birthday-year
   min-width: 5em
-
-input::-webkit-inner-spin-button
-    -webkit-appearance: none
-    margin: 0
 
 body
   &.age-check

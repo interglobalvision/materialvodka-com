@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
-import TweenMax from 'gsap'; 
+import TweenMax from 'gsap';
 
 // Import style
 import '../styl/site.styl';
