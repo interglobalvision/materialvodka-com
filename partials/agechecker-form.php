@@ -18,7 +18,7 @@
       </div>
 
       <div>
-         <input id="birthday-year" name="year" value="" type="number" min="1800" max="<?php echo date("Y"); ?>"placeholder="YYYY">
+         <input id="birthday-year" name="year" value="" type="number" min="1900" max="<?php echo date("Y"); ?>"placeholder="YYYY">
       </div>
     </div>
 
