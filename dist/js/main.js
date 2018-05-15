@@ -13013,7 +13013,7 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 // Import style
-__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(11);var _stockists2 = _interopRequireDefault(_stockists);var _cube = __webpack_require__(20);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(21);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(22);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(24);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(25);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(27);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(10);var _stockists2 = _interopRequireDefault(_stockists);var _cube = __webpack_require__(19);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(20);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(21);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(23);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(24);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -13032,6 +13032,8 @@ Site = function () {
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
+      this.windowWidth = this.$window.width();
+
       this.sizeHeaderSpacer();
       this.repositionHeader();
     } }, { key: 'onReady', value: function onReady()
@@ -13041,16 +13043,19 @@ Site = function () {
 
       this.$window = $(window);
       this.$document = $(document);
+      this.$body = $('body');
       this.$header = $('#header');
       this.$mainContent = $('#main-content');
-      this.$headerSpacer = $('#header-spacer');
+      this.$headerSpacer = $('.header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
+      this.windowWidth = this.$window.width();
+
+      this.bindMobileNavTrigger();
       this.checkForCookie();
       this.initCoverVid();
       this.submitAgeForm();
       this.bindStickyHeader();
-      this.initCoverVid();
       this.animateBottleSprite();
     } }, { key: 'fixWidows', value: function fixWidows()
 
@@ -13078,25 +13083,34 @@ Site = function () {
     } }, { key: 'repositionHeader', value: function repositionHeader()
 
     {
-      if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop()) {
-        this.$header.addClass('bottom').css({
-          top: this.headerTop + 'px',
-          bottom: 'auto' });
-
-      } else if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop()) {
+      if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop() || this.windowWidth < 720) {
         this.$header.removeClass('bottom').css({
           top: 'auto',
           bottom: 0 });
+
+      } else if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop() && this.windowWidth >= 720) {
+        this.$header.addClass('bottom').css({
+          top: this.headerTop + 'px',
+          bottom: 'auto' });
 
       }
     } }, { key: 'sizeHeaderSpacer', value: function sizeHeaderSpacer()
 
     {
       var headerHeight = this.$header.outerHeight();
+
       this.$headerSpacer.css('height', headerHeight + 'px');
       this.headerTop = this.$headerSpacer.offset().top;
       this.headerSpacerOffset = this.headerTop + headerHeight;
       this.windowHeight = this.$window.outerHeight();
+    } }, { key: 'bindMobileNavTrigger', value: function bindMobileNavTrigger()
+
+    {var _this = this;
+      var $mobileNav = $('#mobile-nav');
+
+      $('#mobile-nav-trigger').on('click', function () {
+        _this.$body.toggleClass('mobile-active');
+      });
     } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
 
     {
@@ -19076,15 +19090,14 @@ Ajaxy = function () {
 Ajaxy;
 
 /***/ }),
-/* 10 */,
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, window, WP */
 
-var _geo2zip = __webpack_require__(12);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+var _geo2zip = __webpack_require__(11);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Stockists = function () {
 
@@ -19272,13 +19285,13 @@ Stockists = function () {
 Stockists;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var sphereKnn = __webpack_require__(13);var _require =
-__webpack_require__(17),standardizeGeolocation = _require.standardizeGeolocation;
-var usZips = __webpack_require__(18);
+var sphereKnn = __webpack_require__(12);var _require =
+__webpack_require__(16),standardizeGeolocation = _require.standardizeGeolocation;
+var usZips = __webpack_require__(17);
 
 var cleanedPoints = Object.
 keys(usZips).
@@ -19295,11 +19308,11 @@ module.exports = {
   geo2zip: geo2zip };
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var spherekd = __webpack_require__(14);
+var spherekd = __webpack_require__(13);
 
 module.exports = function (points) {
   /* Inflate the toad! */
@@ -19312,12 +19325,12 @@ module.exports = function (points) {
 };
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
-var kd = __webpack_require__(15),
+var kd = __webpack_require__(14),
 rad = Math.PI / 180,
 invEarthDiameter = 1 / 12742018 /* meters */;
 
@@ -19409,11 +19422,11 @@ exports.build = build;
 exports.lookup = lookup;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var binary = __webpack_require__(16);
+var binary = __webpack_require__(15);
 
 function Node(axis, split, left, right) {
   this.axis = axis;
@@ -19543,7 +19556,7 @@ exports.build = build;
 exports.lookup = lookup;
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19586,7 +19599,7 @@ exports.insert = function (item, array, comparator) {
 };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19629,14 +19642,14 @@ module.exports = {
   standardizeGeolocation: standardizeGeolocation };
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(18);
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52787,7 +52800,7 @@ module.exports={
 '08904':{latitude:40.500795,longitude:-74.427911}};
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52887,7 +52900,7 @@ Cube = function () {
 Cube;
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53002,7 +53015,7 @@ Mailchimp = function () {
 Mailchimp;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53702,10 +53715,10 @@ Mailchimp;
 
 	return lazysizes;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)(module)))
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53733,7 +53746,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53744,7 +53757,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = 
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : t.dayjs = e();}(undefined, function () {"use strict";var t = "second",e = "minute",n = "hour",s = "day",r = "week",i = "month",a = "year",u = "Sunday.Monday.Tuesday.Wednesday.Thursday.Friday.Saturday".split("."),c = "January.February.March.April.May.June.July.August.September.October.November.December".split("."),h = /^(\d{4})-?(\d{1,2})-?(\d{1,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?$/,o = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,d = function d(t, e, n) {var s = String(t);return !s || s.length >= e ? t : "" + Array(e + 1 - s.length).join(n) + t;},$ = function $(t) {return t && String(t).toLowerCase().replace(/s$/, "");},f = function f(t) {return void 0 === t;},l = function l(t) {var e;return null === t ? new Date(NaN) : f(t) ? new Date() : t instanceof Date ? t : "string" == typeof t && (e = t.match(h)) ? new Date(e[1], e[2] - 1, e[3], e[5] || 0, e[6] || 0, e[7] || 0, e[8] || 0) : new Date(t);},m = function () {function h(t) {this.$d = l(t), this.init();}var m = h.prototype;return m.init = function () {this.$y = this.$d.getFullYear(), this.$M = this.$d.getMonth(), this.$D = this.$d.getDate(), this.$W = this.$d.getDay(), this.$H = this.$d.getHours(), this.$m = this.$d.getMinutes(), this.$s = this.$d.getSeconds(), this.$ms = this.$d.getMilliseconds();}, m.isValid = function () {return !("Invalid Date" === this.$d.toString());}, m.isLeapYear = function () {return this.$y % 4 == 0 && this.$y % 100 != 0 || this.$y % 400 == 0;}, m.isSame = function (t) {return this.valueOf() === t.valueOf();}, m.isBefore = function (t) {return this.valueOf() < t.valueOf();}, m.isAfter = function (t) {return this.valueOf() > t.valueOf();}, m.year = function () {return this.$y;}, m.month = function () {return this.$M;}, m.day = function () {return this.$W;}, m.date = function () {return this.$D;}, m.hour = function () {return this.$H;}, m.minute = function () {return this.$m;}, m.second = function () {return this.$s;}, m.millisecond = function () {return this.$ms;}, m.unix = function () {return Math.floor(this.valueOf() / 1e3);}, m.valueOf = function () {return this.$d.getTime();}, m.startOf = function (u, c) {var o = this,d = !!f(c) || c,l = function l(t, e, n) {void 0 === n && (n = o.$y);var r = new h(new Date(n, e, t));return d ? r : r.endOf(s);},m = function m(t, e) {return new h(o.toDate()[t].apply(o.toDate(), d ? [0, 0, 0, 0].slice(e) : [23, 59, 59, 999].slice(e)));};switch ($(u)) {case a:return d ? l(1, 0) : l(31, 11, this.$y);case i:return d ? l(1, this.$M) : l(0, this.$M + 1, this.$y);case r:return d ? l(this.$D - this.$W, this.$M) : l(this.$D + (6 - this.$W), this.$M, this.$y);case s:case "date":return m("setHours", 0);case n:return m("setMinutes", 1);case e:return m("setSeconds", 2);case t:return m("setMilliseconds", 3);default:return this.clone();}}, m.endOf = function (t) {return this.startOf(t, !1);}, m.$set = function (s, r) {switch ($(s)) {case "date":this.$d.setDate(r);break;case i:this.$d.setMonth(r);break;case a:this.$d.setFullYear(r);break;case n:this.$d.setHours(r);break;case e:this.$d.setMinutes(r);break;case t:this.$d.setSeconds(r);break;case "millisecond":this.$d.setMilliseconds(r);}return this.init(), this;}, m.set = function (t, e) {return this.clone().$set(t, e);}, m.add = function (t, u) {t = Number(t);var c,o = u && 1 === u.length ? u : $(u);if (["M", i].indexOf(o) > -1) {var d = this.set("date", 1).set(i, this.$M + t);return d = d.set("date", Math.min(this.$D, d.daysInMonth()));}if (["y", a].indexOf(o) > -1) return this.set(a, this.$y + t);switch (o) {case "m":case e:c = 6e4;break;case "h":case n:c = 36e5;break;case "d":case s:c = 864e5;break;case "w":case r:c = 6048e5;break;default:c = 1e3;}return new h(this.valueOf() + t * c);}, m.subtract = function (t, e) {return this.add(-1 * t, e);}, m.format = function (t) {var e,n,s,r,i = this,a = t || "YYYY-MM-DDTHH:mm:ssZ",h = (e = this.$d.getTimezoneOffset(), n = Math.abs(e), s = Math.floor(n / 60), r = n % 60, (e <= 0 ? "+" : "-") + d(s, 2, "0") + ":" + d(r, 2, "0"));return a.replace(o, function (t) {if (t.indexOf("[") > -1) return t.replace(/\[|\]/g, "");switch (t) {case "YY":return String(i.$y).slice(-2);case "YYYY":return String(i.$y);case "M":return String(i.$M + 1);case "MM":return d(i.$M + 1, 2, "0");case "MMM":return c[i.$M].slice(0, 3);case "MMMM":return c[i.$M];case "D":return String(i.$D);case "DD":return d(i.$D, 2, "0");case "d":return String(i.$W);case "dddd":return u[i.$W];case "H":return String(i.$H);case "HH":return d(i.$H, 2, "0");case "h":case "hh":return 0 === i.$H ? 12 : d(i.$H < 13 ? i.$H : i.$H - 12, "hh" === t ? 2 : 1, "0");case "a":return i.$H < 12 ? "am" : "pm";case "A":return i.$H < 12 ? "AM" : "PM";case "m":return String(i.$m);case "mm":return d(i.$m, 2, "0");case "s":return String(i.$s);case "ss":return d(i.$s, 2, "0");case "SSS":return d(i.$ms, 3, "0");case "Z":return h;default:return h.replace(":", "");}});}, m.diff = function (u, c, o) {var d,f,l,m,M,y,g = $(c),S = u instanceof h ? u : new h(u),D = this - S,b = (d = this, m = 12 * ((f = S).year() - d.year()) + (f.month() - d.month()), M = d.clone().add(m, "months"), l = f - M < 0 ? (f - M) / (M - d.clone().add(m - 1, "months")) : (f - M) / (d.clone().add(m + 1, "months") - M), Number(-(m + l)));switch (g) {case a:b /= 12;break;case i:break;case "quarter":b /= 3;break;case r:b = D / 6048e5;break;case s:b = D / 864e5;break;case n:b = D / 36e5;break;case e:b = D / 6e4;break;case t:b = D / 1e3;break;default:b = D;}return o ? b : (y = b) < 0 ? Math.ceil(y) || 0 : Math.floor(y);}, m.daysInMonth = function () {return this.endOf(i).$D;}, m.clone = function () {return new h(this);}, m.toDate = function () {return new Date(this.$d);}, m.toArray = function () {return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];}, m.toJSON = function () {return this.toISOString();}, m.toISOString = function () {return this.toDate().toISOString();}, m.toObject = function () {return { years: this.$y, months: this.$M, date: this.$D, hours: this.$H, minutes: this.$m, seconds: this.$s, milliseconds: this.$ms };}, m.toString = function () {return this.$d.toUTCString();}, h;}();return function (t) {return new m(t);};});
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53778,7 +53791,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (root, factory) {
 	if (true) {
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(26)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2), __webpack_require__(3), __webpack_require__(25)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -54063,7 +54076,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55389,7 +55402,7 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
