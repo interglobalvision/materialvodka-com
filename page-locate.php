@@ -102,27 +102,25 @@ if (have_posts()) {
 ?>
       </div>
 
+
+      <?php
+        if (!empty($bottom_image)) {
+      ?>
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6 background-cover locate-bottom-image">
           <?php
             responsive_background_styles('locate-bottom-image', $bottom_image, array('320', '640', '960'));
           ?>
         </div>
+        <?php get_template_part('partials/mailinglist-half'); ?>
+      </div>
       <?php
-        if (!empty($options['_igv_mailchimp_url'])) {
+        } else {
       ?>
-        <div class="grid-item item-s-12 item-m-6 padding-top-small">
-          <div class="font-size-mid">Special Events, Art Prize, Cocktail Recipes, etc.</div>
-          <div class="grid-row justify-center">
-            <div class="grid-item item-s-10 item-m-8 padding-top-mid padding-bottom-mid">
-              <?php get_template_part('partials/mailinglist-form'); ?>
-            </div>
-          </div>
-        </div>
+        <?php get_template_part('partials/mailinglist-full'); ?>
       <?php
         }
       ?>
-      </div>
 <?php
   }
 }

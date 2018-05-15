@@ -64,20 +64,8 @@ if (have_posts()) {
   </div>
 <?php
 }
-
-if (!empty($options['_igv_mailchimp_url'])) {
 ?>
-    <div class="grid-row align-items-center justify-center">
-      <div class="grid-item item-s-12 item-m-6 item-l-auto font-size-mid">
-        Special Events, Art Prize, Cocktail Recipes, etc.
-      </div>
-      <div class="grid-item item-s-12 item-m-6 padding-top-mid padding-bottom-mid">
-        <?php get_template_part('partials/mailinglist-form'); ?>
-      </div>
-    </div>
-<?php
-}
-?>
+<?php get_template_part('partials/mailinglist-full'); ?>
   </div>
 </main>
 
