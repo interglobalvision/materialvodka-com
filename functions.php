@@ -17,10 +17,10 @@ function scripts_and_styles_method() {
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
     'shopify' => array(
-      'domain' => $shopify_options['shopify_domain'],
-      'storefrontAccessToken' => $shopify_options['shopify_token'],
+      'domain' => !empty($shopify_options['shopify_domain']) ? $shopify_options['shopify_domain'] : null,
+      'storefrontAccessToken' => !empty($shopify_options['shopify_token']) ? $shopify_options['shopify_token'] : null,
     ),
-    'mailchimp' => $site_options['mailchimp_url'],
+    'mailchimp' => !empty($site_options['_igv_mailchimp_url']) ? $site_options['_igv_mailchimp_url'] : null,
   );
 
   wp_register_script('javascript-main', $javascriptMain);

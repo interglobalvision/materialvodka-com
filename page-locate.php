@@ -109,7 +109,7 @@ if (have_posts()) {
           ?>
         </div>
       <?php
-        if (!empty($options['mailchimp_url'])) {
+        if (!empty($options['_igv_mailchimp_url'])) {
       ?>
         <div class="grid-item item-s-12 item-m-6 padding-top-small">
           <div class="font-size-mid">Special Events, Art Prize, Cocktail Recipes, etc.</div>

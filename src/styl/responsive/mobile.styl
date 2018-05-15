@@ -23,6 +23,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 .grid-item-square
   min-height: 100vw
 
+#main-container
+  transition: opacity 1000ms, filter 300ms
+  filter: blur(0)
+  transform-style: preserve-3d
+  &.hide
+    opacity: 0
+
 #main-content
   min-height: 100vh
 
@@ -66,6 +73,7 @@ input
   border: 1px solid $color-white
   font-weight: 300
   font-family: $font-sans
+  margin: 0 $margin-micro
   &::placeholder
     color: $color-white
   &:focus
@@ -226,7 +234,7 @@ body.mobile-active
 // AGE CHECKER FORM
 
 #age-overlay
-  visibility: hidden
+  opacity: 0
   pointer-events: none
   position: fixed
   width: 100vw
@@ -248,7 +256,7 @@ body
     #main-container
       filter: blur(50px)
     #age-overlay
-      visibility: visible
+      opacity: 1
       pointer-events: auto
 
 .age-form-error

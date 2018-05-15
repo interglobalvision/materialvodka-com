@@ -17,7 +17,7 @@ class Mailchimp {
   onReady() {
     this.$form = $('#mailchimp-form');
 
-    if (this.$form.length) {
+    if (this.$form.length && WP.mailchimp !== null) {
       this.$email = $('#mailchimp-email');
       this.$reply = $('#mailchimp-response');
 

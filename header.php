@@ -31,7 +31,11 @@ get_template_part('partials/seo');
 
 <?php get_template_part('partials/agechecker-form'); ?>
 
-<section id="main-container">
+<section id="main-container" class="hide">
+
+<?php
+$options = get_site_option('_igv_site_options');
+?>
 
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
@@ -45,53 +49,49 @@ get_template_part('partials/seo');
             <div id="mobile-nav-trigger-borders"></div>
           </div>
         </div>
+      <?php
+        if (!empty($options['_igv_nav_menu_group'])) {
+          $nav_menu_group = $options['_igv_nav_menu_group'][0];
+      ?>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
           <ul class="grid-row justify-between flex-nowrap">
+          <?php
+            foreach ($nav_menu_group as $key => $value) {
+          ?>
             <li class="grid-item">
-              <a href="<?php echo home_url('prize'); ?>">Prize</a>
+              <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
             </li>
-            <li class="grid-item">
-              <a href="<?php echo home_url('videos'); ?>">Videos</a>
-            </li>
-            <li class="grid-item">
-              <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
-            </li>
-            <li class="grid-item">
-              <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
-            </li>
-            <li class="grid-item">
-              <a href="<?php echo home_url('locate'); ?>">Locate</a>
-            </li>
-            <li class="grid-item">
-              <a href="<?php echo home_url('merch'); ?>">Merch</a>
-            </li>
+          <?php
+            }
+          ?>
           </ul>
         </nav>
+      <?php
+        }
+      ?>
       </div>
     </div>
   </header>
 
   <nav id="mobile-nav">
     <div class="container">
+    <?php
+      if (!empty($options['_igv_nav_menu_group'])) {
+        $nav_menu_group = $options['_igv_nav_menu_group'][0];
+    ?>
       <ul id="mobile-nav-list" class="grid-column align-items-center justify-center font-uppercase">
+      <?php
+        foreach ($nav_menu_group as $key => $value) {
+      ?>
         <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('prize'); ?>">Prize</a>
+          <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
         </li>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('videos'); ?>">Videos</a>
-        </li>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
-        </li>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
-        </li>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('locate'); ?>">Locate</a>
-        </li>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('merch'); ?>">Merch</a>
-        </li>
+      <?php
+        }
+      ?>
       </ul>
+    <?php
+      }
+    ?>
     </div>
   </nav>

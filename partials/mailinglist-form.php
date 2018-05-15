@@ -1,7 +1,7 @@
 <?php
 $options = get_site_option('_igv_site_options');
 
-if (!empty($options['mailchimp_url'])) {
+if (!empty($options['_igv_mailchimp_url'])) {
 ?>
 <div id="mailinglist-form-holder">
   <div class="margin-bottom-tiny">Enter your email address and stay informed</div>

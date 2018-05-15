@@ -78,7 +78,7 @@ class AgeCheck {
           errorMessage = 'You must be of legal age to enter';
         }
       }
-      return {isValid, errorMessage}
+      return {isValid, errorMessage};
   }
 
   checkForCookie() {
@@ -86,6 +86,7 @@ class AgeCheck {
     if (!cookie) {
       $('body').addClass('age-check');
     }
+    $('#main-container').removeClass('hide');
   }
 }
 
