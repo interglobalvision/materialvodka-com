@@ -59,7 +59,6 @@ class Site {
     this.initCoverVid();
     this.submitAgeForm();
     this.bindStickyHeader();
-    this.initCoverVid();
     this.animateBottleSprite();
   }
 
@@ -111,8 +110,6 @@ class Site {
 
   bindMobileNavTrigger() {
     const $mobileNav = $('#mobile-nav');
-
-    console.log('bind');
 
     $('#mobile-nav-trigger').on('click', () => {
       this.$body.toggleClass('mobile-active');

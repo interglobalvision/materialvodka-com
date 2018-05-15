@@ -13056,7 +13056,6 @@ Site = function () {
       this.initCoverVid();
       this.submitAgeForm();
       this.bindStickyHeader();
-      this.initCoverVid();
       this.animateBottleSprite();
     } }, { key: 'fixWidows', value: function fixWidows()
 
@@ -13108,8 +13107,6 @@ Site = function () {
 
     {var _this = this;
       var $mobileNav = $('#mobile-nav');
-
-      console.log('bind');
 
       $('#mobile-nav-trigger').on('click', function () {
         _this.$body.toggleClass('mobile-active');
