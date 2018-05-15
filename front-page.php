@@ -47,12 +47,12 @@ if (have_posts()) {
         <?php
           if (!empty($locate_image)) {
         ?>
-          <div class="grid-item item-s-6 background-cover bg-front-locate">
+          <div class="grid-item item-s-4 item-m-6 background-cover bg-front-locate">
             <?php
             responsive_background_styles('bg-front-locate', $locate_image, array('320x320','640x640','960x960'));
             ?>
           </div>
-          <div class="grid-item item-s-6 margin-top-basic">
+          <div class="grid-item item-s-8 item-m-6 margin-top-basic">
         <?php
           } else {
         ?>

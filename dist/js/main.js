@@ -13032,6 +13032,8 @@ Site = function () {
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
+      this.windowWidth = this.$window.width();
+
       this.sizeHeaderSpacer();
       this.repositionHeader();
     } }, { key: 'onReady', value: function onReady()
@@ -13041,16 +13043,19 @@ Site = function () {
 
       this.$window = $(window);
       this.$document = $(document);
+      this.$body = $('body');
       this.$header = $('#header');
       this.$mainContent = $('#main-content');
-      this.$headerSpacer = $('#header-spacer');
+      this.$headerSpacer = $('.header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
+      this.windowWidth = this.$window.width();
+
+      this.bindMobileNavTrigger();
       this.checkForCookie();
       this.initCoverVid();
       this.submitAgeForm();
       this.bindStickyHeader();
-      this.initCoverVid();
       this.animateBottleSprite();
     } }, { key: 'fixWidows', value: function fixWidows()
 
@@ -13078,25 +13083,34 @@ Site = function () {
     } }, { key: 'repositionHeader', value: function repositionHeader()
 
     {
-      if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop()) {
-        this.$header.addClass('bottom').css({
-          top: this.headerTop + 'px',
-          bottom: 'auto' });
-
-      } else if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop()) {
+      if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop() || this.windowWidth < 720) {
         this.$header.removeClass('bottom').css({
           top: 'auto',
           bottom: 0 });
+
+      } else if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop() && this.windowWidth >= 720) {
+        this.$header.addClass('bottom').css({
+          top: this.headerTop + 'px',
+          bottom: 'auto' });
 
       }
     } }, { key: 'sizeHeaderSpacer', value: function sizeHeaderSpacer()
 
     {
       var headerHeight = this.$header.outerHeight();
+
       this.$headerSpacer.css('height', headerHeight + 'px');
       this.headerTop = this.$headerSpacer.offset().top;
       this.headerSpacerOffset = this.headerTop + headerHeight;
       this.windowHeight = this.$window.outerHeight();
+    } }, { key: 'bindMobileNavTrigger', value: function bindMobileNavTrigger()
+
+    {var _this = this;
+      var $mobileNav = $('#mobile-nav');
+
+      $('#mobile-nav-trigger').on('click', function () {
+        _this.$body.toggleClass('mobile-active');
+      });
     } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
 
     {
