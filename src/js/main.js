@@ -8,9 +8,8 @@ import Ajaxy from './ajaxy';
 import Stockists from './stockists';
 import Cube from './cube';
 import Mailchimp from './mailchimp';
+import AgeCheck from './ageCheck';
 import lazySizes from 'lazysizes';
-import dayjs from 'dayjs';
-import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import animationGsap from 'animationGsap';
 import TweenMax from 'gsap';
@@ -31,11 +30,11 @@ class Site {
 
     // Bind
     this.repositionHeader = this.repositionHeader.bind(this);
-
   }
 
   onResize() {
     this.resetHeader();
+    this.windowWidth = this.$window.width();
   }
 
   onReady() {
@@ -43,16 +42,17 @@ class Site {
 
     this.$window = $(window);
     this.$document = $(document);
+    this.$body = $('body');
     this.$header = $('#header');
     this.$mainContent = $('#main-content');
-    this.$headerSpacer = $('#header-spacer');
+    this.$headerSpacer = $('.header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
-    this.checkForCookie();
+    this.windowWidth = this.$window.width();
+
+    this.bindMobileNavTrigger();
     this.initCoverVid();
-    this.submitAgeForm();
     this.bindStickyHeader();
-    this.initCoverVid();
     this.animateBottleSprite();
   }
 
@@ -68,7 +68,7 @@ class Site {
   initCoverVid() {
     if (this.$covervidVideo.length) {
       this.$covervidVideo.each((index, element) =>  {
-        $(element).coverVid(1920, 1080);
+        $(element).coverVid(1920, 1080).addClass('show');
       });
     }
   }
@@ -80,21 +80,22 @@ class Site {
   }
 
   repositionHeader() {
-    if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop()) {
-      this.$header.addClass('bottom').css({
-        top: this.headerTop + 'px',
-        bottom: 'auto'
-      });
-    } else if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop()) {
+    if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop() || this.windowWidth < 720) {
       this.$header.removeClass('bottom').css({
         top: 'auto',
         bottom: 0
+      });
+    } else if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop() && this.windowWidth >= 720) {
+      this.$header.addClass('bottom').css({
+        top: this.headerTop + 'px',
+        bottom: 'auto'
       });
     }
   }
 
   sizeHeaderSpacer() {
     const headerHeight = this.$header.outerHeight();
+
     this.$headerSpacer.css('height', headerHeight + 'px');
     this.headerTop = this.$headerSpacer.offset().top;
     this.headerSpacerOffset = this.headerTop + headerHeight;
@@ -104,6 +105,14 @@ class Site {
   resetHeader() {
     this.sizeHeaderSpacer();
     this.repositionHeader();
+  }
+
+  bindMobileNavTrigger() {
+    const $mobileNav = $('#mobile-nav');
+
+    $('#mobile-nav-trigger').on('click', () => {
+      this.$body.toggleClass('mobile-active');
+    });
   }
 
   animateBottleSprite() {
@@ -124,28 +133,6 @@ class Site {
     }
   }
 
-  submitAgeForm() {
-    $('#submit-age').on('click', function(e){
-      e.preventDefault();
-      const month = $('#birthday-month').val();
-      const day = $('#birthday-day').val();
-      const year = $('#birthday-year').val();
-      const birthday = dayjs(new Date(year, month, day));
-      const age = dayjs().diff(birthday, 'years');
-      if (age >= 21) {
-        Cookies.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-        $('body').removeClass('age-check');
-      }
-    });
-  }
-
-  checkForCookie() {
-    const cookie = Cookies.get('legalAge');
-    if (!cookie) {
-      $('body').addClass('age-check');
-    }
-  }
-
 }
 
 const Material = new Site();
@@ -154,3 +141,4 @@ const MaterialAjaxy = new Ajaxy();
 const MaterialStockists = new Stockists();
 const MaterialCube = new Cube();
 const MaterialMailchimp = new Mailchimp();
+const MaterialAgeCheck = new AgeCheck(MaterialMailchimp.handleMailchimpAjax);

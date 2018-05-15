@@ -49,6 +49,21 @@ function igv_cmb_metabox_home() {
     ) );
 
     $metabox->add_field( array(
+      'name'      	=> __( 'Bottle background image', 'cmb2' ),
+      'id'        	=> $prefix . 'home_bottle_image',
+      'type'      	=> 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+    ) );
+
+    $metabox->add_field( array(
       'name'      	=> __( 'Featured Recipe', 'cmb2' ),
       'id'        	=> $prefix . 'home_recipe',
       'type'      	=> 'post_search_ajax',
@@ -214,6 +229,7 @@ function igv_cmb_metabox_video_awards() {
     'type'    => 'wysiwyg',
     'options' => array(
       'textarea_rows' => 5,
+      'media_buttons' => false,
     ),
   ) );
 
@@ -658,5 +674,24 @@ function igv_cmb_metaboxes_vodka_page() {
   ) );
 
   }
+}
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_winner' );
+function igv_cmb_metabox_winner() {
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'metabox_winner',
+    'title'         => esc_html__( 'Options', 'cmb2' ),
+    'object_types'  => array( 'prize-winner' ), // Post type
+  ) );
+
+  // Year
+  $metabox->add_field( array(
+    'name'    => 'Year',
+    'id'      => $prefix . 'prize_winner_year',
+    'type'    => 'text',
+  ) );
 }
 ?>

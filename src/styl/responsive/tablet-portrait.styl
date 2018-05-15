@@ -25,11 +25,27 @@
   .mobile-only
     display: none !important
 
+  .grid-item-square
+    min-height: 50vw
+
+  .mobile-min-height
+    min-height: 0
+
+  // ******************************************************
+
+  // FORMS
+
+  button
+    padding: 0 $margin-tiny
+
+  input
+    margin: 0 $margin-micro
+
   // ******************************************************
 
   // HEADER
 
-  #mobile-menu-trigger-holder
+  #mobile-nav-trigger-holder
     display: none
 
   #desktop-nav
@@ -39,6 +55,12 @@
     transform: translateX(100vw)
     &.active
       transform: translateX(100vw)
+
+  #header-spacer-desktop
+    display: block
+
+  #header-spacer-mobile
+    display: none
 
   // ******************************************************
 

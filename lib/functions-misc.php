@@ -11,6 +11,35 @@ add_filter('show_admin_bar', '__return_false');
 function no_generator() { return ''; }
 add_filter( 'the_generator', 'no_generator' );
 
+// Show recipe season in admin lists
+add_filter('manage_recipe_posts_columns', 'new_add_recipe_season_column');
+function new_add_recipe_season_column($cols) {
+  $cols['recipe_season'] = __('Season');
+  return $cols;
+}
+
+add_action('manage_recipe_posts_custom_column', 'new_display_recipe_season_column', 5, 2);
+function new_display_recipe_season_column($col, $id) {
+  if ($col === 'recipe_season') {
+    $seasons = wp_get_post_terms( get_the_ID(), 'season' );
+    echo count($seasons) > 0 ? $seasons[0]->name : '';
+  }
+}
+
+// Show City in Stockists list
+add_filter('manage_stockist_posts_columns', 'new_add_stockist_city_column');
+function new_add_stockist_city_column($cols) {
+  $cols['stockist_city'] = __('City');
+  return $cols;
+}
+add_action('manage_stockist_posts_custom_column', 'new_display_stockist_city_column', 5, 2);
+function new_display_stockist_city_column($col, $id) {
+  if ($col === 'stockist_city') {
+    $city = get_post_meta(get_the_ID(), '_igv_stockist_city', true);
+    echo !empty($city) ? strtoupper($city) : '';
+  }
+}
+
 // Show thumbnails in admin lists
 add_filter('manage_posts_columns', 'new_add_post_thumbnail_column');
 function new_add_post_thumbnail_column($cols) {
