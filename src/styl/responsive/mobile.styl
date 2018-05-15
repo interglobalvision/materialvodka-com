@@ -107,11 +107,18 @@ input::-webkit-inner-spin-button
   position: fixed
   bottom: 0
   left: 0
-  z-index: 900
   background-color: $color-black
   width: 100%
+  z-index: 1200
   &.bottom
     position: absolute
+
+body.mobile-active
+  #mobile-nav
+    transform: translateY(0)
+  #mobile-nav-trigger-borders
+    height: 1px
+    border-width: .5px 0
 
 #logo
   fill: $color-white
@@ -128,30 +135,28 @@ input::-webkit-inner-spin-button
   height: 100vh
   z-index: 1100
   background-color: $color-black
-  transform: translateX(100vw)
+  transform: translateY(100vh)
   transition: transform 300ms ease-in
-  &.active
-    transform: translateX(0)
 
 #mobile-nav-list
-  min-height: 50vh
-  margin-top: 50vh
+  min-height: 100vh
   li
     width: 50%
     text-align: center
 
-#mobile-nav-trigger-holder
-  z-index: 1200
-
 #mobile-nav-trigger
-  margin: 4px 0 6px
+  height: 20px
 
 #mobile-nav-trigger-borders
   border-width: 1px 0
   border-color: $color-white
   border-style: solid
-  height: 10px
+  height: 8px
   width: 17px
+  transition: height 300ms ease-in
+
+#header-spacer-desktop
+  display: none
 
 // ******************************************************
 
