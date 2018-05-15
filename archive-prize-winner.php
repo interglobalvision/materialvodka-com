@@ -13,11 +13,11 @@ $options = get_site_option('_igv_site_options');
       </div>
     </div>
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item item-s-12 item-m-4 item-l-3">
-        A yearly no-strings-attached cash prize awarded to a progressive creator by an independant board of artists and curators.
+      <div class="grid-item item-s-12 item-m-4 item-l-3 p-max-width">
+        <p>A yearly no-strings-attached cash prize awarded to a progressive creator by an independant board of artists and curators.</p>
       </div>
-      <div class="grid-item item-s-12 item-m-4 item-l-3">
-        The Material Prize is an invitation only prize selected by a small group of curators and artists. Material Vodka has no say in the decision of the winner or the nomination process.
+      <div class="grid-item item-s-12 item-m-4 item-l-3 p-max-width">
+        <p>The Material Prize is an invitation only prize selected by a small group of curators and artists. Material Vodka has no say in the decision of the winner or the nomination process.</p>
       </div>
     </div>
 
