@@ -24,8 +24,8 @@ class Site {
 
     $(window)
       .resize(this.onResize.bind(this))
-      .on('ajaxSuccess', this.onReady.bind(this))
-      .on('ajaxSuccess', this.repositionHeader.bind(this));
+      .on('ajaxEndTransition', this.onReady.bind(this))
+      .on('ajaxEndTransition', this.resetHeader.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -35,8 +35,7 @@ class Site {
   }
 
   onResize() {
-    this.sizeHeaderSpacer();
-    this.repositionHeader();
+    this.resetHeader();
   }
 
   onReady() {
@@ -100,6 +99,11 @@ class Site {
     this.headerTop = this.$headerSpacer.offset().top;
     this.headerSpacerOffset = this.headerTop + headerHeight;
     this.windowHeight = this.$window.outerHeight();
+  }
+
+  resetHeader() {
+    this.sizeHeaderSpacer();
+    this.repositionHeader();
   }
 
   animateBottleSprite() {
