@@ -13011,9 +13011,8 @@ var _createClass = function () {function defineProperties(target, props) {for (v
 
 
 
-
 // Import style
-__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(10);var _stockists2 = _interopRequireDefault(_stockists);var _cube = __webpack_require__(19);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(20);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _lazysizes = __webpack_require__(21);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _dayjs = __webpack_require__(23);var _dayjs2 = _interopRequireDefault(_dayjs);var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(24);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+__webpack_require__(6);var _shop = __webpack_require__(7);var _shop2 = _interopRequireDefault(_shop);var _ajaxy = __webpack_require__(9);var _ajaxy2 = _interopRequireDefault(_ajaxy);var _stockists = __webpack_require__(10);var _stockists2 = _interopRequireDefault(_stockists);var _cube = __webpack_require__(19);var _cube2 = _interopRequireDefault(_cube);var _mailchimp = __webpack_require__(20);var _mailchimp2 = _interopRequireDefault(_mailchimp);var _ageCheck = __webpack_require__(31);var _ageCheck2 = _interopRequireDefault(_ageCheck);var _lazysizes = __webpack_require__(21);var _lazysizes2 = _interopRequireDefault(_lazysizes);var _scrollmagic = __webpack_require__(2);var _scrollmagic2 = _interopRequireDefault(_scrollmagic);var _animationGsap = __webpack_require__(24);var _animationGsap2 = _interopRequireDefault(_animationGsap);var _gsap = __webpack_require__(3);var _gsap2 = _interopRequireDefault(_gsap);__webpack_require__(26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
 
 Site = function () {
   function Site() {_classCallCheck(this, Site);
@@ -13027,8 +13026,6 @@ Site = function () {
 
     // Bind
     this.repositionHeader = this.repositionHeader.bind(this);
-    this.handleAgeFormSubmit = this.handleAgeFormSubmit.bind(this);
-
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
@@ -13052,9 +13049,7 @@ Site = function () {
       this.windowWidth = this.$window.width();
 
       this.bindMobileNavTrigger();
-      this.checkForCookie();
       this.initCoverVid();
-      this.submitAgeForm();
       this.bindStickyHeader();
       this.animateBottleSprite();
     } }, { key: 'fixWidows', value: function fixWidows()
@@ -13129,64 +13124,7 @@ Site = function () {
         setTween(tween).
         addTo(controller);
       }
-    } }, { key: 'submitAgeForm', value: function submitAgeForm()
-
-    {
-      $('#submit-age').on('click', this.handleAgeFormSubmit);
-    } }, { key: 'handleAgeFormSubmit', value: function handleAgeFormSubmit(
-
-    event) {
-      event.preventDefault();
-      var month = $('#birthday-month').val();
-      var day = $('#birthday-day').val();
-      var year = $('#birthday-year').val();
-      var validation = this.validateAgeForm(month, day, year);
-
-      if (validation['isValid'] === false) {
-        $('#age-form-response').html(validation['errorMessage']).addClass('age-form-error');
-      } else {
-        _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
-        $('body').removeClass('age-check');
-      }
-    } }, { key: 'validateAgeForm', value: function validateAgeForm(
-
-    month, day, year) {
-      //returns true or false based on validation state
-      var isValid = true;
-      var errorMessage = '';
-      if (month === null || month === '' || day === null || day === '' || year === null || year === '') {
-        isValid = false;
-        errorMessage = 'Please fill out all fields';
-      } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        isValid = false;
-        errorMessage = 'Enter a valid number';
-      } else if (month > 12 || month < 1) {
-        isValid = false;
-        errorMessage = 'Enter a valid month';
-      } else if (day > 31 || day < 1) {
-        isValid = false;
-        errorMessage = 'Enter a valid day';
-      } else if (year > 2050 || year < 1900) {
-        isValid = false;
-        errorMessage = 'Enter a valid year';
-      } else {
-        var birthday = (0, _dayjs2.default)(new Date(year, month, day));
-        var age = (0, _dayjs2.default)().diff(birthday, 'years');
-        if (age < 21) {
-          isValid = false;
-          errorMessage = 'You must be of legal age to enter';
-        }
-      }
-      return { isValid: isValid, errorMessage: errorMessage };
-    } }, { key: 'checkForCookie', value: function checkForCookie()
-
-    {
-      var cookie = _jsCookie2.default.get('legalAge');
-      if (!cookie) {
-        $('body').addClass('age-check');
-      }
     } }]);return Site;}();
-
 
 
 
@@ -13196,6 +13134,7 @@ var MaterialAjaxy = new _ajaxy2.default();
 var MaterialStockists = new _stockists2.default();
 var MaterialCube = new _cube2.default();
 var MaterialMailchimp = new _mailchimp2.default();
+var MaterialAgeCheck = new _ageCheck2.default(MaterialMailchimp.handleMailchimpAjax);
 
 /***/ }),
 /* 6 */
@@ -52933,9 +52872,6 @@ Mailchimp = function () {
     } }, { key: 'submitForm', value: function submitForm()
 
     {
-      // Rewrite action URL for JSONP
-      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
-
       var data = {};
 
       // Get form data
@@ -52946,19 +52882,26 @@ Mailchimp = function () {
         data[item.name] = item.value;
       });
 
+      this.handleMailchimpAjax(data, this.successMessage);
+
+      // Prevent default submit functionality
+      return false;
+    } }, { key: 'handleMailchimpAjax', value: function handleMailchimpAjax(
+
+    data, successCallback) {
+      // Rewrite action URL for JSONP
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
       // Ajax post to Mailchimp API
       $.ajax({
         url: url,
         data: data,
-        success: this.successMessage,
+        success: successCallback,
         dataType: 'jsonp',
         error: function error(resp, text) {
           console.log('mailchimp ajax submit error: ' + text);
         } });
 
-
-      // Prevent default submit functionality
-      return false;
     }
 
     /**
@@ -55406,6 +55349,108 @@ var _gsScope = typeof module !== "undefined" && module.exports && typeof global 
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */
+
+var _dayjs = __webpack_require__(23);var _dayjs2 = _interopRequireDefault(_dayjs);
+var _jsCookie = __webpack_require__(1);var _jsCookie2 = _interopRequireDefault(_jsCookie);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var
+
+AgeCheck = function () {
+  function AgeCheck(handleMailchimpAjax) {_classCallCheck(this, AgeCheck);
+    this.mobileThreshold = 601;
+
+    $(document).ready(this.onReady.bind(this));
+
+    this.handleMailchimpAjax = handleMailchimpAjax;
+
+    // Bind
+    this.handleAgeFormSubmit = this.handleAgeFormSubmit.bind(this);
+  }_createClass(AgeCheck, [{ key: 'onResize', value: function onResize()
+
+    {
+
+    } }, { key: 'onReady', value: function onReady()
+
+    {
+      this.checkForCookie();
+      this.bindAgeForm();
+    } }, { key: 'bindAgeForm', value: function bindAgeForm()
+
+    {
+      $('#submit-age').on('click', this.handleAgeFormSubmit);
+    } }, { key: 'handleAgeFormSubmit', value: function handleAgeFormSubmit(
+
+    event) {
+      event.preventDefault();
+      var month = $('#birthday-month').val();
+      var day = $('#birthday-day').val();
+      var year = $('#birthday-year').val();
+      var email = $('#mailchimp-email').val();
+      var validation = this.validateAgeForm(month, day, year);
+
+      if (validation.isValid === false) {
+        $('#age-form-response').html(validation.errorMessage).addClass('age-form-error');
+      } else {
+        _jsCookie2.default.set('legalAge', true, { expires: 1 }); // Expires in 1 day
+        $('body').removeClass('age-check');
+
+        if (email !== null && email !== '' && this.handleMailchimpAjax !== undefined) {
+          var data = { 'EMAIL': email };
+
+          this.handleMailchimpAjax(data);
+        }
+      }
+    } }, { key: 'validateAgeForm', value: function validateAgeForm(
+
+    month, day, year) {
+      //returns true or false based on validation state
+      var isValid = true;
+      var errorMessage = '';
+      if (month === null || month === '' || day === null || day === '' || year === null || year === '') {
+        isValid = false;
+        errorMessage = 'Please fill out all fields';
+      } else if (isNaN(month) || isNaN(day) || isNaN(year)) {
+        isValid = false;
+        errorMessage = 'Enter a valid number';
+      } else if (month > 12 || month < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid month';
+      } else if (day > 31 || day < 1) {
+        isValid = false;
+        errorMessage = 'Enter a valid day';
+      } else if (year > 2050 || year < 1900) {
+        isValid = false;
+        errorMessage = 'Enter a valid year';
+      } else {
+        var birthday = (0, _dayjs2.default)(new Date(year, month, day));
+        var age = (0, _dayjs2.default)().diff(birthday, 'years');
+        if (age < 21) {
+          isValid = false;
+          errorMessage = 'You must be of legal age to enter';
+        }
+      }
+      return { isValid: isValid, errorMessage: errorMessage };
+    } }, { key: 'checkForCookie', value: function checkForCookie()
+
+    {
+      var cookie = _jsCookie2.default.get('legalAge');
+      if (!cookie) {
+        $('body').addClass('age-check');
+      }
+    } }]);return AgeCheck;}();exports.default =
+
+
+AgeCheck;
 
 /***/ })
 /******/ ]);
