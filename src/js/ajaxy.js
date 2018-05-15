@@ -88,8 +88,13 @@ class Ajaxy {
   }
 
   ajaxBefore(xhr, settings) {
+    $('html').animate({
+      scrollTop: 0,
+    }, 500);
+
     $('body').addClass('loading');
-    $('#transition-cube').css('transform', 'scale(0.9)');
+
+    $('#transition-cube').css('transform', 'scale(0.6)');
   }
 
   ajaxAfter() {
@@ -105,14 +110,14 @@ class Ajaxy {
     $next.addClass('active');
 
     setTimeout(() => {
-      $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0'); 
+      $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0');
       $('#transition-cube').css('transform', 'scale(1)');
 
       //$next.removeClass('next');
       //$active.addClass('next');
 
       this.endTransition();
-    }, 1000);
+    }, 500);
   }
 
   endTransition() {
@@ -124,7 +129,7 @@ class Ajaxy {
       $('#transition-cube .next').css('opacity', '1');
       $('body').removeClass('loading');
       window.dispatchEvent(this.ajaxEndTransition);
-    }, 1000);
+    }, 500);
   }
 
   ajaxErrorHandler(jqXHR, textStatus) {
