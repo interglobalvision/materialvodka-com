@@ -24,7 +24,8 @@ class Site {
 
     $(window)
       .resize(this.onResize.bind(this))
-      .on('ajaxSuccess', this.onReady.bind(this));
+      .on('ajaxSuccess', this.onReady.bind(this))
+      .on('ajaxSuccess', this.repositionHeader.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 

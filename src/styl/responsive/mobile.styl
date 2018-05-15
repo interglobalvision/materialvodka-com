@@ -154,8 +154,8 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   top:0
   left:0
   z-index: 1000
- 
-  
+
+
 #age-checker-form
   background-color: $color-black
 
@@ -175,7 +175,7 @@ input
 input#birthday-year
   min-width: 5em
 
-input::-webkit-inner-spin-button 
+input::-webkit-inner-spin-button
     -webkit-appearance: none
     margin: 0
 
@@ -186,6 +186,26 @@ body
     #age-overlay
       visibility: visible
       pointer-events: auto
-      
 
 
+
+// TRANSITION-CUBE
+#transition-cube
+  backface-visibility: hidden
+  background-color: #000
+  visibility: visible
+  perspective: none
+
+#main-content
+  visibility: visible
+  transition: transform 500ms ease-in-out
+  transform: rotateY(0deg) translateZ(50vw)
+  border: 1px solid green
+
+#main-content-next
+  width: 100vw
+  height: 100vh
+  visibility: visible
+  transition: transform 500ms ease-in-out
+  transform: rotateY(90deg) translateZ(50vw)
+  border: 1px solid blue

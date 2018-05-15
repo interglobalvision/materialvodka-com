@@ -89,17 +89,48 @@ class Ajaxy {
   ajaxBefore(xhr, settings) {
 
     $('body').addClass('loading');
-    $('body, html').animate({
-      scrollTop: 0,
-    }, 300);
   }
 
   ajaxAfter() {
 
     $('body').removeClass('loading');
 
+    this.startTransition();
+
     this.reset();
 
+  }
+
+  startTransition() {
+    console.log('transition');
+
+    // Set DOM element
+    $('#transition-cube').css({
+      'position': 'relative',
+      '-webkit-perspective': 0,
+      'perspective': 0,
+      'z-index': 0,
+      'height': '100%',
+      'min-height': '100vh',
+    });
+
+    $('#main-content').css({
+      'position': 'absolute',
+      'top': '0',
+      'bottom': '0',
+      'left': '0',
+      'right': '0',
+      'transform': 'rotateY(-90deg) translateZ(50vw)',
+    });
+
+    $('#main-content-next').css({
+      'position': 'absolute',
+      'top': '0',
+      'bottom': '0',
+      'left': '0',
+      'right': '0',
+      'transform': 'rotateY(0deg) translateZ(50vw)',
+    });
   }
 
   ajaxErrorHandler(jqXHR, textStatus) {
@@ -120,7 +151,7 @@ class Ajaxy {
 
     // Update with new title, content and classes
     document.title = $title;
-    $('#main-content').html($content.html());
+    $('#main-content-next').html($content.html());
     $('body').removeAttr('class').addClass($bodyClasses + ' loading');
 
     // Update Admin Bar
