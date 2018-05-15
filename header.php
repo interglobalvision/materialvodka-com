@@ -37,11 +37,11 @@ get_template_part('partials/seo');
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
       <div class="grid-row flex-nowrap align-items-center">
-        <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
+        <div class="grid-item item-m-auto item-l-6 flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
-        <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
-          <button id="mobile-menu-trigger">Menu</button>
+        <div id="mobile-menu-trigger-holder" class="grid-item text-align-right">
+          <div id="mobile-menu-trigger"><div id="mobile-menu-trigger-borders"></div></div>
         </div>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
           <ul class="grid-row justify-between flex-nowrap">
