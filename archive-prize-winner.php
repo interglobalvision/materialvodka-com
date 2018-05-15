@@ -13,10 +13,10 @@ $options = get_site_option('_igv_site_options');
       </div>
     </div>
     <div class="grid-row margin-bottom-basic">
-      <div class="grid-item item-s-12 item-m-4 item-l-3 p-max-width">
+      <div class="grid-item item-s-12 item-m-4 item-l-3 text-max-width">
         <p>A yearly no-strings-attached cash prize awarded to a progressive creator by an independant board of artists and curators.</p>
       </div>
-      <div class="grid-item item-s-12 item-m-4 item-l-3 p-max-width">
+      <div class="grid-item item-s-12 item-m-4 item-l-3 text-max-width">
         <p>The Material Prize is an invitation only prize selected by a small group of curators and artists. Material Vodka has no say in the decision of the winner or the nomination process.</p>
       </div>
     </div>
@@ -55,7 +55,7 @@ if (have_posts()) {
       <?php the_post_thumbnail('640x640', 'class=margin-bottom-small'); ?>
       <div class="font-uppercase"><?php echo $year; ?> Prize</div>
       <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
-      <div class="p-max-width"><?php the_content(); ?></div>
+      <div class="text-max-width"><?php the_content(); ?></div>
     </div>
 
 <?php
@@ -66,6 +66,9 @@ if (have_posts()) {
 }
 ?>
 
+<?php
+  if (!empty($options['_igv_mailchimp_url'])) {
+?>
     <div class="grid-row align-items-center justify-center">
       <div class="grid-item item-s-12 item-m-6 text-align-right">
         Special Events, Art Prize, Cocktail Recipes, etc.
@@ -74,7 +77,9 @@ if (have_posts()) {
         <?php get_template_part('partials/mailinglist-form'); ?>
       </div>
     </div>
-
+<?php
+  }
+?>
   </div>
 </main>
 
