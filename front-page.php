@@ -145,7 +145,7 @@ if (have_posts()) {
 
         wp_reset_postdata();
 
-        if (!empty($options['_igv_mailinglist_embed'])) {
+        if (!empty($options['_igv_mailchimp_url'])) {
       ?>
         <div class="grid-item padding-top-small">
           <div class="font-size-mid">Special Events, Art Prize, Cocktail Recipes, etc.</div>

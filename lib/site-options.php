@@ -163,6 +163,61 @@ function igv_register_theme_options_metabox() {
     'type'    => 'text',
   ) );
 
+  // Prize video group
+  $prize_video_id = $site_options->add_field( array(
+    'id'      => $prefix . 'prize_video_group',
+    'name'    => 'Video',
+    'type'        => 'group',
+    'repeatable'  => false, // use false if you want non-repeatable group
+  ) );
+
+  // Prize video mp4
+  $site_options->add_group_field( $prize_video_id , array(
+    'name'    => 'Video (mp4)',
+    'id'      => 'mp4',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'video/mp4',
+      ),
+    ),
+  ) );
+
+  // Prize video webm
+  $site_options->add_group_field( $prize_video_id , array(
+    'name'    => 'Video (webm)',
+    'id'      => 'webm',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'video/webm',
+      ),
+    ),
+  ) );
+
+  // Prize video poster
+  $site_options->add_group_field( $prize_video_id , array(
+    'name'    => 'Video Poster',
+    'id'      => 'poster',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ));
+
   // Social Media variables
 
   $site_options->add_field( array(

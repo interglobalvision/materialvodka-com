@@ -8,7 +8,6 @@ function create_custom_pages() {
     'home' => 'Home',
     'locate' => 'Locate',
     'vodka' => 'Vodka',
-    'prize' => 'Prize',
     'press' => 'Press',
     'contact' => 'Contact',
     'terms-and-conditions' => 'Terms & Conditions',
