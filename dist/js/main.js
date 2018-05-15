@@ -13263,7 +13263,7 @@ Shop = function () {
     {
 
       // Check shopify api data
-      if (WP.shopify) {var _WP$shopify =
+      if (WP.shopify.domain !== null && WP.shopify.storefrontAccessToken !== null) {var _WP$shopify =
         WP.shopify,domain = _WP$shopify.domain,storefrontAccessToken = _WP$shopify.storefrontAccessToken;
 
         // Init Shopify client
