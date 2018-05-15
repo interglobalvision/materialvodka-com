@@ -2,7 +2,7 @@
 $options = get_site_option('_igv_site_options');
 ?>
   </div>
-  <div id="s2" class="transition-cube-side next"></div>
+  <div class="transition-cube-side next"></div>
 </div>
 
   <div id="header-spacer"></div>

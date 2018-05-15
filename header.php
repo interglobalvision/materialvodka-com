@@ -92,4 +92,4 @@ get_template_part('partials/seo');
     </nav>
   </header>
 <div id="transition-cube">
-  <div id="s1" class="transition-cube-side active">
+  <div class="transition-cube-side active">
