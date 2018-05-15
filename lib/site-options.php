@@ -163,6 +163,12 @@ function igv_register_theme_options_metabox() {
     'type'    => 'text',
   ) );
 
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Prize page video', 'cmb2' ),
+    'id'      => $prefix . 'prize_video_title',
+    'type'    => 'title',
+  ) );
+
   // Prize video group
   $prize_video_id = $site_options->add_field( array(
     'id'      => $prefix . 'prize_video_group',
