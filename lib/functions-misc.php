@@ -11,7 +11,7 @@ add_filter('show_admin_bar', '__return_false');
 function no_generator() { return ''; }
 add_filter( 'the_generator', 'no_generator' );
 
-// Show thumbnails in admin lists
+// Show recipe season in admin lists
 add_filter('manage_posts_columns', 'new_add_recipe_season_column');
 function new_add_recipe_season_column($cols) {
   $cols['recipe_season'] = __('Season');
