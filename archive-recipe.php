@@ -58,7 +58,7 @@ if (have_posts()) {
         <div class="recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3">
 
           <div class="cube-left cube-front background-cover grid-column <?php echo $bg_class; ?>">
-            <div class="grid-item">
+            <div class="grid-item padding-top-small text-max-width">
               <h3 class="font-size-mid padding-bottom-micro"><?php echo the_title(); ?></h3>
             <?php
               if (!empty($ingredients)) {
@@ -74,7 +74,7 @@ if (have_posts()) {
                   $i++;
                 }
             ?>
-              <span><?php echo $ingredients_string; ?></span>
+              <p><?php echo $ingredients_string; ?></p>
             <?php
               }
             ?>
@@ -85,7 +85,7 @@ if (have_posts()) {
           </div>
 
           <div class="recipe-details cube-right grid-column">
-            <div class="grid-item">
+            <div class="grid-item padding-top-small text-max-width">
               <h3 class="font-size-mid padding-bottom-basic"><?php echo the_title(); ?></h3>
               <?php
                 if (!empty($ingredients)) {
@@ -119,7 +119,7 @@ if (have_posts()) {
 }
 ?>
       <div class="grid-row align-items-center justify-center">
-        <div class="grid-item item-s-12 item-m-6 text-align-right">
+        <div class="grid-item item-s-12 item-m-6 text-align-right font-size-mid">
           Special Events, Art Prize, Cocktail Recipes, etc.
         </div>
         <div class="grid-item item-s-12 item-m-6">
