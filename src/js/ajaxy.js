@@ -17,8 +17,9 @@ class Ajaxy {
     // Bind links
     this.bindLinks();
 
-    // Ajax event
+    // Ajax events
     this.ajaxSuccessEvent = new Event('ajaxySuccess');
+    this.ajaxEndTransition = new Event('ajaxyEndTransition');
 
     $(window).bind('popstate', this.handlePopState);
 
@@ -87,19 +88,48 @@ class Ajaxy {
   }
 
   ajaxBefore(xhr, settings) {
+    $('html').animate({
+      scrollTop: 0,
+    }, 500);
 
     $('body').addClass('loading');
-    $('body, html').animate({
-      scrollTop: 0,
-    }, 300);
+
+    $('#transition-cube').css('transform', 'scale(0.6)');
   }
 
   ajaxAfter() {
-
-    $('body').removeClass('loading');
-
+    this.startTransition();
     this.reset();
+  }
 
+  startTransition() {
+    const $active = $('#transition-cube .active');
+    const $next = $('#transition-cube .next');
+
+    $active.removeClass('active');
+    $next.addClass('active');
+
+    setTimeout(() => {
+      $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0');
+      $('#transition-cube').css('transform', 'scale(1)');
+
+      //$next.removeClass('next');
+      //$active.addClass('next');
+
+      this.endTransition();
+    }, 500);
+  }
+
+  endTransition() {
+    $('#transition-cube .next.active').removeClass('next');
+
+    $('#transition-cube .transition-cube-side').not('.active').addClass('next');
+
+    setTimeout(() => {
+      $('#transition-cube .next').css('opacity', '1');
+      $('body').removeClass('loading');
+      window.dispatchEvent(this.ajaxEndTransition);
+    }, 500);
   }
 
   ajaxErrorHandler(jqXHR, textStatus) {
@@ -120,9 +150,8 @@ class Ajaxy {
 
     // Update with new title, content and classes
     document.title = $title;
-    $('#main-content').html($content.html());
+    $('#transition-cube .next').html('').append($content);
     $('body').removeAttr('class').addClass($bodyClasses + ' loading');
-
     // Update Admin Bar
     if( WP.isAdmin ) {
       $('#wpadminbar').html( $('#wpadminbar', respHtml) );

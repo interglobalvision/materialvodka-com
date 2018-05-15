@@ -95,3 +95,6 @@ $options = get_site_option('_igv_site_options');
     ?>
     </div>
   </nav>
+
+<div id="transition-cube">
+  <div class="transition-cube-side active">

@@ -13020,7 +13020,8 @@ Site = function () {
 
     $(window).
     resize(this.onResize.bind(this)).
-    on('ajaxSuccess', this.onReady.bind(this));
+    on('ajaxySuccess', this.onReady.bind(this)).
+    on('ajaxyEndTransition', this.resetHeader.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -13029,10 +13030,8 @@ Site = function () {
   }_createClass(Site, [{ key: 'onResize', value: function onResize()
 
     {
+      this.resetHeader();
       this.windowWidth = this.$window.width();
-
-      this.sizeHeaderSpacer();
-      this.repositionHeader();
     } }, { key: 'onReady', value: function onReady()
 
     {
@@ -13098,6 +13097,11 @@ Site = function () {
       this.headerTop = this.$headerSpacer.offset().top;
       this.headerSpacerOffset = this.headerTop + headerHeight;
       this.windowHeight = this.$window.outerHeight();
+    } }, { key: 'resetHeader', value: function resetHeader()
+
+    {
+      this.sizeHeaderSpacer();
+      this.repositionHeader();
     } }, { key: 'bindMobileNavTrigger', value: function bindMobileNavTrigger()
 
     {var _this = this;
@@ -18909,8 +18913,9 @@ Ajaxy = function () {
     // Bind links
     this.bindLinks();
 
-    // Ajax event
+    // Ajax events
     this.ajaxSuccessEvent = new Event('ajaxySuccess');
+    this.ajaxEndTransition = new Event('ajaxyEndTransition');
 
     $(window).bind('popstate', this.handlePopState);
 
@@ -18979,19 +18984,48 @@ Ajaxy = function () {
     } }, { key: 'ajaxBefore', value: function ajaxBefore(
 
     xhr, settings) {
+      $('html').animate({
+        scrollTop: 0 },
+      500);
 
       $('body').addClass('loading');
-      $('body, html').animate({
-        scrollTop: 0 },
-      300);
+
+      $('#transition-cube').css('transform', 'scale(0.6)');
     } }, { key: 'ajaxAfter', value: function ajaxAfter()
 
     {
-
-      $('body').removeClass('loading');
-
+      this.startTransition();
       this.reset();
+    } }, { key: 'startTransition', value: function startTransition()
 
+    {var _this = this;
+      var $active = $('#transition-cube .active');
+      var $next = $('#transition-cube .next');
+
+      $active.removeClass('active');
+      $next.addClass('active');
+
+      setTimeout(function () {
+        $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0');
+        $('#transition-cube').css('transform', 'scale(1)');
+
+        //$next.removeClass('next');
+        //$active.addClass('next');
+
+        _this.endTransition();
+      }, 500);
+    } }, { key: 'endTransition', value: function endTransition()
+
+    {var _this2 = this;
+      $('#transition-cube .next.active').removeClass('next');
+
+      $('#transition-cube .transition-cube-side').not('.active').addClass('next');
+
+      setTimeout(function () {
+        $('#transition-cube .next').css('opacity', '1');
+        $('body').removeClass('loading');
+        window.dispatchEvent(_this2.ajaxEndTransition);
+      }, 500);
     } }, { key: 'ajaxErrorHandler', value: function ajaxErrorHandler(
 
     jqXHR, textStatus) {
@@ -19012,9 +19046,8 @@ Ajaxy = function () {
 
       // Update with new title, content and classes
       document.title = $title;
-      $('#main-content').html($content.html());
+      $('#transition-cube .next').html('').append($content);
       $('body').removeAttr('class').addClass($bodyClasses + ' loading');
-
       // Update Admin Bar
       if (WP.isAdmin) {
         $('#wpadminbar').html($('#wpadminbar', respHtml));
