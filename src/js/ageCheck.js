@@ -86,6 +86,7 @@ class AgeCheck {
     if (!cookie) {
       $('body').addClass('age-check');
     }
+    $('#main-container').removeClass('hide');
   }
 }
 
