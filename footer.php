@@ -1,6 +1,9 @@
 <?php
 $options = get_site_option('_igv_site_options');
 ?>
+  </div>
+  <div class="transition-cube-side next"></div>
+</div>
 
   <div id="header-spacer-desktop" class="header-spacer"></div>
 

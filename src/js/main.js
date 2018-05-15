@@ -23,7 +23,8 @@ class Site {
 
     $(window)
       .resize(this.onResize.bind(this))
-      .on('ajaxSuccess', this.onReady.bind(this));
+      .on('ajaxySuccess', this.onReady.bind(this))
+      .on('ajaxyEndTransition', this.resetHeader.bind(this));
 
     $(document).ready(this.onReady.bind(this));
 
@@ -32,10 +33,8 @@ class Site {
   }
 
   onResize() {
+    this.resetHeader();
     this.windowWidth = this.$window.width();
-
-    this.sizeHeaderSpacer();
-    this.repositionHeader();
   }
 
   onReady() {
@@ -101,6 +100,11 @@ class Site {
     this.headerTop = this.$headerSpacer.offset().top;
     this.headerSpacerOffset = this.headerTop + headerHeight;
     this.windowHeight = this.$window.outerHeight();
+  }
+
+  resetHeader() {
+    this.sizeHeaderSpacer();
+    this.repositionHeader();
   }
 
   bindMobileNavTrigger() {
