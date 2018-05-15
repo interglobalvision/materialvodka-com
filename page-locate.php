@@ -46,7 +46,7 @@ if (have_posts()) {
     ?>
       <div class="grid-row">
         <div class="grid-item item-s-12 covervid-wrapper height-s-33vw height-m-28vw">
-          <video class="covervid-video hide" muted autoplay loop poster="<?php echo !empty($video[0]['poster']) ?  $video[0]['poster'] : ''; ?>">
+          <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($video[0]['poster']) ?  $video[0]['poster'] : ''; ?>">
             <source src="<?php echo !empty($video[0]['webm']) ? $video[0]['webm'] : ''; ?>" type="video/webm">
             <source src="<?php echo !empty($video[0]['mp4']) ? $video[0]['mp4'] : ''; ?>" type="video/mp4">
           </video>
