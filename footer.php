@@ -1,6 +1,8 @@
 <?php
 $options = get_site_option('_igv_site_options');
 ?>
+  <div id="main-content-next"></div>
+</div>
 
   <div id="header-spacer"></div>
 
