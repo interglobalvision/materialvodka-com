@@ -64,16 +64,18 @@ function get_stockists_by_city($city_slug) {
 function generate_stockists_list($query) {
 
   if (!empty($query)) {
-    echo '<ul>';
-    while($query->have_posts()) {
-      $query->the_post();
+    if ($query->have_posts()) {
+      echo '<ul>';
+      while($query->have_posts()) {
+        $query->the_post();
 
-      $website = get_post_meta(get_the_ID(), '_igv_stockist_website', true);
-      echo '<li class="font-uppercase">';
-      echo '<a href="' . $website . '" rel="noopener noreferrer" target="_blank">' . the_title() . '</a>';
-      echo '</li>';
+        $website = get_post_meta(get_the_ID(), '_igv_stockist_website', true);
+        echo '<li class="font-uppercase margin-bottom-tiny">';
+        echo '<a href="' . $website . '" rel="noopener noreferrer" target="_blank">' . get_the_title() . '</a>';
+        echo '</li>';
+      }
+      echo '</ul>';
     }
-    echo '</ul>';
   }
 
   wp_reset_postdata();

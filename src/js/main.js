@@ -32,6 +32,8 @@ class Site {
   }
 
   onResize() {
+    this.windowWidth = this.$window.width();
+
     this.sizeHeaderSpacer();
     this.repositionHeader();
   }
@@ -41,14 +43,17 @@ class Site {
 
     this.$window = $(window);
     this.$document = $(document);
+    this.$body = $('body');
     this.$header = $('#header');
     this.$mainContent = $('#main-content');
-    this.$headerSpacer = $('#header-spacer');
+    this.$headerSpacer = $('.header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
+    this.windowWidth = this.$window.width();
+
+    this.bindMobileNavTrigger();
     this.initCoverVid();
     this.bindStickyHeader();
-    this.initCoverVid();
     this.animateBottleSprite();
   }
 
@@ -64,7 +69,7 @@ class Site {
   initCoverVid() {
     if (this.$covervidVideo.length) {
       this.$covervidVideo.each((index, element) =>  {
-        $(element).coverVid(1920, 1080);
+        $(element).coverVid(1920, 1080).addClass('show');
       });
     }
   }
@@ -76,25 +81,34 @@ class Site {
   }
 
   repositionHeader() {
-    if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop()) {
-      this.$header.addClass('bottom').css({
-        top: this.headerTop + 'px',
-        bottom: 'auto'
-      });
-    } else if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop()) {
+    if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop() || this.windowWidth < 720) {
       this.$header.removeClass('bottom').css({
         top: 'auto',
         bottom: 0
+      });
+    } else if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop() && this.windowWidth >= 720) {
+      this.$header.addClass('bottom').css({
+        top: this.headerTop + 'px',
+        bottom: 'auto'
       });
     }
   }
 
   sizeHeaderSpacer() {
     const headerHeight = this.$header.outerHeight();
+
     this.$headerSpacer.css('height', headerHeight + 'px');
     this.headerTop = this.$headerSpacer.offset().top;
     this.headerSpacerOffset = this.headerTop + headerHeight;
     this.windowHeight = this.$window.outerHeight();
+  }
+
+  bindMobileNavTrigger() {
+    const $mobileNav = $('#mobile-nav');
+
+    $('#mobile-nav-trigger').on('click', () => {
+      this.$body.toggleClass('mobile-active');
+    });
   }
 
   animateBottleSprite() {
