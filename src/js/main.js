@@ -49,12 +49,14 @@ class Site {
     this.$headerSpacer = $('#header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
+    this.bindMobileNavTrigger();
     this.checkForCookie();
     this.initCoverVid();
     this.submitAgeForm();
     this.bindStickyHeader();
     this.initCoverVid();
     this.animateBottleSprite();
+
   }
 
   fixWidows() {
@@ -100,6 +102,16 @@ class Site {
     this.headerTop = this.$headerSpacer.offset().top;
     this.headerSpacerOffset = this.headerTop + headerHeight;
     this.windowHeight = this.$window.outerHeight();
+  }
+
+  bindMobileNavTrigger() {
+    const $mobileNav = $('#mobile-nav');
+
+    console.log('bind');
+
+    $('#mobile-nav-trigger').on('click', () => {
+      $mobileNav.toggleClass('active');
+    });
   }
 
   animateBottleSprite() {

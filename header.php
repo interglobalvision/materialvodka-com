@@ -40,8 +40,8 @@ get_template_part('partials/seo');
         <div class="grid-item item-m-auto item-l-6 flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
-        <div id="mobile-menu-trigger-holder" class="grid-item text-align-right">
-          <div id="mobile-menu-trigger"><div id="mobile-menu-trigger-borders"></div></div>
+        <div id="mobile-nav-trigger-holder" class="grid-item text-align-right">
+          <div id="mobile-nav-trigger"><div id="mobile-nav-trigger-borders"></div></div>
         </div>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
           <ul class="grid-row justify-between flex-nowrap">
@@ -69,23 +69,23 @@ get_template_part('partials/seo');
     </div>
     <nav id="mobile-nav">
       <div class="container">
-        <ul class="grid-column">
-          <li class="grid-item">
+        <ul id="mobile-nav-list" class="grid-column align-items-center">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('prize'); ?>">Prize</a>
           </li>
-          <li class="grid-item">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('videos'); ?>">Videos</a>
           </li>
-          <li class="grid-item">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
           </li>
-          <li class="grid-item">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
           </li>
-          <li class="grid-item">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('locate'); ?>">Locate</a>
           </li>
-          <li class="grid-item">
+          <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
             <a href="<?php echo home_url('merch'); ?>">Merch</a>
           </li>
         </ul>
