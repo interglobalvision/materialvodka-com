@@ -39,7 +39,8 @@ get_template_part('partials/seo');
       <div class="grid-row flex-nowrap align-items-center">
         <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
-        </div> <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
+        </div>
+        <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
           <button id="mobile-menu-trigger">Menu</button>
         </div>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
