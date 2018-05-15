@@ -13021,7 +13021,7 @@ Site = function () {
 
     $(window).
     resize(this.onResize.bind(this)).
-    on('ajaxEndTransition', this.onReady.bind(this)).
+    on('ajaxySuccess', this.onReady.bind(this)).
     on('ajaxEndTransition', this.resetHeader.bind(this));
 
     $(document).ready(this.onReady.bind(this));
@@ -19013,6 +19013,7 @@ Ajaxy = function () {
       $next.addClass('active');
 
       setTimeout(function () {
+        $('#transition-cube .transition-cube-side').not('.active').css('visibility', 'hidden');
         $('#transition-cube').css('transform', 'scale(1)');
 
         //$next.removeClass('next');
@@ -19025,11 +19026,10 @@ Ajaxy = function () {
     {var _this2 = this;
       $('#transition-cube .next.active').removeClass('next');
 
-      debugger;
-
       $('#transition-cube .transition-cube-side').not('.active').addClass('next');
 
       setTimeout(function () {
+        $('#transition-cube .next').css('visibility', 'visible');
         $('body').removeClass('loading');
         window.dispatchEvent(_this2.ajaxEndTransition);
       }, 1000);

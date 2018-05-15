@@ -105,6 +105,7 @@ class Ajaxy {
     $next.addClass('active');
 
     setTimeout(() => {
+      $('#transition-cube .transition-cube-side').not('.active').css('visibility', 'hidden');
       $('#transition-cube').css('transform', 'scale(1)');
 
       //$next.removeClass('next');
@@ -117,11 +118,10 @@ class Ajaxy {
   endTransition() {
     $('#transition-cube .next.active').removeClass('next');
 
-    debugger;
-
     $('#transition-cube .transition-cube-side').not('.active').addClass('next');
 
     setTimeout(() => {
+      $('#transition-cube .next').css('visibility', 'visible'); 
       $('body').removeClass('loading');
       window.dispatchEvent(this.ajaxEndTransition);
     }, 1000);
