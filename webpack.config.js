@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const glob = require('glob');
 
@@ -74,6 +75,14 @@ module.exports = {
         to: path.resolve(__dirname, 'dist/img/'),
       },
     ]),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      gifsicle:{interlaced: false, optimizationLevel: 1},
+      jpegtran:{progressive: false, arithmetic: false},
+      optipng:{optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true},
+      svgo:{plugins: [{cleanupIDs: false}]},
+    }),
+
   ],
 
   stats: {
