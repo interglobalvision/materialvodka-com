@@ -2,7 +2,7 @@
 
 function find_stockists_call($data) {
   // Zip is required
-  if (!array_key_exists('zip', $data)) {
+  if (!isset($data['zipcode'])) {
     wp_send_json_error();
   }
 
@@ -15,6 +15,9 @@ function find_stockists_call($data) {
   // init http client
   // https://github.com/guzzle/guzzle
   $client = new \GuzzleHttp\Client();
+
+  // Declare zipcode
+  $zipcode = $data['zipcode'];
 
   // Wrapped in try/catch to catch exceptions
   try {

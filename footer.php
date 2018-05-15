@@ -2,7 +2,7 @@
 $options = get_site_option('_igv_site_options');
 ?>
 
-  <div id="header-spacer"></div>
+  <div id="header-spacer-desktop" class="header-spacer"></div>
 
   <footer id="footer" class="padding-top-tiny padding-bottom-tiny font-size-small">
     <div class="container">
@@ -66,6 +66,8 @@ $options = get_site_option('_igv_site_options');
       </div>
     </div>
   </footer>
+
+  <div id="header-spacer-mobile" class="header-spacer"></div>
 
 </section>
 

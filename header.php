@@ -37,11 +37,13 @@ get_template_part('partials/seo');
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
       <div class="grid-row flex-nowrap align-items-center">
-        <div class="grid-item item-s-6 item-m-auto item-l-6 flex-grow">
+        <div id="nav-logo-holder" class="grid-item item-m-auto item-l-6 flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
-        <div id="mobile-menu-trigger-holder" class="grid-item item-s-6 text-align-right">
-          <button id="mobile-menu-trigger">Menu</button>
+        <div id="mobile-nav-trigger-holder" class="grid-item text-align-right">
+          <div id="mobile-nav-trigger" class="grid-row justify-center align-items-center">
+            <div id="mobile-nav-trigger-borders"></div>
+          </div>
         </div>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
           <ul class="grid-row justify-between flex-nowrap">
@@ -67,28 +69,29 @@ get_template_part('partials/seo');
         </nav>
       </div>
     </div>
-    <nav id="mobile-nav">
-      <div class="container">
-        <ul class="grid-column">
-          <li class="grid-item">
-            <a href="<?php echo home_url('prize'); ?>">Prize</a>
-          </li>
-          <li class="grid-item">
-            <a href="<?php echo home_url('videos'); ?>">Videos</a>
-          </li>
-          <li class="grid-item">
-            <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
-          </li>
-          <li class="grid-item">
-            <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
-          </li>
-          <li class="grid-item">
-            <a href="<?php echo home_url('locate'); ?>">Locate</a>
-          </li>
-          <li class="grid-item">
-            <a href="<?php echo home_url('merch'); ?>">Merch</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
   </header>
+
+  <nav id="mobile-nav">
+    <div class="container">
+      <ul id="mobile-nav-list" class="grid-column align-items-center justify-center font-uppercase">
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('prize'); ?>">Prize</a>
+        </li>
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('videos'); ?>">Videos</a>
+        </li>
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
+        </li>
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
+        </li>
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('locate'); ?>">Locate</a>
+        </li>
+        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
+          <a href="<?php echo home_url('merch'); ?>">Merch</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
