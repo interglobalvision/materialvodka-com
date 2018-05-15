@@ -31,11 +31,11 @@ get_template_part('partials/seo');
 
 <?php get_template_part('partials/agechecker-form'); ?>
 
+<section id="main-container" class="hide">
+
 <?php
 $options = get_site_option('_igv_site_options');
 ?>
-
-<section id="main-container">
 
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
