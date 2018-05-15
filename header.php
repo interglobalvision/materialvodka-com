@@ -31,7 +31,7 @@ get_template_part('partials/seo');
 
 <?php get_template_part('partials/agechecker-form'); ?>
 
-<section id="main-container">
+<section id="main-container" class="hide">
 
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>

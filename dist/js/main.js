@@ -55447,6 +55447,7 @@ AgeCheck = function () {
       if (!cookie) {
         $('body').addClass('age-check');
       }
+      $('#main-container').removeClass('hide');
     } }]);return AgeCheck;}();exports.default =
 
 
