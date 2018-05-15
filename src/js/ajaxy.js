@@ -105,7 +105,7 @@ class Ajaxy {
     $next.addClass('active');
 
     setTimeout(() => {
-      $('#transition-cube .transition-cube-side').not('.active').css('visibility', 'hidden');
+      $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0'); 
       $('#transition-cube').css('transform', 'scale(1)');
 
       //$next.removeClass('next');
@@ -121,7 +121,7 @@ class Ajaxy {
     $('#transition-cube .transition-cube-side').not('.active').addClass('next');
 
     setTimeout(() => {
-      $('#transition-cube .next').css('visibility', 'visible'); 
+      $('#transition-cube .next').css('opacity', '1');
       $('body').removeClass('loading');
       window.dispatchEvent(this.ajaxEndTransition);
     }, 1000);

@@ -19013,7 +19013,7 @@ Ajaxy = function () {
       $next.addClass('active');
 
       setTimeout(function () {
-        $('#transition-cube .transition-cube-side').not('.active').css('visibility', 'hidden');
+        $('#transition-cube .transition-cube-side').not('.active').css('opacity', '0');
         $('#transition-cube').css('transform', 'scale(1)');
 
         //$next.removeClass('next');
@@ -19029,7 +19029,7 @@ Ajaxy = function () {
       $('#transition-cube .transition-cube-side').not('.active').addClass('next');
 
       setTimeout(function () {
-        $('#transition-cube .next').css('visibility', 'visible');
+        $('#transition-cube .next').css('opacity', '1');
         $('body').removeClass('loading');
         window.dispatchEvent(_this2.ajaxEndTransition);
       }, 1000);
