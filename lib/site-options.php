@@ -152,6 +152,48 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Navigation Menu', 'cmb2' ),
+    'id'      => $prefix . 'nav_menu_title',
+    'type'    => 'title',
+  ) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Prize', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_prize',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Videos', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_videos',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Vodka', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_vodka',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Recipes', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_recipes',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Locate', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_locate',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
+		'name' => esc_html__( 'Merch', 'cmb2' ),
+		'id'   => $prefix . 'nav_menu_merch',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Mailing List', 'cmb2' ),
     'id'      => $prefix . 'mailinglist_title',
     'type'    => 'title',
@@ -159,7 +201,7 @@ function igv_register_theme_options_metabox() {
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Mailchimp Form Action URL', 'cmb2' ),
-    'id'      => 'mailchimp_url',
+    'id'      => $prefix . 'mailchimp_url',
     'type'    => 'text',
   ) );
 
