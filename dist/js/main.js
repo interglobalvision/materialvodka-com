@@ -13071,7 +13071,7 @@ Site = function () {
     {
       if (this.$covervidVideo.length) {
         this.$covervidVideo.each(function (index, element) {
-          $(element).coverVid(1920, 1080);
+          $(element).coverVid(1920, 1080).addClass('show');
         });
       }
     } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
@@ -19213,7 +19213,7 @@ Stockists = function () {
        * @param {string} msg - The message to output
        */ }, { key: 'outputMessage', value: function outputMessage(
     msg) {
-      this.$stockistsContainer.html('<p class="font-size-mid">' + msg + '</p>');
+      this.$stockistsContainer.html('<p>' + msg + '</p>');
     }
 
     /**
@@ -19221,7 +19221,7 @@ Stockists = function () {
        * @param {string} error - The error message to output
        */ }, { key: 'outputError', value: function outputError()
     {var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'An error ocurred';
-      this.$stockistsContainer.html('<p class="font-size-mid error-message">' + error + '</p>');
+      this.$stockistsContainer.html('<p class="error-message">' + error + '</p>');
     }
 
     /**
@@ -19236,40 +19236,40 @@ Stockists = function () {
       stockists.forEach(function (element) {
 
         // Start our info string with the basics: title and address
-        var info = '\n        <h3>' +
-        element.post_title + '</h3>\n        <p><a href="https://www.google.com/maps/search/' +
-        element._igv_stockist_address + '" target="_blank" rel="noopener noreferrer">' + element._igv_stockist_address + '</a></p>\n        ';
+        var info = '\n        <h3 class="font-size-mid">' +
+        element.post_title + '</h3>\n        <div><a href="https://www.google.com/maps/search/' +
+        element._igv_stockist_address + '" target="_blank" rel="noopener noreferrer">' + element._igv_stockist_address + '</a></div>\n        ';
 
 
         // Phone
         if (element._igv_stockist_phone !== undefined && element._igv_stockist_phone !== '') {
-          info += '\n        <p><a href="tel:' +
-          element._igv_stockist_phone + '" target="_blank" rel="noopener noreferrer">' + element._igv_stockist_phone + '</a></p>\n        ';
+          info += '\n        <div><a href="tel:' +
+          element._igv_stockist_phone + '" target="_blank" rel="noopener noreferrer" class="link-underline">' + element._igv_stockist_phone + '</a></div>\n        ';
 
         }
 
         // Links: website, facebok, instagram
         if (element._igv_stockist_website !== undefined || element._igv_stockist_facebook !== undefined || element._igv_stockist_twitter !== undefined) {
           // Open links paragraph
-          var links = '<p>';
+          var links = '<div>';
 
           // Website
           if (element._igv_stockist_website !== undefined) {
-            links += '<a class="font-uppercase" href="' + element._igv_stockist_website + '" target="_blank" rel="noopener noreferrer">Website</a>';
+            links += '<a class="font-uppercase link-underline" href="' + element._igv_stockist_website + '" target="_blank" rel="noopener noreferrer">Website</a>';
           }
 
           // Facebook
           if (element._igv_stockist_facebook !== undefined) {
-            links += ' <a class="font-uppercase" href="' + element._igv_stockist_facebook + '" target="_blank" rel="noopener noreferrer">Facebook</a>';
+            links += ' <a class="font-uppercase link-underline" href="' + element._igv_stockist_facebook + '" target="_blank" rel="noopener noreferrer">Facebook</a>';
           }
 
           // Instagram
           if (element._igv_stockist_instagram !== undefined) {
-            links += ' <a class="font-uppercase" href="' + element._igv_stockist_instagram + '" target="_blank" rel="noopener noreferrer">Instagram</a>';
+            links += ' <a class="font-uppercase link-underline" href="' + element._igv_stockist_instagram + '" target="_blank" rel="noopener noreferrer">Instagram</a>';
           }
 
           // Close links paragraph
-          links += '</p>';
+          links += '</div>';
 
           // Append to info
           info += links;
