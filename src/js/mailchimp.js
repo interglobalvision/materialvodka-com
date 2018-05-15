@@ -37,7 +37,7 @@ class Mailchimp {
       data[item.name] = item.value;
     });
 
-    this.handleAjax(data, this.successMessage);
+    this.handleMailchimpAjax(data, this.successMessage);
 
     // Prevent default submit functionality
     return false;
