@@ -69,7 +69,7 @@ class Site {
   initCoverVid() {
     if (this.$covervidVideo.length) {
       this.$covervidVideo.each((index, element) =>  {
-        $(element).coverVid(1920, 1080);
+        $(element).coverVid(1920, 1080).removeClass('hide');
       });
     }
   }
