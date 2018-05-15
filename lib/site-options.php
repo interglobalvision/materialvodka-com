@@ -157,39 +157,52 @@ function igv_register_theme_options_metabox() {
     'type'    => 'title',
   ) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Prize', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_prize',
+  // Nav menu group
+  $nav_menu_group_id = $site_options->add_field( array(
+    'id'      => $prefix . 'nav_menu_group',
+    'type'        => 'group',
+    'repeatable'  => false, // use false if you want non-repeatable group
+  ) );
+
+  // Prize
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Prize', 'cmb2' ),
+		'id'   => 'prize',
 		'type' => 'checkbox',
 	) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Videos', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_videos',
+  // Videos
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Videos', 'cmb2' ),
+		'id'   => 'videos',
 		'type' => 'checkbox',
 	) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Vodka', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_vodka',
+  // Vodka
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Vodka', 'cmb2' ),
+		'id'   => 'vodka',
 		'type' => 'checkbox',
 	) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Recipes', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_recipes',
+  // Recipes
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Recipes', 'cmb2' ),
+		'id'   => 'recipes',
 		'type' => 'checkbox',
 	) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Locate', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_locate',
+  // Locate
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Locate', 'cmb2' ),
+		'id'   => 'locate',
 		'type' => 'checkbox',
 	) );
 
-  $site_options->add_field( array(
-		'name' => esc_html__( 'Merch', 'cmb2' ),
-		'id'   => $prefix . 'nav_menu_merch',
+  // Merch
+  $site_options->add_group_field( $nav_menu_group_id , array(
+    'name' => esc_html__( 'Merch', 'cmb2' ),
+		'id'   => 'merch',
 		'type' => 'checkbox',
 	) );
 
@@ -214,7 +227,6 @@ function igv_register_theme_options_metabox() {
   // Prize video group
   $prize_video_id = $site_options->add_field( array(
     'id'      => $prefix . 'prize_video_group',
-    'name'    => 'Video',
     'type'        => 'group',
     'repeatable'  => false, // use false if you want non-repeatable group
   ) );

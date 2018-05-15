@@ -49,105 +49,49 @@ $options = get_site_option('_igv_site_options');
             <div id="mobile-nav-trigger-borders"></div>
           </div>
         </div>
+      <?php
+        if (!empty($options['_igv_nav_menu_group'])) {
+          $nav_menu_group = $options['_igv_nav_menu_group'][0];
+      ?>
         <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
           <ul class="grid-row justify-between flex-nowrap">
           <?php
-            if (!empty($options['_igv_nav_menu_prize'])) {
+            foreach ($nav_menu_group as $key => $value) {
           ?>
             <li class="grid-item">
-              <a href="<?php echo home_url('prize'); ?>">Prize</a>
-            </li>
-          <?php
-            }
-            if (!empty($options['_igv_nav_menu_videos'])) {
-          ?>
-            <li class="grid-item">
-              <a href="<?php echo home_url('videos'); ?>">Videos</a>
-            </li>
-          <?php
-            }
-            if (!empty($options['_igv_nav_menu_vodka'])) {
-          ?>
-            <li class="grid-item">
-              <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
-            </li>
-          <?php
-            }
-            if (!empty($options['_igv_nav_menu_recipes'])) {
-          ?>
-            <li class="grid-item">
-              <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
-            </li>
-          <?php
-            }
-            if (!empty($options['_igv_nav_menu_locate'])) {
-          ?>
-            <li class="grid-item">
-              <a href="<?php echo home_url('locate'); ?>">Locate</a>
-            </li>
-          <?php
-            }
-            if (!empty($options['_igv_nav_menu_merch'])) {
-          ?>
-            <li class="grid-item">
-              <a href="<?php echo home_url('merch'); ?>">Merch</a>
+              <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
             </li>
           <?php
             }
           ?>
           </ul>
         </nav>
+      <?php
+        }
+      ?>
       </div>
     </div>
   </header>
 
   <nav id="mobile-nav">
     <div class="container">
+    <?php
+      if (!empty($options['_igv_nav_menu_group'])) {
+        $nav_menu_group = $options['_igv_nav_menu_group'][0];
+    ?>
       <ul id="mobile-nav-list" class="grid-column align-items-center justify-center font-uppercase">
       <?php
-        if (!empty($options['_igv_nav_menu_prize'])) {
+        foreach ($nav_menu_group as $key => $value) {
       ?>
         <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('prize'); ?>">Prize</a>
-        </li>
-      <?php
-        }
-        if (!empty($options['_igv_nav_menu_videos'])) {
-      ?>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('videos'); ?>">Videos</a>
-        </li>
-      <?php
-        }
-        if (!empty($options['_igv_nav_menu_vodka'])) {
-      ?>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('vodka'); ?>">Vodka</a>
-        </li>
-      <?php
-        }
-        if (!empty($options['_igv_nav_menu_recipes'])) {
-      ?>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('recipes'); ?>">Recipes</a>
-        </li>
-      <?php
-        }
-        if (!empty($options['_igv_nav_menu_locate'])) {
-      ?>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('locate'); ?>">Locate</a>
-        </li>
-      <?php
-        }
-        if (!empty($options['_igv_nav_menu_merch'])) {
-      ?>
-        <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url('merch'); ?>">Merch</a>
+          <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
         </li>
       <?php
         }
       ?>
       </ul>
+    <?php
+      }
+    ?>
     </div>
   </nav>
