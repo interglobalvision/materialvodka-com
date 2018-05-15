@@ -78,7 +78,7 @@ class AgeCheck {
           errorMessage = 'You must be of legal age to enter';
         }
       }
-      return {isValid, errorMessage}
+      return {isValid, errorMessage};
   }
 
   checkForCookie() {

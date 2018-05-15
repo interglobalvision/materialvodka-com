@@ -21,7 +21,7 @@ class Shop {
   onReady() {
 
     // Check shopify api data
-    if(WP.shopify) {
+    if(WP.shopify.domain !== null && WP.shopify.storefrontAccessToken !== null) {
       const { domain, storefrontAccessToken } = WP.shopify;
 
       // Init Shopify client
