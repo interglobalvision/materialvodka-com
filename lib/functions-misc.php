@@ -11,6 +11,20 @@ add_filter('show_admin_bar', '__return_false');
 function no_generator() { return ''; }
 add_filter( 'the_generator', 'no_generator' );
 
+// Show City in Stockists list
+add_filter('manage_posts_columns', 'new_add_stockist_city_column');
+function new_add_stockist_city_column($cols) {
+  $cols['stockist_city'] = __('City');
+  return $cols;
+}
+add_action('manage_posts_custom_column', 'new_display_stockist_city_column', 5, 2);
+function new_display_stockist_city_column($col, $id) {
+  if ($col === 'stockist_city') {
+    $city = get_post_meta(get_the_ID(), '_igv_stockist_city', true);
+    echo !empty($city) ? strtoupper($city) : '';
+  }
+}
+
 // Show thumbnails in admin lists
 add_filter('manage_posts_columns', 'new_add_post_thumbnail_column');
 function new_add_post_thumbnail_column($cols) {
