@@ -45,7 +45,7 @@ if (have_posts()) {
     );
 
     $prize_winners = new WP_Query($args);
-    
+
     if ($prize_winners->have_posts()) {
 ?>
     <div class="grid-row padding-top-mid padding-bottom-basic">
@@ -62,7 +62,7 @@ if (have_posts()) {
 ?>
 
       <div class="grid-item item-s-12 item-m-4 item-l-3 margin-bottom-basic">
-        <?php the_post_thumbnail('640x640', 'class=margin-bottom-small'); ?>
+        <?php the_post_thumbnail('1920x1920', 'class=margin-bottom-small'); ?>
         <div class="font-uppercase"><?php echo $year; ?> Prize</div>
         <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
         <div class="text-max-width"><?php the_content(); ?></div>

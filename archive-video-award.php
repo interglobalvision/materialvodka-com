@@ -31,7 +31,7 @@ if (have_posts()) {
         <p><?php echo $bio; ?></p>
       </div>
 
-      <div class="grid-item item-s-12 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+      <div class="grid-item item-s-12 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('1920'); ?>)">
         <h2><?php the_title(); ?></h2>
         <div><?php echo $artists; ?></div>
         <div><?php echo get_the_date('F Y'); ?></div>
@@ -42,7 +42,7 @@ if (have_posts()) {
 } else { //grid post
 ?>
 
-      <div class="grid-item item-s-4 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('full'); ?>)">
+      <div class="grid-item item-s-4 background-cover font-uppercase" style="background-image: url(<?php echo the_post_thumbnail_url('1920'); ?>)">
         <h2><?php the_title(); ?></h2>
         <div><?php echo $artists; ?></div>
         <div><?php echo get_the_date('F Y'); ?></div>
