@@ -33,15 +33,23 @@ get_template_part('partials/seo');
 
 <section id="main-container" class="hide">
 
-<?php
-$options = get_site_option('_igv_site_options');
-?>
+  <?php
+  $options = get_site_option('_igv_site_options');
+
+  if (!empty($options['_igv_cube_bg_image_id'])) {
+    $bg_image = $options['_igv_cube_bg_image_id'];
+    responsive_background_styles('cube-background-image', $bg_image, array('320', '640', '960', '1440', '1920'));
+  ?>
+  <div id="cube-background" class="cube-background-image background-cover"<?php echo !empty($options['_igv_cube_bg_blur']) ? 'style="filter: blur(10px)"' : ''; ?>></div>
+  <?php
+  }
+  ?>
 
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
     <div class="container">
       <div class="grid-row flex-nowrap align-items-center">
-        <div id="nav-logo-holder" class="grid-item item-m-auto item-l-6 flex-grow">
+        <div id="nav-logo-holder" class="grid-item flex-grow">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
         <div id="mobile-nav-trigger-holder" class="grid-item text-align-right">
@@ -53,12 +61,12 @@ $options = get_site_option('_igv_site_options');
         if (!empty($options['_igv_nav_menu_group'])) {
           $nav_menu_group = $options['_igv_nav_menu_group'][0];
       ?>
-        <nav id="desktop-nav" class="grid-item no-gutter item-l-6">
-          <ul class="grid-row justify-between flex-nowrap">
+        <nav id="desktop-nav" class="grid-item item-s-6">
+          <ul class="grid-row justify-between flex-nowrap font-size-small">
           <?php
             foreach ($nav_menu_group as $key => $value) {
           ?>
-            <li class="grid-item">
+            <li class="grid-item no-gutter">
               <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
             </li>
           <?php
