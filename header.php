@@ -54,7 +54,7 @@ $options = get_site_option('_igv_site_options');
           $nav_menu_group = $options['_igv_nav_menu_group'][0];
       ?>
         <nav id="desktop-nav" class="grid-item item-s-6">
-          <ul class="grid-row justify-between flex-nowrap">
+          <ul class="grid-row justify-between flex-nowrap font-size-small">
           <?php
             foreach ($nav_menu_group as $key => $value) {
           ?>
