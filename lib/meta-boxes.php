@@ -76,6 +76,22 @@ function igv_cmb_metabox_home() {
       )
     ) );
 
+    $metabox->add_field( array(
+      'name'      	=> __( 'Video award fallback image (jpeg/png)', 'cmb2' ),
+      'desc' => esc_html__( 'Appears if 0 video awards are published', 'cmb2' ),
+      'id'        	=> $prefix . 'home_video_award_fallback_image',
+      'type'      	=> 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+    ) );
+
     // Video group
     $video_group_id = $metabox->add_field( array(
       'id'      => $prefix . 'home_video_group',

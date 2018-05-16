@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="vodka">
     <div <?php post_class('container'); ?> id="post-<?php the_ID(); ?>">
 
@@ -133,6 +133,8 @@ if (have_posts()) {
 
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php
