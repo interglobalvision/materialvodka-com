@@ -52,11 +52,22 @@ class ComposerStaticInit0aabf58559934c624bbcd130d4de6be6
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'G' => 
+        array (
+            'GoogleMapsGeocoder' => 
+            array (
+                0 => __DIR__ . '/..' . '/jstayton/google-maps-geocoder/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0aabf58559934c624bbcd130d4de6be6::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0aabf58559934c624bbcd130d4de6be6::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0aabf58559934c624bbcd130d4de6be6::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
