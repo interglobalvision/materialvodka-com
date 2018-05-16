@@ -51,7 +51,7 @@ if (have_posts()) {
     $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
 ?>
 
-    <div class="grid-item item-s-4 margin-bottom-basic">
+    <div class="grid-item item-s-12 item-m-4 item-l-3 margin-bottom-basic">
       <?php the_post_thumbnail('640x640', 'class=margin-bottom-small'); ?>
       <div class="font-uppercase"><?php echo $year; ?> Prize</div>
       <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
@@ -65,21 +65,7 @@ if (have_posts()) {
 <?php
 }
 ?>
-
-<?php
-  if (!empty($options['_igv_mailchimp_url'])) {
-?>
-    <div class="grid-row align-items-center justify-center">
-      <div class="grid-item item-s-12 item-m-6 text-align-right">
-        Special Events, Art Prize, Cocktail Recipes, etc.
-      </div>
-      <div class="grid-item item-s-12 item-m-6">
-        <?php get_template_part('partials/mailinglist-form'); ?>
-      </div>
-    </div>
-<?php
-  }
-?>
+  <?php get_template_part('partials/mailinglist-full'); ?>
   </div>
 </main>
 

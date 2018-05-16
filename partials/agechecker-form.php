@@ -28,9 +28,9 @@
       </div>
     </div>
 
-    <p id="age-form-response margin-top-tiny">You must be of legal age to enter<p>
+    <p id="age-form-response margin-top-small">You must be of legal age to enter<p>
 
-    <button id="submit-age" class="margin-top-basic">Enter</button>
+    <button id="submit-age" class="margin-top-small font-uppercase">Enter</button>
 
   </form>
 

@@ -673,6 +673,25 @@ function igv_cmb_metaboxes_vodka_page() {
     'type' => 'textarea',
   ) );
 
+  //Bottom Image
+
+  $vodka_meta->add_field( array(
+    'name'    => 'Bottom Image',
+    'id'      => $prefix . 'vodka_bottom_image',
+    'desc' => esc_html__( 'Appears next to mailing list form', 'cmb2' ),
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ) );
+
   }
 }
 
