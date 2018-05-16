@@ -152,8 +152,8 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
-    'name'    => esc_html__( 'Body background', 'cmb2' ),
-    'id'      => $prefix . 'body_bg_title',
+    'name'    => esc_html__( 'Cube background', 'cmb2' ),
+    'id'      => $prefix . 'cube_bg_title',
     'desc'    => esc_html__( 'Image background appearing behind cube on page transitions', 'cmb2' ),
     'type'    => 'title',
   ) );
@@ -161,7 +161,7 @@ function igv_register_theme_options_metabox() {
   // Prize video webm
   $site_options->add_field( array(
     'name'    => 'Image (jpeg/png)',
-    'id'      => $prefix . 'body_bg_image',
+    'id'      => $prefix . 'cube_bg_image',
     'type'    => 'file',
     'options' => array(
       'url' => false, // Hide the text input for the url
@@ -174,6 +174,12 @@ function igv_register_theme_options_metabox() {
     ),
     'preview_size' => 'large', // Image size to use when previewing in the admin.
   ) );
+
+  $site_options->add_field( array(
+    'name' => esc_html__( 'Blur', 'cmb2' ),
+		'id'   => $prefix . 'cube_bg_blur',
+		'type' => 'checkbox',
+	) );
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Navigation Menu', 'cmb2' ),
