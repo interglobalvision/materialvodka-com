@@ -71,7 +71,9 @@ function generate_stockists_list($query) {
 
         $website = get_post_meta(get_the_ID(), '_igv_stockist_website', true);
         echo '<li class="font-uppercase margin-bottom-tiny">';
-        echo '<a href="' . $website . '" rel="noopener noreferrer" target="_blank">' . get_the_title() . '</a>';
+        echo '<a ';
+        echo !empty($website) ? 'href="' . $website . '" ' : '';
+        echo 'rel="noopener noreferrer" target="_blank">' . get_the_title() . '</a>';
         echo '</li>';
       }
       echo '</ul>';
