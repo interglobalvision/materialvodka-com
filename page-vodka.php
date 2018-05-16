@@ -31,7 +31,7 @@ if (have_posts()) {
   <?php
     }
   ?>
-    <div class="grid-row margin-top-mid margin-bottom-basic">
+    <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item item-s-12">
         <h1 class='font-uppercase font-size-mid font-bold font-outline'>Material = Art</h1>
       </div>
