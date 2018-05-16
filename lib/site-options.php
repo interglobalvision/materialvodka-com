@@ -152,8 +152,39 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Cube background', 'cmb2' ),
+    'id'      => $prefix . 'cube_bg_title',
+    'desc'    => esc_html__( 'Image background appearing behind cube on page transitions', 'cmb2' ),
+    'type'    => 'title',
+  ) );
+
+  // Prize video webm
+  $site_options->add_field( array(
+    'name'    => 'Image (jpeg/png)',
+    'id'      => $prefix . 'cube_bg_image',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ) );
+
+  $site_options->add_field( array(
+    'name' => esc_html__( 'Blur', 'cmb2' ),
+		'id'   => $prefix . 'cube_bg_blur',
+		'type' => 'checkbox',
+	) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Navigation Menu', 'cmb2' ),
     'id'      => $prefix . 'nav_menu_title',
+    'desc'    => esc_html__( 'Enable/disable navigation items', 'cmb2' ),
     'type'    => 'title',
   ) );
 
@@ -223,60 +254,6 @@ function igv_register_theme_options_metabox() {
     'id'      => $prefix . 'prize_video_title',
     'type'    => 'title',
   ) );
-
-  // Prize video group
-  $prize_video_id = $site_options->add_field( array(
-    'id'      => $prefix . 'prize_video_group',
-    'type'        => 'group',
-    'repeatable'  => false, // use false if you want non-repeatable group
-  ) );
-
-  // Prize video mp4
-  $site_options->add_group_field( $prize_video_id , array(
-    'name'    => 'Video (mp4)',
-    'id'      => 'mp4',
-    'type'    => 'file',
-    'options' => array(
-      'url' => false, // Hide the text input for the url
-    ),
-    'query_args' => array(
-      'type' => array(
-        'video/mp4',
-      ),
-    ),
-  ) );
-
-  // Prize video webm
-  $site_options->add_group_field( $prize_video_id , array(
-    'name'    => 'Video (webm)',
-    'id'      => 'webm',
-    'type'    => 'file',
-    'options' => array(
-      'url' => false, // Hide the text input for the url
-    ),
-    'query_args' => array(
-      'type' => array(
-        'video/webm',
-      ),
-    ),
-  ) );
-
-  // Prize video poster
-  $site_options->add_group_field( $prize_video_id , array(
-    'name'    => 'Video Poster',
-    'id'      => 'poster',
-    'type'    => 'file',
-    'options' => array(
-      'url' => false, // Hide the text input for the url
-    ),
-    'query_args' => array(
-      'type' => array(
-        'image/jpeg',
-        'image/png',
-      ),
-    ),
-    'preview_size' => 'large', // Image size to use when previewing in the admin.
-  ));
 
   // Social Media variables
 

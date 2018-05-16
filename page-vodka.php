@@ -14,6 +14,7 @@ if (have_posts()) {
     $vodka_image = get_post_meta($post->ID, '_igv_vodka_image_id', true);
     $world_video = get_post_meta($post->ID, '_igv_world_video_group', true);
     $world_image = get_post_meta($post->ID, '_igv_world_image_id', true);
+    $bottom_image = get_post_meta($post->ID, '_igv_vodka_bottom_image_id', true);
     $institution_list = get_post_meta($post->ID, '_igv_institution_list_textarea', true);
 
 ?>
@@ -31,7 +32,7 @@ if (have_posts()) {
   <?php
     }
   ?>
-    <div class="grid-row margin-top-mid margin-bottom-basic">
+    <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item item-s-12">
         <h1 class='font-uppercase font-size-mid font-bold font-outline'>Material = Art</h1>
       </div>
@@ -72,15 +73,15 @@ if (have_posts()) {
     <div class="grid-row">
       <div class="grid-item grid-column item-s-12 item-m-6 no-gutter justify-around">
         <div class="grid-item">
-          <h2 class='font-uppercase text-align-center font-size-extra font-outline font-bold'>10% of all profits go to supporting the arts</h2>
+          <h2 class='font-uppercase text-align-center font-size-extra font-outline font-bold padding-top-mid padding-bottom-mid'>10% of all profits go to supporting the arts</h2>
         </div>
 
         <div class="grid-item no-gutter grid-row">
-          <div class="grid-item item-s-12 item-m-6">
+          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic">
             <p class="font-size-mid">Material is woven into the framework of the creative community. We are members of our world and we actively support radical change.</p>
           </div>
 
-          <div class="grid-item item-s-12 item-m-6">
+          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic">
           <?php
             if (!empty($institution_list)) {
           ?>
@@ -110,6 +111,25 @@ if (have_posts()) {
 <?php
   }
 } ?>
+
+    <?php
+      if (!empty($bottom_image)) {
+    ?>
+    <div class="grid-row">
+      <div class="grid-item item-s-12 item-m-6 background-cover vodka-bottom-image">
+        <?php
+          responsive_background_styles('vodka-bottom-image', $bottom_image, array('320', '640', '960'));
+        ?>
+      </div>
+      <?php get_template_part('partials/mailinglist-half'); ?>
+    </div>
+    <?php
+      } else {
+    ?>
+      <?php get_template_part('partials/mailinglist-full'); ?>
+    <?php
+      }
+    ?>
 
     </div>
   </section>

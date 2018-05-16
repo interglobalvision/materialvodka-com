@@ -673,6 +673,25 @@ function igv_cmb_metaboxes_vodka_page() {
     'type' => 'textarea',
   ) );
 
+  //Bottom Image
+
+  $vodka_meta->add_field( array(
+    'name'    => 'Bottom Image',
+    'id'      => $prefix . 'vodka_bottom_image',
+    'desc' => esc_html__( 'Appears next to mailing list form', 'cmb2' ),
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'large', // Image size to use when previewing in the admin.
+  ) );
+
   }
 }
 
@@ -694,4 +713,84 @@ function igv_cmb_metabox_winner() {
     'type'    => 'text',
   ) );
 }
+
+add_action( 'cmb2_init', 'igv_cmb_metabox_prize' );
+function igv_cmb_metabox_prize() {
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_igv_';
+
+  $prize_page = get_page_by_path('/prize');
+
+  // Check if prize page exists
+  if(!empty($prize_page)) {
+
+    $metabox = new_cmb2_box( array(
+      'id'            => $prefix . 'metabox_prize',
+      'title'         => esc_html__( 'Options', 'cmb2' ),
+      'object_types'  => array( 'page' ), // Post type
+      'show_on'      => array(
+        'key' => 'id',
+        'value' => array($prize_page->ID)
+      ),
+      'context'       => 'normal',
+      'priority'      => 'high',
+      'show_names'    => true, // Show field names on the left
+    ) );
+
+    // Prize video group
+    $prize_video_id = $metabox->add_field( array(
+      'id'      => $prefix . 'prize_video_group',
+      'type'        => 'group',
+      'repeatable'  => false, // use false if you want non-repeatable group
+    ) );
+
+    // Prize video mp4
+    $metabox->add_group_field( $prize_video_id , array(
+      'name'    => 'Video (mp4)',
+      'id'      => 'mp4',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/mp4',
+        ),
+      ),
+    ) );
+
+    // Prize video webm
+    $metabox->add_group_field( $prize_video_id , array(
+      'name'    => 'Video (webm)',
+      'id'      => 'webm',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'video/webm',
+        ),
+      ),
+    ) );
+
+    // Prize video poster
+    $metabox->add_group_field( $prize_video_id , array(
+      'name'    => 'Video Poster',
+      'id'      => 'poster',
+      'type'    => 'file',
+      'options' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      'query_args' => array(
+        'type' => array(
+          'image/jpeg',
+          'image/png',
+        ),
+      ),
+      'preview_size' => 'large', // Image size to use when previewing in the admin.
+    ));
+  }
+}
+
 ?>

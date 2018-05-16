@@ -144,22 +144,9 @@ if (have_posts()) {
         }
 
         wp_reset_postdata();
-
-        if (!empty($options['_igv_mailchimp_url'])) {
       ?>
-        <div class="grid-item padding-top-small">
-          <div class="font-size-mid">Special Events, Art Prize, Cocktail Recipes, etc.</div>
-          <div class="grid-row justify-center">
-            <div class="grid-item item-s-10 item-m-8 padding-top-mid padding-bottom-mid">
-              <?php get_template_part('partials/mailinglist-form'); ?>
-            </div>
-          </div>
-        </div>
-      <?php
-        }
-      ?>
+        <?php get_template_part('partials/mailinglist-half'); ?>
       </div>
-
     </div>
   </div>
 
