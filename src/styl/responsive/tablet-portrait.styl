@@ -1,5 +1,7 @@
 @media screen and (min-width: 720px)
 
+  $header-height = 39px
+
   $gutter = 21px
 
   $margin-micro = ($gutter / 3)
@@ -56,11 +58,8 @@
     &.active
       transform: translateX(100vw)
 
-  #header-spacer-desktop
-    display: block
-
-  #header-spacer-mobile
-    display: none
+  #header-spacer
+    height: $header-height
 
   // ******************************************************
 
@@ -73,3 +72,15 @@
   .height-m-28vw
     height: 28vw
     max-height: 28vw
+
+  // ******************************************************
+
+  // AGE CHECKER FORM
+  
+  .loading
+
+    #transition-cube
+      height: calc('100vh - ' + $header-height)
+
+    .transition-cube-side
+      height: calc('100vh - ' + $header-height)

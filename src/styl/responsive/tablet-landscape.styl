@@ -1,5 +1,7 @@
 @media screen and (min-width: 1024px)
 
+  $header-height = 41px
+
   $gutter = 24px
 
   $margin-micro = ($gutter / 3)
@@ -25,3 +27,22 @@
 
   input
     margin: 0 $margin-micro
+
+  // ******************************************************
+
+  // HEADER
+
+  #header-spacer
+    height: $header-height
+
+  // ******************************************************
+
+  // AGE CHECKER FORM
+
+  .loading
+
+    #transition-cube
+      height: calc('100vh - ' + $header-height)
+
+    .transition-cube-side
+      height: calc('100vh - ' + $header-height)
