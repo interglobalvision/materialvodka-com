@@ -26,16 +26,21 @@ get_template_part('partials/seo');
 
   <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('bg-body background-cover'); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+
+<?php
+$options = get_site_option('_igv_site_options');
+
+if (!empty($options['_igv_body_bg_image_id'])) {
+  $bg_image = $options['_igv_body_bg_image_id'];
+  responsive_background_styles('bg-body', $bg_image, array('320', '640', '960', '1440', '1920'));
+}
+?>
 
 <?php get_template_part('partials/agechecker-form'); ?>
 
 <section id="main-container" class="hide">
-
-<?php
-$options = get_site_option('_igv_site_options');
-?>
 
   <header id="header" class="padding-top-micro padding-bottom-micro font-uppercase">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
