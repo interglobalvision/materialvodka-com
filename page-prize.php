@@ -42,11 +42,11 @@ if (have_posts()) {
     $args = array(
       'post_type' => 'prize-winner',
       'posts_per_page' => -1,
-      'status' => 'published',
     );
 
     $prize_winners = new WP_Query($args);
-    if (have_posts()) {
+    
+    if ($prize_winners->have_posts()) {
 ?>
     <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item">
@@ -83,7 +83,7 @@ if (have_posts()) {
   <?php get_template_part('partials/mailinglist-full'); ?>
   </div>
 
-  <?php get_template_part('partials/footer-content'); ?>
+  <?php //get_template_part('partials/footer-content'); ?>
 </main>
 
 
