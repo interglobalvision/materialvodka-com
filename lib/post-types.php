@@ -235,7 +235,7 @@ function register_cpt_prize_winner() {
     'show_in_nav_menus' => true,
     'publicly_queryable' => true,
     'exclude_from_search' => false,
-    'has_archive' => 'prize',
+    'has_archive' => true,
     'query_var' => true,
     'can_export' => true,
     'rewrite' => true,
