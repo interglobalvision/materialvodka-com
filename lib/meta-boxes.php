@@ -721,7 +721,7 @@ function igv_cmb_metabox_prize() {
 
   $prize_page = get_page_by_path('/prize');
 
-  // Check if home page exists
+  // Check if prize page exists
   if(!empty($prize_page)) {
 
     $metabox = new_cmb2_box( array(
