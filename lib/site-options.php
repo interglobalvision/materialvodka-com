@@ -250,6 +250,13 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Mailing list form header text', 'cmb2' ),
+    'id'      => $prefix . 'maillinglist_header',
+    'type'    => 'text',
+    'default' => esc_attr__( 'Special Events, Art Prize, Cocktail Recipes, etc.', 'cmb2' ),
+  ) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Prize page video', 'cmb2' ),
     'id'      => $prefix . 'prize_video_title',
     'type'    => 'title',

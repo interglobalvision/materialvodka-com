@@ -34,7 +34,7 @@ if (have_posts()) {
   ?>
     <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item item-s-12">
-        <h1 class='font-uppercase font-size-mid font-bold font-outline'>Material = Art</h1>
+        <h1 class='font-uppercase font-size-large font-bold font-outline'>Material = Art</h1>
       </div>
     </div>
 
@@ -81,16 +81,16 @@ if (have_posts()) {
             <p class="font-size-mid">Material is woven into the framework of the creative community. We are members of our world and we actively support radical change.</p>
           </div>
 
-          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic">
+          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic text-max-width">
           <?php
             if (!empty($institution_list)) {
           ?>
-            <div>Some of the artists and cultural institutions we have worked with include:</div>
+            <p class="margin-bottom-micro">Some of the artists and cultural institutions we have worked with include:</p>
             <?php echo apply_filters('the_content', $institution_list); ?>
           <?php
             }
           ?>
-            <div>Learn more about the <a class="link-underline" href="<?php echo home_url('prize'); ?>">Material Vodka Prize</a> and the <a class="link-underline" href="<?php echo home_url('videos'); ?>">Video Award</a></div>
+            <p>Learn more about the <a class="link-underline" href="<?php echo home_url('prize'); ?>">Material Vodka Prize</a> and the <a class="link-underline" href="<?php echo home_url('videos'); ?>">Video Award</a></p>
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ if (have_posts()) {
             responsive_background_styles('bg-front-bottle', $bottle_image , array('320x320','640x640','960x960'));
           }
           ?>
-          <div class="font-size-large grid-item item-s-12 item-m-10 offset-m-1 no-gutter margin-bottom-large">a vodka company founded with the sole intention of supporting alternative arts.</div>
+          <div class="font-size-extra grid-item item-s-12 item-m-10 offset-m-1 no-gutter padding-bottom-large font-outline">a vodka company founded with the sole intention of supporting alternative arts.</div>
           <div id="bottle-sprite"></div>
         </div>
       <?php
@@ -53,11 +53,11 @@ if (have_posts()) {
             responsive_background_styles('bg-front-locate', $locate_image, array('320x320','640x640','960x960'));
             ?>
           </div>
-          <div class="grid-item item-s-8 item-m-6 margin-top-basic">
+          <div class="grid-item item-s-8 item-m-6 margin-top-small">
         <?php
           } else {
         ?>
-          <div class="grid-item item-s-12 margin-top-basic">
+          <div class="grid-item item-s-12 margin-top-small">
         <?php
           }
         ?>
