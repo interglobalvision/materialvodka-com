@@ -218,12 +218,6 @@ function igv_register_theme_options_metabox() {
     'type'    => 'text',
   ) );
 
-  $site_options->add_field( array(
-    'name'    => esc_html__( 'Prize page video', 'cmb2' ),
-    'id'      => $prefix . 'prize_video_title',
-    'type'    => 'title',
-  ) );
-
   // Social Media variables
 
   $site_options->add_field( array(
