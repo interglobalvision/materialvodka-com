@@ -21,10 +21,12 @@ get_header();
 
 <?php
 if (have_posts()) {
+  while (have_posts()) {
+    the_post();
 
-  // Get prize video
-  $prize_video = get_post_meta(get_the_ID(), '_igv_prize_video_group', true);
-  if (!empty($prize_video)){
+    // Get prize video
+    $prize_video = get_post_meta(get_the_ID(), '_igv_prize_video_group', true);
+    if (!empty($prize_video)){
 ?>
     <div class="grid-row">
       <div class="grid-item item-s-12 covervid-wrapper height-s-33vw height-m-28vw">
@@ -35,45 +37,53 @@ if (have_posts()) {
       </div>
     </div>
   <?php
-  }
-  ?>
-  <div class="grid-row padding-top-mid padding-bottom-basic">
-    <div class="grid-item">
-      <h2 class="font-uppercase font-size-large font-outline font-bold">Material Prize Recipients</h2>
+    }
+
+    $args = array(
+      'post_type' => 'prize-winner',
+      'posts_per_page' => -1,
+      'status' => 'published',
+    );
+
+    $prize_winners = new WP_Query($args);
+    if (have_posts()) {
+?>
+    <div class="grid-row padding-top-mid padding-bottom-basic">
+      <div class="grid-item">
+        <h2 class="font-uppercase font-size-large font-outline font-bold">Material Prize Recipients</h2>
+      </div>
     </div>
-  </div>
-  <div class="grid-row">
+    <div class="grid-row">
 <?php
-  $args = array(
-    'post_type' => 'prize-winner',
-    'posts_per_page' => -1,
-    'status' => 'published',
-  );
+      while ($prize_winners->have_posts()) {
+        $prize_winners->the_post();
 
-  $prize_winners = new WP_Query($args);
-
-  while ($prize_winners->have_posts()) {
-    $prize_winners->the_post();
-
-    $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
+        $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
 ?>
 
-    <div class="grid-item item-s-12 item-m-4 item-l-3 margin-bottom-basic">
-      <?php the_post_thumbnail('640x640', 'class=margin-bottom-small'); ?>
-      <div class="font-uppercase"><?php echo $year; ?> Prize</div>
-      <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
-      <div class="text-max-width"><?php the_content(); ?></div>
-    </div>
+      <div class="grid-item item-s-12 item-m-4 item-l-3 margin-bottom-basic">
+        <?php the_post_thumbnail('640x640', 'class=margin-bottom-small'); ?>
+        <div class="font-uppercase"><?php echo $year; ?> Prize</div>
+        <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
+        <div class="text-max-width"><?php the_content(); ?></div>
+      </div>
 
 <?php
-  }
+      }
+?>
+    </div>
+<?php
+    }
 ?>
   </div>
 <?php
+  }
 }
 ?>
   <?php get_template_part('partials/mailinglist-full'); ?>
   </div>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 
