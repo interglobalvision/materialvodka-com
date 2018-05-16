@@ -61,4 +61,4 @@
   </div>
 </footer>
 
-<div class="header-spacer"></div>
+<div id="header-spacer"></div>
