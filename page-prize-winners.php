@@ -45,8 +45,16 @@ if (have_posts()) {
   </div>
   <div class="grid-row">
 <?php
-  while (have_posts()) {
-    the_post();
+  $args = array(
+    'post_type' => 'prize-winner',
+    'posts_per_page' => -1,
+    'status' => 'published',
+  );
+
+  $prize_winners = new WP_Query($args);
+
+  while ($prize_winners->have_posts()) {
+    $prize_winners->the_post();
 
     $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
 ?>
