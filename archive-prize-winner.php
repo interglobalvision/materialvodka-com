@@ -7,7 +7,7 @@ $options = get_site_option('_igv_site_options');
 <main id="main-content">
   <div class="container">
 
-    <div class="grid-row margin-top-mid margin-bottom-basic">
+    <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item">
         <h2 class="font-uppercase font-size-large font-outline font-bold">Material Vodka Prize</h2>
       </div>
@@ -38,7 +38,7 @@ if (!empty($options['_igv_prize_video_group'])){
 
 if (have_posts()) {
 ?>
-  <div class="grid-row margin-top-mid margin-bottom-basic">
+  <div class="grid-row padding-top-mid padding-bottom-basic">
     <div class="grid-item">
       <h2 class="font-uppercase font-size-large font-outline font-bold">Material Prize Recipients</h2>
     </div>

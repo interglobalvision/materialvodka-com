@@ -19,7 +19,7 @@ if (have_posts()) {
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-9 item-l-8 item-xl-6 no-gutter grid-row padding-top-mid">
           <div class="grid-item item-s-12">
-            <h2 class="margin-bottom-basic font-uppercase font-outline font-size-large">Find it near you</h2>
+            <h2 class="padding-bottom-basic font-uppercase font-outline font-size-large">Find it near you</h2>
           </div>
           <div class="grid-item item-s-12 item-m-6 padding-bottom-large">
             <?php get_template_part('partials/zip-code-form'); ?>
