@@ -8,10 +8,11 @@ if (have_posts()) {
     $video = get_post_meta($post->ID, '_igv_home_video_group', true);
     $recipe = get_post_meta($post->ID, '_igv_home_recipe', true);
     $bottle_image = get_post_meta($post->ID, '_igv_home_bottle_image_id', true);
+    $fallback_image = get_post_meta($post->ID, '_igv_home_video_award_fallback_image_id', true);
     $options = get_site_option('_igv_site_options');
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <div class="container">
     <div class="grid-row">
 
@@ -34,7 +35,7 @@ if (have_posts()) {
             responsive_background_styles('bg-front-bottle', $bottle_image , array('320x320','640x640','960x960'));
           }
           ?>
-          <div class="font-size-large grid-item item-s-12 item-m-10 offset-m-1 no-gutter margin-bottom-large">a vodka company founded with the sole intention of supporting alternative arts.</div>
+          <div class="font-size-extra grid-item item-s-12 item-m-10 offset-m-1 no-gutter padding-bottom-large font-outline">a vodka company founded with the sole intention of supporting alternative arts.</div>
           <div id="bottle-sprite"></div>
         </div>
       <?php
@@ -52,11 +53,11 @@ if (have_posts()) {
             responsive_background_styles('bg-front-locate', $locate_image, array('320x320','640x640','960x960'));
             ?>
           </div>
-          <div class="grid-item item-s-8 item-m-6 margin-top-basic">
+          <div class="grid-item item-s-8 item-m-6 margin-top-small">
         <?php
           } else {
         ?>
-          <div class="grid-item item-s-12 margin-top-basic">
+          <div class="grid-item item-s-12 margin-top-small">
         <?php
           }
         ?>
@@ -91,12 +92,12 @@ if (have_posts()) {
         );
 
         // The Query
-        $query = new WP_Query( $args );
+        $video_award_query = new WP_Query( $args );
 
         // The Loop
-        if ( $query->have_posts() ) {
-          while ( $query->have_posts() ) {
-            $query->the_post();
+        if ( $video_award_query->have_posts() ) {
+          while ( $video_award_query->have_posts() ) {
+            $video_award_query->the_post();
 
       ?>
         <a class="grid-item grid-item-square background-cover font-uppercase bg-front-video-award padding-top-small padding-bottom-small" href="<?php echo home_url('videos'); ?>">
@@ -109,6 +110,14 @@ if (have_posts()) {
         </a>
       <?php
         	}
+        } else if (!empty($fallback_image)) {
+      ?>
+        <div class="grid-item grid-item-square background-cover bg-fallback-image">
+          <?php
+          responsive_background_styles('bg-fallback-image', $fallback_image, array('320x320','640x640','960x960'));
+          ?>
+        </div>
+      <?php
         }
 
         wp_reset_postdata();
@@ -122,12 +131,12 @@ if (have_posts()) {
         );
 
         // The Query
-        $query = new WP_Query( $args );
+        $prize_winner_query = new WP_Query( $args );
 
         // The Loop
-        if ( $query->have_posts() ) {
-          while ( $query->have_posts() ) {
-            $query->the_post();
+        if ( $prize_winner_query->have_posts() ) {
+          while ( $prize_winner_query->have_posts() ) {
+            $prize_winner_query->the_post();
 
             $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
       ?>
@@ -149,6 +158,8 @@ if (have_posts()) {
       </div>
     </div>
   </div>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

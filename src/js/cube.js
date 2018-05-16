@@ -7,7 +7,7 @@ class Cube {
 
     $(window)
       .resize(this.onResize.bind(this)) // Bind resize
-      .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+      .on('ajaxyEndTransition', this.onReady.bind(this)); // Bind ajaxySuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
 
@@ -36,7 +36,7 @@ class Cube {
         }
       });
 
-      this.updateCubeStyle('recipe', '.recipe-item');
+      this.updateCubeStyle('recipe', '#transition-cube .active .main-content .recipe-item');
     }
   }
 
@@ -61,6 +61,8 @@ class Cube {
       if ($('style#cube-style-' + styleId).length) {
 
         $('style#cube-style-' + styleId).html(styleContent);
+
+        $(selector).addClass('ready');
 
         this.setTransition(selector);
 

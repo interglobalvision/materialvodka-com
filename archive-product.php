@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="shop">
     <div class="container">
   <?php get_template_part('partials/shop-header'); ?>
@@ -33,6 +33,8 @@ if (have_posts()) {
       <?php get_template_part('partials/mailinglist-full'); ?>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 
   <?php get_template_part('partials/cart'); ?>
 
