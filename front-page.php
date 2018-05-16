@@ -8,6 +8,7 @@ if (have_posts()) {
     $video = get_post_meta($post->ID, '_igv_home_video_group', true);
     $recipe = get_post_meta($post->ID, '_igv_home_recipe', true);
     $bottle_image = get_post_meta($post->ID, '_igv_home_bottle_image_id', true);
+    $fallback_image = get_post_meta($post->ID, '_igv_home_video_award_fallback_image_id', true);
     $options = get_site_option('_igv_site_options');
 ?>
 
@@ -91,12 +92,12 @@ if (have_posts()) {
         );
 
         // The Query
-        $query = new WP_Query( $args );
+        $video_award_query = new WP_Query( $args );
 
         // The Loop
-        if ( $query->have_posts() ) {
-          while ( $query->have_posts() ) {
-            $query->the_post();
+        if ( $video_award_query->have_posts() ) {
+          while ( $video_award_query->have_posts() ) {
+            $video_award_query->the_post();
 
       ?>
         <a class="grid-item grid-item-square background-cover font-uppercase bg-front-video-award padding-top-small padding-bottom-small" href="<?php echo home_url('videos'); ?>">
@@ -109,6 +110,14 @@ if (have_posts()) {
         </a>
       <?php
         	}
+        } else if (!empty($fallback_image)) {
+      ?>
+        <div class="grid-item grid-item-square background-cover bg-fallback-image">
+          <?php
+          responsive_background_styles('bg-fallback-image', $fallback_image, array('320x320','640x640','960x960'));
+          ?>
+        </div>
+      <?php
         }
 
         wp_reset_postdata();
@@ -122,12 +131,12 @@ if (have_posts()) {
         );
 
         // The Query
-        $query = new WP_Query( $args );
+        $prize_winner_query = new WP_Query( $args );
 
         // The Loop
-        if ( $query->have_posts() ) {
-          while ( $query->have_posts() ) {
-            $query->the_post();
+        if ( $prize_winner_query->have_posts() ) {
+          while ( $prize_winner_query->have_posts() ) {
+            $prize_winner_query->the_post();
 
             $year = get_post_meta($post->ID, '_igv_prize_winner_year', true);
       ?>
