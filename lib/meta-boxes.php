@@ -714,23 +714,23 @@ function igv_cmb_metabox_winner() {
   ) );
 }
 
-add_action( 'cmb2_init', 'igv_cmb_metabox_prize_winners' );
-function igv_cmb_metabox_prize_winners() {
+add_action( 'cmb2_init', 'igv_cmb_metabox_prize' );
+function igv_cmb_metabox_prize() {
   // Start with an underscore to hide fields from custom fields list
   $prefix = '_igv_';
 
-  $prize_winners_page = get_page_by_path('/prize-winners');
+  $prize_page = get_page_by_path('/prize');
 
   // Check if home page exists
-  if(!empty($prize_winners_page)) {
+  if(!empty($prize_page)) {
 
     $metabox = new_cmb2_box( array(
-      'id'            => $prefix . 'metabox_prize_winners',
+      'id'            => $prefix . 'metabox_prize',
       'title'         => esc_html__( 'Options', 'cmb2' ),
       'object_types'  => array( 'page' ), // Post type
       'show_on'      => array(
         'key' => 'id',
-        'value' => array($prize_winners_page->ID)
+        'value' => array($prize_page->ID)
       ),
       'context'       => 'normal',
       'priority'      => 'high',
