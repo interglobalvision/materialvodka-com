@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="archive-video-award">
     <div class="container">
       <div class="grid-row">
@@ -66,6 +66,8 @@ if (have_posts()) {
       </div>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

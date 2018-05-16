@@ -11,7 +11,7 @@ if (have_posts()) {
     $options = get_site_option('_igv_site_options');
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <div class="container">
     <div class="grid-row">
 
@@ -162,6 +162,8 @@ if (have_posts()) {
 
     </div>
   </div>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php
