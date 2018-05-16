@@ -1,7 +1,5 @@
 <?php
 get_header();
-
-$options = get_site_option('_igv_site_options');
 ?>
 
 <main id="main-content">
@@ -22,22 +20,23 @@ $options = get_site_option('_igv_site_options');
     </div>
 
 <?php
-if (!empty($options['_igv_prize_video_group'])){
-  $prize_video = $options['_igv_prize_video_group'][0];
+if (have_posts()) {
+
+  // Get prize video
+  $prize_video = get_post_meta(get_the_ID(), '_igv_prize_video_group', true);
+  if (!empty($prize_video)){
 ?>
     <div class="grid-row">
       <div class="grid-item item-s-12 covervid-wrapper height-s-33vw height-m-28vw">
-        <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($prize_video['poster']) ? $prize_video['poster'] : ''; ?>">
-          <source src="<?php echo !empty($prize_video['webm']) ? $prize_video['webm'] : ''; ?>" type="video/webm">
-          <source src="<?php echo !empty($prize_video['mp4']) ? $prize_video['mp4'] : ''; ?>" type="video/mp4">
+        <video class="covervid-video" muted autoplay loop poster="<?php echo !empty($prize_video[0]['poster']) ? $prize_video[0]['poster'] : ''; ?>">
+          <source src="<?php echo !empty($prize_video[0]['webm']) ? $prize_video[0]['webm'] : ''; ?>" type="video/webm">
+          <source src="<?php echo !empty($prize_video[0]['mp4']) ? $prize_video[0]['mp4'] : ''; ?>" type="video/mp4">
         </video>
       </div>
     </div>
-<?php
-}
-
-if (have_posts()) {
-?>
+  <?php
+  }
+  ?>
   <div class="grid-row padding-top-mid padding-bottom-basic">
     <div class="grid-item">
       <h2 class="font-uppercase font-size-large font-outline font-bold">Material Prize Recipients</h2>
