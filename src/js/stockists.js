@@ -146,7 +146,7 @@ class Stockists {
       // Links: website, facebok, instagram
       if (element._igv_stockist_website !== undefined || element._igv_stockist_facebook !== undefined || element._igv_stockist_twitter !== undefined) {
         // Open links paragraph
-        let links = `<div>`;
+        let links = `<div class="font-size-small">`;
 
         // Website
         if (element._igv_stockist_website !== undefined) {
