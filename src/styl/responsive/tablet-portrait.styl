@@ -1,6 +1,7 @@
 @media screen and (min-width: 720px)
 
   $header-height = 39px
+  $footer-height = 37px
 
   $gutter = 21px
 
@@ -32,6 +33,9 @@
 
   .mobile-min-height
     min-height: 0
+
+  .content-wrapper
+    min-height: calc('100vh - ' + ($footer-height + $header-height))
 
   // ******************************************************
 

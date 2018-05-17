@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main class="main-content">
-  <section id="shop">
+  <section id="shop" class="content-wrapper">
     <div class="container">
   <?php get_template_part('partials/shop-header'); ?>
       <div class="grid-row">

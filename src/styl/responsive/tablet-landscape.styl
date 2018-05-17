@@ -1,6 +1,7 @@
 @media screen and (min-width: 1024px)
 
   $header-height = 41px
+  $footer-height = 41px
 
   $gutter = 24px
 
@@ -26,6 +27,9 @@
 
   .desktop-only
     display: initial !important
+
+  .content-wrapper
+    min-height: calc('100vh - ' + ($footer-height + $header-height))
 
   // ******************************************************
 

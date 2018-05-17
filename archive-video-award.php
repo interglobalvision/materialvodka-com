@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main class="main-content">
-  <section id="archive-video-award">
+  <section id="archive-video-award" class="content-wrapper">
     <div class="container">
       <div class="grid-row">
 
