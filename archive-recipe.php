@@ -80,7 +80,7 @@ if (have_posts()) {
             ?>
             </div>
             <?php
-              responsive_background_styles($bg_class, $bg_image, array('320', '640', '960', '1440'));
+              responsive_background_styles($bg_class, $bg_image, array('320', '640', '960', '1440', '1920'));
             ?>
           </div>
 

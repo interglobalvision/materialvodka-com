@@ -47,7 +47,7 @@ if (have_posts()) {
     ?>
       <div class="grid-item item-s-12 item-m-8 item-l-9 vodka-image background-repeat-x">
       <?php
-        responsive_background_styles('vodka-image', $vodka_image, array('320', '640', '960'));
+        responsive_background_styles('vodka-image', $vodka_image, array('320', '640', '960', '1440', '1920'));
       ?>
       </div>
     <?php
@@ -100,7 +100,7 @@ if (have_posts()) {
     ?>
       <div class="grid-item item-s-12 item-m-6 background-cover world-image grid-item-square">
       <?php
-        responsive_background_styles('world-image', $world_image, array('320x320', '640x640', '960x960'));
+        responsive_background_styles('world-image', $world_image, array('320x320','640x640','960x960', '1440x1440','1920x1920'));
       ?>
       </div>
     <?php
@@ -118,7 +118,7 @@ if (have_posts()) {
     <div class="grid-row">
       <div class="grid-item item-s-12 item-m-6 background-cover vodka-bottom-image">
         <?php
-          responsive_background_styles('vodka-bottom-image', $bottom_image, array('320', '640', '960'));
+          responsive_background_styles('vodka-bottom-image', $bottom_image, array('320', '640', '960', '1440', '1920'));
         ?>
       </div>
       <?php get_template_part('partials/mailinglist-half'); ?>
