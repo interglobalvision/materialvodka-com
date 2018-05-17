@@ -268,13 +268,15 @@ function igv_register_theme_options_metabox() {
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Facebook Page URL', 'cmb2' ),
+    'desc' => esc_html__( 'Must begin with https:// or http://', 'cmb2' ),
     'id'      => 'socialmedia_facebook_url',
-    'type'    => 'text',
+    'type'    => 'text_url',
     'default' => 'https://www.facebook.com/materialvodka/',
   ) );
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Twitter Account Handle', 'cmb2' ),
+    'desc' => esc_html__( 'Without the @', 'cmb2' ),
     'id'      => 'socialmedia_twitter',
     'type'    => 'text',
     'default' => 'MaterialVodka',
@@ -282,6 +284,7 @@ function igv_register_theme_options_metabox() {
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Instagram Account Handle', 'cmb2' ),
+    'desc' => esc_html__( 'Without the @', 'cmb2' ),
     'id'      => 'socialmedia_instagram',
     'type'    => 'text',
     'default' => 'MaterialVodka',

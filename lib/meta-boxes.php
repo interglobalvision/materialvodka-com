@@ -195,20 +195,24 @@ function igv_cmb_metabox_stockist() {
 
   $metabox->add_field( array(
     'name' => esc_html__( 'Website', 'cmb2' ),
+    'desc' => esc_html__( 'Must begin with https:// or http://', 'cmb2' ),
     'id'   => $prefix . 'stockist_website',
     'type' => 'text_url',
   ) );
 
   $metabox->add_field( array(
-    'name' => esc_html__( 'Facebook', 'cmb2' ),
+    'name' => esc_html__( 'Facebook page URL', 'cmb2' ),
+    'desc' => esc_html__( 'Must begin with https:// or http://', 'cmb2' ),
     'id'   => $prefix . 'stockist_facebook',
     'type' => 'text_url',
+
   ) );
 
   $metabox->add_field( array(
-    'name' => esc_html__( 'Instagram', 'cmb2' ),
+    'name' => esc_html__( 'Instagram handle', 'cmb2' ),
+    'desc' => esc_html__( 'Without the @', 'cmb2' ),
     'id'   => $prefix . 'stockist_instagram',
-    'type' => 'text_url',
+    'type' => 'text',
   ) );
 
 }
