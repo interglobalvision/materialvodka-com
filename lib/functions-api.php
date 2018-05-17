@@ -159,7 +159,7 @@ function geoToZip($latitude, $longitude) {
   if(empty($addresses)) {
     return array(
       'error' => true,
-      'message' => 'We couldn\' find you location',
+      'message' => 'We couldn\'t find your location',
     );
   }
 
