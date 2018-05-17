@@ -1,23 +1,64 @@
 <?php
 
-function find_stockists_call($data) {
-  // Zip is required
-  if (!isset($data['zipcode'])) {
-    wp_send_json_error();
+function find_stockists_call(WP_REST_Request $request) {
+
+  $zipcode = $request->get_param('zipcode');
+  $latitude = $request->get_param('latitude');
+  $longitude = $request->get_param('longitude');
+
+  // If using Zipcode
+  if(!empty($zipcode)) {
+    // Get stockists
+    $response = find_stockists($zipcode);
+
+  } elseif(!empty($latitude) && !empty($longitude)) { // If using geolocation
+
+    $postal_code = geoToZip($latitude, $longitude);
+
+    // Check if geoToZip returned an error
+    if(isset($postal_code['error'])) {
+      wp_send_json_error(array(
+        'error' => $postal_code['message'],
+      ));
+    } else {
+      // Find stockists
+      $response = find_stockists($postal_code);
+    }
+
+  } else { // Parameters are incomplete
+    wp_send_json_error(array(
+      'error' => 'Request parameters missing',
+    ));
   }
 
+  // Check if the response is an error
+  if(isset($response['error'])) {
+    wp_send_json_error(array(
+      'error' => $response['message'],
+    ));
+  } else {
+    return $response;
+  }
+}
+
+function find_stockists($zipcode) {
   // Get Site Options
   $site_options = get_site_option('_igv_site_options');
+
+  // Check the API key
+  if(!isset($site_options['zipcode_api_key'])) {
+    return array(
+      'error' => true,
+      'message' => 'Zipcode API key missing',
+    );
+  }
 
   // Get Zip Code Api Key
   $key = $site_options['zipcode_api_key'];
 
-  // init http client
+  // Init http client
   // https://github.com/guzzle/guzzle
   $client = new \GuzzleHttp\Client();
-
-  // Declare zipcode
-  $zipcode = $data['zipcode'];
 
   // Wrapped in try/catch to catch exceptions
   try {
@@ -76,13 +117,92 @@ function find_stockists_call($data) {
     );
 
   } catch (Exception $e) {
-    wp_send_json_error();
+    // Return generic server error
+    return array(
+      'error' => true,
+      'message' => 'Server error',
+    );
+  }
+}
+
+function geoToZip($latitude, $longitude) {
+  // Get Site Options
+  $site_options = get_site_option('_igv_site_options');
+
+  // Check the API key
+  if(!isset($site_options['_igv_google_api_key'])) {
+    return array(
+      'error' => true,
+      'message' => 'Google API key missing',
+    );
   }
 
+  $google_api_key = $site_options['_igv_google_api_key'];
+
+  // Init geocoder
+  // http://jstayton.github.io/GoogleMapsGeocoder/classes/GoogleMapsGeocoder.html
+  $Geocoder = new GoogleMapsGeocoder();
+
+  // Set API key for authentication
+  $Geocoder->setApiKey($google_api_key);
+
+  // Set lat and lng to geocode
+  $Geocoder->setLatitudeLongitude($latitude, $longitude);
+
+  // Geocode that thing. Returns an array of addresses that match the geolocation
+  $response = $Geocoder->geocode();
+
+  // Get the addreses from the response
+  $addresses = $response['results'];
+
+  // If addreses is empty
+  if(empty($addresses)) {
+    return array(
+      'error' => true,
+      'message' => 'We couldn\'t find your location',
+    );
+  }
+
+  $response = '';
+  $index = 0;
+
+  // Go thru addreses and find the first zipcode (postal code)
+  while($response == '') {
+    // Check if the components are set
+    if(isset($addresses[$index]['address_components'])) {
+      // Get the components
+      $address_components = $addresses[$index]['address_components'];
+
+      // Check the size of the found postal code
+      if(sizeof($address_components) >= 7 && $address_components[7]['types']['0'] == 'postal_code') {
+
+        // Save the postal code (trimed to be 5 digits long, just in case)
+        $response = substr($address_components[7]['long_name'], 0, 5);
+      }
+
+      // Check the first address to see if inside the USA
+      if($address_components[6]['short_name'] !== 'US') {
+        $response = array(
+          'error' => true,
+          'message' => 'For the moment Material Vodka is only available in the US. Subscribe to our newsletter below to be the first to know when we get in your area',
+        );
+      }
+
+    }
+  }
+
+  if($response == '') {
+    return array(
+      'error' => true,
+      'message' => 'Server error',
+    );
+  } else {
+    return $response;
+  }
 }
 
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'igv', '/find-stockists/(?P<zipcode>\d+)', array(
+  register_rest_route( 'igv', '/find-stockists', array(
     'methods' => 'GET',
     'callback' => 'find_stockists_call',
   ) );

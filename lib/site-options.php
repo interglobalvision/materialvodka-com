@@ -237,6 +237,7 @@ function igv_register_theme_options_metabox() {
 		'type' => 'checkbox',
 	) );
 
+  // Mailchimp
   $site_options->add_field( array(
     'name'    => esc_html__( 'Mailing List', 'cmb2' ),
     'id'      => $prefix . 'mailinglist_title',
@@ -320,21 +321,28 @@ function igv_register_theme_options_metabox() {
     'type'    => 'text',
   ) );
 
-  // Analytics
 
   $site_options->add_field( array(
-    'name'    => esc_html__( 'Analytics', 'cmb2' ),
-    'desc'    => esc_html__( 'Settings for analytics', 'cmb2' ),
-    'id'      => $prefix . 'analytics_title',
+    'name'    => esc_html__( 'Google', 'cmb2' ),
+    'id'      => $prefix . 'google_title',
     'type'    => 'title',
   ) );
 
+  // Analytics
   $site_options->add_field( array(
     'name'    => esc_html__( 'Google Analytics Tracking ID', 'cmb2' ),
     'desc'    => esc_html__( '(optional)', 'cmb2' ),
     'id'      => 'google_analytics_id',
     'type'    => 'text',
   ) );
+
+  // Google API
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Google API Key', 'cmb2' ),
+    'id'      => $prefix . 'google_api_key',
+    'type'    => 'text',
+  ) );
+
 
   // Zip Code API options
   $site_options->add_field( array(

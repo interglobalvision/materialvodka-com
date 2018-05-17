@@ -1,8 +1,6 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, document, window, WP */
 
-import { geo2zip } from 'geo2zip';
-
 class Stockists {
 
   constructor() {
@@ -50,7 +48,7 @@ class Stockists {
     if(zipcode.toString().length !== 5) {
       this.outputError('Please provide a valid zipcode');
     } else {
-      this.findStockists(zipcode);
+      this.findStockists({zipcode});
     }
   }
 
@@ -66,30 +64,23 @@ class Stockists {
     // Get lat/lng
     const { latitude, longitude } = position.coords;
 
-    // Convert lat/lng to zipcode
-    geo2zip({ longitude, latitude })
-      .then(zip => {
-        this.findStockists(zip);
-      })
-      .catch(e => {
-        this.outputError();
-      });
-
+    this.findStockists({latitude, longitude});
   }
 
   geoError(error) {
     this.outputMessage('We cound\'t retrive your geolocation :(');
   }
 
-  findStockists(zip) {
+  findStockists(data) {
     // Set loading message
     this.outputMessage('Finding Stockists...');
 
     // Make a request to find the nearest stockists
-    $.ajax(WP.siteUrl + `/wp-json/igv/find-stockists/${zip}`, {
+    $.ajax(`${WP.siteUrl}/wp-json/igv/find-stockists`, {
       dataType: 'json',
       error: this.handleError,
       success: this.handleSuccess,
+      data,
     });
   }
 
@@ -98,7 +89,9 @@ class Stockists {
     // If success is false, it means no other zipcodes where found
     // or an error happened in the server
     if (!data.success) {
-      this.outputError();
+      debugger;
+      const { error } = data.data || {};
+      this.outputError(error);
     } else {
       if(data.stockists.length) {
         this.outputStockists(data.stockists);
@@ -155,7 +148,7 @@ class Stockists {
       // Links: website, facebok, instagram
       if (element._igv_stockist_website !== undefined || element._igv_stockist_facebook !== undefined || element._igv_stockist_twitter !== undefined) {
         // Open links paragraph
-        let links = `<div>`;
+        let links = `<div class="font-size-small">`;
 
         // Website
         if (element._igv_stockist_website !== undefined) {
