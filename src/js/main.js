@@ -45,7 +45,7 @@ class Site {
   }
 
   onResize() {
-    
+
   }
 
   fixWidows() {
@@ -80,12 +80,12 @@ class Site {
       // create Tween
       const tween = TweenMax.to("#bottle-sprite", 1.0, {
         backgroundPosition: "100% 0",
-        ease: SteppedEase.config(59)
+        ease: SteppedEase.config(99)
       });
 
       // build scene
       const scene = new ScrollMagic.Scene({duration: 500})
-      .triggerHook("onCenter")
+      .triggerHook("onBottom")
       .setTween(tween)
       .addTo(controller);
     }

@@ -13077,12 +13077,12 @@ Site = function () {
         // create Tween
         var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
           backgroundPosition: "100% 0",
-          ease: SteppedEase.config(59) });
+          ease: SteppedEase.config(99) });
 
 
         // build scene
         var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
-        triggerHook("onCenter").
+        triggerHook("onBottom").
         setTween(tween).
         addTo(controller);
       }
