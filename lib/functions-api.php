@@ -184,7 +184,7 @@ function geoToZip($latitude, $longitude) {
       if($address_components[6]['short_name'] !== 'US') {
         $response = array(
           'error' => true,
-          'message' => 'For the moment Material Vodka is only available in the US. Subscribe to our newsletter below to be te first to know when we get in your area',
+          'message' => 'For the moment Material Vodka is only available in the US. Subscribe to our newsletter below to be the first to know when we get in your area',
         );
       }
 
