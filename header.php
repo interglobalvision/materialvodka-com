@@ -53,7 +53,7 @@ get_template_part('partials/seo');
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo') ?></a>
         </div>
         <div id="mobile-nav-trigger-holder" class="grid-item text-align-right">
-          <div id="mobile-nav-trigger" class="grid-row justify-center align-items-center">
+          <div id="mobile-nav-trigger" class="grid-row justify-center align-items-center js-mobile-nav-toggle">
             <div id="mobile-nav-trigger-borders"></div>
           </div>
         </div>
@@ -92,7 +92,7 @@ get_template_part('partials/seo');
         foreach ($nav_menu_group as $key => $value) {
       ?>
         <li class="grid-item padding-top-micro padding-bottom-micro margin-bottom-micro">
-          <a href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
+          <a class="js-mobile-nav-toggle" href="<?php echo home_url($key); ?>"><?php echo $key; ?></a>
         </li>
       <?php
         }
