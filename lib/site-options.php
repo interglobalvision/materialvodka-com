@@ -270,18 +270,21 @@ function igv_register_theme_options_metabox() {
     'name'    => esc_html__( 'Facebook Page URL', 'cmb2' ),
     'id'      => 'socialmedia_facebook_url',
     'type'    => 'text',
+    'default' => 'https://www.facebook.com/materialvodka/',
   ) );
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Twitter Account Handle', 'cmb2' ),
     'id'      => 'socialmedia_twitter',
     'type'    => 'text',
+    'default' => 'MaterialVodka',
   ) );
 
   $site_options->add_field( array(
     'name'    => esc_html__( 'Instagram Account Handle', 'cmb2' ),
     'id'      => 'socialmedia_instagram',
     'type'    => 'text',
+    'default' => 'MaterialVodka',
   ) );
 
   // Metadata options
