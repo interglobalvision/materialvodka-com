@@ -89,7 +89,9 @@ class Stockists {
     // If success is false, it means no other zipcodes where found
     // or an error happened in the server
     if (!data.success) {
-      this.outputError();
+      debugger;
+      const { error } = data.data || {};
+      this.outputError(error);
     } else {
       if(data.stockists.length) {
         this.outputStockists(data.stockists);

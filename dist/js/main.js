@@ -19157,7 +19157,9 @@ Stockists = function () {
       // If success is false, it means no other zipcodes where found
       // or an error happened in the server
       if (!data.success) {
-        this.outputError();
+        debugger;var _ref =
+        data.data || {},error = _ref.error;
+        this.outputError(error);
       } else {
         if (data.stockists.length) {
           this.outputStockists(data.stockists);
