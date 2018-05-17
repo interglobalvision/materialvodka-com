@@ -91,7 +91,7 @@ class Ajaxy {
     const $activeContent = $('#transition-cube .active .main-content');
     const contentTop = $(document).scrollTop()
 
-    $('#transition-cube .active .main-content').addClass('transition-content-absolute').css({
+    $activeContent.addClass('transition-content-absolute').css({
       top: '-' + contentTop + 'px',
     });
 

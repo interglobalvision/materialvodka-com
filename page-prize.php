@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <div class="container">
 
     <div class="grid-row padding-top-mid padding-bottom-basic">
@@ -45,7 +45,7 @@ if (have_posts()) {
     );
 
     $prize_winners = new WP_Query($args);
-    
+
     if ($prize_winners->have_posts()) {
 ?>
     <div class="grid-row padding-top-mid padding-bottom-basic">
@@ -74,16 +74,13 @@ if (have_posts()) {
     </div>
 <?php
     }
-?>
-  </div>
-<?php
   }
 }
 ?>
   <?php get_template_part('partials/mailinglist-full'); ?>
   </div>
 
-  <?php //get_template_part('partials/footer-content'); ?>
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 

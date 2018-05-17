@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<section id="main-content">
+<section class="main-content">
   <h1>Not found</h1>
   <p>:(</p>
 </section>

@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="single-product">
     <div class="container">
   <?php get_template_part('partials/shop-header'); ?>
