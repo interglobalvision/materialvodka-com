@@ -169,7 +169,7 @@ class Stockists {
 
         // Instagram
         if (element._igv_stockist_instagram !== undefined) {
-          links  += ` <a class="font-uppercase link-underline" href="${element._igv_stockist_instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>`;
+          links  += ` <a class="font-uppercase link-underline" href="https://www.instagram.com/${element._igv_stockist_instagram}/" target="_blank" rel="noopener noreferrer">Instagram</a>`;
         }
 
         // Close links paragraph

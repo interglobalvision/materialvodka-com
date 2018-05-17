@@ -13036,8 +13036,6 @@ Site = function () {
       this.$headerSpacer = $('.header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
-      this.windowHeight = this.$window.outerHeight();
-
       this.bindMobileNavTrigger();
       this.initCoverVid();
       this.animateBottleSprite();
@@ -13078,13 +13076,12 @@ Site = function () {
 
         // create Tween
         var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
-          backgroundPosition: "100% 0", // property we're stepping to
-          ease: SteppedEase.config(99) // 100 frames - 1
-        });
+          backgroundPosition: "100% 0",
+          ease: SteppedEase.config(59) });
+
 
         // build scene
-        var scene = new _scrollmagic2.default.Scene({ duration: this.windowHeight }).
-        triggerElement('#bottle-sprite').
+        var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
         triggerHook("onCenter").
         setTween(tween).
         addTo(controller);
@@ -19201,7 +19198,7 @@ Stockists = function () {
 
           // Instagram
           if (element._igv_stockist_instagram !== undefined) {
-            links += ' <a class="font-uppercase link-underline" href="' + element._igv_stockist_instagram + '" target="_blank" rel="noopener noreferrer">Instagram</a>';
+            links += ' <a class="font-uppercase link-underline" href="https://www.instagram.com/' + element._igv_stockist_instagram + '/" target="_blank" rel="noopener noreferrer">Instagram</a>';
           }
 
           // Close links paragraph
