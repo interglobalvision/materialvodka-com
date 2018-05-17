@@ -8,7 +8,9 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'admin-thumb', 150, 150, false );
   add_image_size( 'opengraph', 1200, 630, true );
 
+  add_image_size( '1920x1920', 1920, 1920, true );
   add_image_size( '1920', 1920, 9999, false );
+  add_image_size( '1440x1440', 1440, 1440, true );
   add_image_size( '1440', 1440, 9999, false );
   add_image_size( '960x960', 960, 960, true );
   add_image_size( '960', 960, 9999, false );

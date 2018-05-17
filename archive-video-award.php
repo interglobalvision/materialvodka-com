@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="archive-video-award">
     <div class="container">
       <div class="grid-row">
@@ -54,10 +54,20 @@ if (have_posts()) {
 } // endif
 ?>
 
+      <div class="align-items-center justify-center">
+        <div class="grid-item item-s-12 item-m-6 text-align-right">
+          Special Events, Art Prize, Cocktail Recipes, etc.
+        </div>
+        <div class="grid-item item-s-12 item-m-6">
+          <?php get_template_part('partials/mailinglist-form'); ?>
+        </div>
       </div>
-      <?php get_template_part('partials/mailinglist-full'); ?>
+
+      </div>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

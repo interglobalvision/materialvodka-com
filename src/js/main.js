@@ -23,18 +23,9 @@ class Site {
 
     $(window)
       .resize(this.onResize.bind(this))
-      .on('ajaxySuccess', this.onReady.bind(this))
-      .on('ajaxyEndTransition', this.resetHeader.bind(this));
+      .on('ajaxySuccess', this.onReady.bind(this));
 
     $(document).ready(this.onReady.bind(this));
-
-    // Bind
-    this.repositionHeader = this.repositionHeader.bind(this);
-  }
-
-  onResize() {
-    this.resetHeader();
-    this.windowWidth = this.$window.width();
   }
 
   onReady() {
@@ -44,16 +35,19 @@ class Site {
     this.$document = $(document);
     this.$body = $('body');
     this.$header = $('#header');
-    this.$mainContent = $('#main-content');
+    this.$mainContent = $('.main-content');
     this.$headerSpacer = $('.header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
-    this.windowWidth = this.$window.width();
+    this.windowHeight = this.$window.outerHeight();
 
     this.bindMobileNavTrigger();
     this.initCoverVid();
-    this.bindStickyHeader();
     this.animateBottleSprite();
+  }
+
+  onResize() {
+
   }
 
   fixWidows() {
@@ -73,44 +67,10 @@ class Site {
     }
   }
 
-  bindStickyHeader() {
-    this.sizeHeaderSpacer();
-
-    this.$window.on('scroll', this.repositionHeader);
-  }
-
-  repositionHeader() {
-    if ((this.headerSpacerOffset - this.windowHeight) > this.$window.scrollTop() || this.windowWidth < 720) {
-      this.$header.removeClass('bottom').css({
-        top: 'auto',
-        bottom: 0
-      });
-    } else if ((this.headerSpacerOffset - this.windowHeight) <= this.$window.scrollTop() && this.windowWidth >= 720) {
-      this.$header.addClass('bottom').css({
-        top: this.headerTop + 'px',
-        bottom: 'auto'
-      });
-    }
-  }
-
-  sizeHeaderSpacer() {
-    const headerHeight = this.$header.outerHeight();
-
-    this.$headerSpacer.css('height', headerHeight + 'px');
-    this.headerTop = this.$headerSpacer.offset().top;
-    this.headerSpacerOffset = this.headerTop + headerHeight;
-    this.windowHeight = this.$window.outerHeight();
-  }
-
-  resetHeader() {
-    this.sizeHeaderSpacer();
-    this.repositionHeader();
-  }
-
   bindMobileNavTrigger() {
     const $mobileNav = $('#mobile-nav');
 
-    $('#mobile-nav-trigger').on('click', () => {
+    $('.js-mobile-nav-toggle').on('click', () => {
       this.$body.toggleClass('mobile-active');
     });
   }
@@ -121,12 +81,13 @@ class Site {
 
       // create Tween
       const tween = TweenMax.to("#bottle-sprite", 1.0, {
-        backgroundPosition: "100% 0",
-        ease: SteppedEase.config(59)
+        backgroundPosition: "100% 0", // property we're stepping to
+        ease: SteppedEase.config(99) // 100 frames - 1
       });
 
       // build scene
-      const scene = new ScrollMagic.Scene({duration: 500})
+      const scene = new ScrollMagic.Scene({duration: this.windowHeight})
+      .triggerElement('#bottle-sprite')
       .triggerHook("onCenter")
       .setTween(tween)
       .addTo(controller);

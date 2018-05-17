@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="vodka">
     <div <?php post_class('container'); ?> id="post-<?php the_ID(); ?>">
 
@@ -34,12 +34,12 @@ if (have_posts()) {
   ?>
     <div class="grid-row padding-top-mid padding-bottom-basic">
       <div class="grid-item item-s-12">
-        <h1 class='font-uppercase font-size-mid font-bold font-outline'>Material = Art</h1>
+        <h1 class='font-uppercase font-size-large font-bold font-outline'>Material = Art</h1>
       </div>
     </div>
 
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-4 item-l-3 p-line-length padding-bottom-large">
+      <div class="grid-item item-s-12 item-m-4 item-l-3 text-max-width padding-bottom-large">
         <?php the_content(); ?>
       </div>
     <?php
@@ -47,7 +47,7 @@ if (have_posts()) {
     ?>
       <div class="grid-item item-s-12 item-m-8 item-l-9 vodka-image background-repeat-x">
       <?php
-        responsive_background_styles('vodka-image', $vodka_image, array('320', '640', '960'));
+        responsive_background_styles('vodka-image', $vodka_image, array('320', '640', '960', '1440', '1920'));
       ?>
       </div>
     <?php
@@ -81,16 +81,16 @@ if (have_posts()) {
             <p class="font-size-mid">Material is woven into the framework of the creative community. We are members of our world and we actively support radical change.</p>
           </div>
 
-          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic">
+          <div class="grid-item item-s-12 item-m-6 padding-bottom-basic text-max-width">
           <?php
             if (!empty($institution_list)) {
           ?>
-            <div>Some of the artists and cultural institutions we have worked with include:</div>
+            <p class="margin-bottom-micro">Some of the artists and cultural institutions we have worked with include:</p>
             <?php echo apply_filters('the_content', $institution_list); ?>
           <?php
             }
           ?>
-            <div>Learn more about the <a class="link-underline" href="<?php echo home_url('prize'); ?>">Material Vodka Prize</a> and the <a class="link-underline" href="<?php echo home_url('videos'); ?>">Video Award</a></div>
+            <p>Learn more about the <a class="link-underline" href="<?php echo home_url('prize'); ?>">Material Vodka Prize</a> and the <a class="link-underline" href="<?php echo home_url('videos'); ?>">Video Award</a></p>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ if (have_posts()) {
     ?>
       <div class="grid-item item-s-12 item-m-6 background-cover world-image grid-item-square">
       <?php
-        responsive_background_styles('world-image', $world_image, array('320x320', '640x640', '960x960'));
+        responsive_background_styles('world-image', $world_image, array('320x320','640x640','960x960', '1440x1440','1920x1920'));
       ?>
       </div>
     <?php
@@ -118,7 +118,7 @@ if (have_posts()) {
     <div class="grid-row">
       <div class="grid-item item-s-12 item-m-6 background-cover vodka-bottom-image">
         <?php
-          responsive_background_styles('vodka-bottom-image', $bottom_image, array('320', '640', '960'));
+          responsive_background_styles('vodka-bottom-image', $bottom_image, array('320', '640', '960', '1440', '1920'));
         ?>
       </div>
       <?php get_template_part('partials/mailinglist-half'); ?>
@@ -133,6 +133,8 @@ if (have_posts()) {
 
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

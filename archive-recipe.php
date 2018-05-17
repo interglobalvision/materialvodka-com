@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="posts">
     <div class="container">
 
@@ -10,7 +10,7 @@ get_header();
         <div class="grid-item item-s-12 item-m-6">
           <h1 class="font-uppercase font-size-large font-bold font-outline">Cocktail Recipes</h1>
         </div>
-        <div class="grid-item item-s-12 item-m-3 item-l-2">
+        <div class="grid-item item-s-12 item-m-3 item-l-2 text-max-width">
           <span>Material works with Arley Marks of Honey’s to invent the most tasty recipes.</span>
         </div>
       </div>
@@ -80,7 +80,7 @@ if (have_posts()) {
             ?>
             </div>
             <?php
-              responsive_background_styles($bg_class, $bg_image, array('320', '640', '960', '1440'));
+              responsive_background_styles($bg_class, $bg_image, array('320', '640', '960', '1440', '1920'));
             ?>
           </div>
 
@@ -121,6 +121,8 @@ if (have_posts()) {
     <?php get_template_part('partials/mailinglist-full'); ?>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

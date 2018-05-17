@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main class="main-content">
   <section id="locate">
     <div class="container">
 
@@ -33,7 +33,7 @@ if (have_posts()) {
       ?>
         <div class="grid-item item-s-12 item-m-3 item-l-4 item-xl-6 background-cover locate-top-image">
           <?php
-            responsive_background_styles('locate-top-image', $top_image, array('320x320', '640x640', '960x960'));
+            responsive_background_styles('locate-top-image', $top_image, array('320x320', '640x640', '960x960','1440x1440','1920x1920'));
           ?>
         </div>
       <?php
@@ -109,7 +109,7 @@ if (have_posts()) {
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6 background-cover locate-bottom-image">
           <?php
-            responsive_background_styles('locate-bottom-image', $bottom_image, array('320', '640', '960'));
+            responsive_background_styles('locate-bottom-image', $bottom_image, array('320', '640', '960', '1440', '1920'));
           ?>
         </div>
         <?php get_template_part('partials/mailinglist-half'); ?>
@@ -128,6 +128,8 @@ if (have_posts()) {
 
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 </main>
 
 <?php

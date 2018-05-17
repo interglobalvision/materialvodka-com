@@ -88,9 +88,12 @@ class Ajaxy {
   }
 
   ajaxBefore(xhr, settings) {
-    $('html').animate({
-      scrollTop: 0,
-    }, 500);
+    const $activeContent = $('#transition-cube .active .main-content');
+    const contentTop = $(document).scrollTop()
+
+    $activeContent.addClass('transition-content-absolute').css({
+      top: '-' + contentTop + 'px',
+    });
 
     $('body').addClass('loading');
 
@@ -145,7 +148,7 @@ class Ajaxy {
 
     // Get changes: body classes, page title, main content, header
     let $bodyClasses = $('body', respHtml).attr('class');
-    let $content = $('#main-content', respHtml);
+    let $content = $('.main-content', respHtml);
     let $title = $('title', respHtml).text();
 
     // Update with new title, content and classes

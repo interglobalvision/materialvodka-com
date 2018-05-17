@@ -13020,19 +13020,10 @@ Site = function () {
 
     $(window).
     resize(this.onResize.bind(this)).
-    on('ajaxySuccess', this.onReady.bind(this)).
-    on('ajaxyEndTransition', this.resetHeader.bind(this));
+    on('ajaxySuccess', this.onReady.bind(this));
 
     $(document).ready(this.onReady.bind(this));
-
-    // Bind
-    this.repositionHeader = this.repositionHeader.bind(this);
-  }_createClass(Site, [{ key: 'onResize', value: function onResize()
-
-    {
-      this.resetHeader();
-      this.windowWidth = this.$window.width();
-    } }, { key: 'onReady', value: function onReady()
+  }_createClass(Site, [{ key: 'onReady', value: function onReady()
 
     {
       _lazysizes2.default.init();
@@ -13041,16 +13032,19 @@ Site = function () {
       this.$document = $(document);
       this.$body = $('body');
       this.$header = $('#header');
-      this.$mainContent = $('#main-content');
+      this.$mainContent = $('.main-content');
       this.$headerSpacer = $('.header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
-      this.windowWidth = this.$window.width();
+      this.windowHeight = this.$window.outerHeight();
 
       this.bindMobileNavTrigger();
       this.initCoverVid();
-      this.bindStickyHeader();
       this.animateBottleSprite();
+    } }, { key: 'onResize', value: function onResize()
+
+    {
+
     } }, { key: 'fixWidows', value: function fixWidows()
 
     {
@@ -13068,46 +13062,12 @@ Site = function () {
           $(element).coverVid(1920, 1080).addClass('show');
         });
       }
-    } }, { key: 'bindStickyHeader', value: function bindStickyHeader()
-
-    {
-      this.sizeHeaderSpacer();
-
-      this.$window.on('scroll', this.repositionHeader);
-    } }, { key: 'repositionHeader', value: function repositionHeader()
-
-    {
-      if (this.headerSpacerOffset - this.windowHeight > this.$window.scrollTop() || this.windowWidth < 720) {
-        this.$header.removeClass('bottom').css({
-          top: 'auto',
-          bottom: 0 });
-
-      } else if (this.headerSpacerOffset - this.windowHeight <= this.$window.scrollTop() && this.windowWidth >= 720) {
-        this.$header.addClass('bottom').css({
-          top: this.headerTop + 'px',
-          bottom: 'auto' });
-
-      }
-    } }, { key: 'sizeHeaderSpacer', value: function sizeHeaderSpacer()
-
-    {
-      var headerHeight = this.$header.outerHeight();
-
-      this.$headerSpacer.css('height', headerHeight + 'px');
-      this.headerTop = this.$headerSpacer.offset().top;
-      this.headerSpacerOffset = this.headerTop + headerHeight;
-      this.windowHeight = this.$window.outerHeight();
-    } }, { key: 'resetHeader', value: function resetHeader()
-
-    {
-      this.sizeHeaderSpacer();
-      this.repositionHeader();
     } }, { key: 'bindMobileNavTrigger', value: function bindMobileNavTrigger()
 
     {var _this = this;
       var $mobileNav = $('#mobile-nav');
 
-      $('#mobile-nav-trigger').on('click', function () {
+      $('.js-mobile-nav-toggle').on('click', function () {
         _this.$body.toggleClass('mobile-active');
       });
     } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
@@ -13118,12 +13078,13 @@ Site = function () {
 
         // create Tween
         var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
-          backgroundPosition: "100% 0",
-          ease: SteppedEase.config(59) });
-
+          backgroundPosition: "100% 0", // property we're stepping to
+          ease: SteppedEase.config(99) // 100 frames - 1
+        });
 
         // build scene
-        var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
+        var scene = new _scrollmagic2.default.Scene({ duration: this.windowHeight }).
+        triggerElement('#bottle-sprite').
         triggerHook("onCenter").
         setTween(tween).
         addTo(controller);
@@ -18984,9 +18945,12 @@ Ajaxy = function () {
     } }, { key: 'ajaxBefore', value: function ajaxBefore(
 
     xhr, settings) {
-      $('html').animate({
-        scrollTop: 0 },
-      500);
+      var $activeContent = $('#transition-cube .active .main-content');
+      var contentTop = $(document).scrollTop();
+
+      $activeContent.addClass('transition-content-absolute').css({
+        top: '-' + contentTop + 'px' });
+
 
       $('body').addClass('loading');
 
@@ -19041,7 +19005,7 @@ Ajaxy = function () {
 
       // Get changes: body classes, page title, main content, header
       var $bodyClasses = $('body', respHtml).attr('class');
-      var $content = $('#main-content', respHtml);
+      var $content = $('.main-content', respHtml);
       var $title = $('title', respHtml).text();
 
       // Update with new title, content and classes
@@ -19230,7 +19194,7 @@ Stockists = function () {
 
           // Instagram
           if (element._igv_stockist_instagram !== undefined) {
-            links += ' <a class="font-uppercase link-underline" href="' + element._igv_stockist_instagram + '" target="_blank" rel="noopener noreferrer">Instagram</a>';
+            links += ' <a class="font-uppercase link-underline" href="https://www.instagram.com/' + element._igv_stockist_instagram + '/" target="_blank" rel="noopener noreferrer">Instagram</a>';
           }
 
           // Close links paragraph
@@ -19271,7 +19235,7 @@ Cube = function () {
 
     $(window).
     resize(this.onResize.bind(this)) // Bind resize
-    .on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+    .on('ajaxyEndTransition', this.onReady.bind(this)); // Bind ajaxySuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
 
@@ -19300,7 +19264,7 @@ Cube = function () {
           } });
 
 
-        this.updateCubeStyle('recipe', '.recipe-item');
+        this.updateCubeStyle('recipe', '#transition-cube .active .main-content .recipe-item');
       }
     } }, { key: 'updateCubeStyle', value: function updateCubeStyle(
 
@@ -19325,6 +19289,8 @@ Cube = function () {
         if ($('style#cube-style-' + styleId).length) {
 
           $('style#cube-style-' + styleId).html(styleContent);
+
+          $(selector).addClass('ready');
 
           this.setTransition(selector);
 
