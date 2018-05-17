@@ -13036,6 +13036,8 @@ Site = function () {
       this.$headerSpacer = $('.header-spacer');
       this.$covervidVideo = $('.covervid-video');
 
+      this.windowHeight = this.$window.outerHeight();
+
       this.bindMobileNavTrigger();
       this.initCoverVid();
       this.animateBottleSprite();
@@ -13076,12 +13078,13 @@ Site = function () {
 
         // create Tween
         var tween = _gsap2.default.to("#bottle-sprite", 1.0, {
-          backgroundPosition: "100% 0",
-          ease: SteppedEase.config(59) });
-
+          backgroundPosition: "100% 0", // property we're stepping to
+          ease: SteppedEase.config(99) // 100 frames - 1
+        });
 
         // build scene
-        var scene = new _scrollmagic2.default.Scene({ duration: 500 }).
+        var scene = new _scrollmagic2.default.Scene({ duration: this.windowHeight }).
+        triggerElement('#bottle-sprite').
         triggerHook("onCenter").
         setTween(tween).
         addTo(controller);

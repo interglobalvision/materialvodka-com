@@ -39,6 +39,8 @@ class Site {
     this.$headerSpacer = $('.header-spacer');
     this.$covervidVideo = $('.covervid-video');
 
+    this.windowHeight = this.$window.outerHeight();
+
     this.bindMobileNavTrigger();
     this.initCoverVid();
     this.animateBottleSprite();
@@ -79,12 +81,13 @@ class Site {
 
       // create Tween
       const tween = TweenMax.to("#bottle-sprite", 1.0, {
-        backgroundPosition: "100% 0",
-        ease: SteppedEase.config(59)
+        backgroundPosition: "100% 0", // property we're stepping to
+        ease: SteppedEase.config(99) // 100 frames - 1
       });
 
       // build scene
-      const scene = new ScrollMagic.Scene({duration: 500})
+      const scene = new ScrollMagic.Scene({duration: this.windowHeight})
+      .triggerElement('#bottle-sprite')
       .triggerHook("onCenter")
       .setTween(tween)
       .addTo(controller);
