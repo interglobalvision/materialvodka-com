@@ -35,8 +35,8 @@ if (have_posts()) {
             responsive_background_styles('bg-front-bottle', $bottle_image , array('320x320','640x640','960x960','1440x1440','1920x1920'));
           }
           ?>
-          <div class="font-size-extra grid-item item-s-12 item-m-10 offset-m-1 no-gutter padding-bottom-large font-outline">a vodka company founded with the sole intention of supporting alternative arts.</div>
           <div id="bottle-sprite"></div>
+          <div class="font-size-extra grid-item item-s-12 item-m-10 offset-m-1 no-gutter padding-bottom-large font-outline">a vodka company founded with the sole intention of supporting alternative arts.</div>
         </div>
       <?php
         $locate_page = get_page_by_path('locate');
