@@ -39,7 +39,7 @@ if (have_posts()) {
     </div>
 
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-4 item-l-3 p-line-length padding-bottom-large">
+      <div class="grid-item item-s-12 item-m-4 item-l-3 text-max-width padding-bottom-large">
         <?php the_content(); ?>
       </div>
     <?php
