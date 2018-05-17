@@ -45,7 +45,7 @@ class Site {
   }
 
   onResize() {
-    
+
   }
 
   fixWidows() {
@@ -68,7 +68,7 @@ class Site {
   bindMobileNavTrigger() {
     const $mobileNav = $('#mobile-nav');
 
-    $('#mobile-nav-trigger').on('click', () => {
+    $('.js-mobile-nav-toggle').on('click', () => {
       this.$body.toggleClass('mobile-active');
     });
   }

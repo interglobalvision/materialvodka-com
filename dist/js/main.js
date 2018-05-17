@@ -13065,7 +13065,7 @@ Site = function () {
     {var _this = this;
       var $mobileNav = $('#mobile-nav');
 
-      $('#mobile-nav-trigger').on('click', function () {
+      $('.js-mobile-nav-toggle').on('click', function () {
         _this.$body.toggleClass('mobile-active');
       });
     } }, { key: 'animateBottleSprite', value: function animateBottleSprite()
