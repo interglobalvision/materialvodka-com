@@ -7,7 +7,7 @@ get_header();
     <div class="container">
       <?php get_template_part('partials/shop-header'); ?>
       <!-- open main row -->
-      <div class="grid-row ">
+      <div class="grid-row">
 <?php
 if (have_posts()) {
   $shop_options = get_site_option('_igv_shop_options');
@@ -62,7 +62,7 @@ if (have_posts()) {
       <!-- open product sub-row -->
       <div class="grid-item item-s-12 no-gutter grid-row">
         <!-- open product sub-sub-row -->
-        <div class="grid-item item-s-12 item-m- no-gutter grid-row">
+        <div class="grid-item item-s-12 item-m-6 no-gutter grid-row">
 <?php
       } else if ($wp_query->current_post === $wp_query->post_count - 1) {
         // No more posts.
