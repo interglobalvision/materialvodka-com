@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main class="main-content">
-  <section id="vodka">
+  <section id="vodka" class="content-wrapper">
     <div <?php post_class('container'); ?> id="post-<?php the_ID(); ?>">
 
 <?php

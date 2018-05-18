@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main class="main-content">
-  <section id="locate">
+  <section id="locate" class="content-wrapper">
     <div class="container">
 
 <?php

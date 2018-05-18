@@ -1,4 +1,5 @@
 $header-height = 30px
+$footer-height = 84px
 
 $gutter = 14px
 
@@ -34,6 +35,9 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 .main-content
   min-height: 100vh
+
+.content-wrapper
+  min-height: calc('100vh - ' + ($footer-height + $header-height))
 
 .background-cover
   background-size: cover
