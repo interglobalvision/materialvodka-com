@@ -55,7 +55,7 @@ if (have_posts()) {
         $bg_image = get_post_thumbnail_id($post->ID);
 
 ?>
-        <div class="recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3">
+        <article <?php post_class('recipe-item cube-holder grid-item no-gutter item-s-12 item-m-4 item-l-3'); ?>>
 
           <div class="cube-left cube-front background-cover grid-column <?php echo $bg_class; ?>">
             <div class="grid-item padding-top-small text-max-width">
@@ -106,7 +106,7 @@ if (have_posts()) {
             </div>
           </div>
 
-        </div>
+        </article>
 <?php
       }
 ?>

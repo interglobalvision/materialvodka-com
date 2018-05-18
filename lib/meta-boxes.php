@@ -430,6 +430,46 @@ function igv_product_metaboxes() {
     'type'       => 'text',
   ) );
 
+  // Product thumbs group
+  $product_thumbs_id = $product->add_field( array(
+    'id'      => $prefix . 'product_thumbs_group',
+    'name'    => 'Catalog thumbs',
+    'type'        => 'group',
+    'repeatable'  => false, // use false if you want non-repeatable group
+  ) );
+
+  $product->add_group_field( $product_thumbs_id, array(
+    'name'    => 'Front',
+    'id'      => 'front_image',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'medium', // Image size to use when previewing in the admin.
+  ) );
+
+  $product->add_group_field( $product_thumbs_id, array(
+    'name'    => 'Side',
+    'id'      => 'side_image',
+    'type'    => 'file',
+    'options' => array(
+      'url' => false, // Hide the text input for the url
+    ),
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      ),
+    ),
+    'preview_size' => 'medium', // Image size to use when previewing in the admin.
+  ) );
+
   $product->add_field( array(
     'name' => 'Product Gallery',
     'desc' => '',
