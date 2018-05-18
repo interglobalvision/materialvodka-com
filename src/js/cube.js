@@ -14,11 +14,13 @@ class Cube {
   }
 
   onResize() {
-    this.updateCubeStyle('recipe', '.recipe-item');
+    this.updateCubeStyle('recipe', '#transition-cube .active .main-content .recipe-item');
+    this.updateCubeStyle('product', '#transition-cube .active .main-content .archive-product-item');
   }
 
   onReady() {
     this.bindRecipeCube();
+    this.bindProductCube();
   }
 
   bindRecipeCube() {
@@ -37,6 +39,25 @@ class Cube {
       });
 
       this.updateCubeStyle('recipe', '#transition-cube .active .main-content .recipe-item');
+    }
+  }
+
+  bindProductCube() {
+    if ($('.archive-product-item').length) {
+      $('.archive-product-item').on({
+        'mouseenter': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).addClass('cube-active').find('.cube-right').addClass('cube-front');
+          $(this).addClass('cube-active').find('.cube-left').removeClass('cube-front');
+        },
+        'mouseleave': function() {
+          $('.cube-holder').removeClass('cube-active');
+          $(this).find('.cube-right').removeClass('cube-front');
+          $(this).find('.cube-left').addClass('cube-front');
+        }
+      });
+
+      this.updateCubeStyle('product', '#transition-cube .active .main-content .archive-product-item');
     }
   }
 
