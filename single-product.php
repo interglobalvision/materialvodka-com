@@ -5,9 +5,7 @@ get_header();
 <main class="main-content">
   <section id="single-product" class="content-wrapper">
     <div class="container">
-  <?php get_template_part('partials/shop-header'); ?>
-      <div class="grid-row">
-
+    <?php get_template_part('partials/shop-header'); ?>
 <?php
 if (have_posts()) {
   while (have_posts()) {
@@ -20,23 +18,29 @@ if (have_posts()) {
     $product_gallery = get_post_meta(get_the_ID(), '_igv_shopify_product_gallery', true);
 ?>
 
-        <article <?php post_class('grid-item item-s-12 item-m-3'); ?> id="post-<?php the_ID(); ?>">
-
+      <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
     <?php
     // Output product handle
     if (!empty($shopify_product_handle)) {
     ?>
-          <div id="shopify-handle" class="u-visuallyhidden" data-shopify-handle="<?php echo $shopify_product_handle; ?>"></div>
+        <div id="shopify-handle" class="u-visuallyhidden" data-shopify-handle="<?php echo $shopify_product_handle; ?>"></div>
     <?php
     }
     ?>
+        <div class="grid-item item-s-12 item-m-4">
 
-          <?php the_title(); ?>
+          <h1 class="font-uppercase font-size-mid"><?php the_title(); ?></h1>
+
           <?php the_content(); ?>
-          <h3 class="single-product-price"></h3>
+
+          <span class="single-product-price"></span>
+
+        </div>
+
+        <div class="grid-item item-s-12 item-m-8 padding-top-mid padding-bottom-mid">
 
           <div>
-            <label id="quantity-select-label" for="quantity">Quantity: </label>
+            <label id="quantity-select-label" for="quantity">QTY</label>
             <select id="quantity" class="quantity" name="quantity">
   <?php
   for($i = 1; $i <= 10; $i++) {
@@ -46,28 +50,25 @@ if (have_posts()) {
             </select>
           </div>
 
-          <div>
-            <label id="variation-select-label" for="variation-select">Size: </label>
-            <select id="variation-select" class="variation-select" name="variation-select">
-            </select>
-          </div>
+          <div id="product-options"></div>
 
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart button-no-padding">Add to cart</button>
+        </div>
 
-
-        </article>
+      </article>
 
 <?php
   }
-} else {
+}
 ?>
-        <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
-} ?>
 
-      </div>
+      <?php get_template_part('partials/shop-other-header'); ?>
+
+      <?php get_template_part('partials/mailinglist-full'); ?>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 
   <?php get_template_part('partials/cart'); ?>
 
