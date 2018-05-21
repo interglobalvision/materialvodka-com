@@ -13,6 +13,8 @@ class Shop {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind functions
+    this.handleVariantChange = this.handleVariantChange.bind(this);
   }
 
   onResize() {
@@ -121,6 +123,7 @@ class Shop {
     // Fetch data from shopify. Returns a promise
     this.client.product.fetchByHandle(productHandle)
       .then(product => {
+        this.product = product;
 
         // Get DOM elements
         this.$price = $('.single-product-price');
@@ -130,10 +133,12 @@ class Shop {
         this.$variationLabel = $('#variation-select-label');
 
         // Display price
-        this.showPrice(product, this.$price);
+        this.showPrice(this.$price);
 
         // Generate variation selector
-        this.generateSelector(product, this.$variationSelect, this.$variationLabel);
+        this.generateOptions();
+        this.variantId = this.getVariantId();
+        this.bindVariantChange();
 
         // Bind functions
         this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -180,25 +185,31 @@ class Shop {
    * @param {object} product - Shopify product object
    * @param {object} $element - jQuery DOM object to update
    */
-  showPrice(product, $element) {
+  showPrice($element) {
     // Update the element with the price of the first variant
-    $element.html('$ ' + product.attrs.variants[0].price);
+    $element.html('$ ' + this.product.attrs.variants[0].price);
   }
 
   handleAddToCart() {
     const itemsToAdd = this.getQuantityAndVariant();
 
-    // Add an item to the checkout in shopify
-    this.client.checkout.addLineItems(this.checkout.id, [itemsToAdd])
-      .then((checkout) => {
-        // Do something with the updated checkout
+    if (itemsToAdd.variantId) {
 
-        // Update the cart with the updated checkout
-        this.updateCart(checkout);
-      })
-      .catch( error => {
-        console.log(error);
-      });
+      // Add an item to the checkout in shopify
+      this.client.checkout.addLineItems(this.checkout.id, [itemsToAdd])
+        .then((checkout) => {
+          // Do something with the updated checkout
+
+          // Update the cart with the updated checkout
+          this.updateCart(checkout);
+        })
+        .catch( error => {
+          console.log(error);
+        });
+
+    } else {
+      $('#out-of-stock').addClass('show');
+    }
   }
 
   /*
@@ -283,17 +294,24 @@ class Shop {
     });
   }
 
-  generateSelector(product, $select, $label) {
-    let label;
+  generateOptions() {
+    this.product.options.map( option => {
+      let optionHtml = `
+      <div class="product-variant">
+        <label for="option-${option.name}" class="font-uppercase">${option.name}</label>
+        <select id="option-${option.name}" class="product-variant-select font-uppercase">
+      `;
 
-    product.variants.map( option => {
-      const value = option.selectedOptions.map( option => option.value).join(' - ');
-      const variantId = option.id;
-      label = option.selectedOptions[0].name;
-      $select.append(`<option value=\"${variantId}\">${value}</option>`);
+      option.values.map( option => {
+        optionHtml += `<option value=\"${option.value}\">${option.value}</option>`;
+      });
+
+      optionHtml += `
+        </select>
+      </div>`;
+
+      $('#product-options').append(optionHtml);
     });
-
-    $label.html(label);
   }
 
   bindRemoveItems() {
@@ -308,9 +326,45 @@ class Shop {
     });
   }
 
+  getVariantId() {
+    const selectedVariants = $('.product-variant-select').map((index, elem) => {
+      return $(elem).val();
+    });
+
+    const variants = this.product.variants;
+    let matchFound = false;
+    let variantId = false;
+
+    for (let i = 0; i < variants.length; i++) {
+      let variantOptions = variants[i].selectedOptions;
+      variantId = variants[i].id;
+      let v = 0;
+
+      for (let j = 0; j < variantOptions.length; j++) {
+        for (let k = 0; k < selectedVariants.length; k++) {
+          matchFound = variantOptions[j].value == selectedVariants[v];
+
+          if (matchFound) {
+            if (v === (selectedVariants.length - 1)) {
+              return variantId;
+            }
+            v++;
+          }
+        }
+      }
+    }
+  }
+
+  bindVariantChange() {
+    $('.product-variant-select').on('change', this.handleVariantChange);
+  }
+
+  handleVariantChange() {
+    this.variantId = this.getVariantId();
+  }
 
   getQuantityAndVariant() {
-    const variantId = this.$variationSelect.val();
+    const variantId = this.variantId;
     const quantity = parseInt(this.$quantitySelect.val());
 
     // Has to be an array

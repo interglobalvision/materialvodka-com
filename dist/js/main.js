@@ -13220,6 +13220,8 @@ Shop = function () {
 
     $(document).ready(this.onReady.bind(this));
 
+    // Bind functions
+    this.handleVariantChange = this.handleVariantChange.bind(this);
   }_createClass(Shop, [{ key: 'onResize', value: function onResize()
 
     {
@@ -13328,6 +13330,7 @@ Shop = function () {
       // Fetch data from shopify. Returns a promise
       this.client.product.fetchByHandle(productHandle).
       then(function (product) {
+        _this2.product = product;
 
         // Get DOM elements
         _this2.$price = $('.single-product-price');
@@ -13337,10 +13340,12 @@ Shop = function () {
         _this2.$variationLabel = $('#variation-select-label');
 
         // Display price
-        _this2.showPrice(product, _this2.$price);
+        _this2.showPrice(_this2.$price);
 
         // Generate variation selector
-        _this2.generateSelector(product, _this2.$variationSelect, _this2.$variationLabel);
+        _this2.generateOptions();
+        _this2.variantId = _this2.getVariantId();
+        _this2.bindVariantChange();
 
         // Bind functions
         _this2.handleAddToCart = _this2.handleAddToCart.bind(_this2);
@@ -13387,25 +13392,31 @@ Shop = function () {
        * @param {object} product - Shopify product object
        * @param {object} $element - jQuery DOM object to update
        */ }, { key: 'showPrice', value: function showPrice(
-    product, $element) {
+    $element) {
       // Update the element with the price of the first variant
-      $element.html('$ ' + product.attrs.variants[0].price);
+      $element.html('$ ' + this.product.attrs.variants[0].price);
     } }, { key: 'handleAddToCart', value: function handleAddToCart()
 
     {var _this3 = this;
       var itemsToAdd = this.getQuantityAndVariant();
 
-      // Add an item to the checkout in shopify
-      this.client.checkout.addLineItems(this.checkout.id, [itemsToAdd]).
-      then(function (checkout) {
-        // Do something with the updated checkout
+      if (itemsToAdd.variantId) {
 
-        // Update the cart with the updated checkout
-        _this3.updateCart(checkout);
-      }).
-      catch(function (error) {
-        console.log(error);
-      });
+        // Add an item to the checkout in shopify
+        this.client.checkout.addLineItems(this.checkout.id, [itemsToAdd]).
+        then(function (checkout) {
+          // Do something with the updated checkout
+
+          // Update the cart with the updated checkout
+          _this3.updateCart(checkout);
+        }).
+        catch(function (error) {
+          console.log(error);
+        });
+
+      } else {
+        $('#out-of-stock').addClass('show');
+      }
     }
 
     /*
@@ -13488,19 +13499,26 @@ Shop = function () {
         console.log(checkout); // Quantity of line item 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc4NTc5ODkzODQ=' updated to 2
         _this5.updateSubtotal(checkout.subtotalPrice);
       });
-    } }, { key: 'generateSelector', value: function generateSelector(
+    } }, { key: 'generateOptions', value: function generateOptions()
 
-    product, $select, $label) {
-      var label = void 0;
+    {
+      this.product.options.map(function (option) {
+        var optionHtml = '\n      <div class="product-variant">\n        <label for="option-' +
 
-      product.variants.map(function (option) {
-        var value = option.selectedOptions.map(function (option) {return option.value;}).join(' - ');
-        var variantId = option.id;
-        label = option.selectedOptions[0].name;
-        $select.append('<option value="' + variantId + '">' + value + '</option>');
+        option.name + '" class="font-uppercase">' + option.name + '</label>\n        <select id="option-' +
+        option.name + '" class="product-variant-select font-uppercase">\n      ';
+
+
+        option.values.map(function (option) {
+          optionHtml += '<option value="' + option.value + '">' + option.value + '</option>';
+        });
+
+        optionHtml += '\n        </select>\n      </div>';
+
+
+
+        $('#product-options').append(optionHtml);
       });
-
-      $label.html(label);
     } }, { key: 'bindRemoveItems', value: function bindRemoveItems()
 
     {
@@ -13513,11 +13531,47 @@ Shop = function () {
       this.client.checkout.removeLineItems(this.checkout.id, [productId]).then(function (checkout) {
         _this6.updateCart(checkout);
       });
-    } }, { key: 'getQuantityAndVariant', value: function getQuantityAndVariant()
-
+    } }, { key: 'getVariantId', value: function getVariantId()
 
     {
-      var variantId = this.$variationSelect.val();
+      var selectedVariants = $('.product-variant-select').map(function (index, elem) {
+        return $(elem).val();
+      });
+
+      var variants = this.product.variants;
+      var matchFound = false;
+      var variantId = false;
+
+      for (var i = 0; i < variants.length; i++) {
+        var variantOptions = variants[i].selectedOptions;
+        variantId = variants[i].id;
+        var v = 0;
+
+        for (var j = 0; j < variantOptions.length; j++) {
+          for (var k = 0; k < selectedVariants.length; k++) {
+            matchFound = variantOptions[j].value == selectedVariants[v];
+
+            if (matchFound) {
+              if (v === selectedVariants.length - 1) {
+                return variantId;
+              }
+              v++;
+            }
+          }
+        }
+      }
+    } }, { key: 'bindVariantChange', value: function bindVariantChange()
+
+    {
+      $('.product-variant-select').on('change', this.handleVariantChange);
+    } }, { key: 'handleVariantChange', value: function handleVariantChange()
+
+    {
+      this.variantId = this.getVariantId();
+    } }, { key: 'getQuantityAndVariant', value: function getQuantityAndVariant()
+
+    {
+      var variantId = this.variantId;
       var quantity = parseInt(this.$quantitySelect.val());
 
       // Has to be an array
