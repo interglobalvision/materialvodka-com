@@ -1,30 +1,15 @@
-<div id="cart-container" class="container margin-bottom-basic">
+<div id="cart">
   <div class="grid-row">
-    <div class="grid-item item-m-9 grid-row text-align-center">
-      <div class="grid-item item-s-12 item-m-4">
-        <span>Product</span>
-      </div>
-      <div class="grid-item item-s-12 item-m-1">
-        <span>Quantity</span>
-      </div>
-      <div class="grid-item item-s-12 item-m-3">
-        <span>Type</span>
-      </div>
-      <div class="grid-item item-s-12 item-m-2">
-        <span>Price</span>
-      </div>
-      <div class="grid-item item-s-12 item-m-1">
-      </div>
+    <div class="grid-item item-s-12 padding-top-mid padding-bottom-basic">
+      <h2 class="font-uppercase font-size-large font-bold font-outline">Cart</h2>
     </div>
-    <div class="grid-item item-m-3">
+
+    <div id="items-container"></div>
+
+    <div class="grid-item item-s-12 item-m-4 offset-m-8">
+      <div id="subtotal-container"></div>
+      <div id="checkout-container"></div>
     </div>
   </div>
-  <div class="grid-row ">
-    <div id="items-container" class="grid-item item-s-12 item-m-9">
-    </div>
-    <div class="grid-item item-s-12 item-m-3">
-      <div id="subtotal-container" class="grid-item item-s-12 grid-row"></div>
-      <div id="checkout-container" class="grid-item item-s-12 text-align-center"></div>
-    </div>
-  </div>
+  <div id="cart-close" class="js-cart-toggle"></div>
 </div>

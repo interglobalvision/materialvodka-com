@@ -2,6 +2,7 @@
 /* global $, document, WP */
 import Client from 'shopify-buy';
 import Cookies from 'js-cookie';
+import slick from 'slick-carousel';
 
 class Shop {
   constructor() {
@@ -38,13 +39,22 @@ class Shop {
         this.initSingleProduct();
       }
 
-      if ($('#cart-container').length) { // Cart is present
+      if ($('#cart').length) { // Cart is present
+        this.bindCartToggle();
         this.initCartSection();
       }
+
+      this.initCarousel();
 
     } else {
       console.error('Shopify URL and/or token missing');
     }
+  }
+
+  bindCartToggle() {
+    $('.js-cart-toggle').on('click', () => {
+      $('#cart').toggleClass('active');
+    });
   }
 
   /**
@@ -53,7 +63,6 @@ class Shop {
   initCheckout() {
 
     // Get cart link DOM elements
-    this.$cartLink = $('#cart-link');
     this.$cartCounter = $('#cart-counter');
 
     // Get shopifyCheckoutId from cookies
@@ -161,16 +170,19 @@ class Shop {
     this.$cartCounter.html(lineItems.length);
 
     // Update page Cart content
-    if ($('#cart-container').length) {
+    if ($('#cart').length) {
       this.clearCartMarkup();
-      this.generateCartItemsRow(lineItems);
-      this.bindCartInputs(lineItems);
-      this.generateCheckout(webUrl);
-      this.generateSubtotal();
-      this.updateSubtotal(subtotalPrice);
 
-      this.$removeItem = $('.remove-item');
-      this.bindRemoveItems();
+      if (lineItems.length > 0) {
+        this.generateCartItemsRow(lineItems);
+        this.bindCartInputs(lineItems);
+        this.generateCheckout(webUrl);
+        this.generateSubtotal();
+        this.updateSubtotal(subtotalPrice);
+
+        this.$removeItem = $('.remove-item');
+        this.bindRemoveItems();
+      }
     }
   }
 
@@ -219,27 +231,29 @@ class Shop {
   generateCartItemsRow(items) {
     if (items.length) {
       items.map( item => {
-        //console.log(item);
+        console.log(item);
 
-        const image =  item.image ?  `<img alt="${item.title}" src="${item.image}" />` : ``;
+        const image =  item.variant.image.src ?  `<img alt="${item.title}" src="${item.variant.image.src}" />` : ``;
+
+        const variant = item.variant.title === `Default Title` ? `` : item.variant.title;
 
         this.$itemsContainer.append(`
-          <div class="grid-row   ">
-            <div class="grid-item item-s-12 item-m-4 text-align-center">
-              <h1 class="font-uppercase">${item.title}</h1>
+          <div class="grid-row margin-bottom-basic align-items-center">
+            <div class="grid-item item-s-12 item-m-2">
               ${image}
             </div>
-            <div class="grid-item item-s-2 item-m-1 text-align-center">
-              <input class="cart-item-quantity text-align-center" type="number" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
+            <div class="grid-item item-s-12 item-m-4">
+              <h3 class="font-uppercase font-size-mid">${item.title}</h3>
+              <span class="font-uppercase">${variant}</span>
             </div>
-            <div class="grid-item item-s-3 item-m-3 text-align-center">
-              <span class="font-uppercase">${item.variant.title}</span>
+            <div class="grid-item item-s-4 item-m-2 font-uppercase font-size-small">
+              Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
             </div>
-            <div class="grid-item item-s-3 item-m-2 text-align-center">
+            <div class="grid-item item-s-4 item-m-2">
               <span class="font-uppercase">$${item.variant.price}</span>
             </div>
-            <div class="grid-item item-s-3 item-m-2 text-align-center">
-              <a class="remove-item font-uppercase u-pointer" data-product-id="${item.id}" >Remove Item</span>
+            <div class="grid-item item-s-4 item-m-2">
+              <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
             </div>
           </div>
         `);
@@ -247,9 +261,8 @@ class Shop {
     } else {
       this.$itemsContainer.append(`
         <div class="grid-row">
-          <div class="grid-item item-s-12 text-align-center">
-            <h1>Cart is empty</h1>
-            <p>Please visit our <a href="/shop">Shop</p>
+          <div class="grid-item item-s-12">
+            <h3 class="font-uppercase">Cart is empty</h3>
           </div>
         </div>
       `);
@@ -257,7 +270,7 @@ class Shop {
   }
 
   generateCheckout(checkoutUrl) {
-    this.$checkoutContainer.append(`<a href="${checkoutUrl}">Proceed to Checkout</a>`);
+    this.$checkoutContainer.append(`<a href="${checkoutUrl}" class="font-uppercase font-medium">Proceed to Checkout</a>`);
   }
 
   generateSubtotal() {
@@ -296,18 +309,27 @@ class Shop {
 
   generateOptions() {
     this.product.options.map( option => {
+      let hidden = '';
+
+      if (option.name === 'Title') {
+        hidden = 'u-hidden';
+      }
+
       let optionHtml = `
-      <div class="product-variant">
-        <label for="option-${option.name}" class="font-uppercase">${option.name}</label>
-        <select id="option-${option.name}" class="product-variant-select font-uppercase">
-      `;
+      <div class="grid-item item-s-12 no-gutter grid-row margin-bottom-basic align-items-center ${hidden}">
+        <div class="grid-item item-s-6 text-align-right">
+          <label for="option-${option.name}" class="font-uppercase font-size-small">${option.name}</label>
+        </div>
+        <div class="grid-item item-s-6">
+          <select id="option-${option.name}" class="product-variant-select font-uppercase">`;
 
       option.values.map( option => {
         optionHtml += `<option value=\"${option.value}\">${option.value}</option>`;
       });
 
       optionHtml += `
-        </select>
+          </select>
+        </div>
       </div>`;
 
       $('#product-options').append(optionHtml);
@@ -372,6 +394,22 @@ class Shop {
       variantId,
       quantity,
     });
+  }
+
+  initCarousel() {
+    if ($('#slick-carousel').length) {
+      $('#slick-carousel').slick({
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        centerMode: false,
+        variableWidth: true,
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        rows: 0
+      });
+    }
   }
 }
 
