@@ -132,7 +132,6 @@ class Shop {
     // Fetch data from shopify. Returns a promise
     this.client.product.fetchByHandle(productHandle)
       .then(product => {
-        this.product = product;
 
         // Get DOM elements
         this.$price = $('.single-product-price');
@@ -142,11 +141,11 @@ class Shop {
         this.$variationLabel = $('#variation-select-label');
 
         // Display price
-        this.showPrice(this.$price);
+        this.showPrice(product, this.$price);
 
         // Generate variation selector
-        this.generateOptions();
-        this.variantId = this.getVariantId();
+        this.generateOptions(product);
+        this.variantId = this.getVariantId(product);
         this.bindVariantChange();
 
         // Bind functions
@@ -197,9 +196,9 @@ class Shop {
    * @param {object} product - Shopify product object
    * @param {object} $element - jQuery DOM object to update
    */
-  showPrice($element) {
+  showPrice(product, $element) {
     // Update the element with the price of the first variant
-    $element.html('$ ' + this.product.attrs.variants[0].price);
+    $element.html('$ ' + product.attrs.variants[0].price);
   }
 
   handleAddToCart() {
@@ -307,8 +306,8 @@ class Shop {
     });
   }
 
-  generateOptions() {
-    this.product.options.map( option => {
+  generateOptions(product) {
+    product.options.map( option => {
       let hidden = '';
 
       if (option.name === 'Title') {
@@ -348,12 +347,12 @@ class Shop {
     });
   }
 
-  getVariantId() {
+  getVariantId(product) {
     const selectedVariants = $('.product-variant-select').map((index, elem) => {
       return $(elem).val();
     });
 
-    const variants = this.product.variants;
+    const variants = product.variants;
     let matchFound = false;
     let variantId = false;
 
