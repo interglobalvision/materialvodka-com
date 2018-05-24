@@ -43,6 +43,8 @@ get_header();
       $args = array(
         'post_type' => 'prize-winner',
         'posts_per_page' => -1,
+        'meta_key' => '_igv_prize_winner_year',
+        'orderby' => 'meta_value'
       );
 
       $prize_winners = new WP_Query($args);
@@ -63,7 +65,18 @@ get_header();
   ?>
 
         <div class="grid-item item-s-12 item-m-4 item-l-3 margin-bottom-basic">
-          <?php the_post_thumbnail('1920x1920', 'class=margin-bottom-small'); ?>
+        <?php
+          if (has_post_thumbnail()) {
+            $portrait_image_class = 'prize-portrait-bg-' . $post->ID;
+        ?>
+          <div class="prize-portrait <?php echo $portrait_image_class; ?> background-cover margin-bottom-small">
+            <?php
+              responsive_background_styles($portrait_image_class, get_post_thumbnail_id() , array('320x320','640x640','960x960','1440x1440','1920x1920'));
+            ?>
+          </div>
+        <?php
+          }
+        ?>
           <div class="font-uppercase"><?php echo $year; ?> Prize</div>
           <h3 class="font-size-mid margin-bottom-small"><?php the_title(); ?></h3>
           <div class="text-max-width"><?php the_content(); ?></div>
