@@ -145,8 +145,6 @@ class Shop {
 
         // Generate variation selector
         this.generateOptions(product);
-        this.variantId = this.getVariantId(product);
-        this.bindVariantChange();
 
         // Bind functions
         this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -185,6 +183,9 @@ class Shop {
     }
   }
 
+  /**
+   * Clear HTML from Cart to prepare for update
+   */
   clearCartMarkup() {
     this.$itemsContainer.html('');
     this.$subtotalContainer.html('');
@@ -201,6 +202,9 @@ class Shop {
     $element.html('$ ' + product.attrs.variants[0].price);
   }
 
+  /**
+   * Add item to Cart
+   */
   handleAddToCart() {
     const itemsToAdd = this.getQuantityAndVariant();
 
@@ -376,16 +380,8 @@ class Shop {
     }
   }
 
-  bindVariantChange() {
-    $('.product-variant-select').on('change', this.handleVariantChange);
-  }
-
-  handleVariantChange() {
-    this.variantId = this.getVariantId();
-  }
-
   getQuantityAndVariant() {
-    const variantId = this.variantId;
+    const variantId = this.getVariantId();
     const quantity = parseInt(this.$quantitySelect.val());
 
     // Has to be an array

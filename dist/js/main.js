@@ -13352,8 +13352,6 @@ Shop = function () {
 
         // Generate variation selector
         _this2.generateOptions(product);
-        _this2.variantId = _this2.getVariantId(product);
-        _this2.bindVariantChange();
 
         // Bind functions
         _this2.handleAddToCart = _this2.handleAddToCart.bind(_this2);
@@ -13390,8 +13388,11 @@ Shop = function () {
           this.bindRemoveItems();
         }
       }
-    } }, { key: 'clearCartMarkup', value: function clearCartMarkup()
+    }
 
+    /**
+       * Clear HTML from Cart to prepare for update
+       */ }, { key: 'clearCartMarkup', value: function clearCartMarkup()
     {
       this.$itemsContainer.html('');
       this.$subtotalContainer.html('');
@@ -13406,8 +13407,11 @@ Shop = function () {
     product, $element) {
       // Update the element with the price of the first variant
       $element.html('$ ' + product.attrs.variants[0].price);
-    } }, { key: 'handleAddToCart', value: function handleAddToCart()
+    }
 
+    /**
+       * Add item to Cart
+       */ }, { key: 'handleAddToCart', value: function handleAddToCart()
     {var _this3 = this;
       var itemsToAdd = this.getQuantityAndVariant();
 
@@ -13581,18 +13585,10 @@ Shop = function () {
           }
         }
       }
-    } }, { key: 'bindVariantChange', value: function bindVariantChange()
-
-    {
-      $('.product-variant-select').on('change', this.handleVariantChange);
-    } }, { key: 'handleVariantChange', value: function handleVariantChange()
-
-    {
-      this.variantId = this.getVariantId();
     } }, { key: 'getQuantityAndVariant', value: function getQuantityAndVariant()
 
     {
-      var variantId = this.variantId;
+      var variantId = this.getVariantId();
       var quantity = parseInt(this.$quantitySelect.val());
 
       // Has to be an array
