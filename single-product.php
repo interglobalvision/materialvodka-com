@@ -95,7 +95,12 @@ $args = array(
   'posts_per_page' => 4,
   'orderby' => 'rand',
   'post__not_in' => array($post->ID),
-  'meta_key' => '_igv_shopify_product_handle',
+  'meta_query' => array(
+    array(
+      'key' => '_igv_shopify_product_handle',
+      'compare' => 'EXISTS',
+    ),
+  ),
 );
 
 $other_products_query = new WP_query($args);
