@@ -13220,9 +13220,6 @@ Shop = function () {
     .on('ajaxySuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
 
     $(document).ready(this.onReady.bind(this));
-
-    // Bind functions
-    this.handleVariantChange = this.handleVariantChange.bind(this);
   }_createClass(Shop, [{ key: 'onResize', value: function onResize()
 
     {
@@ -13354,8 +13351,10 @@ Shop = function () {
         _this2.generateOptions(product);
 
         // Bind functions
-        _this2.handleAddToCart = _this2.handleAddToCart.bind(_this2);
-        $('.add-to-cart').on('click', _this2.handleAddToCart); // Bind AddToCart button
+        _this2.handleAddToCart = _this2.handleAddToCart.bind(_this2, product);
+
+        // Bind AddToCart button
+        $('.add-to-cart').on('click', _this2.handleAddToCart);
 
       }).
       catch(function (error) {
@@ -13411,9 +13410,9 @@ Shop = function () {
 
     /**
        * Add item to Cart
-       */ }, { key: 'handleAddToCart', value: function handleAddToCart()
-    {var _this3 = this;
-      var itemsToAdd = this.getQuantityAndVariant();
+       */ }, { key: 'handleAddToCart', value: function handleAddToCart(
+    product) {var _this3 = this;
+      var itemsToAdd = this.getQuantityAndVariant(product);
 
       if (itemsToAdd.variantId) {
 
@@ -13559,36 +13558,54 @@ Shop = function () {
     } }, { key: 'getVariantId', value: function getVariantId(
 
     product) {
-      var selectedVariants = $('.product-variant-select').map(function (index, elem) {
+      // Map values of form select inputs to array
+      var selectedOptions = $('.product-variant-select').map(function (index, elem) {
         return $(elem).val();
       });
 
       var variants = product.variants;
+
+      // Set defaults for variant search
       var matchFound = false;
       var variantId = false;
 
+      // Loop through product variants
+      // example: Small/White, Medium/White, Small/Black, ...
       for (var i = 0; i < variants.length; i++) {
         var variantOptions = variants[i].selectedOptions;
         variantId = variants[i].id;
+
+        // initiate selectedOptions counter
         var v = 0;
 
+        // Loop through options of each variant
+        // example: Small, White
         for (var j = 0; j < variantOptions.length; j++) {
-          for (var k = 0; k < selectedVariants.length; k++) {
-            matchFound = variantOptions[j].value == selectedVariants[v];
+
+          // Loop through values retrieved from form select inputs.
+          // See if they correspond to this variant's options
+          for (var k = 0; k < selectedOptions.length; k++) {
+
+            // TRUE if this variant option matches the selected option
+            matchFound = variantOptions[j].value == selectedOptions[v];
 
             if (matchFound) {
-              if (v === selectedVariants.length - 1) {
+              // If this is the last selected option
+              // and match found is still true
+              if (v === selectedOptions.length - 1) {
                 return variantId;
               }
+
+              // Otherwise just iterate to next selected option
               v++;
             }
           }
         }
       }
-    } }, { key: 'getQuantityAndVariant', value: function getQuantityAndVariant()
+    } }, { key: 'getQuantityAndVariant', value: function getQuantityAndVariant(
 
-    {
-      var variantId = this.getVariantId();
+    product) {
+      var variantId = this.getVariantId(product);
       var quantity = parseInt(this.$quantitySelect.val());
 
       // Has to be an array
