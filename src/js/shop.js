@@ -233,29 +233,30 @@ class Shop {
   generateCartItemsRow(items) {
     if (items.length) {
       items.map( item => {
-        console.log(item);
 
         const image =  item.variant.image.src ?  `<img alt="${item.title}" src="${item.variant.image.src}" />` : ``;
 
         const variant = item.variant.title === `Default Title` ? `` : item.variant.title;
 
         this.$itemsContainer.append(`
-          <div class="grid-row margin-bottom-basic align-items-center">
-            <div class="grid-item item-s-12 item-m-2">
+          <div class="grid-row margin-bottom-basic">
+            <div class="grid-item item-s-3">
               ${image}
             </div>
-            <div class="grid-item item-s-12 item-m-4">
-              <h3 class="font-uppercase font-size-mid">${item.title}</h3>
-              <span class="font-uppercase">${variant}</span>
-            </div>
-            <div class="grid-item item-s-4 item-m-2 font-uppercase font-size-small">
-              Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
-            </div>
-            <div class="grid-item item-s-4 item-m-2">
-              <span class="font-uppercase">$${item.variant.price}</span>
-            </div>
-            <div class="grid-item item-s-4 item-m-2">
-              <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
+            <div class="grid-item item-s-9 grid-row no-gutter">
+              <div class="grid-item item-s-12">
+                <h3 class="font-uppercase font-size-mid">${item.title}</h3>
+                <span class="font-uppercase">${variant}</span>
+              </div>
+              <div class="grid-item item-s-4 font-uppercase font-size-small">
+                Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
+              </div>
+              <div class="grid-item item-s-4">
+                <span class="font-uppercase">$${item.variant.price}</span>
+              </div>
+              <div class="grid-item item-s-4">
+                <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
+              </div>
             </div>
           </div>
         `);

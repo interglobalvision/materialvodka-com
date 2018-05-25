@@ -13440,29 +13440,30 @@ Shop = function () {
     items) {var _this4 = this;
       if (items.length) {
         items.map(function (item) {
-          console.log(item);
 
           var image = item.variant.image.src ? '<img alt="' + item.title + '" src="' + item.variant.image.src + '" />' : '';
 
           var variant = item.variant.title === 'Default Title' ? '' : item.variant.title;
 
-          _this4.$itemsContainer.append('\n          <div class="grid-row margin-bottom-basic align-items-center">\n            <div class="grid-item item-s-12 item-m-2">\n              ' +
+          _this4.$itemsContainer.append('\n          <div class="grid-row margin-bottom-basic">\n            <div class="grid-item item-s-3">\n              ' +
 
 
-          image + '\n            </div>\n            <div class="grid-item item-s-12 item-m-4">\n              <h3 class="font-uppercase font-size-mid">' +
+          image + '\n            </div>\n            <div class="grid-item item-s-9 grid-row no-gutter">\n              <div class="grid-item item-s-12">\n                <h3 class="font-uppercase font-size-mid">' +
 
 
-          item.title + '</h3>\n              <span class="font-uppercase">' +
-          variant + '</span>\n            </div>\n            <div class="grid-item item-s-4 item-m-2 font-uppercase font-size-small">\n              Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
+
+          item.title + '</h3>\n                <span class="font-uppercase">' +
+          variant + '</span>\n              </div>\n              <div class="grid-item item-s-4 font-uppercase font-size-small">\n                Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
 
 
-          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n            </div>\n            <div class="grid-item item-s-4 item-m-2">\n              <span class="font-uppercase">$' +
+          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n              </div>\n              <div class="grid-item item-s-4">\n                <span class="font-uppercase">$' +
 
 
-          item.variant.price + '</span>\n            </div>\n            <div class="grid-item item-s-4 item-m-2">\n              <button class="remove-item font-size-small font-uppercase" data-product-id="' +
+          item.variant.price + '</span>\n              </div>\n              <div class="grid-item item-s-4">\n                <button class="remove-item font-size-small font-uppercase" data-product-id="' +
 
 
-          item.id + '" >Remove</button>\n            </div>\n          </div>\n        ');
+          item.id + '" >Remove</button>\n              </div>\n            </div>\n          </div>\n        ');
+
 
 
 
