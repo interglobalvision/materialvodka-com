@@ -473,10 +473,15 @@ function igv_product_metaboxes() {
   $product->add_field( array(
     'name' => 'Product Gallery',
     'desc' => '',
-    'id'         => $prefix . 'shopify_product_gallery',
+    'id' => $prefix . 'product_gallery',
     'type' => 'file_list',
     'preview_size' => array( 100, 100 ),
-    'query_args' => array( 'type' => 'image' ), // Only images attachment
+    'query_args' => array(
+      'type' => array(
+        'image/jpeg',
+        'image/png',
+      )
+    ), // Only images attachment
   ) );
 
 }

@@ -5,9 +5,7 @@ get_header();
 <main class="main-content">
   <section id="single-product" class="content-wrapper">
     <div class="container">
-  <?php get_template_part('partials/shop-header'); ?>
-      <div class="grid-row">
-
+    <?php get_template_part('partials/shop-header'); ?>
 <?php
 if (have_posts()) {
   while (have_posts()) {
@@ -17,57 +15,123 @@ if (have_posts()) {
     $shopify_product_handle = get_post_meta(get_the_ID(), '_igv_shopify_product_handle', true);
 
     // Get product gallery
-    $product_gallery = get_post_meta(get_the_ID(), '_igv_shopify_product_gallery', true);
+    $product_gallery = get_post_meta(get_the_ID(), '_igv_product_gallery', true);
 ?>
-
-        <article <?php post_class('grid-item item-s-12 item-m-3'); ?> id="post-<?php the_ID(); ?>">
-
     <?php
-    // Output product handle
-    if (!empty($shopify_product_handle)) {
+      // Output product handle
+      if (!empty($shopify_product_handle)) {
     ?>
-          <div id="shopify-handle" class="u-visuallyhidden" data-shopify-handle="<?php echo $shopify_product_handle; ?>"></div>
+      <div id="shopify-handle" class="u-visuallyhidden" data-shopify-handle="<?php echo $shopify_product_handle; ?>"></div>
     <?php
-    }
+      }
     ?>
 
-          <?php the_title(); ?>
-          <?php the_content(); ?>
-          <h3 class="single-product-price"></h3>
+      <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
+        <div class="grid-item item-s-12 item-m-6 no-gutter grid-row align-content-start">
+          <div class="grid-item item-s-12 margin-bottom-mid text-max-width">
 
-          <div>
-            <label id="quantity-select-label" for="quantity">Quantity: </label>
-            <select id="quantity" class="quantity" name="quantity">
-  <?php
-  for($i = 1; $i <= 10; $i++) {
-    echo '<option value="' . $i . '">' . $i . '</option>';
+            <h1 class="font-uppercase font-size-mid margin-bottom-tiny"><?php the_title(); ?></h1>
+
+            <?php the_content(); ?>
+
+            <span class="single-product-price"></span>
+
+          </div>
+
+          <div class="grid-item item-s-12 padding-bottom-mid no-gutter grid-row align-content-start">
+            <div id="product-options" class="grid-item item-s-12 no-gutter grid-row align-content-start">
+              <div class="grid-item item-s-12 no-gutter grid-row margin-bottom-basic align-items-center">
+                <div class="grid-item item-s-6 text-align-right">
+                  <label id="quantity-select-label" for="quantity" class="font-size-small">QTY</label>
+                </div>
+                <div class="grid-item item-s-6">
+                  <select id="quantity" class="quantity" name="quantity">
+                    <?php
+                    for($i = 1; $i <= 10; $i++) {
+                      echo '<option value="' . $i . '">' . $i . '</option>';
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          <?php
+            if (!empty($shopify_product_handle)) {
+          ?>
+            <div class="grid-item item-s-6 offset-s-6 padding-top-mid">
+              <button class="add-to-cart button-no-padding font-uppercase">Add to cart</button>
+            </div>
+          <?php
+            }
+          ?>
+          </div>
+        </div>
+
+      <?php
+        if (!empty($product_gallery)) {
+      ?>
+        <div class="grid-item item-s-12 item-m-6 no-gutter">
+          <div id="slick-carousel">
+            <?php
+              foreach($product_gallery as $id => $src) {
+                echo wp_get_attachment_image($id, '1920', false, 'data-no-lazysizes=true');
+              }
+            ?>
+          </div>
+        </div>
+      <?php
+        }
+      ?>
+
+      </article>
+
+<?php
   }
-  ?>
-            </select>
-          </div>
+}
 
-          <div>
-            <label id="variation-select-label" for="variation-select">Size: </label>
-            <select id="variation-select" class="variation-select" name="variation-select">
-            </select>
-          </div>
+$args = array(
+  'post_type' => 'product',
+  'posts_per_page' => 4,
+  'orderby' => 'rand',
+  'post__not_in' => array($post->ID),
+  'meta_query' => array(
+    array(
+      'key' => '_igv_shopify_product_handle',
+      'compare' => 'EXISTS',
+    ),
+  ),
+);
 
-          <button class="add-to-cart">Add to cart</button>
+$other_products_query = new WP_query($args);
 
-
+if ($other_products_query->have_posts()) {
+?>
+      <?php get_template_part('partials/shop-other-header'); ?>
+      <div class="grid-row">
+<?php
+  while ($other_products_query->have_posts()) {
+    $other_products_query->the_post();
+?>
+        <!-- print product item -->
+        <article <?php post_class('archive-product-item cube-holder grid-item no-gutter item-s-6'); ?> id="post-<?php the_ID(); ?>">
+          <?php get_template_part('partials/archive-product-item'); ?>
         </article>
-
 <?php
   }
-} else {
 ?>
-        <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
-<?php
-} ?>
-
       </div>
+<?php
+}
+
+wp_reset_postdata();
+?>
+
+      <?php get_template_part('partials/mailinglist-full'); ?>
     </div>
   </section>
+
+  <?php get_template_part('partials/footer-content'); ?>
 
   <?php get_template_part('partials/cart'); ?>
 

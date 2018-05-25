@@ -1,6 +1,6 @@
 @media screen and (min-width: 1024px)
-
-  $header-height = 41px
+  $header-height = 180px
+  $nav-height = 41px
   $footer-height = 41px
 
   $gutter = 24px
@@ -29,7 +29,7 @@
     display: initial !important
 
   .content-wrapper
-    min-height: calc('100vh - ' + ($footer-height + $header-height))
+    min-height: calc('100vh - ' + ($footer-height + $nav-height))
 
   // ******************************************************
 
@@ -47,7 +47,7 @@
   // HEADER
 
   #header-spacer
-    height: $header-height
+    height: $nav-height
 
   // ******************************************************
 
@@ -56,10 +56,25 @@
   .loading
 
     #transition-cube
-      height: calc('100vh - ' + $header-height)
+      height: calc('100vh - ' + $nav-height)
 
     .transition-cube-side
-      height: calc('100vh - ' + $header-height)
+      height: calc('100vh - ' + $nav-height)
+
+  // ******************************************************
+
+  // PRODUCT
+
+  #slick-carousel,
+  .slick-list,
+  .slick-track,
+  .slick-slide
+    height: calc('100vh - ' + ($header-height / 2))
+    min-height: 600px
+
+  #cart
+    width: 50vw
+    transform: translateX(50vw)
 
   // ******************************************************
 

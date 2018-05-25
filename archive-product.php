@@ -19,12 +19,19 @@ if (have_posts()) {
 <?php
   while (have_posts()) {
     the_post();
+
+    // Get shopify ID
+    $shopify_product_handle = get_post_meta($post->ID, '_igv_shopify_product_handle', true);
+
+    if (!empty($shopify_product_handle)) {
 ?>
             <!-- print product item -->
             <article <?php post_class('archive-product-item cube-holder grid-item no-gutter item-s-6'); ?> id="post-<?php the_ID(); ?>">
               <?php get_template_part('partials/archive-product-item'); ?>
             </article>
 <?php
+    } // end if shopify ID
+    
     if ($wp_query->current_post === $wp_query->post_count - 1 || $wp_query->current_post === 3)  {
       // Its the last post
       // Or the 4th post
