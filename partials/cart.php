@@ -13,12 +13,11 @@
 
     <div class="grid-row">
 
-      <div id="items-container"></div>
+      <div id="items-container" class="font-uppercase margin-bottom-basic"></div>
 
-      <div class="grid-item item-s-12 item-m-4 offset-m-8">
-        <div id="subtotal-container"></div>
-        <div id="checkout-container"></div>
-      </div>
+      <div id="subtotal-container" class="grid-item item-s-9 grid-row no-gutter"></div>
+
+      <div id="checkout-container" class="grid-item item-s-3 text-align-right"></div>
     </div>
 
   </div>

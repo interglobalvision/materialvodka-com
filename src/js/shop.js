@@ -114,7 +114,7 @@ class Shop {
     // Get DOM elements
     this.$itemsContainer = $('#items-container');
     this.$checkoutContainer = $('#checkout-container');
-    this.$subtotalContainer = $('subtotal-container');
+    this.$subtotalContainer = $('#subtotal-container');
 
     // Bind functions
     this.handleCartQuantity = this.handleCartQuantity.bind(this); // Bind the quantity selector
@@ -245,18 +245,18 @@ class Shop {
             </div>
             <div class="grid-item item-s-9 grid-row no-gutter">
               <div class="grid-item item-s-12">
-                <h3 class="font-uppercase font-size-mid">${item.title}</h3>
-                <span class="font-uppercase">${variant}</span>
+                <h3>${item.title}</h3>
+                <span>${variant}</span>
               </div>
               <div class="grid-item item-s-12 grid-row no-gutter padding-top-tiny">
-                <div class="grid-item item-s-4 font-uppercase font-size-small">
+                <div class="grid-item item-s-4 font-size-small">
                   Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
                 </div>
                 <div class="grid-item item-s-4">
-                  <span class="font-uppercase">$${item.variant.price}</span>
+                  <span>$${item.variant.price}</span>
                 </div>
-                <div class="grid-item item-s-4">
-                  <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
+                <div class="grid-item item-s-4 text-align-right">
+                  <button class="remove-item font-size-small font-uppercase button-no-padding" data-product-id="${item.id}" >Remove</button>
                 </div>
               </div>
             </div>
@@ -267,7 +267,7 @@ class Shop {
       this.$itemsContainer.append(`
         <div class="grid-row">
           <div class="grid-item item-s-12">
-            <h3 class="font-uppercase">Cart is empty</h3>
+            <h3 class="font-uppercase">Bag is empty</h3>
           </div>
         </div>
       `);
@@ -275,13 +275,16 @@ class Shop {
   }
 
   generateCheckout(checkoutUrl) {
-    this.$checkoutContainer.append(`<a href="${checkoutUrl}" class="font-uppercase font-medium">Proceed to Checkout</a>`);
+    this.$checkoutContainer.append(`<a href="${checkoutUrl}" class="font-uppercase font-medium">Checkout</a>`);
   }
 
   generateSubtotal() {
     this.$subtotalContainer.append(`
-      <div class="grid-item item-s-12 text-align-center">
-        <p>Subtotal: $<span id="subtotal"></span></p>
+      <div class="grid-item item-s-8 text-align-right font-uppercase">
+        Subtotal:
+      </div>
+      <div class="grid-item item-s-4">
+        $<span id="subtotal"></span>
       </div>
     `);
   }

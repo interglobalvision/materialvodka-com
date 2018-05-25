@@ -13321,7 +13321,7 @@ Shop = function () {
       // Get DOM elements
       this.$itemsContainer = $('#items-container');
       this.$checkoutContainer = $('#checkout-container');
-      this.$subtotalContainer = $('subtotal-container');
+      this.$subtotalContainer = $('#subtotal-container');
 
       // Bind functions
       this.handleCartQuantity = this.handleCartQuantity.bind(this); // Bind the quantity selector
@@ -13448,19 +13448,19 @@ Shop = function () {
           _this4.$itemsContainer.append('\n          <div class="grid-row margin-bottom-basic">\n            <div class="grid-item item-s-3">\n              ' +
 
 
-          image + '\n            </div>\n            <div class="grid-item item-s-9 grid-row no-gutter">\n              <div class="grid-item item-s-12">\n                <h3 class="font-uppercase font-size-mid">' +
+          image + '\n            </div>\n            <div class="grid-item item-s-9 grid-row no-gutter">\n              <div class="grid-item item-s-12">\n                <h3>' +
 
 
 
-          item.title + '</h3>\n                <span class="font-uppercase">' +
-          variant + '</span>\n              </div>\n              <div class="grid-item item-s-12 grid-row no-gutter padding-top-tiny">\n                <div class="grid-item item-s-4 font-uppercase font-size-small">\n                  Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
+          item.title + '</h3>\n                <span>' +
+          variant + '</span>\n              </div>\n              <div class="grid-item item-s-12 grid-row no-gutter padding-top-tiny">\n                <div class="grid-item item-s-4 font-size-small">\n                  Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
 
 
 
-          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n                </div>\n                <div class="grid-item item-s-4">\n                  <span class="font-uppercase">$' +
+          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n                </div>\n                <div class="grid-item item-s-4">\n                  <span>$' +
 
 
-          item.variant.price + '</span>\n                </div>\n                <div class="grid-item item-s-4">\n                  <button class="remove-item font-size-small font-uppercase" data-product-id="' +
+          item.variant.price + '</span>\n                </div>\n                <div class="grid-item item-s-4 text-align-right">\n                  <button class="remove-item font-size-small font-uppercase button-no-padding" data-product-id="' +
 
 
           item.id + '" >Remove</button>\n                </div>\n              </div>\n            </div>\n          </div>\n        ');
@@ -13471,7 +13471,7 @@ Shop = function () {
 
         });
       } else {
-        this.$itemsContainer.append('\n        <div class="grid-row">\n          <div class="grid-item item-s-12">\n            <h3 class="font-uppercase">Cart is empty</h3>\n          </div>\n        </div>\n      ');
+        this.$itemsContainer.append('\n        <div class="grid-row">\n          <div class="grid-item item-s-12">\n            <h3 class="font-uppercase">Bag is empty</h3>\n          </div>\n        </div>\n      ');
 
 
 
@@ -13482,11 +13482,14 @@ Shop = function () {
     } }, { key: 'generateCheckout', value: function generateCheckout(
 
     checkoutUrl) {
-      this.$checkoutContainer.append('<a href="' + checkoutUrl + '" class="font-uppercase font-medium">Proceed to Checkout</a>');
+      this.$checkoutContainer.append('<a href="' + checkoutUrl + '" class="font-uppercase font-medium">Checkout</a>');
     } }, { key: 'generateSubtotal', value: function generateSubtotal()
 
     {
-      this.$subtotalContainer.append('\n      <div class="grid-item item-s-12 text-align-center">\n        <p>Subtotal: $<span id="subtotal"></span></p>\n      </div>\n    ');
+      this.$subtotalContainer.append('\n      <div class="grid-item item-s-8 text-align-right font-uppercase">\n        Subtotal:\n      </div>\n      <div class="grid-item item-s-4">\n        $<span id="subtotal"></span>\n      </div>\n    ');
+
+
+
 
 
 
