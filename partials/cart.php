@@ -1,7 +1,7 @@
 <div id="cart">
   <div class="grid-row">
     <div class="grid-item item-s-12 padding-top-mid padding-bottom-basic">
-      <h2 class="font-uppercase font-size-large font-bold font-outline">Cart</h2>
+      <h2 class="font-uppercase font-size-large font-bold font-outline">Bag</h2>
     </div>
 
     <div id="items-container"></div>
