@@ -360,6 +360,7 @@ body
   height: calc('100vh - ' + ($nav-height + $header-height))
 
 .slick-slide
+  cursor: pointer
   width: auto
   &:focus
     outline: none
@@ -377,11 +378,9 @@ body
     transform: translateX(0vw)
 
 #cart-close
-  position: absolute
-  top: $margin-basic
-  right: $margin-basic
-  height: $margin-basic
-  width: $margin-basic
+  position: relative
+  height: $margin-small
+  width: $margin-small
   cursor: pointer
   &:before,
   &:after
