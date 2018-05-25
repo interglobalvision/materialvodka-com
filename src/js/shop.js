@@ -248,14 +248,16 @@ class Shop {
                 <h3 class="font-uppercase font-size-mid">${item.title}</h3>
                 <span class="font-uppercase">${variant}</span>
               </div>
-              <div class="grid-item item-s-4 font-uppercase font-size-small">
-                Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
-              </div>
-              <div class="grid-item item-s-4">
-                <span class="font-uppercase">$${item.variant.price}</span>
-              </div>
-              <div class="grid-item item-s-4">
-                <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
+              <div class="grid-item item-s-12 grid-row no-gutter padding-top-tiny">
+                <div class="grid-item item-s-4 font-uppercase font-size-small">
+                  Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="${item.attrs.quantity.value}" data-product-id="${item.id}" />
+                </div>
+                <div class="grid-item item-s-4">
+                  <span class="font-uppercase">$${item.variant.price}</span>
+                </div>
+                <div class="grid-item item-s-4">
+                  <button class="remove-item font-size-small font-uppercase" data-product-id="${item.id}" >Remove</button>
+                </div>
               </div>
             </div>
           </div>
@@ -421,6 +423,10 @@ class Shop {
         arrows: false,
         focusOnSelect: true,
         rows: 0
+      });
+
+      $('.slick-slide').on('click', () => {
+        console.log($('#slick-carousel').slick('slickCurrentSlide'));
       });
     }
   }

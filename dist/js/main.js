@@ -13453,16 +13453,18 @@ Shop = function () {
 
 
           item.title + '</h3>\n                <span class="font-uppercase">' +
-          variant + '</span>\n              </div>\n              <div class="grid-item item-s-4 font-uppercase font-size-small">\n                Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
+          variant + '</span>\n              </div>\n              <div class="grid-item item-s-12 grid-row no-gutter padding-top-tiny">\n                <div class="grid-item item-s-4 font-uppercase font-size-small">\n                  Qty: <input class="cart-item-quantity font-size-basic" type="number" max="9" min="1" value="' +
 
 
-          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n              </div>\n              <div class="grid-item item-s-4">\n                <span class="font-uppercase">$' +
+
+          item.attrs.quantity.value + '" data-product-id="' + item.id + '" />\n                </div>\n                <div class="grid-item item-s-4">\n                  <span class="font-uppercase">$' +
 
 
-          item.variant.price + '</span>\n              </div>\n              <div class="grid-item item-s-4">\n                <button class="remove-item font-size-small font-uppercase" data-product-id="' +
+          item.variant.price + '</span>\n                </div>\n                <div class="grid-item item-s-4">\n                  <button class="remove-item font-size-small font-uppercase" data-product-id="' +
 
 
-          item.id + '" >Remove</button>\n              </div>\n            </div>\n          </div>\n        ');
+          item.id + '" >Remove</button>\n                </div>\n              </div>\n            </div>\n          </div>\n        ');
+
 
 
 
@@ -13629,6 +13631,10 @@ Shop = function () {
           focusOnSelect: true,
           rows: 0 });
 
+
+        $('.slick-slide').on('click', function () {
+          console.log($('#slick-carousel').slick('slickCurrentSlide'));
+        });
       }
     } }]);return Shop;}();exports.default =
 
