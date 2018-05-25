@@ -60,7 +60,7 @@ if (have_posts()) {
             if (!empty($shopify_product_handle)) {
           ?>
             <div class="grid-item item-s-6 offset-s-6 padding-top-mid">
-              <button class="add-to-cart button-no-padding font-uppercase">Add to cart</button>
+              <button class="add-to-cart font-uppercase">Add to bag</button>
             </div>
           <?php
             }
