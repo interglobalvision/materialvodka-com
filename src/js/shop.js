@@ -428,9 +428,11 @@ class Shop {
         rows: 0
       });
 
-      $('.slick-slide').on('click', () => {
+      // TODO
+      // Advance carousel on-click
+      /*$('.slick-slide').on('click', () => {
         console.log($('#slick-carousel').slick('slickCurrentSlide'));
-      });
+      });*/
     }
   }
 }

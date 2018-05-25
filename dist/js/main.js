@@ -13635,9 +13635,11 @@ Shop = function () {
           rows: 0 });
 
 
-        $('.slick-slide').on('click', function () {
+        // TODO
+        // Advance carousel on-click
+        /*$('.slick-slide').on('click', () => {
           console.log($('#slick-carousel').slick('slickCurrentSlide'));
-        });
+        });*/
       }
     } }]);return Shop;}();exports.default =
 
