@@ -35,7 +35,13 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
     opacity: 0
 
 .main-content
-  min-height: 100vh
+  position: absolute
+  top: 0
+  left: 0
+  height: 100vh
+  width: 100vw
+  overflow-y: scroll
+  background-color: $color-black
 
 .content-wrapper
   min-height: calc('100vh - ' + ($footer-height + $nav-height))
@@ -67,11 +73,13 @@ button
   appearance: none
   font-family: $font-medium
   font-weight: 400
-  padding: 0 $margin-tiny
+  padding: $margin-tiny 0
   cursor: pointer
-  margin: 0 $margin-tiny
   &.button-no-padding
     padding: 0
+  &.button-side-margin
+    margin: 0 $margin-tiny
+
 
 input, select
   appearance: none
@@ -360,9 +368,11 @@ body
   height: calc('100vh - ' + ($nav-height + $header-height))
 
 .slick-slide
+  cursor: pointer
   width: auto
   &:focus
     outline: none
+
 
 #cart
   position: fixed
@@ -370,18 +380,36 @@ body
   right: 0
   height: 100vh
   width: 100vw
-  background-color: $color-black
   transform: translateX(100vw)
   transition: transform 300ms ease-in
+  overflow: hidden
+  pointer-events: none
   &.active
     transform: translateX(0vw)
+    pointer-events: auto
+
+#cart-background-toggle
+  cursor: pointer
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+#cart-content
+  position: absolute
+  top: 0
+  right: 0
+  width: 100vw
+  height: 100vh
+  cursor: default
+  background-color: $color-black
+  overflow-y: scroll
 
 #cart-close
-  position: absolute
-  top: $margin-basic
-  right: $margin-basic
-  height: $margin-basic
-  width: $margin-basic
+  position: relative
+  height: $margin-small
+  width: $margin-small
   cursor: pointer
   &:before,
   &:after

@@ -36,8 +36,9 @@
   // FORMS
 
   button
-    padding: 0 $margin-tiny
-    margin: 0 $margin-tiny
+    padding: $margin-tiny 0
+    &.button-side-margin
+      margin: 0 $margin-tiny
 
   input
     margin: 0 $margin-micro
@@ -73,8 +74,14 @@
     min-height: 600px
 
   #cart
-    width: 50vw
     transform: translateX(50vw)
+
+  #cart-content
+    width: 50vw
+
+  #cart-close
+    height: $margin-small
+    width: $margin-small
 
   // ******************************************************
 

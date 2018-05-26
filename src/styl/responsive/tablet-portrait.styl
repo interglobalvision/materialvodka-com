@@ -42,8 +42,9 @@
   // FORMS
 
   button
-    padding: 0 $margin-tiny
-    margin: 0 $margin-tiny
+    padding: $margin-tiny 0
+    &.button-side-margin
+      margin: 0 $margin-tiny
 
   // ******************************************************
 
@@ -112,8 +113,14 @@
     height: calc('100vh - ' + $header-height)
 
   #cart
-    width: 75vw
-    transform: translateX(75vw)
+    transform: translateX(70vw)
+
+  #cart-content
+    width: 70vw
+
+  #cart-close
+    height: $margin-small
+    width: $margin-small
 
   // ******************************************************
 
