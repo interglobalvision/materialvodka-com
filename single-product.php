@@ -114,7 +114,7 @@ if ($other_products_query->have_posts()) {
     $other_products_query->the_post();
 ?>
         <!-- print product item -->
-        <article <?php post_class('archive-product-item cube-holder grid-item no-gutter item-s-6'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('archive-product-item cube-holder grid-item no-gutter item-s-6 item-m-3'); ?> id="post-<?php the_ID(); ?>">
           <?php get_template_part('partials/archive-product-item'); ?>
         </article>
 <?php
